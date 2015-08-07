@@ -17,3 +17,9 @@ library(Bchron)
 help(Bchronology) # Help on the chronology modelling function
 help(BchronCalibrate) # Help on the calibrate function
 ```
+
+To install the stable version of the package go to R and type:
+
+```
+install.packages('Bchron')
+```
