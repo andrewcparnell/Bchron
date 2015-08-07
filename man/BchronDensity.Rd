@@ -1,0 +1,79 @@
+\name{BchronDensity}
+\alias{BchronDensity}
+\title{
+Non-parametric phase model
+}
+\description{
+This function runs a non-parametric phase model on 14C and non-14C ages via Gaussian Mixture density estimation
+}
+\usage{
+BchronDensity(ages, ageSds, calCurves, pathToCalCurves = system.file('data',
+package = "Bchron"), dfs = rep(100, length(ages)), numMix = 30, iterations = 10000, 
+burn = 2000, thin = 8, updateAges = FALSE)
+}
+\arguments{
+  \item{ages}{
+A vector of ages (most likely 14C)
+}
+  \item{ageSds}{
+A vector of 1-sigma values for the ages given above
+}
+  \item{calCurves}{
+A vector of values containing either 'intcal13', 'shcal13', 'marine13', or 'normal'. Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.
+}
+  \item{pathToCalCurves}{
+(optional) File path to where the calibration curves are located. Defaults to the system directory where the 3 standard calibration curves are stored. 
+}
+  \item{dfs}{
+(optional) Degrees-of-freedom values for the t-distribution associated with the calibration calculation. A large value indicates Gaussian distributions assumed for the 14C ages
+}
+  \item{numMix}{
+(optional) The number of mixture components in the phase model. Might need to be increased if the data set is large and the phase behaviour is very complex
+}
+  \item{iterations}{
+The number of iterations to run for
+}
+  \item{burn}{
+The number of starting iterations to discard
+}
+  \item{thin}{
+The step size of iterations to keep
+}
+  \item{updateAges}{
+Whether or not to update ages as part of the MCMC run. Default is FALSE. Changing this to TRUE will improve performance but will fit a slightly invalid model
+}
+}
+\details{
+This model places a Gaussian mixture prior distribution on the calibrated ages and so estimates the density of the overall set of radiocarbon ages. It is designed to be a probabilistic version of the Oxcal SUM command which takes calibrated ages and sums the probability distributions with the aim of estimating activity through age as a proxy.
+}
+\value{
+    output = list(theta = thetaStore, p = pStore, mu = mu, calAges = xSmall, 
+        G = G)
+    class(output) = "BchronDensityRun"
+An object of class BchronDensityRun with the following elements:
+\item{theta}{The posterior samples of the restricted ages}
+\item{p}{Posterior samples of the mixture proportions}
+\item{mu}{Values of the means of each Gaussian mixture}
+\item{calAges}{The calibrated ages from \code{\link{BchronCalibrate}}}
+\item{G}{The number of mixture components. Equal to numMix}
+}
+\references{
+Forthcoming!
+}
+\author{
+Andrew Parnell <andrew.parnell@ucd.ie>
+}
+\seealso{
+\code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensityFast}} for a faster approximate version of this function
+}
+\examples{
+\dontrun{# Read in some data from Sluggan Moss
+data(Sluggan)
+
+# Run the model
+SlugDens = BchronDensity(ages=Sluggan$ages,ageSds=Sluggan$ageSds,
+calCurves=Sluggan$calCurves,numMix=50)
+
+# plot it
+plot(SlugDens)}
+}
