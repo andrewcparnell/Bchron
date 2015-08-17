@@ -30,7 +30,7 @@ function(x,plotDates=TRUE,plotSum=FALSE,...) {
   }
   densFinal = dens/sum(dens)
   
-  plot(dateGrid,densFinal,type='l',,ylab='Density',ylim=range(c(0,densFinal)),...)
+  plot(dateGrid,densFinal,type='l',ylab='Density',ylim=range(c(0,densFinal)),...)
   
   if(plotDates) {
     # Plot the individual dates

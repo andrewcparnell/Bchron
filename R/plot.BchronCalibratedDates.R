@@ -33,7 +33,7 @@ function(x,withPositions=FALSE,xlab='Age (cal years BP)',ylab=ifelse(withPositio
     ylimits[1] = ylimits[1]-dateHeight
     
     # Create the plot
-    plot(1,1,xlim=rev(xlimits),ylim=rev(ylimits),type="n",main='Calibrated dates by depth',,xlab=xlab,ylab=ylab,...)
+    plot(1,1,xlim=rev(xlimits),ylim=rev(ylimits),type="n",main='Calibrated dates by position',,xlab=xlab,ylab=ylab,...)
     for(i in 1:length(x)) {
       polygon(x[[i]]$ageGrid,x[[i]]$positions-x[[i]]$densities*dateHeight/max(x[[i]]$densities),border=NA,col='gray')      
     }

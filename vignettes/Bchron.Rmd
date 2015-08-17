@@ -84,7 +84,7 @@ print(Glendalough)
 
 The top date is from the present and has the calibration curve 'normal' as it is not a 14C date. This core can be run through Bchron via:
 
-```{r}
+```{r,results='hide'}
 GlenOut = Bchronology(ages=Glendalough$ages,
                       ageSds=Glendalough$ageSds, 
                       calCurves=Glendalough$calCurves,
@@ -101,14 +101,15 @@ help(Bchronology)
 ```
 
 Once run, the summary commands will show various output:
-
-```{r}
+```{r,eval=FALSE}
 summary(GlenOut)
+```
+```{r}
 summary(GlenOut, type='convergence')
 summary(GlenOut, type='outliers')
 ```
 
-The first summary command produces ages for each position supplied in the `predictPositions` argument above. The second provides convergence diagnostics. The third gives outlier probabilities. The `plot` command will produce an age-position plot:
+The first summary command produces ages for each position supplied in the `predictPositions` argument above (output not shown as it's too long). The second provides convergence diagnostics. The third gives outlier probabilities. The `plot` command will produce an age-position plot:
 
 ```{r,fig.align='center',fig.width=6,fig.height=5}
 plot(GlenOut,
@@ -120,7 +121,7 @@ plot(GlenOut,
 
 Finally, the `predict` command will produce predicted ages for a newly specified set of positions with optional thicknesses:
 
-```{r}
+```{r,results='hide'}
 predictAges = predict(GlenOut, 
                       newPositions = c(150,725,1500), 
                       newPositionThicknesses=c(5,0,20))
@@ -170,18 +171,21 @@ plot(RSLrun2)
 
 Bchron contains two functions for running non-parametric phase models for estimating activity level in a site/region. The first, BchronDensity fits a full Bayesian Gaussian mixture model to the radiocarbon dates whilst the second BchronDensityFast fits an approximate version which will run on much larger data sets. An example run is
 
-```{r,fig.align='center',fig.width=6,fig.height=5}
+```{r,results='hide'}
 data(Sluggan)
 SlugDens = BchronDensity(ages=Sluggan$ages,
                          ageSds=Sluggan$ageSds,
                          calCurves=Sluggan$calCurves,
                          numMix=50)
-plot(SlugDens)
+```
+
+```{r,fig.align='center',fig.width=6,fig.height=5}
+plot(SlugDens,xlab='Age (cal years BP)')
 ```
 
 BchronDensityFast is identical except for the function call:
 
-```{r}
+```{r,eval=FALSE}
 SlugDensFast = BchronDensityFast(ages=Sluggan$ages,
                                  ageSds=Sluggan$ageSds, 
                                  calCurves=Sluggan$calCurves)
