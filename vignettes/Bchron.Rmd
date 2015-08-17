@@ -1,5 +1,5 @@
 ---
-title: "Using the Bchron package"
+title: "Using Bayesian radiocarbon chronology package Bchron"
 author: "Andrew Parnell"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -9,13 +9,13 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-# The Bayesian radiocarbon chronology package Bchron
-
 ## Introduction
 
-Bchron is an R package that enables quick calibration of radiocarbon dates under various calibration curves (including user generated ones); age-depth modelling as per the algorithm of Haslett and Parnell (2008); Relative sea level rate estimation incorporating time uncertainty in polynomial regression models (Parnell and Gehrels 2015); and non-parametric phase modelling via Gaussian mixtures as a means to determine the activity of a site (and as an alternative to the Oxcal function SUM).
+Bchron is an R package that enables quick calibration of radiocarbon dates under various calibration curves (including user generated ones); age-depth modelling as per the algorithm of Haslett and Parnell (2008); Relative sea level rate estimation incorporating time uncertainty in polynomial regression models (Parnell and Gehrels 2015); and non-parametric phase modelling via Gaussian mixtures as a means to determine the activity of a site (and as an alternative to the Oxcal function SUM; currently unpublished).
 
 You will find Bchron far easier to use if you know some basics on how to use R. I recommend the book by Norman Matloff [amazon.co.uk link](http://www.amazon.co.uk/The-Art-Programming-Statistical-Software/dp/1593273843), or the online intro course by [Code School](www.codeschool.com).
+
+If you find bugs or want to suggest new features please visit the Bchron [GitHub issues page](https://github.com/andrewcparnell/Bchron/issues). 
 
 ## Installing Bchron
 
@@ -37,7 +37,7 @@ it will load in all the Bchron functions.
 
 Bchron will calibrate single or multiple dates under multiple (even user defined) calibration curves. By default, the intcal13, shcal13 and marine13 calibration curves are included. You can calibrate a single radiocarbon date with, e.g.
 
-```{r}
+```{r,fig.align='center',fig.width=6,fig.height=5}
 ages1 = BchronCalibrate(ages=11553,ageSds=230,calCurves='intcal13',ids='Date-1')
 summary(ages1)
 plot(ages1)
@@ -47,7 +47,7 @@ This will calibrate the radiocarbon age of 11,553 14C years BP with standard err
 
 Bchron can calibrate multiple dates simultaneously by inputting the dates as vectors:
 
-```{r}
+```{r,results='hide'}
 ages2 = BchronCalibrate(ages=c(3445,11553,7456), ageSds=c(50,230,110), calCurves=c('intcal13','intcal13','shcal13'))
 summary(ages2)
 plot(ages2)
@@ -58,7 +58,10 @@ This will calibrate three different 14C ages with the calibration curves as spec
 Finally, if you provide position information (e.g. depths) to the BchronCalibrate function it will create a plot with position on the y-axis, e.g.:
 
 ```{r}
-ages3 = BchronCalibrate(ages=c(3445,11553), ageSds=c(50,230), positions=c(100,150), calCurves=c('intcal13','normal'))
+ages3 = BchronCalibrate(ages=c(3445,11553), 
+                        ageSds=c(50,230), 
+                        positions=c(100,150), 
+                        calCurves=c('intcal13','normal'))
 summary(ages3)
 plot(ages3,withDepths=TRUE)
 ```
