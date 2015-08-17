@@ -57,7 +57,7 @@ for(j in 1:n) thetaAll[,j] = sample(xSmall[[j]]$ageGrid,size=iterations,prob=xSm
 # Create function for quick calling of mixture density
 mu2 = mu
 sigma2 = (mu[2] - mu[1]) / 2
-mystats::dnorm = function(x) stats::dnorm(x,mean=mu2,sd=sigma2)
+my_dnorm = function(x) stats::dnorm(x,mean=mu2,sd=sigma2)
 
 # Loop through iterations
 pb = utils::txtProgressBar(min = 1, max = iterations, style = 3,width=60,title='Running BchronDensity')

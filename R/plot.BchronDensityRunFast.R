@@ -33,7 +33,7 @@ function(x,plotDates=TRUE,plotSum=FALSE,...) {
   if(plotDates) {
     # Plot the individual dates
     yHeight=graphics::par('usr')[4]
-    myCol = grDevices:rgb(190/255,190/255,190/255,0.4)
+    myCol = grDevices::rgb(190/255,190/255,190/255,0.4)
     for(i in 1:n) {
       graphics::polygon(x$calAges[[i]]$ageGrid,0.3*yHeight*x$calAges[[i]]$densities/max(x$calAges[[i]]$densities),col=myCol,border=NA)
     }   
