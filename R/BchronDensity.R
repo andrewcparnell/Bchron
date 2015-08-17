@@ -40,8 +40,8 @@ clrInv = function(phi) {
 J = numMix
 mu = seq(thetaRange[1],thetaRange[2],length=numMix)
 theta = vector(length=n)
-for(j in 1:n) theta[j] = round(rnorm(1,mean=x[[j]]$ageGrid[match(max(x[[j]]$densities),x[[j]]$densities)],sd=ageSds[j]),3)
-phi = c(runif(J-1,-10,10),0)
+for(j in 1:n) theta[j] = round(stats::rnorm(1,mean=x[[j]]$ageGrid[match(max(x[[j]]$densities),x[[j]]$densities)],sd=ageSds[j]),3)
+phi = c(stats::runif(J-1,-10,10),0)
 p = as.numeric(clrInv(phi))
 G = gbase(theta,mu)
   
@@ -57,7 +57,7 @@ for(j in 1:n) thetaAll[,j] = sample(xSmall[[j]]$ageGrid,size=iterations,prob=xSm
 # Create function for quick calling of mixture density
 mu2 = mu
 sigma2 = (mu[2] - mu[1]) / 2
-mydnorm = function(x) dnorm(x,mean=mu2,sd=sigma2)
+mystats::dnorm = function(x) stats::dnorm(x,mean=mu2,sd=sigma2)
 
 # Loop through iterations
 pb = utils::txtProgressBar(min = 1, max = iterations, style = 3,width=60,title='Running BchronDensity')
@@ -74,16 +74,16 @@ for(i in 1:iterations) {
   # Update theta
   if(updateAges) {
     for(j in 1:n) {
-      thetaNew = round(rnorm(1,theta[j],0.5),3)
+      thetaNew = round(stats::rnorm(1,theta[j],0.5),3)
       thetaNewMatch = as.integer(thetaNew+offset[j])+1      
       thetaNewLogDens = max(log(x[[j]]$densities[thetaNewMatch]),-1000000)
-      priorNew.dens = sum(p*dnorm(thetaNew,mean=mu2,sd=sigma2))
+      priorNew.dens = sum(p*stats::dnorm(thetaNew,mean=mu2,sd=sigma2))
       thetaMatch = as.integer(theta[j]+offset[j])+1
       thetaLogDens = max(log(x[[j]]$densities[thetaMatch]),-1000000)
-      priorDens = sum(p*dnorm(theta[j],mean=mu2,sd=sigma2))
+      priorDens = sum(p*stats::dnorm(theta[j],mean=mu2,sd=sigma2))
         
       logRtheta = thetaNewLogDens - thetaLogDens + log(priorNew.dens) - log(priorDens)
-      if(runif(1)<exp(logRtheta)) theta[j] = thetaNew      
+      if(stats::runif(1)<exp(logRtheta)) theta[j] = thetaNew      
     }    
   } else {
     theta = thetaAll[i,]  
@@ -91,14 +91,14 @@ for(i in 1:iterations) {
   
   # Update phi
   for(j in 1:(J-1)) {
-    phiNew = rnorm(1,phi[j],1)
+    phiNew = stats::rnorm(1,phi[j],1)
     phiAllNew = phi
     phiAllNew[j] = phiNew
     pNew = as.numeric(clrInv(phiAllNew))
     phiNewLogDens = sum(log(G%*%pNew))
     phiLogDens = sum(log(G%*%p))
-    logRphi = phiNewLogDens - phiLogDens + dunif(phiNew,-10,10,log=TRUE) - dunif(phi[j],-10,10,log=TRUE)
-    if(runif(1)<exp(logRphi)) {
+    logRphi = phiNewLogDens - phiLogDens + stats::dunif(phiNew,-10,10,log=TRUE) - stats::dunif(phi[j],-10,10,log=TRUE)
+    if(stats::runif(1)<exp(logRphi)) {
       phi[j] = phiNew
       p = as.numeric(clrInv(phi))
     } 

@@ -8,12 +8,12 @@ function(x, xlab='Age (cal BP)',ylab='Depth (m)', ...) {
   RSL.low = x$RSLmean-2*x$RSLsd
   RSL.high = x$RSLmean+2*x$RSLsd
   
-  plot(age.med,x$RSLmean,type='n',xlim=rev(range(c(age.low,age.high))),ylim=range(c(RSL.low,RSL.high)),xlab=xlab,ylab=ylab,...)
+  graphics::plot(age.med,x$RSLmean,type='n',xlim=rev(range(c(age.low,age.high))),ylim=range(c(RSL.low,RSL.high)),xlab=xlab,ylab=ylab,...)
   
   for(i in 1:length(x$RSLmean)) {
     agescale = (age.high[i]-age.low[i])/4
     rslscale = x$RSLsd[i]
-    lines(ellipse::ellipse(0,scale=c(agescale,rslscale),centre=c(age.med[i],x$RSLmean[i])),col=rgb(0,0,1,0.4))
+    graphics::lines(ellipse::ellipse(0,scale=c(agescale,rslscale),centre=c(age.med[i],x$RSLmean[i])),col=grDevices::rgb(0,0,1,0.4))
   }
   
   xgrid = seq(max(age.low),min(age.high),length=100)/1000
@@ -30,8 +30,8 @@ function(x, xlab='Age (cal BP)',ylab='Depth (m)', ...) {
   pred.med = apply(pred.lines,2,'quantile',probs=0.5)
   pred.low = apply(pred.lines,2,'quantile',probs=0.025)
   pred.high = apply(pred.lines,2,'quantile',probs=0.975)
-  lines(xgrid*1000,pred.med,lwd=2)
-  lines(xgrid*1000,pred.low,lwd=2,lty=2)
-  lines(xgrid*1000,pred.high,lwd=2,lty=2)
+  graphics::lines(xgrid*1000,pred.med,lwd=2)
+  graphics::lines(xgrid*1000,pred.low,lwd=2,lty=2)
+  graphics::lines(xgrid*1000,pred.high,lwd=2,lty=2)
   
 }

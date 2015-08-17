@@ -34,7 +34,7 @@ predict.BchronologyRun = function(object, newPositions, newPositionThicknesses=N
       if(is.null(newPositionThicknesses)) {
         currPosition = newPositions[j]/object$positionScaleVal
       } else {
-        currPosition = runif(1,newPositions[j]/object$positionScaleVal-0.5*newPositionThicknesses[j]/object$positionScaleVal,newPositions[j]/object$positionScaleVal+0.5*newPositionThicknesses[j]/object$positionScaleVal)
+        currPosition = stats::runif(1,newPositions[j]/object$positionScaleVal-0.5*newPositionThicknesses[j]/object$positionScaleVal,newPositions[j]/object$positionScaleVal+0.5*newPositionThicknesses[j]/object$positionScaleVal)
       }
       
       # Get sedimentation rate parameters

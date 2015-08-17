@@ -21,26 +21,26 @@ function(x,plotDates=TRUE,plotSum=FALSE,...) {
   # Create the densities for each cluster
   dens = matrix(NA,ncol=x$out$G,nrow=length(thetaSeq))
   for(i in 1:ncol(dens)) {
-    dens[,i] = dnorm(thetaSeq,mean=clusterMeans[i],sd=clusterSds[i])
+    dens[,i] = stats::dnorm(thetaSeq,mean=clusterMeans[i],sd=clusterSds[i])
   }
     
   # Create a plot
-  plot(thetaSeq,dens%*%clusterProps,type='l',...)
+  graphics::plot(thetaSeq,dens%*%clusterProps,type='l',...)
   
   # Add in individual densities
-  for(i in 1:ncol(dens)) lines(thetaSeq,clusterProps[i]*dens[,i],lty=2)
+  for(i in 1:ncol(dens)) graphics::lines(thetaSeq,clusterProps[i]*dens[,i],lty=2)
   
   if(plotDates) {
     # Plot the individual dates
-    yHeight=par('usr')[4]
-    myCol = rgb(190/255,190/255,190/255,0.4)
+    yHeight=graphics::par('usr')[4]
+    myCol = grDevices:rgb(190/255,190/255,190/255,0.4)
     for(i in 1:n) {
-      polygon(x$calAges[[i]]$ageGrid,0.3*yHeight*x$calAges[[i]]$densities/max(x$calAges[[i]]$densities),col=myCol,border=NA)
+      graphics::polygon(x$calAges[[i]]$ageGrid,0.3*yHeight*x$calAges[[i]]$densities/max(x$calAges[[i]]$densities),col=myCol,border=NA)
     }   
   }
  
   if(plotSum) {
-    yHeight=par('usr')[4]
+    yHeight=graphics::par('usr')[4]
     thetaRange = range(x$calAges[[1]]$ageGrid)
     for(i in 2:n) thetaRange = range(c(thetaRange,x$calAges[[i]]$ageGrid))
     dateGrid = seq(round(thetaRange[1]*0.9,0),round(thetaRange[2]*1.1,0),by=1)
@@ -50,7 +50,7 @@ function(x,plotDates=TRUE,plotSum=FALSE,...) {
       sumDens[matchRows] = sumDens[matchRows]+x$calAges[[i]]$densities
       if(any(is.na(matchRows))) stop()
     }
-    lines(dateGrid,sumDens*yHeight/max(sumDens),col='red')
+    graphics::lines(dateGrid,sumDens*yHeight/max(sumDens),col='red')
   }
   
 }

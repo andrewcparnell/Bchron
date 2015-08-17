@@ -8,6 +8,13 @@ importFrom(hdrcde,hdr)
 importFrom(utils,txtProgressBar,setTxtProgressBar)
 importFrom(ellipse,ellipse)
 importFrom(coda,geweke.diag)
+importFrom("grDevices", "rgb")
+importFrom("graphics", "grid", "legend", "lines", "mtext", "par",
+             "plot", "points", "polygon")
+importFrom("stats", "approx", "dbinom", "dnorm", "dt", "dunif",
+             "pnorm", "quantile", "rnorm", "runif")
+importFrom("utils", "read.table")
+
 
 S3method(plot, BchronologyRun)
 S3method(plot, BchronCalibratedDates)

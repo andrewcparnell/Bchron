@@ -29,14 +29,14 @@ function(ages,ageSds,calCurves,ids=NULL,positions=NULL,pathToCalCurves=system.fi
   for(i in 1:length(allCalCurves)) {
     calCurveFile = paste(pathToCalCurves,'/',allCalCurves[i],'.txt.gz',sep='')
     if(!file.exists(calCurveFile)) stop(paste('Calibration curve file',calCurveFile,'not found'))
-    calCurve = as.matrix(read.table(calCurveFile))
+    calCurve = as.matrix(utils::read.table(calCurveFile))
     calBP[[i]] = calCurve[,1]
     c14BP[[i]] = calCurve[,2]
     calSd[[i]] = calCurve[,3]
     # Create an age grid and get mean and variance of calibration curve 
     ageGrid[[i]] = seq(min(calBP[[i]]),max(calBP[[i]]),by=1)
-    mu[[i]] = approx(calBP[[i]],c14BP[[i]],xout=ageGrid[[i]])$y
-    tau1[[i]] = approx(calBP[[i]],calSd[[i]],xout=ageGrid[[i]])$y
+    mu[[i]] = stats::approx(calBP[[i]],c14BP[[i]],xout=ageGrid[[i]])$y
+    tau1[[i]] = stats::approx(calBP[[i]],calSd[[i]],xout=ageGrid[[i]])$y
     # Allow for greater age ranges if the calibration curve is normal
     if(allCalCurves[i]=='normal') {
       ageRange = range(c(calBP,ages+4*ageSds))
@@ -60,7 +60,7 @@ function(ages,ageSds,calCurves,ids=NULL,positions=NULL,pathToCalCurves=system.fi
     tau = ageSds[i]^2 + tau1[[matchCalCurves[i]]]
     
     currAgeGrid = ageGrid[[matchCalCurves[i]]]
-    dens = dt((ages[i]-mu[[matchCalCurves[i]]])/sqrt(tau),df=dfs[i])
+    dens = stats::dt((ages[i]-mu[[matchCalCurves[i]]])/sqrt(tau),df=dfs[i])
     dens = dens/sum(dens)
   
     # Create list of output

@@ -5,7 +5,7 @@ function(object,type=c('quantiles','outliers','convergence'),probs=c(0.025,0.1,0
   switch(type,
     # Give a list of quantiles for each depth and Show outlier probabilities
     quantiles = {
-      chronSummary <- data.frame(cbind(object$predictPositions,round(t(apply(object$thetaPredict,2,'quantile',probs)),3)))
+      chronSummary <- data.frame(cbind(object$predictPositions,round(t(apply(object$thetaPredict,2,stats::quantile,probs)),3)))
       colnames(chronSummary) <- c('Depth',paste(probs*100,'%',sep=''))
       cat('Quantiles of predicted ages by depth: \n')
       print(chronSummary,row.names=FALSE)
@@ -25,7 +25,7 @@ function(object,type=c('quantiles','outliers','convergence'),probs=c(0.025,0.1,0
       colnames(pars) <- c(names(object$calAges),paste('Outlier',1:n),'RateMean','RateVar')
       geweke <- coda::geweke.diag(pars)[[1]]
       geweke[is.nan(geweke)] <- 0
-      pvals <- data.frame(sort(round(c(pnorm(geweke[geweke<0]),1-pnorm(geweke[geweke>0])),5)))
+      pvals <- data.frame(sort(round(c(stats::pnorm(geweke[geweke<0]),1-stats::pnorm(geweke[geweke>0])),5)))
       colnames(pvals) <- 'p-value'
       print(pvals)  
       invisible(pvals)

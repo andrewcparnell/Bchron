@@ -17,26 +17,26 @@ function(x,...) {
   yLimits[1] = yLimits[1]-dateHeight
   
   # Create the plot
-  plot(1,1,xlim=rev(xLimits),ylim=rev(yLimits),type="n",...)
-  grid()
+  graphics::plot(1,1,xlim=rev(xLimits),ylim=rev(yLimits),type="n",...)
+  graphics::grid()
   
   # Add in the dates
   for(i in 1:length(x$calAges)) {
     # First for known points
     if(x$calAges[[i]]$ageSds<5) {
-      points(sum(x$calAges[[i]]$ageGrid*x$calAges[[i]]$densities),x$calAges[[i]]$positions,pch=16)
+      graphics::points(sum(x$calAges[[i]]$ageGrid*x$calAges[[i]]$densities),x$calAges[[i]]$positions,pch=16)
     } else {
-      polygon(c(min(x$calAges[[i]]$ageGrid),x$calAges[[i]]$ageGrid,max(x$calAges[[i]]$ageGrid)),c(x$calAges[[i]]$positions,x$calAges[[i]]$positions-x$calAges[[i]]$dens*dateHeight/max(x$calAges[[i]]$dens),x$calAges[[i]]$positions),border=NA,col='black')      
+      graphics::polygon(c(min(x$calAges[[i]]$ageGrid),x$calAges[[i]]$ageGrid,max(x$calAges[[i]]$ageGrid)),c(x$calAges[[i]]$positions,x$calAges[[i]]$positions-x$calAges[[i]]$dens*dateHeight/max(x$calAges[[i]]$dens),x$calAges[[i]]$positions),border=NA,col='black')      
     }
   }
   
   # Add in the chronologies
-  chronCol = rgb(190/255,190/255,190/255,alpha=0.8)
+  chronCol = grDevices::rgb(190/255,190/255,190/255,alpha=0.8)
   chronLow = apply(x$thetaPredict,2,'quantile',probs=0.025)
   chronMed = apply(x$thetaPredict,2,'quantile',probs=0.5)
   chronHigh = apply(x$thetaPredict,2,'quantile',probs=0.975)
-  polygon(c(chronLow,rev(chronHigh)),c(x$predictPositions,rev(x$predictPositions)),col=chronCol,border=NA)
+  graphics::polygon(c(chronLow,rev(chronHigh)),c(x$predictPositions,rev(x$predictPositions)),col=chronCol,border=NA)
 
-  legend('topleft',c('Dated positions','95% Chronology CI'),col=c('black',chronCol),pch=15)
+  graphics::legend('topleft',c('Dated positions','95% Chronology CI'),col=c('black',chronCol),pch=15)
   
 }

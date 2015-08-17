@@ -48,14 +48,14 @@ theta = vector(length=n)
 # Make sure no theta values are identical 
 badThetas = TRUE
 while(badThetas) {
-  for(j in 1:n) theta[j] = round(rnorm(1,x.df2[[j]]$ageGrid[match(max(x.df2[[j]]$densities),x.df2[[j]]$densities)]/ageScaleVal,sd=ageSds[j]/ageScaleVal),3)
+  for(j in 1:n) theta[j] = round(stats::rnorm(1,x.df2[[j]]$ageGrid[match(max(x.df2[[j]]$densities),x.df2[[j]]$densities)]/ageScaleVal,sd=ageSds[j]/ageScaleVal),3)
   theta=sort(theta)
   if(all(diff(theta)!=0)) badThetas= FALSE
 }
 phi = rep(0,length(theta))
 p = 1.2
-mu = abs(rnorm(1,mean=mean(diff(theta))/mean(diffPosition),sd=1))
-psi = abs(rnorm(1,1,1))
+mu = abs(stats::rnorm(1,mean=mean(diff(theta))/mean(diffPosition),sd=1))
+psi = abs(stats::rnorm(1,1,1))
 
 # Tranformed values (used for interpolation)
 alpha = (2-p)/(p-1)
@@ -103,7 +103,7 @@ for(i in 1:iterations) {
   
   if(any(positionThicknesses>0) & i>0.5*burn & i%%thin==0) {
     # Get date order so I can preserve things if they change around
-    currPositions = runif(n,positions/positionScaleVal-0.5*positionThicknesses/positionScaleVal,positions/positionScaleVal+0.5*positionThicknesses/positionScaleVal)
+    currPositions = stats::runif(n,positions/positionScaleVal-0.5*positionThicknesses/positionScaleVal,positions/positionScaleVal+0.5*positionThicknesses/positionScaleVal)
     do = order(currPositions)
     diffPosition = diff(currPositions[do])
     theta[do]=sort(theta)
@@ -161,7 +161,7 @@ for(i in 1:iterations) {
     priorLogDens = ifelse(j==1,0,log(dtweediep1(theta[do[j]]-theta[do[j-1]],p,mu*(diffPosition[j-1]),psi/(diffPosition[j-1])^(p-1))))+ifelse(j==n,0,log(dtweediep1(theta[do[j+1]]-theta[do[j]],p,mu*(diffPosition[j]),psi/(diffPosition[j])^(p-1))))
     
     logRtheta = thetaNewLogDens - thetaLogDens + priorNewLogDens - priorLogDens + log(thetaNewAll$rat)
-    if(runif(1)<exp(logRtheta)) theta[do[j]] = thetaNew      
+    if(stats::runif(1)<exp(logRtheta)) theta[do[j]] = thetaNew      
   }
   
   
@@ -184,9 +184,9 @@ for(i in 1:iterations) {
       thetaMatch = as.integer(theta[do[j]]*ageScaleVal+offset[j])+1
       thetaNewLogDens = max(log(newDens[thetaMatch]),-1000000)
       
-      logRphi = thetaNewLogDens- thetaLogDens + dbinom(phiNew,1,outlierProbs[do[j]],log=TRUE) - dbinom(phi[do[j]],1,outlierProbs[do[j]],log=TRUE)
+      logRphi = thetaNewLogDens- thetaLogDens + stats::dbinom(phiNew,1,outlierProbs[do[j]],log=TRUE) - stats::dbinom(phi[do[j]],1,outlierProbs[do[j]],log=TRUE)
       
-      if(runif(1)<exp(logRphi)) phi[do[j]] = phiNew
+      if(stats::runif(1)<exp(logRphi)) phi[do[j]] = phiNew
     }
   }
   
@@ -195,14 +195,14 @@ for(i in 1:iterations) {
   muNew = muNewAll$new
 
   logRmu = sum(log(dtweediep1(diff(theta[do]),p,muNew*diffPosition,psi/(diffPosition)^(p-1)))) - sum(log(dtweediep1(diff(theta[do]),p,mu*diffPosition,psi/(diffPosition)^(p-1)))) + log(muNewAll$rat)
-  if(runif(1)<exp(logRmu)) mu = muNew
+  if(stats::runif(1)<exp(logRmu)) mu = muNew
   
   # Update psi
   psiNewAll = truncatedWalk(psi,psiMhSd,0,1e5)
   psiNew = psiNewAll$new
   
   logRpsi = sum(log(dtweediep1(diff(theta[do]),p,mu*diffPosition,psiNew/(diffPosition)^(p-1)))) - sum(log(dtweediep1(diff(theta[do]),p,mu*diffPosition,psi/(diffPosition)^(p-1)))) + log(psiNewAll$rat)
-  if(runif(1)<exp(logRpsi)) psi = psiNew
+  if(stats::runif(1)<exp(logRpsi)) psi = psiNew
   
 }
 

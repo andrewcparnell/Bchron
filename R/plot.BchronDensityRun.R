@@ -30,19 +30,19 @@ function(x,plotDates=TRUE,plotSum=FALSE,...) {
   }
   densFinal = dens/sum(dens)
   
-  plot(dateGrid,densFinal,type='l',ylab='Density',ylim=range(c(0,densFinal)),...)
+  graphics::plot(dateGrid,densFinal,type='l',ylab='Density',ylim=range(c(0,densFinal)),...)
   
   if(plotDates) {
     # Plot the individual dates
-    yHeight=par('usr')[4]
-    myCol = rgb(190/255,190/255,190/255,0.4)
+    yHeight=graphics::par('usr')[4]
+    myCol = grDevices::rgb(190/255,190/255,190/255,0.4)
     for(i in 1:n) {
-      polygon(x$calAges[[i]]$ageGrid,0.3*yHeight*x$calAges[[i]]$densities/max(x$calAges[[i]]$densities),col=myCol,border=NA)
+      graphics::polygon(x$calAges[[i]]$ageGrid,0.3*yHeight*x$calAges[[i]]$densities/max(x$calAges[[i]]$densities),col=myCol,border=NA)
     }   
   }
     
   if(plotSum) {
-    yHeight=par('usr')[4]
+    yHeight=graphics::par('usr')[4]
     thetaRange = range(x$calAges[[1]]$ageGrid)
     for(i in 2:n) thetaRange = range(c(thetaRange,x$calAges[[i]]$ageGrid))
     dateGrid = seq(round(thetaRange[1]*0.9,0),round(thetaRange[2]*1.1,0),by=1)
@@ -52,7 +52,7 @@ function(x,plotDates=TRUE,plotSum=FALSE,...) {
       sumDens[matchRows] = sumDens[matchRows]+x$calAges[[i]]$densities
       if(any(is.na(matchRows))) stop()
     }
-    lines(dateGrid,sumDens*yHeight/max(sumDens),col='red')
+    graphics::lines(dateGrid,sumDens*yHeight/max(sumDens),col='red')
   }
   
 }
