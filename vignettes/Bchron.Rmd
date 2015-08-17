@@ -190,3 +190,18 @@ SlugDensFast = BchronDensityFast(ages=Sluggan$ages,
                                  ageSds=Sluggan$ageSds, 
                                  calCurves=Sluggan$calCurves)
 ```
+
+## References
+
+For a description of the kind of things that Bchron can do:  
+Parnell, A. C., Haslett, J., Allen, J. R. M., Buck, C. E., & Huntley, B. (2008). A flexible approach to assessing synchroneity of past events using Bayesian reconstructions of sedimentation history. Quaternary Science Reviews, 27(19-20), 1872–1885.
+
+For the maths behind Bchron:  
+Haslett, J., & Parnell, A. (2008). A simple monotone process with application to radiocarbon-dated depth chronologies. Journal of the Royal Statistical Society: Series C (Applied Statistics), 57(4), 399–418.
+
+For a review of chronology models:  
+Parnell, A. C., Buck, C. E., & Doan, T. K. (2011). A review of statistical chronology models for high-resolution, proxy-based Holocene palaeoenvironmental reconstruction. Quaternary Science Reviews, 30(21-22), 2948–2960.
+
+For relative sea level rate estimation:  
+Parnell, A. C., & Gehrels, W. R. (2015). Using chronological models in late Holocene sea level reconstructions from salt marsh sediments. In: I. Shennan, B.P. Horton, and A.J. Long (eds). Handbook of Sea Level Research. Chichester: Wiley.
+
