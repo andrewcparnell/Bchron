@@ -38,7 +38,10 @@ it will load in all the Bchron functions.
 Bchron will calibrate single or multiple dates under multiple (even user defined) calibration curves. By default, the intcal13, shcal13 and marine13 calibration curves are included. You can calibrate a single radiocarbon date with, e.g.
 
 ```{r,fig.align='center',fig.width=6,fig.height=5}
-ages1 = BchronCalibrate(ages=11553,ageSds=230,calCurves='intcal13',ids='Date-1')
+ages1 = BchronCalibrate(ages=11553,
+                        ageSds=230,
+                        calCurves='intcal13',
+                        ids='Date-1')
 summary(ages1)
 plot(ages1)
 ```
@@ -48,7 +51,9 @@ This will calibrate the radiocarbon age of 11,553 14C years BP with standard err
 Bchron can calibrate multiple dates simultaneously by inputting the dates as vectors:
 
 ```{r,results='hide'}
-ages2 = BchronCalibrate(ages=c(3445,11553,7456), ageSds=c(50,230,110), calCurves=c('intcal13','intcal13','shcal13'))
+ages2 = BchronCalibrate(ages=c(3445,11553,7456), 
+                        ageSds=c(50,230,110), 
+                        calCurves=c('intcal13','intcal13','shcal13'))
 summary(ages2)
 plot(ages2)
 ```
@@ -57,13 +62,13 @@ This will calibrate three different 14C ages with the calibration curves as spec
 
 Finally, if you provide position information (e.g. depths) to the BchronCalibrate function it will create a plot with position on the y-axis, e.g.:
 
-```{r}
+```{r,fig.align='center',fig.width=6,fig.height=5}
 ages3 = BchronCalibrate(ages=c(3445,11553), 
                         ageSds=c(50,230), 
                         positions=c(100,150), 
                         calCurves=c('intcal13','normal'))
 summary(ages3)
-plot(ages3,withDepths=TRUE)
+plot(ages3,withPositions=TRUE)
 ```
 
 The calibration code is very fast. On standard PC you should have no trouble calibrating thousands of dates simultaneously without a noticeably long wait.
@@ -80,12 +85,18 @@ print(Glendalough)
 The top date is from the present and has the calibration curve 'normal' as it is not a 14C date. This core can be run through Bchron via:
 
 ```{r}
-GlenOut = Bchronology(ages=Glendalough$ages,ageSds=Glendalough$ageSds, calCurves=Glendalough$calCurves,positions=Glendalough$position, positionThicknesses=Glendalough$thickness,ids=Glendalough$id, predictPositions=seq(0,1500,by=10))
+GlenOut = Bchronology(ages=Glendalough$ages,
+                      ageSds=Glendalough$ageSds, 
+                      calCurves=Glendalough$calCurves,
+                      positions=Glendalough$position, 
+                      positionThicknesses=Glendalough$thickness,
+                      ids=Glendalough$id, 
+                      predictPositions=seq(0,1500,by=10))
 ```
 
 There are other arguments you can supply to Bchronology, including the date the core was extracted, the outlier probabilities for each individual date, and the number of iterations for which to run the algorithm. For more details see:
 
-```{r}
+```{r,eval=FALSE}
 help(Bchronology)
 ```
 
@@ -99,14 +110,20 @@ summary(GlenOut, type='outliers')
 
 The first summary command produces ages for each position supplied in the `predictPositions` argument above. The second provides convergence diagnostics. The third gives outlier probabilities. The `plot` command will produce an age-position plot:
 
-```{r}
-plot(GlenOut,main="Glendalough",xlab='Age (cal years BP)',ylab='Depth (cm)',las=1)
+```{r,fig.align='center',fig.width=6,fig.height=5}
+plot(GlenOut,
+     main="Glendalough",
+     xlab='Age (cal years BP)',
+     ylab='Depth (cm)',
+     las=1)
 ```
 
 Finally, the `predict` command will produce predicted ages for a newly specified set of positions with optional thicknesses:
 
 ```{r}
-predictAges = predict(GlenOut, newPositions = c(150,725,1500), newPositionThicknesses=c(5,0,20))
+predictAges = predict(GlenOut, 
+                      newPositions = c(150,725,1500), 
+                      newPositionThicknesses=c(5,0,20))
 ```
 
 To run this model on a data set of your own, you will need to load in your data set via, e.g.
@@ -128,14 +145,23 @@ data(TestRSLData)
 
 These can be run through Bchronology and BchronRSL via:
 
-```{r}
-RSLrun = Bchronology(ages=TestChronData$ages,ageSds=TestChronData$ageSds, positions=TestChronData$position,positionThicknesses=TestChronData$thickness, ids=TestChronData$id,calCurves=TestChronData$calCurves, predictPositions=TestRSLData$Depth)
-RSLrun2 = BchronRSL(RSLrun,RSLmean=TestRSLData$RSL,RSLsd=TestRSLData$Sigma,degree=3)
+```{r,eval=FALSE}
+RSLrun = Bchronology(ages=TestChronData$ages,
+                     ageSds=TestChronData$ageSds, 
+                     positions=TestChronData$position,
+                     positionThicknesses=TestChronData$thickness, 
+                     ids=TestChronData$id,
+                     calCurves=TestChronData$calCurves, 
+                     predictPositions=TestRSLData$Depth)
+RSLrun2 = BchronRSL(RSLrun,
+                    RSLmean=TestRSLData$RSL,
+                    RSLsd=TestRSLData$Sigma,
+                    degree=3)
 ```
 
 The `Bchronology` run is as described in the section above. The `BChronRSL` run takes this object, an estimate of the RSL means and standard deviations, and a value of degree (here 3 indicating cubic regression). They can then be summarised and plotted via:
 
-```{r}
+```{r,fig.align='center',fig.width=6,fig.height=5,eval=FALSE}
 summary(RSLrun2)
 plot(RSLrun2)
 ```
@@ -144,10 +170,19 @@ plot(RSLrun2)
 
 Bchron contains two functions for running non-parametric phase models for estimating activity level in a site/region. The first, BchronDensity fits a full Bayesian Gaussian mixture model to the radiocarbon dates whilst the second BchronDensityFast fits an approximate version which will run on much larger data sets. An example run is
 
+```{r,fig.align='center',fig.width=6,fig.height=5}
 data(Sluggan)
-SlugDens = BchronDensity(ages=Sluggan$ages,ageSds=Sluggan$ageSds,calCurves=Sluggan$calCurves,
-numMix=50)
+SlugDens = BchronDensity(ages=Sluggan$ages,
+                         ageSds=Sluggan$ageSds,
+                         calCurves=Sluggan$calCurves,
+                         numMix=50)
 plot(SlugDens)
+```
 
 BchronDensityFast is identical except for the function call:
-SlugDensFast = BchronDensityFast(ages=Sluggan$ages,ageSds=Sluggan$ageSds, calCurves=Sluggan$calCurves)
+
+```{r}
+SlugDensFast = BchronDensityFast(ages=Sluggan$ages,
+                                 ageSds=Sluggan$ageSds, 
+                                 calCurves=Sluggan$calCurves)
+```
