@@ -71,6 +71,15 @@ summary(ages3)
 plot(ages3,withPositions=TRUE)
 ```
 
+If, alternatively, you want a _credible interval_ (i.e. a single contiguous range) rather than an HDR, you could use the following:
+
+```{r}
+# First create age samples for each date
+age_samples = sapply(ages3,function(x) sample(x$ageGrid,size=2000,replace=TRUE,prob=x$densities))
+# Now summarise them with quantile - this gives a 95% credible interval
+apply(age_samples,2,quantile,prob=c(0.025,0.975))
+```
+
 The calibration code is very fast. On standard PC you should have no trouble calibrating thousands of dates simultaneously without a noticeably long wait.
 
 ## Running the Bchronology age-depth model
