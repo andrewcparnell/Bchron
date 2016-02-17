@@ -39,7 +39,7 @@ function(ages,ageSds,calCurves,ids=NULL,positions=NULL,pathToCalCurves=system.fi
     tau1[[i]] = stats::approx(calBP[[i]],calSd[[i]],xout=ageGrid[[i]])$y
     # Allow for greater age ranges if the calibration curve is normal
     if(allCalCurves[i]=='normal') {
-      ageRange = range(c(calBP,ages+8*ageSds))
+      ageRange = range(c(calBP,ages+4*ageSds))
       ageGrid[[i]] = seq(ageRange[1],ageRange[2],by=1)
       mu[[i]] = ageGrid[[i]]
       tau1[[i]] = rep(0,length(ageGrid[[i]]))

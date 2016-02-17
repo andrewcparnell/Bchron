@@ -1,6 +1,6 @@
 # Function to create Bchron chronologies
 Bchronology = function(ages,ageSds,positions,positionThicknesses=rep(0,length(ages)),calCurves=rep('intcal13',length(ages)),ids=NULL,outlierProbs=rep(0.01,length(ages)),predictPositions=seq(min(positions),max(positions),length=100),pathToCalCurves=system.file('data',package='Bchron'),iterations=10000,burn=2000,thin=8,extractDate=1950-as.numeric(format(Sys.time(),"%Y")),maxExtrap=500,thetaMhSd=0.5,muMhSd=0.1,psiMhSd=0.1,ageScaleVal=1000,positionScaleVal=100) {
-  
+
 # Notation:
 # theta are the calibrated ages of ages 1 to n (not necessarily radiocarbon)
 # phi are the outlier indicators (1=TRUE or 0=FALSE) for date i
@@ -45,7 +45,7 @@ for(i in 1:n) {
 
 # Starting values
 theta = vector(length=n)
-# Make sure no theta values are identical 
+# Make sure no theta values are identical
 badThetas = TRUE
 while(badThetas) {
   for(j in 1:n) theta[j] = round(stats::rnorm(1,x.df2[[j]]$ageGrid[match(max(x.df2[[j]]$densities),x.df2[[j]]$densities)]/ageScaleVal,sd=ageSds[j]/ageScaleVal),3)
@@ -66,7 +66,7 @@ thetaStore = phiStore = matrix(ncol=length(theta),nrow=remaining)
 muStore = psiStore = vector(length=remaining)
 thetaPredict = matrix(ncol=length(predictPositions),nrow=remaining)
 
-# Some C functions which are useful 
+# Some C functions which are useful
 #################################################
 
 # C function for truncated random walk
@@ -100,7 +100,7 @@ predictExtrapDown = function(alpha,lambda,beta,predictPositions,currPositionsn,t
 pb = utils::txtProgressBar(min = 1, max = iterations, style = 3,width=60,title='Running Bchronology...')
 for(i in 1:iterations) {
   utils::setTxtProgressBar(pb, i)
-  
+
   if(any(positionThicknesses>0) & i>0.5*burn & i%%thin==0) {
     # Get date order so I can preserve things if they change around
     currPositions = stats::runif(n,positions/positionScaleVal-0.5*positionThicknesses/positionScaleVal,positions/positionScaleVal+0.5*positionThicknesses/positionScaleVal)
@@ -108,7 +108,7 @@ for(i in 1:iterations) {
     diffPosition = diff(currPositions[do])
     theta[do]=sort(theta)
   }
-  
+
   # If we're in the right place put things in storage
   if(i>burn & i%%thin==0) {
     ind = (i-burn)/thin
@@ -116,24 +116,24 @@ for(i in 1:iterations) {
     phiStore[ind,] = phi
     muStore[ind] = mu
     psiStore[ind] = psi
-        
+
     # Run interpolation/extrapolation stage
     lambda = (mu^(2-p))/(psi*(2-p))
     beta = 1/(psi*(p-1)*(mu^(p-1)))
-    
+
     # First interpolation
     for(j in 1:(n-1)) {
       # Find which positions we need to interpolate for
       depthIndRange = which(predictPositionsRescaled>=currPositions[do[j]] & predictPositionsRescaled<=currPositions[do[j+1]])
       thetaPredict[ind,depthIndRange] = round(predictInterp(alpha,lambda,beta,predictPositionsRescaled[depthIndRange],diffPosition[j],currPositions[do[j]],currPositions[do[j+1]],theta[do[j]],theta[do[j+1]]),3)
     }
-  
+
     # Extrapolate up to to top depth
     if(any(predictPositionsRescaled<currPositions[1])) {
       depthIndRange = which(predictPositionsRescaled<=currPositions[1])
       thetaPredict[ind,depthIndRange] = round(predictExtrapUp(alpha,lambda,beta,predictPositionsRescaled[depthIndRange],currPositions[1],theta[1],maxExtrap,extractDate/ageScaleVal),3)
     }
-    
+
     # Extrapolate below bottom depth
     if(any(predictPositionsRescaled>=currPositions[n])) {
       depthIndRange = which(predictPositionsRescaled>=currPositions[n])
@@ -153,18 +153,18 @@ for(i in 1:iterations) {
     } else {
       currDens = x.df1[[do[j]]]$densities
     }
-    thetaNewMatch = as.integer(thetaNew*ageScaleVal+offset[do[j]])+1      
-    thetaNewLogDens = max(log(currDens[thetaNewMatch]),-1000000)
+    thetaNewMatch = as.integer(thetaNew*ageScaleVal+offset[do[j]])+1
+    thetaNewLogDens = max(log(currDens[thetaNewMatch]),-1000000,na.rm=TRUE) # Get rid of NAs in case of moving beyond the calibration curve
     priorNewLogDens = ifelse(j==1,0,log(dtweediep1(thetaNew-theta[do[j-1]],p,mu*diffPosition[j-1],psi/(diffPosition[j-1]^(p-1)))))+ifelse(j==n,0,log(dtweediep1(theta[do[j+1]]-thetaNew,p,mu*(diffPosition[j]),psi/(diffPosition[j])^(p-1))))
     thetaMatch = as.integer(theta[do[j]]*ageScaleVal+offset[do[j]])+1
     thetaLogDens = max(log(currDens[thetaMatch]),-1000000)
     priorLogDens = ifelse(j==1,0,log(dtweediep1(theta[do[j]]-theta[do[j-1]],p,mu*(diffPosition[j-1]),psi/(diffPosition[j-1])^(p-1))))+ifelse(j==n,0,log(dtweediep1(theta[do[j+1]]-theta[do[j]],p,mu*(diffPosition[j]),psi/(diffPosition[j])^(p-1))))
-    
+
     logRtheta = thetaNewLogDens - thetaLogDens + priorNewLogDens - priorLogDens + log(thetaNewAll$rat)
-    if(stats::runif(1)<exp(logRtheta)) theta[do[j]] = thetaNew      
+    if(stats::runif(1)<exp(logRtheta)) theta[do[j]] = thetaNew
   }
-  
-  
+
+
   # Update phi
   for(j in 1:n) {
     phiNew = sample(0:1,1)
@@ -183,32 +183,32 @@ for(i in 1:iterations) {
       }
       thetaMatch = as.integer(theta[do[j]]*ageScaleVal+offset[j])+1
       thetaNewLogDens = max(log(newDens[thetaMatch]),-1000000)
-      
+
       logRphi = thetaNewLogDens- thetaLogDens + stats::dbinom(phiNew,1,outlierProbs[do[j]],log=TRUE) - stats::dbinom(phi[do[j]],1,outlierProbs[do[j]],log=TRUE)
-      
+
       if(stats::runif(1)<exp(logRphi)) phi[do[j]] = phiNew
     }
   }
-  
+
   # Update mu
   muNewAll = truncatedWalk(mu,muMhSd,0,1e5)
   muNew = muNewAll$new
 
   logRmu = sum(log(dtweediep1(diff(theta[do]),p,muNew*diffPosition,psi/(diffPosition)^(p-1)))) - sum(log(dtweediep1(diff(theta[do]),p,mu*diffPosition,psi/(diffPosition)^(p-1)))) + log(muNewAll$rat)
   if(stats::runif(1)<exp(logRmu)) mu = muNew
-  
+
   # Update psi
   psiNewAll = truncatedWalk(psi,psiMhSd,0,1e5)
   psiNew = psiNewAll$new
-  
+
   logRpsi = sum(log(dtweediep1(diff(theta[do]),p,mu*diffPosition,psiNew/(diffPosition)^(p-1)))) - sum(log(dtweediep1(diff(theta[do]),p,mu*diffPosition,psi/(diffPosition)^(p-1)))) + log(psiNewAll$rat)
   if(stats::runif(1)<exp(logRpsi)) psi = psiNew
-  
+
 }
 
 # Return everything
 out = list(theta=thetaStore,phi=phiStore,mu=muStore,psi=psiStore,thetaPredict=ageScaleVal*thetaPredict,predictPositions=predictPositions,calAges=x.df2,positions=positions,extractDate=extractDate,ageScaleVal=ageScaleVal,positionScaleVal=positionScaleVal)
 class(out) = 'BchronologyRun'
 return(out)
-  
+
 }
