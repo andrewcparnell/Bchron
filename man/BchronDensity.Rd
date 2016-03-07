@@ -8,8 +8,8 @@ This function runs a non-parametric phase model on 14C and non-14C ages via Gaus
 }
 \usage{
 BchronDensity(ages, ageSds, calCurves, pathToCalCurves = system.file('data',
-package = "Bchron"), dfs = rep(100, length(ages)), numMix = 30, iterations = 10000, 
-burn = 2000, thin = 8, updateAges = FALSE)
+package = "Bchron"), dfs = rep(100, length(ages)), numMix = 30, iterations = 10000,
+burn = 2000, thin = 8, updateAges = FALSE, store_density=FALSE)
 }
 \arguments{
   \item{ages}{
@@ -22,13 +22,13 @@ A vector of 1-sigma values for the ages given above
 A vector of values containing either 'intcal13', 'shcal13', 'marine13', or 'normal'. Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.
 }
   \item{pathToCalCurves}{
-(optional) File path to where the calibration curves are located. Defaults to the system directory where the 3 standard calibration curves are stored. 
+File path to where the calibration curves are located. Defaults to the system directory where the 3 standard calibration curves are stored
 }
   \item{dfs}{
-(optional) Degrees-of-freedom values for the t-distribution associated with the calibration calculation. A large value indicates Gaussian distributions assumed for the 14C ages
+Degrees-of-freedom values for the t-distribution associated with the calibration calculation. A large value indicates Gaussian distributions assumed for the 14C ages
 }
   \item{numMix}{
-(optional) The number of mixture components in the phase model. Might need to be increased if the data set is large and the phase behaviour is very complex
+The number of mixture components in the phase model. Might need to be increased if the data set is large and the phase behaviour is very complex
 }
   \item{iterations}{
 The number of iterations to run for
@@ -42,12 +42,15 @@ The step size of iterations to keep
   \item{updateAges}{
 Whether or not to update ages as part of the MCMC run. Default is FALSE. Changing this to TRUE will improve performance but will fit a slightly invalid model
 }
+  \item{store_density}{
+Whether or not to store the density and age grid. Useful for plotting the output in other packages
+}
 }
 \details{
 This model places a Gaussian mixture prior distribution on the calibrated ages and so estimates the density of the overall set of radiocarbon ages. It is designed to be a probabilistic version of the Oxcal SUM command which takes calibrated ages and sums the probability distributions with the aim of estimating activity through age as a proxy.
 }
 \value{
-    output = list(theta = thetaStore, p = pStore, mu = mu, calAges = xSmall, 
+    output = list(theta = thetaStore, p = pStore, mu = mu, calAges = xSmall,
         G = G)
     class(output) = "BchronDensityRun"
 An object of class BchronDensityRun with the following elements:
@@ -56,6 +59,9 @@ An object of class BchronDensityRun with the following elements:
 \item{mu}{Values of the means of each Gaussian mixture}
 \item{calAges}{The calibrated ages from \code{\link{BchronCalibrate}}}
 \item{G}{The number of mixture components. Equal to numMix}
+\item{age_grid}{A grid of ages used for the final density estimate}
+\item{density}{The density estimate based on the above age grid}
+
 }
 \references{
 Forthcoming!

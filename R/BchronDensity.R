@@ -1,9 +1,9 @@
 BchronDensity <-
-function(ages,ageSds,calCurves,pathToCalCurves=system.file('data',package='Bchron'),dfs=rep(100,length(ages)),numMix=30,iterations=10000,burn=2000,thin=8,updateAges=FALSE) {
+function(ages,ageSds,calCurves,pathToCalCurves=system.file('data',package='Bchron'),dfs=rep(100,length(ages)),numMix=30,iterations=10000,burn=2000,thin=8,updateAges=FALSE,store_density=FALSE) {
 
 if(length(ages)!=length(ageSds)) stop("ages and 1-sigma errors must be same length")
 if(length(ages)!=length(calCurves)) stop("ages and Calibration curves must be same length")
-  
+
 # Calibrate ages
 x = BchronCalibrate(ages=ages,ageSds=ageSds,calCurves=calCurves,pathToCalCurves=pathToCalCurves,eps=0,dfs=rep(100,length(ages)))
 xSmall = BchronCalibrate(ages=ages,ageSds=ageSds,calCurves=calCurves,pathToCalCurves=pathToCalCurves,dfs=rep(100,length(ages)))
@@ -33,7 +33,7 @@ gbase <- function(x, mus) {
   G }
 
 clrInv = function(phi) {
-  return(exp(phi)/sum(exp(phi)))  
+  return(exp(phi)/sum(exp(phi)))
 }
 
 # Starting values
@@ -44,7 +44,7 @@ for(j in 1:n) theta[j] = round(stats::rnorm(1,mean=x[[j]]$ageGrid[match(max(x[[j
 phi = c(stats::runif(J-1,-10,10),0)
 p = as.numeric(clrInv(phi))
 G = gbase(theta,mu)
-  
+
 # Storage
 remaining = (iterations-burn)/thin
 thetaStore = matrix(ncol=length(theta),nrow=remaining)
@@ -70,25 +70,25 @@ for(i in 1:iterations) {
     thetaStore[ind,] = theta
     pStore[ind,] = p
   }
-  
+
   # Update theta
   if(updateAges) {
     for(j in 1:n) {
       thetaNew = round(stats::rnorm(1,theta[j],0.5),3)
-      thetaNewMatch = as.integer(thetaNew+offset[j])+1      
+      thetaNewMatch = as.integer(thetaNew+offset[j])+1
       thetaNewLogDens = max(log(x[[j]]$densities[thetaNewMatch]),-1000000)
       priorNew.dens = sum(p*stats::dnorm(thetaNew,mean=mu2,sd=sigma2))
       thetaMatch = as.integer(theta[j]+offset[j])+1
       thetaLogDens = max(log(x[[j]]$densities[thetaMatch]),-1000000)
       priorDens = sum(p*stats::dnorm(theta[j],mean=mu2,sd=sigma2))
-        
+
       logRtheta = thetaNewLogDens - thetaLogDens + log(priorNew.dens) - log(priorDens)
-      if(stats::runif(1)<exp(logRtheta)) theta[j] = thetaNew      
-    }    
+      if(stats::runif(1)<exp(logRtheta)) theta[j] = thetaNew
+    }
   } else {
-    theta = thetaAll[i,]  
+    theta = thetaAll[i,]
   }
-  
+
   # Update phi
   for(j in 1:(J-1)) {
     phiNew = stats::rnorm(1,phi[j],1)
@@ -101,12 +101,29 @@ for(i in 1:iterations) {
     if(stats::runif(1)<exp(logRphi)) {
       phi[j] = phiNew
       p = as.numeric(clrInv(phi))
-    } 
+    }
   }
 }
 
-output = list(theta=thetaStore,p=pStore,mu=mu,calAges=xSmall,G=G)
+# Store the density if required
+if(store_density) {
+  # Create the densities
+  dateGrid = seq(round(thetaRange[1]*0.9,3),round(thetaRange[2]*1.1,3),length=1000)
+  dens = rep(0,length=length(dateGrid))
+  Gstar = gbase(dateGrid,mu)
+  for(i in 1:nrow(pStore)) {
+    dens = dens + Gstar%*%pStore[i,]
+  }
+  densFinal = dens/sum(dens)
+}
+
+if(store_density) {
+  output = list(theta=thetaStore,p=pStore,mu=mu,calAges=xSmall,G=G,age_grid=dateGrid,density=densFinal)
+} else {
+  output = list(theta=thetaStore,p=pStore,mu=mu,calAges=xSmall,G=G)
+}
+
 class(output) = 'BchronDensityRun'
 return(output)
-  
+
 }

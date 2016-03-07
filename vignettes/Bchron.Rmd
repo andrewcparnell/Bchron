@@ -187,6 +187,8 @@ SlugDens = BchronDensity(ages=Sluggan$ages,
                          calCurves=Sluggan$calCurves,
                          numMix=50)
 ```
+The `BchronDensity` function also has an optional argument `store_density` which will output an age grid and associated density in case you wish to plot the output in a different package.
+
 
 ```{r,fig.align='center',fig.width=6,fig.height=5}
 plot(SlugDens,xlab='Age (cal years BP)')
@@ -199,6 +201,7 @@ SlugDensFast = BchronDensityFast(ages=Sluggan$ages,
                                  ageSds=Sluggan$ageSds, 
                                  calCurves=Sluggan$calCurves)
 ```
+The `BchronDensityFast` function outputs the age grid and density by default so requires no extra arguments to store it.
 
 ## References
 
