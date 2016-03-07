@@ -203,6 +203,26 @@ SlugDensFast = BchronDensityFast(ages=Sluggan$ages,
 ```
 The `BchronDensityFast` function outputs the age grid and density by default so requires no extra arguments to store it.
 
+## Including user-defined calibration curves
+
+Bchron allows for user-defined calibration curves to be created through the function `CreateCalCurve`. If inputs to this function are:
+  - The `name` of the calibration curve (e.g. intcal13c)
+  - The calibrated/calendar ages for the new calibration curve
+  - The uncalibrated (e.g. 14C) ages for the new calibration curve
+  - (Optionally) the 1-sigma error for the calibration curve in uncalibrated years. If not included the error is assumed to be zero
+
+One run, the calibration curve can be used for all future runs until the package is deleted or re-installed. The calibration curve can be used by simple calling it in any other Bchron function using the supplied name. Note that no name checking is done, so it is possible to over-write the pre-defined calibration curves if
+
+As an example, consider installing the intcal09 calibration curve, as available from (http://www.radiocarbon.org/IntCal09%20files/intcal09.14c)[here]. We can run the following code:
+
+```{r}
+# Load in the calibration curve with:
+intcal09 = read.table('http://www.radiocarbon.org/IntCal09%20files/intcal09.14c',sep=',')
+# Run CreateCalCurve
+CreateCalCurve(name='intcal09',cal_ages=intcal09[,1],uncal_ages=intcal09[,2],one_sigma=intcal09[,3])
+```
+
+
 ## References
 
 For a description of the kind of things that Bchron can do:  
