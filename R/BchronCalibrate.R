@@ -34,9 +34,9 @@ function(ages,ageSds,calCurves,ids=NULL,positions=NULL,pathToCalCurves=system.fi
     c14BP[[i]] = calCurve[,2]
     calSd[[i]] = calCurve[,3]
     # Create an age grid and get mean and variance of calibration curve
-    ageGrid[[i]] = seq(min(calBP[[i]]),max(calBP[[i]]),by=1)
-    mu[[i]] = stats::approx(calBP[[i]],c14BP[[i]],xout=ageGrid[[i]])$y
-    tau1[[i]] = stats::approx(calBP[[i]],calSd[[i]],xout=ageGrid[[i]])$y
+    ageGrid[[i]] = round(seq(min(calBP[[i]]),max(calBP[[i]]),by=1),0)
+    mu[[i]] = stats::approx(calBP[[i]],c14BP[[i]],xout=ageGrid[[i]],rule=2)$y
+    tau1[[i]] = stats::approx(calBP[[i]],calSd[[i]],xout=ageGrid[[i]],rule=2)$y
     # Allow for greater age ranges if the calibration curve is normal
     if(allCalCurves[i]=='normal') {
       ageRange = range(c(calBP,ages+4*ageSds))
@@ -54,8 +54,8 @@ function(ages,ageSds,calCurves,ids=NULL,positions=NULL,pathToCalCurves=system.fi
   # Loop through ages and calculate densities
   for(i in 1:length(ages)) {
 
-    # Get rid of ages outside the range of the calibration curve
-    if(ages[i]>max(ageGrid[[matchCalCurves[i]]]) | ages[i]<min(ageGrid[[matchCalCurves[i]]])) stop(paste("Date",ids[i],"outside of calibration range"))
+    # Get rid of ages outside the range of the uncalibrated dates
+    if(ages[i]>max(mu[[matchCalCurves[i]]]) | ages[i]<min(mu[[matchCalCurves[i]]])) stop(paste("Date",ids[i],"outside of calibration range"))
 
     tau = ageSds[i]^2 + tau1[[matchCalCurves[i]]]
 
