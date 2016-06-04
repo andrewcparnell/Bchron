@@ -187,6 +187,8 @@ SlugDens = BchronDensity(ages=Sluggan$ages,
                          calCurves=Sluggan$calCurves,
                          numMix=50)
 ```
+The `BchronDensity` function also has an optional argument `store_density` which will output an age grid and associated density in case you wish to plot the output in a different package.
+
 
 ```{r,fig.align='center',fig.width=6,fig.height=5}
 plot(SlugDens,xlab='Age (cal years BP)')
@@ -198,6 +200,35 @@ BchronDensityFast is identical except for the function call:
 SlugDensFast = BchronDensityFast(ages=Sluggan$ages,
                                  ageSds=Sluggan$ageSds, 
                                  calCurves=Sluggan$calCurves)
+```
+The `BchronDensityFast` function outputs the age grid and density by default so requires no extra arguments to store it.
+
+## Including user-defined calibration curves
+
+Bchron allows for user-defined calibration curves to be created through the function `CreateCalCurve`. If inputs to this function are:
+  - The `name` of the calibration curve (e.g. intcal13c)
+  - The calibrated/calendar ages for the new calibration curve
+  - The uncalibrated (e.g. 14C) ages for the new calibration curve
+  - (Optionally) the 1-sigma error for the calibration curve in uncalibrated years. If not included the error is assumed to be zero
+
+One run, the calibration curve can be used for all future runs until the package is deleted or re-installed. The calibration curve can be used by simple calling it in any other Bchron function using the supplied name. Note that no name checking is done, so it is possible to over-write the pre-defined calibration curves if
+
+As an example, consider installing the intcal09 calibration curve, as available from (http://www.radiocarbon.org/IntCal09%20files/intcal09.14c)[here]. We can run the following code:
+
+```{r}
+# Load in the calibration curve with:
+intcal09 = read.table('http://www.radiocarbon.org/IntCal09%20files/intcal09.14c',sep=',')
+# Run CreateCalCurve
+CreateCalCurve(name='intcal09',cal_ages=intcal09[,1],uncal_ages=intcal09[,2],one_sigma=intcal09[,3])
+```
+
+The new calibration curve can now be used via its name. For example, we can now compare the calibration of a date under the intcal09 curve with that of intcal13:
+```{r}
+age_09 = BchronCalibrate(age=15500,ageSds=150,calCurves = 'intcal09',ids='My Date')
+age_13 = BchronCalibrate(age=15500,ageSds=150,calCurves = 'intcal13')
+plot(age_09)
+with(age_13$date1,lines(ageGrid,densities,col='red'))
+legend('topleft',legend=c('intcal09','intcal13'),col=c('black','red'),lty=1)
 ```
 
 ## References

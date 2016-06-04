@@ -7,8 +7,8 @@ Fast radiocarbon calibration
 A fast function for calibrating large numbers of radiocarbon dates involving multiple calibration curves
 }
 \usage{
-BchronCalibrate(ages, ageSds, calCurves, ids = NULL, positions = NULL, 
-pathToCalCurves = system.file('data',package = "Bchron"), 
+BchronCalibrate(ages, ageSds, calCurves, ids = NULL, positions = NULL,
+pathToCalCurves = system.file('data',package = "Bchron"),
 eps = 1e-05, dfs = rep(100, length(ages)))
 }
 \arguments{
@@ -28,7 +28,7 @@ A vector of values containing either 'intcal13', 'shcal13', 'marine13', or 'norm
 (optional) Position values (e.g. depths) for each age
 }
   \item{pathToCalCurves}{
-(optional) File path to where the calibration curves are located. Defaults to the system directory where the 3 standard calibration curves are stored. 
+(optional) File path to where the calibration curves are located. Defaults to the system directory where the 3 standard calibration curves are stored.
 }
   \item{eps}{
 (optional) Cut-off point for density calculation. A value of eps>0 removes ages from the output which have negligible probability density
@@ -63,7 +63,7 @@ Forthcoming!
 Andrew Parnell <andrew.parnell@ucd.ie>
 }
 \seealso{
-\code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}} 
+\code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}, \code{\link{CreateCalCurve}}
 }
 \examples{
 # Calibrate a single age
