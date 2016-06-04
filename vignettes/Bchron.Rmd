@@ -71,11 +71,11 @@ summary(ages3)
 plot(ages3,withPositions=TRUE)
 ```
 
-If, alternatively, you want a _credible interval_ (i.e. a single contiguous range) rather than an HDR, you could use the following:
+If, alternatively, you want a _credible interval_ (i.e. a single contiguous range) rather than an HDR, you could use the `SampleAges` function:
 
 ```{r}
 # First create age samples for each date
-age_samples = sapply(ages3,function(x) sample(x$ageGrid,size=2000,replace=TRUE,prob=x$densities))
+age_samples = SampleAges(ages3)
 # Now summarise them with quantile - this gives a 95% credible interval
 apply(age_samples,2,quantile,prob=c(0.025,0.975))
 ```
