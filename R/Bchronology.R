@@ -163,12 +163,7 @@ for(i in 1:iterations) {
     logRtheta = thetaNewLogDens - thetaLogDens + priorNewLogDens - priorLogDens + log(thetaNewAll$rat)
     if(stats::runif(1)<exp(logRtheta)) theta[do[j]] = thetaNew
   }
-<<<<<<< HEAD
-  
-=======
 
-
->>>>>>> f835a7469df0f3a70fe8a134b3e61bb5597672c8
   # Update phi
   for(j in 1:n) {
     phiNew = sample(0:1,1)
