@@ -1,6 +1,6 @@
 # Function to create Bchron chronologies
 Bchronology = function(ages,ageSds,positions,positionThicknesses=rep(0,length(ages)),calCurves=rep('intcal13',length(ages)),ids=NULL,outlierProbs=rep(0.01,length(ages)),predictPositions=seq(min(positions),max(positions),length=100),pathToCalCurves=system.file('data',package='Bchron'),iterations=10000,burn=2000,thin=8,extractDate=1950-as.numeric(format(Sys.time(),"%Y")),maxExtrap=500,thetaMhSd=0.5,muMhSd=0.1,psiMhSd=0.1,ageScaleVal=1000,positionScaleVal=100) {
-  
+
 # Notation:
 # theta are the calibrated ages of ages 1 to n (not necessarily radiocarbon)
 # phi are the outlier indicators (1=TRUE or 0=FALSE) for date i
@@ -163,7 +163,6 @@ for(i in 1:iterations) {
     logRtheta = thetaNewLogDens - thetaLogDens + priorNewLogDens - priorLogDens + log(thetaNewAll$rat)
     if(stats::runif(1)<exp(logRtheta)) theta[do[j]] = thetaNew      
   }
-  
   
   # Update phi
   for(j in 1:n) {
