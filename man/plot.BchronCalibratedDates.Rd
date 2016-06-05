@@ -9,9 +9,8 @@ Plots calibrated radiocarbon dates from a \code{\link{BchronCalibrate}} run. Has
 \usage{
 \method{plot}{BchronCalibratedDates}(x, 
 withPositions = FALSE, 
-xlab='Age (cal years BP)', 
-ylab=ifelse(withPositions,'Position','Density'), 
-pause=FALSE,
+pause = FALSE,
+dateHeight = 30, 
 \ldots)
 }
 \arguments{
@@ -19,19 +18,16 @@ pause=FALSE,
 Output from BchronCalibrate
 }
   \item{withPositions}{
-Whether to plot with positions (i.e. using the position values as the y axis). Default is FALSE in which case it will produce a sequence of plots, one for each calibrated age
-}
-  \item{xlab}{
-An x-axis label for the plot
-}
-  \item{ylab}{
-A y-axis label for the plot
+Whether to plot with positions (i.e. using the position values as the y axis). Default is FALSE in which case it will produce a sequence of plots, one for each calibrated age.
 }
   \item{pause}{
-Whether to pause between plots or go ahead and create them all
+Whether to pause between plots or go ahead and create them all.
+}
+  \item{dateHeight}{
+The height of the dates in the same units as the positions (e.g. cm). Only relevant if \code{withPositions=TRUE}.
 }
   \item{\dots}{
-Other arguments to plot, see \code{\link{par}}.
+Other arguments to plot, e.g. axis limits, titles, etc. See \code{\link{par}}.
 }
 }
 \details{
@@ -47,5 +43,5 @@ Andrew Parnell <andrew.parnell@ucd.ie>
 \code{\link{BchronCalibrate}}, \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}} 
 }
 \examples{
-# Examples in \code{\link{BchronCalibrate}}
+# Examples in BchronCalibrate
 }

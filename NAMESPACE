@@ -13,8 +13,7 @@ importFrom("graphics", "grid", "legend", "lines", "mtext", "par",
              "plot", "points", "polygon")
 importFrom("stats", "approx", "dbinom", "dnorm", "dt", "dunif",
              "pnorm", "quantile", "rnorm", "runif")
-importFrom("utils", "read.table")
-
+importFrom("utils", "read.table", "modifyList")
 
 S3method(plot, BchronologyRun)
 S3method(plot, BchronCalibratedDates)
