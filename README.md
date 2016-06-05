@@ -1,4 +1,4 @@
-[![cran version](http://www.r-pkg.org/badges/version/Bchron)](http://cran.rstudio.com/web/packages/Bchron) 
+[![cran version](http://www.r-pkg.org/badges/version/Bchron)](https://cran.rstudio.com/web/packages/Bchron) 
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/Bchron?)](https://github.com/metacran/cranlogs.app)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/Bchron?color=82b4e8)](https://github.com/metacran/cranlogs.app)
 
