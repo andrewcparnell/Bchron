@@ -234,7 +234,7 @@ The new calibration curve can now be used via its name. For example, we can now 
 age_09 = BchronCalibrate(age=15500,ageSds=150,calCurves = 'intcal09',ids='My Date')
 age_13 = BchronCalibrate(age=15500,ageSds=150,calCurves = 'intcal13')
 plot(age_09)
-with(age_13$date1,lines(ageGrid,densities,col='red'))
+lines(age_13$date1$ageGrid,age_13$date1$densities,col='red')
 legend('topleft',legend=c('intcal09','intcal13'),col=c('black','red'),lty=1)
 ```
 
