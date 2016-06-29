@@ -172,9 +172,13 @@ RSLrun2 = BchronRSL(RSLrun,
 The `Bchronology` run is as described in the section above. The `BChronRSL` run takes this object, an estimate of the RSL means and standard deviations, and a value of degree (here 3 indicating cubic regression). They can then be summarised and plotted via:
 
 ```{r,fig.align='center',fig.width=6,fig.height=5,eval=FALSE}
-summary(RSLrun2)
-plot(RSLrun2)
+summary(RSLrun2, type = 'RSL', age_grid = seq(0, 2000, by  = 100))
+plot(RSLrun2, type = 'rate', main = 'Rate of RSL change')
 ```
+
+See the help files for more options, including outputting parameter values, and plots of acceleration of RSL itself.
+
+
 
 ## Running non-parametric phase estimation
 
