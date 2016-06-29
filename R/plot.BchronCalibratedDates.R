@@ -28,13 +28,14 @@ function(x,
   # Now for multiple dates without depths
   if(length(x)>1 & withPositions==FALSE) {
     for(i in 1:length(x)) {
+      ex_curr = ex
       ag = x[[i]]$ageGrid
       den = x[[i]]$densities
-      ex$x = ag
-      ex$y = den
-      ex$type = 'l'
-      if(is.null(ex$main)) ex$main = names(x)[i]
-      args = utils::modifyList(ex, list(...))
+      ex_curr$x = ag
+      ex_curr$y = den
+      ex_curr$type = 'l'
+      if(is.null(ex_curr$main)) ex_curr$main = names(x)[i]
+      args = utils::modifyList(ex_curr, list(...))
       do.call("plot", args)
       graphics::mtext(paste(x[[i]]$calCurves),side=1,line=4,adj=0,cex=0.6)
       if(pause) if(i<length(x)) readline('Hit Enter for next plot...')

@@ -10,7 +10,7 @@ function(ages,ageSds,calCurves,ids=NULL,positions=NULL,pathToCalCurves=system.fi
   if(length(ages)!=length(ageSds)) stop("ages and ageSds should be of same length")
   if(length(ages)!=length(calCurves)) stop("ages and calCurves should be of same length")
   if(!is.null(positions)) if(length(ages)!=length(positions)) stop("ages and positions should be of same length")
-  if(is.null(ids)) ids = paste('date',1:length(ages),sep='')
+  if(is.null(ids)) ids = paste('Date',1:length(ages),sep='')
 
   # Check that ages and ageSds are whole numbers (i.e. years)
   if(!all(as.integer(ages)==ages)) {

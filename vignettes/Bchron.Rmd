@@ -9,6 +9,11 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.width=7, fig.align = 'center',
+                      warning=FALSE, message=FALSE)
+```
+
 ## Introduction
 
 Bchron is an R package that enables quick calibration of radiocarbon dates under various calibration curves (including user generated ones); age-depth modelling as per the algorithm of Haslett and Parnell (2008); Relative sea level rate estimation incorporating time uncertainty in polynomial regression models (Parnell and Gehrels 2015); and non-parametric phase modelling via Gaussian mixtures as a means to determine the activity of a site (and as an alternative to the Oxcal function SUM; currently unpublished).
@@ -155,7 +160,7 @@ data(TestRSLData)
 
 These can be run through Bchronology and BchronRSL via:
 
-```{r,eval=FALSE}
+```{r, mesages = FALSE, results='hide'}
 RSLrun = Bchronology(ages=TestChronData$ages,
                      ageSds=TestChronData$ageSds, 
                      positions=TestChronData$position,
@@ -171,14 +176,12 @@ RSLrun2 = BchronRSL(RSLrun,
 
 The `Bchronology` run is as described in the section above. The `BChronRSL` run takes this object, an estimate of the RSL means and standard deviations, and a value of degree (here 3 indicating cubic regression). They can then be summarised and plotted via:
 
-```{r,fig.align='center',fig.width=6,fig.height=5,eval=FALSE}
-summary(RSLrun2, type = 'RSL', age_grid = seq(0, 2000, by  = 100))
+```{r}
+summary(RSLrun2, type = 'RSL', age_grid = seq(0, 2000, by  = 250))
 plot(RSLrun2, type = 'rate', main = 'Rate of RSL change')
 ```
 
 See the help files for more options, including outputting parameter values, and plots of acceleration of RSL itself.
-
-
 
 ## Running non-parametric phase estimation
 
