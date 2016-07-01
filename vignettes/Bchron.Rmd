@@ -10,7 +10,7 @@ vignette: >
 ---
 
 ```{r global_options, include=FALSE}
-knitr::opts_chunk$set(fig.width=7, fig.align = 'center',
+knitr::opts_chunk$set(fig.width=7, fig.height = 5, fig.align = 'center',
                       warning=FALSE, message=FALSE)
 ```
 
@@ -160,11 +160,7 @@ data(TestRSLData)
 
 These can be run through Bchronology and BchronRSL via:
 
-<<<<<<< HEAD
-```{r,messages=FALSE}
-=======
-```{r, mesages = FALSE, results='hide'}
->>>>>>> refs/remotes/origin/master
+```{r,messages=FALSE, results='hide'}
 RSLrun = Bchronology(ages=TestChronData$ages,
                      ageSds=TestChronData$ageSds, 
                      positions=TestChronData$position,
@@ -180,12 +176,9 @@ RSLrun2 = BchronRSL(RSLrun,
 
 The `Bchronology` run is as described in the section above. The `BChronRSL` run takes this object, an estimate of the RSL means and standard deviations, and a value of degree (here 3 indicating cubic regression). They can then be summarised and plotted via:
 
-<<<<<<< HEAD
-```{r,fig.align='center',fig.width=6,fig.height=5}
-=======
 ```{r}
->>>>>>> refs/remotes/origin/master
 summary(RSLrun2, type = 'RSL', age_grid = seq(0, 2000, by  = 250))
+plot(RSLrun2, type = 'RSL', main = 'Relative sea level plot')
 plot(RSLrun2, type = 'rate', main = 'Rate of RSL change')
 ```
 
@@ -238,7 +231,7 @@ CreateCalCurve(name='intcal09',cal_ages=intcal09[,1],uncal_ages=intcal09[,2],one
 ```
 
 The new calibration curve can now be used via its name. For example, we can now compare the calibration of a date under the intcal09 curve with that of intcal13:
-```{r,fig.align='center',fig.width=6,fig.height=5,}
+```{r}
 age_09 = BchronCalibrate(age=15500,ageSds=150,calCurves = 'intcal09',ids='My Date')
 age_13 = BchronCalibrate(age=15500,ageSds=150,calCurves = 'intcal13')
 plot(age_09)
