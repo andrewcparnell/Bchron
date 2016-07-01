@@ -16,8 +16,6 @@ An object created by \code{\link{BchronRSL}}
   \item{type}{
 One of 'RSL', 'rate', or 'accel'. If RSL produces a plot of RSL esimtates from the model. If rate, produces rate estimates. If accel produces acceleration estimates.
 }
-  \item{ylab}{
-}
   \item{\dots}{
 Other arguments to plot, see \code{\link{par}}
 }
