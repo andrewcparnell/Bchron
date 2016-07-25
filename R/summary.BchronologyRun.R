@@ -35,8 +35,8 @@ function(object,type=c('quantiles','outliers','convergence','sed_rate','acc_rate
       chrons = object$thetaPredict
       position_grid = object$predictPositions
       if(useExisting) cat('Note: assumes existing predictPositions are on a regular unit grid. If this is not the case set useExisting = FALSE \n')
-      diff_position_grid = diff(position_grid, differences = 2)
-      if(!isTRUE(all.equal(diff_position_grid, rep(diff_position_grid[1], length(diff_position_grid))))) warning('predictPositions does not seem to be equally spaced. Set useExisting = FALSE')
+      diff_position_grid = diff(position_grid)
+      if(!isTRUE(all.equal(diff_position_grid, rep(1, length(diff_position_grid))))) warning('predictPositions does not seem to be unit spaced. Set useExisting = FALSE')
       if(!useExisting) {
         position_grid = seq(min(object$predictPositions), max(object$predictPositions), by = 1)
         chrons = predict(object, newPositions = position_grid)
