@@ -148,6 +148,38 @@ mydata = read.table(file='path/to/file.txt',header=TRUE)
 run = Bchronology(ages=mydata[,1],ageSds=mydata[,2], ...
 ```
 
+### Obtaining sedimnetation and accumulation rates
+
+The summary function used above also allows for calculation of sedimentation and accumulation rates. Here is an example of calculating and plotting the accumulation rate for the `GlenOut` object created above:
+
+```{r, results ='hide'}
+acc_rate = summary(GlenOut, type = 'acc_rate')
+```
+
+```{r}
+plot(acc_rate[,'age_grid'], acc_rate[,'50%'], type='l', ylab = 'cm per year', xlab = 'Age (k cal years BP)', ylim = range(acc_rate[,-1]))
+lines(acc_rate[,'age_grid'], acc_rate[,'2.5%'], lty='dotted')
+lines(acc_rate[,'age_grid'], acc_rate[,'97.5%'], lty='dotted')
+```
+
+Clearly these accumulation rates are very uncertain, which is unsurprising given the paucity of dates.
+
+To calculate sedimentation rates, you need to either make sure that the `predictPositions` argument in the `Bchronology` call above is given with unit differences (e.g. `predictPositions=seq(0,1500,by=1)`) or set the argument `useExisting=FALSE` in the command below:
+
+```{r, results = 'hide'}
+sed_rate = summary(GlenOut, type = 'sed_rate', useExisting = FALSE)
+```
+
+This will be quite slow as it needs to predict ages on a regular unit depth grid. However, the plots can be created in the same way:
+
+```{r}
+plot(sed_rate[,'position_grid'], sed_rate[,'50%'], type='l', ylab = 'Years per cm', xlab = 'Depth (cm)', ylim = range(sed_rate[,-1]))
+lines(sed_rate[,'position_grid'], sed_rate[,'2.5%'], lty='dotted')
+lines(sed_rate[,'position_grid'], sed_rate[,'97.5%'], lty='dotted')
+```
+
+You could then for example save this to a csv file with, e.g. `write.csv(sed_rate, file = 'Glendalough_sed_rates.csv', quote=FALSE, row.names = FALSE)`
+
 ## Running RSL rate estimation
 
 The function `BchronRSL` will produce estimated relative sea level rates from a regression model taking into account the uncertainties in age provided by a `Bchronology` run as above. Two example data sets are provided:

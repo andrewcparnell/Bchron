@@ -15,7 +15,7 @@ function(object,type=c('quantiles','outliers','convergence','sed_rate','acc_rate
       cat('Posterior outlier probability by date: \n')
       outprob <- data.frame(names(object$calAges),colMeans(object$phi))
       colnames(outprob) <- c('Date','OutlierProb')
-      print(round(outprob, digits=digits),row.names=FALSE)
+      print(outprob,row.names=FALSE)
       invisible(outprob)
     },
     convergence = {
@@ -27,7 +27,7 @@ function(object,type=c('quantiles','outliers','convergence','sed_rate','acc_rate
       geweke[is.nan(geweke)] <- 0
       pvals <- data.frame(sort(round(c(stats::pnorm(geweke[geweke<0]),1-stats::pnorm(geweke[geweke>0])),5)))
       colnames(pvals) <- 'p-value'
-      print(round(pvals, digits=digits))
+      print(pvals)
       invisible(pvals)
     },
     sed_rate = {
@@ -36,8 +36,9 @@ function(object,type=c('quantiles','outliers','convergence','sed_rate','acc_rate
       position_grid = object$predictPositions
       if(useExisting) cat('Note: assumes existing predictPositions are on a regular unit grid. If this is not the case set useExisting = FALSE \n')
       diff_position_grid = diff(position_grid)
-      if(!isTRUE(all.equal(diff_position_grid, rep(1, length(diff_position_grid))))) warning('predictPositions does not seem to be unit spaced. Set useExisting = FALSE')
+      if(!isTRUE(all.equal(diff_position_grid, rep(1, length(diff_position_grid))))) warning('predictPositions does not seem to be unit spaced. If not done alreday, set useExisting = FALSE')
       if(!useExisting) {
+        browser()
         position_grid = seq(min(object$predictPositions), max(object$predictPositions), by = 1)
         chrons = predict(object, newPositions = position_grid)
     }
