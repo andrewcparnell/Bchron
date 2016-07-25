@@ -39,7 +39,7 @@ function(object,type=c('quantiles','outliers','convergence','sed_rate','acc_rate
       if(!isTRUE(all.equal(diff_position_grid, rep(1, length(diff_position_grid))))) if(useExisting) warning('predictPositions does not seem to be unit spaced. If not done alreday, set useExisting = FALSE')
       if(!useExisting) {
         position_grid = seq(min(object$predictPositions), max(object$predictPositions), by = 1)
-        chrons = predict(object, newPositions = position_grid)
+        chrons = predict.BchronologyRun(object, newPositions = position_grid)
     }
       sed_rate = apply(chrons, 1, 'diff')
       sed_rate_ci = cbind(position_grid[-1], t(apply(sed_rate, 1, 'quantile', probs = probs)))

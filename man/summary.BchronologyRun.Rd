@@ -8,15 +8,17 @@ Summarise a Bchronology object
 Summarise a \code{\link{Bchronology}} object
 }
 \usage{
-\method{summary}{BchronologyRun}(object, type=c('quantiles','outliers','convergence'),
-probs = c(0.025, 0.1, 0.5, 0.9, 0.975), \ldots, digits = max(3, getOption("digits") - 3), useExisting = TRUE)
+\method{summary}{BchronologyRun}(object, type=c('quantiles','outliers','convergence','sed_rate','acc_rate'),
+probs = c(0.025, 0.1, 0.5, 0.9, 0.975), \ldots, 
+digits = max(3, getOption("digits") - 3), 
+useExisting = TRUE)
 }
 \arguments{
   \item{object}{
 Output from a run of \code{\link{Bchronology}}
 }
   \item{type}{
-(optional) Type of output required. The default (quantiles) gives the quantiles of the ages for each position in \code{predictPositions} from \code{\link{Bchronology}}. The other options provide outlier probabilities or convergence diagnostics.
+(optional) Type of output required. The default (quantiles) gives the quantiles of the ages for each position in \code{predictPositions} from \code{\link{Bchronology}}. The other options provide outlier probabilities, convergence diagnostics, accumulation rates and sedimentation rates.
 }
   \item{probs}{
 (optional) Probabilities (between 0 and 1) at which to summarise the predicted chronologies
