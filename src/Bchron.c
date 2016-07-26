@@ -141,7 +141,8 @@ void predictInterp(double *alpha, double *lambda, double *beta, double *predictP
   int Nd = rpois((*lambda)*(*diffPositionj));
   int i;
   // Watch out if Nd = 0 - just a straight linear interpolations
-  double depthEvents = 0.0;
+  double depthEvents[1];
+  depthEvents = 0.0;
   if(Nd>0) {
     double depthEvents[Nd];
     for(i=0;i<Nd;i++) depthEvents[i] = runif(*currPositionsj,*currPositionsjp1);
