@@ -46,7 +46,7 @@ void truncatedRat(double *old, double *sd, double *low, double *high, double *ne
 void dtweedielogwsmallp(double *y, double *phi, double *power, double *logw) {
   double p,a,a1,r,drop=37,logz,jmax,j,cc,wmax,estlogw,oldestlogw;
   int hij,lowj;
-  
+
   if (*power < 1) error("Error - power<1!");
   if (*power > 2) error("Error - power>2!");
   if (*phi <= 0) error("Error - phi<=0!");
@@ -56,7 +56,7 @@ void dtweedielogwsmallp(double *y, double *phi, double *power, double *logw) {
   a1 = 1 - a;
   r = -a * log(*y) + a * log(p - 1) - a1 * log(*phi) - log(2 - p);
   logz = r;
-  
+
   jmax = (pow(*y,(2 - p)))/(*phi * (2 - p));
   j = fmax2(1, jmax);
   cc = logz + a1 + a * log(-a);
@@ -66,7 +66,7 @@ void dtweedielogwsmallp(double *y, double *phi, double *power, double *logw) {
     j = j + 2;
     estlogw = j * (cc - a1 * log(j));
   }
-  
+
   hij = (int)ceil(j);
   logz = r;
   jmax = pow(*y,(2 - *power))/(*phi * (2 - *power));
@@ -79,17 +79,17 @@ void dtweedielogwsmallp(double *y, double *phi, double *power, double *logw) {
     estlogw = j * (cc - a1 * log(j));
   }
   lowj = (int)fmax2(1, floor(j));
-  
+
   double newj[hij-lowj+1];
   int k;
   for(k=0;k<(hij-lowj+1);k++) newj[k] = lowj+k;
-  
-  double g[hij-lowj+1]; 
+
+  double g[hij-lowj+1];
   for(k=0;k<hij-lowj+1;k++) g[k] = lgamma(newj[k]+1)+lgamma(-a*newj[k]);
-  
+
   double A[hij-lowj+1];
   for(k=0;k<hij-lowj+1;k++) A[k] = r*(double)newj[k]-g[k];
-  
+
   double m=fmax2(A[0],hij-lowj+1);
   for(k=0;k<(hij-lowj+1);k++) m = fmax2(A[k],hij-lowj+1);
 
@@ -106,7 +106,7 @@ void dtweedieseriessmallp(double *power, double *y, double *mu, double *phi, dou
   double tau = *phi*(*power-1)*pow(*mu,*power-1);
   double lambda = pow(*mu,2-*power)/(*phi*(2-*power));
   double logf = -*y/tau-lambda-log(*y)+logw;
-  *f = exp(logf);  
+  *f = exp(logf);
 }
 
 void dtweediep1(double *y, double *power, double *mu, double *phi, double *fTplus) {
@@ -115,10 +115,10 @@ void dtweediep1(double *y, double *power, double *mu, double *phi, double *fTplu
   double lambda2 = pow(*mu,2-*power)/(*phi*(2-*power))-eps;
   double alpha = (2-*power)/(*power-1);
   double beta = 1/(*phi*(*power-1)*pow(*mu,*power-1));
-  
+
   double mu2 = alpha*lambda2/beta;
   double phi2 = (alpha+1)/(pow(lambda2*alpha,(1/(alpha+1)))*pow(beta,(alpha/(alpha+1))));
-  
+
   double fTplus1,fTplus2,fTplus3;
   dtweedieseriessmallp(power,y,mu,phi,&fTplus1);
   dtweedieseriessmallp(power,y,mu,phi,&fTplus2);
@@ -132,17 +132,20 @@ void linInterp(int *n, double *newx, double *x, double *y, double *ans) {
     if(((*newx >= x[i]) & (*newx <= x[i+1])) | ((*newx <= x[i]) & (*newx >= x[i+1]))) {
       *ans = y[i] + ((*newx-x[i])/(x[i+1]-x[i]))*(y[i+1]-y[i]);
       if(*newx==x[i]) *ans = y[i];
-    }        
+    }
   }
-}  
+}
 
 void predictInterp(double *alpha, double *lambda, double *beta, double *predictPositions, int *NpredictPositions, double *diffPositionj, double *currPositionsj, double *currPositionsjp1, double *thetaj, double *thetajp1, double *predvals) {
   // Runs the prediction code when we are interpolating between two positions
   int Nd = rpois((*lambda)*(*diffPositionj));
   int i;
-  double depthEvents[Nd];
-  for(i=0;i<Nd;i++) depthEvents[i] = runif(*currPositionsj,*currPositionsjp1);
-  R_rsort(depthEvents,Nd);
+  // Watch out if Nd = 0 - just a straight linear interpolations
+  if(Nd>0) {
+    double depthEvents[Nd];
+    for(i=0;i<Nd;i++) depthEvents[i] = runif(*currPositionsj,*currPositionsjp1);
+    R_rsort(depthEvents,Nd);
+  }
   double timeEventsUnsc[Nd+1],timeEventsSum=0.0;
   for(i=0;i<Nd+1;i++) timeEventsUnsc[i] = rgamma(*alpha,1/(*beta));
   for(i=0;i<Nd+1;i++) timeEventsSum += timeEventsUnsc[i];
@@ -153,12 +156,14 @@ void predictInterp(double *alpha, double *lambda, double *beta, double *predictP
   for(i=1;i<Nd+1;i++) timeEventsCumsum[i] = timeEventsCumsum[i-1] + timeEvents[i];
   for(i=0;i<Nd+1;i++) allTimeEvents[i] = timeEventsCumsum[i]+*thetaj;
   allTimeEvents[Nd+1] = *thetajp1;
-  double allDepthEvents[Nd+2];
-  allDepthEvents[0] = *currPositionsj;
-  for(i=1;i<Nd+1;i++) allDepthEvents[i] = depthEvents[i-1];
-  allDepthEvents[Nd+1] = *currPositionsjp1;
-  
   int Ndp2 = Nd+2;
+  double allDepthEvents[Ndp2];
+  allDepthEvents[0] = *currPositionsj;
+  allDepthEvents[Nd+1] = *currPositionsjp1;
+  if(Nd>0) {
+    for(i=1;i<Nd+1;i++) allDepthEvents[i] = depthEvents[i-1];
+  }
+
   for(i=0;i<*NpredictPositions;i++) {
     linInterp(&Ndp2,&predictPositions[i],allDepthEvents,allTimeEvents,&predvals[i]);
   }
@@ -187,11 +192,11 @@ void predictExtrapUp(double *alpha, double *lambda, double *beta, double *predic
     if(count==50) {
       for(i=0;i<*NpredictPositions;i++) {
         if(predvals[i]<*extractDate) predvals[i] = *extractDate;
-      }    
+      }
       bad=0;
       warning("Unable to find suitable chronologies for top of core - truncated to date of extraction");
     }
-  }  
+  }
 }
 
 void predictExtrapDown(double *alpha, double *lambda, double *beta, double *predictPositions, int *NpredictPositions, double *currPositionsn, double *thetan, int *maxExtrap, double *predvals) {
@@ -206,5 +211,5 @@ void predictExtrapDown(double *alpha, double *lambda, double *beta, double *pred
   }
   for(i=0;i<*NpredictPositions;i++) {
     linInterp(maxExtrap,&predictPositions[i],depthEvents,timeEvents,&predvals[i]);
-  }  
+  }
 }
