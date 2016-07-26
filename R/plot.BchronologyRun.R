@@ -23,7 +23,7 @@ function(x,
   ex$ylim = rev(yLimits)
   if(is.null(ex$xlim)) ex$xlim = rev(range(c(chronLow,chronHigh)))
   if(is.null(ex$xlab)) ex$xlab = 'Age'
-  if(is.null(ex$ylab)) ex$ylab = 'Depth'
+  if(is.null(ex$ylab)) ex$ylab = 'Position'
   if(is.null(ex$las)) ex$las = 1
   if(is.null(ex$main)) ex$main = 'Bchronology plot'
   ex$x = 1
