@@ -147,7 +147,7 @@ void predictInterp(double *alpha, double *lambda, double *beta, double *predictP
     R_rsort(depthEvents,Nd);
   } else {
     double depthEvents[1];
-    depthEvents = 0.0;
+    depthEvents[0] = 0.0;
   }
   double timeEventsUnsc[Nd+1],timeEventsSum=0.0;
   for(i=0;i<Nd+1;i++) timeEventsUnsc[i] = rgamma(*alpha,1/(*beta));
