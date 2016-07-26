@@ -25,24 +25,24 @@ predict.BchronologyRun = function(object, newPositions, newPositionThicknesses=N
   alpha = (2-p)/(p-1)
   oldPositions = object$positions/object$positionScaleVal
   diffPosition = diff(oldPositions)
-  
+
   # Now loop through all the values in newPositions
   pb = utils::txtProgressBar(min = 1, max = nSamples, style = 3,width=60,title='Calculating predictions... ')
   n = length(object$positions)
   for(i in 1:nSamples) {
     utils::setTxtProgressBar(pb, i)
-    
+
     if(is.null(newPositionThicknesses)) {
       currPosition = newPositions/object$positionScaleVal
     } else {
       currPosition = sort(stats::runif(length(newPositions),newPositions/object$positionScaleVal-0.5*newPositionThicknesses/object$positionScaleVal,newPositions/object$positionScaleVal+0.5*newPositionThicknesses/object$positionScaleVal))
     }
-    
+
     # Get sedimentation rate parameters
     lambda = (object$mu[i]^(2-p))/(object$psi[i]*(2-p))
     beta = 1/(object$psi[i]*(p-1)*(object$mu[i]^(p-1)))
     theta = object$theta[i,]/object$ageScaleVal
-    
+
     # First interpolation
     for(j in 1:n) {
       # Find which positions we need to interpolate for
@@ -52,13 +52,13 @@ predict.BchronologyRun = function(object, newPositions, newPositionThicknesses=N
       }
     # End of j loop
     }
-    
+
     # Extrapolation up
     if(any(currPosition<oldPositions[1])) {
       depthIndRange = which(currPosition<=oldPositions[1])
       out[i,depthIndRange] = round(predictExtrapUp(alpha,lambda,beta,currPosition[depthIndRange],oldPositions[1],theta[1],maxExtrap,object$extractDate/object$ageScaleVal),3)
     }
-    
+
     # Extrapolate down
     if(any(currPosition>=oldPositions[n])) {
       depthIndRange = which(currPosition>=oldPositions[n])

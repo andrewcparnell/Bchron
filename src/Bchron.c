@@ -141,10 +141,9 @@ void predictInterp(double *alpha, double *lambda, double *beta, double *predictP
   int Nd = rpois((*lambda)*(*diffPositionj));
   int i;
   // Watch out if Nd = 0 - just a straight linear interpolations
-  double depthEvents[1];
-  depthEvents[0] = 0.0;
+  int Ndmax = fmax2(1,Nd);
+  double depthEvents[Ndmax];
   if(Nd>0) {
-    double depthEvents[Nd];
     for(i=0;i<Nd;i++) depthEvents[i] = runif(*currPositionsj,*currPositionsjp1);
     R_rsort(depthEvents,Nd);
   }
@@ -165,7 +164,6 @@ void predictInterp(double *alpha, double *lambda, double *beta, double *predictP
   if(Nd>0) {
     for(i=1;i<Nd+1;i++) allDepthEvents[i] = depthEvents[i-1];
   }
-
   for(i=0;i<*NpredictPositions;i++) {
     linInterp(&Ndp2,&predictPositions[i],allDepthEvents,allTimeEvents,&predvals[i]);
   }
