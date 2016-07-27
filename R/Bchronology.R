@@ -33,7 +33,7 @@ x.df1 = BchronCalibrate(ages=ages,ageSds=ageSds,calCurves=calCurves,positions=po
 x.df2 = BchronCalibrate(ages=ages,ageSds=ageSds,calCurves=calCurves,positions=positions,ids=ids,pathToCalCurves=pathToCalCurves,eps=0,dfs=rep(dfs[2],length(ages)))
 
 # Get current positions and their order
-currPositions = sort(jitter(positions/positionScaleVal))
+currPositions = sort(jitter(positions/positionScaleVal, amount = 1/positionScaleVal))
 diffPosition = diff(currPositions)
 do = order(currPositions)
 
@@ -125,7 +125,9 @@ for(i in 1:iterations) {
     for(j in 1:(n-1)) {
       # Find which positions we need to interpolate for
       depthIndRange = which(predictPositionsRescaled>=currPositions[do[j]] & predictPositionsRescaled<=currPositions[do[j+1]])
-      thetaPredict[ind,depthIndRange] = round(predictInterp(alpha,lambda,beta,predictPositionsRescaled[depthIndRange],diffPosition[j],currPositions[do[j]],currPositions[do[j+1]],theta[do[j]],theta[do[j+1]]),3)
+      if(length(depthIndRange)>0) {
+        thetaPredict[ind,depthIndRange] = round(predictInterp(alpha,lambda,beta,predictPositionsRescaled[depthIndRange],diffPosition[j],currPositions[do[j]],currPositions[do[j+1]],theta[do[j]],theta[do[j+1]]),3)
+      }
     }
 
     # Extrapolate up to to top depth
