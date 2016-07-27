@@ -190,14 +190,14 @@ for(i in 1:iterations) {
   }
 
   # Update mu
-  muNewAll = truncatedWalk(mu,muMhSd,0,1e5)
+  muNewAll = truncatedWalk(mu,muMhSd,1e-4,1e3)
   muNew = muNewAll$new
 
   logRmu = sum(log(dtweediep1(diff(theta[do]),p,muNew*diffPosition,psi/(diffPosition)^(p-1)))) - sum(log(dtweediep1(diff(theta[do]),p,mu*diffPosition,psi/(diffPosition)^(p-1)))) + log(muNewAll$rat)
   if(stats::runif(1)<exp(logRmu)) mu = muNew
 
   # Update psi
-  psiNewAll = truncatedWalk(psi,psiMhSd,0,1e5)
+  psiNewAll = truncatedWalk(psi,psiMhSd,1e-4,1e3)
   psiNew = psiNewAll$new
 
   logRpsi = sum(log(dtweediep1(diff(theta[do]),p,mu*diffPosition,psiNew/(diffPosition)^(p-1)))) - sum(log(dtweediep1(diff(theta[do]),p,mu*diffPosition,psi/(diffPosition)^(p-1)))) + log(psiNewAll$rat)

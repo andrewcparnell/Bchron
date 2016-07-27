@@ -111,8 +111,8 @@ void dtweedieseriessmallp(double *power, double *y, double *mu, double *phi, dou
 
 void dtweediep1(double *y, double *power, double *mu, double *phi, double *fTplus) {
   // Calculates the density of a tweedie plus one random variable
-  //double eps = 0.00000001;
-  double eps = 0.001;
+  double eps = 0.00000001;
+  //double eps = 0.001;
   double lambda2 = pow(*mu,2-*power)/(*phi*(2-*power))-eps;
   double alpha = (2-*power)/(*power-1);
   double beta = 1/(*phi*(*power-1)*pow(*mu,*power-1));
