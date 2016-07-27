@@ -156,7 +156,7 @@ The summary function used above also allows for calculation of sedimentation and
 acc_rate = summary(GlenOut, type = 'acc_rate')
 ```
 
-```{r}
+```{r, eval=FALSE}
 plot(acc_rate[,'age_grid'], acc_rate[,'50%'], type='l', ylab = 'cm per year', xlab = 'Age (k cal years BP)', ylim = range(acc_rate[,-1]))
 lines(acc_rate[,'age_grid'], acc_rate[,'2.5%'], lty='dotted')
 lines(acc_rate[,'age_grid'], acc_rate[,'97.5%'], lty='dotted')
@@ -166,13 +166,13 @@ Clearly these accumulation rates are very uncertain, which is unsurprising given
 
 To calculate sedimentation rates, you need to either make sure that the `predictPositions` argument in the `Bchronology` call above is given with unit differences (e.g. `predictPositions=seq(0,1500,by=1)`) or set the argument `useExisting=FALSE` in the command below:
 
-```{r, results = 'hide'}
+```{r, eval=FALSE}
 sed_rate = summary(GlenOut, type = 'sed_rate', useExisting = FALSE)
 ```
 
 This will be quite slow as it needs to predict ages on a regular unit depth grid. However, the plots can be created in the same way:
 
-```{r}
+```{r, eval=FALSE}
 plot(sed_rate[,'position_grid'], sed_rate[,'50%'], type='l', ylab = 'Years per cm', xlab = 'Depth (cm)', ylim = range(sed_rate[,-1]))
 lines(sed_rate[,'position_grid'], sed_rate[,'2.5%'], lty='dotted')
 lines(sed_rate[,'position_grid'], sed_rate[,'97.5%'], lty='dotted')
@@ -192,7 +192,7 @@ data(TestRSLData)
 
 These can be run through Bchronology and BchronRSL via:
 
-```{r,messages=FALSE, results='hide'}
+```{r,messages=FALSE, results='hide', eval=FALSE}
 RSLrun = Bchronology(ages=TestChronData$ages,
                      ageSds=TestChronData$ageSds, 
                      positions=TestChronData$position,
@@ -208,7 +208,7 @@ RSLrun2 = BchronRSL(RSLrun,
 
 The `Bchronology` run is as described in the section above. The `BChronRSL` run takes this object, an estimate of the RSL means and standard deviations, and a value of degree (here 3 indicating cubic regression). They can then be summarised and plotted via:
 
-```{r}
+```{r, eval=FALSE}
 summary(RSLrun2, type = 'RSL', age_grid = seq(0, 2000, by  = 250))
 plot(RSLrun2, type = 'RSL', main = 'Relative sea level plot')
 plot(RSLrun2, type = 'rate', main = 'Rate of RSL change')
@@ -220,7 +220,7 @@ See the help files for more options, including outputting parameter values, and 
 
 Bchron contains two functions for running non-parametric phase models for estimating activity level in a site/region. The first, BchronDensity fits a full Bayesian Gaussian mixture model to the radiocarbon dates whilst the second BchronDensityFast fits an approximate version which will run on much larger data sets. An example run is
 
-```{r,results='hide'}
+```{r,results='hide', eval=FALSE}
 data(Sluggan)
 SlugDens = BchronDensity(ages=Sluggan$ages,
                          ageSds=Sluggan$ageSds,
@@ -230,7 +230,7 @@ SlugDens = BchronDensity(ages=Sluggan$ages,
 The `BchronDensity` function also has an optional argument `store_density` which will output an age grid and associated density in case you wish to plot the output in a different package.
 
 
-```{r,fig.align='center',fig.width=6,fig.height=5}
+```{r, eval=FALSE}
 plot(SlugDens,xlab='Age (cal years BP)')
 ```
 
