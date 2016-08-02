@@ -71,7 +71,7 @@ thetaPredict = matrix(ncol=length(predictPositions),nrow=remaining)
 
 # C function for truncated random walk
 truncatedWalk = function(old,sd,low,high) {
-  if(all.equal(low,high)) return(list(new=low,rat=1))
+  if(isTRUE(all.equal(low,high))) return(list(new=low,rat=1))
   new = .C('truncatedWalk',as.double(old),as.double(sd),as.double(low),as.double(high),as.double(0))[5][[1]]
   rat =.C('truncatedRat',as.double(old),as.double(sd),as.double(low),as.double(high),as.double(new),as.double(0))[6][[1]]
   if(is.nan(rat)) rat=1 # Useful for when proposed value and new value are identical
