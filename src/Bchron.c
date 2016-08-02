@@ -5,7 +5,7 @@
 
 void rtruncn(double *a, double *b, double *x) {
   double A, B;
-  double maxA, maxB, maxR, r2, r, th, u, v, accept=0.0;
+  double maxA, maxB, maxR, r2, r, th, u, accept=0.0;
   A = atan(*a);
   B = atan(*b);
   maxA = exp(-pow(*a,2)/4)/cos(A);
