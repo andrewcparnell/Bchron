@@ -10,7 +10,7 @@ function(x,
   # Get extra arguments if provided
   ex = list(...)#as.list(substitute(list(...)))[-1L]
 
-  if(is.null(ex$xlab)) ex$xlab = 'Age (cal years BP)'
+  if(is.null(ex$xlab)) ex$xlab = 'Age'
   if(is.null(ex$ylab)) ex$ylab = ifelse(withPositions,'Position','Density')
 
   # First plot for individual dates
