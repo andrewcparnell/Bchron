@@ -3,6 +3,8 @@ function(x,
          withPositions=FALSE,
          pause=FALSE,
          dateHeight = 30,
+         borderCol = NULL,
+         fillCol = 'gray',
          ...) {
 
   # Get extra arguments if provided
@@ -61,7 +63,12 @@ function(x,
     do.call("plot", args)
 
     for(i in 1:length(x)) {
-      graphics::polygon(x[[i]]$ageGrid,x[[i]]$positions-x[[i]]$densities*dateHeight/max(x[[i]]$densities),border=NA,col='gray')
+      curr_xlimit = range(x[[i]]$ageGrid)
+      curr_pos = x[[i]]$positions
+      graphics::polygon(c(curr_xlimit[1], x[[i]]$ageGrid, curr_xlimit[2]),
+                        c(curr_pos, x[[i]]$positions-x[[i]]$densities*dateHeight/max(x[[i]]$densities), curr_pos),
+                        border=ifelse(is.null(borderCol),NA,borderCol),
+                        col=fillCol)
     }
   }
 

@@ -26,8 +26,9 @@ void truncatedWalk(double *old, double *sd, double *low, double *high, double *n
   double lowlimold, upplimold, y;
   lowlimold = (*low - *old)/ *sd;
   upplimold = (*high - *old)/ *sd;
-  rtruncn(&lowlimold, &upplimold,&y);
-  *newvalue = *old + *sd*y;
+  if(lowlimold == upplimold) *newvalue = lowlimold;
+  if(lowlimold < upplimold) rtruncn(&lowlimold, &upplimold,&y);
+  if(lowlimold < upplimold) *newvalue = *old + *sd*y;
 }
 
 void truncatedRat(double *old, double *sd, double *low, double *high, double *newvalue, double *ratio) {

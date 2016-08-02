@@ -7,7 +7,10 @@ Plot output from Bchronology
 Plots output from a run of \code{\link{Bchronology}}
 }
 \usage{
-\method{plot}{BchronologyRun}(x, dateHeight = 30, \ldots)
+\method{plot}{BchronologyRun}(x, dateHeight = 30,
+chronCol = grDevices::rgb(190/255,190/255,190/255,alpha=0.8),
+chronBorder = grDevices::rgb(190/255,190/255,190/255,alpha=0.8),
+alpha = 0.95,\ldots)
 }
 \arguments{
   \item{x}{
@@ -15,6 +18,15 @@ The object created by \code{\link{Bchronology}}
 }
   \item{dateHeight}{
 The height of the date densities plotted in position/depth units
+}
+  \item{chronCol}{
+The colour of the chronology uncertainty ribbon to be plotted
+}
+  \item{chronBorder}{
+The colour of the border of the chronology uncertainty ribbon to be plotted
+}
+  \item{alpha}{
+The credible interval of the chronology run to be plotted. Defaults to 95 percent
 }
   \item{\dots}{
 Other graphical parameters as detailed in \code{\link{par}}
@@ -27,7 +39,7 @@ Creates a simple plot of the chronology output. The height of the date densities
 Andrew Parnell <andrew.parnell@ucd.ie>
 }
 \seealso{
-\code{\link{BchronCalibrate}}, \code{\link{Bchronology}} \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}} 
+\code{\link{BchronCalibrate}}, \code{\link{Bchronology}} \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
 }
 \examples{
 # Examples in main function \code{\link{Bchronology}}
