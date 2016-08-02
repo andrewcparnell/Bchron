@@ -147,7 +147,6 @@ for(i in 1:iterations) {
 
   # Update theta
   for(j in 1:n) {
-    if(i>=2452 && j==3) browser()
     thetaNewAll = truncatedWalk(theta[do[j]],thetaMhSd,ifelse(j==1,ifelse(x.df1[[j]]$calCurve=='normal',extractDate/ageScaleVal,0),theta[do[j-1]]+0.001),ifelse(j==n,100000,theta[do[j+1]]-0.001))
     thetaNew = round(thetaNewAll$new,3)
     # Calculate ratio
