@@ -29,7 +29,7 @@ Andrew Parnell <andrew.parnell@ucd.ie>
 \examples{
 # Calibrate multiple ages and summarise them
 ages = BchronCalibrate(ages=11553,ageSds=230,
-calCurves=c'intcal13')
+calCurves='intcal13')
 # Get samples
 my_hdr = hdr(ages)
 }

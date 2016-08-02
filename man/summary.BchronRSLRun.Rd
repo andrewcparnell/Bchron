@@ -31,5 +31,5 @@ Andrew Parnell <andrew.parnell@ucd.ie>
 \code{\link{BchronCalibrate}}, \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
 }
 \examples{
-# Examples in \code{\link{BchronRSL}}
+# Examples in BchronRSL and vignette
 }

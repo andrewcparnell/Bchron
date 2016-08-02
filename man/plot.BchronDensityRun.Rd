@@ -7,20 +7,31 @@ Plot output from BchronDensity
 A plot of the output from \code{\link{BchronDensity}}
 }
 \usage{
-\method{plot}{BchronDensityRun}(x, plotDates = TRUE, plotSum = FALSE, \ldots)
+\method{plot}{BchronDensityRun}(x,
+plotDates = TRUE,
+plotSum = FALSE,
+plotPhase = TRUE,
+phaseProb = 0.95,
+\ldots)
 }
 \arguments{
   \item{x}{
 Output from \code{\link{BchronDensity}}
 }
   \item{plotDates}{
-(optional) Whether to plot the individual calibrated dates (default TRUE)
+Whether to plot the individual calibrated dates (default TRUE)
 }
   \item{plotSum}{
-(optional) Whether to plot the sum of the probability distributions (default FALSE)
+Whether to plot the sum of the probability distributions (default FALSE)
+}
+  \item{plotPhase}{
+Whether to plot the phase values
+}
+  \item{phaseProb}{
+The probability value for the phase identification
 }
   \item{\dots}{
-(optional) Other graphical commands. See \code{\link{par}}
+Other graphical commands. See \code{\link{par}}
 }
 }
 \author{
