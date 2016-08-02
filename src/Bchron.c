@@ -44,7 +44,7 @@ void truncatedRat(double *old, double *sd, double *low, double *high, double *ne
 }
 
 void dtweedielogwsmallp(double *y, double *phi, double *power, double *logw) {
-  double p,a,a1,r,drop=37,logz,jmax,j,cc,wmax,estlogw,oldestlogw;
+  double p,a,a1,r,drop=37,logz,jmax,j,cc,wmax,estlogw;
   int hij,lowj;
 
   if (*power < 1) error("Error - power<1!");
@@ -75,7 +75,6 @@ void dtweedielogwsmallp(double *y, double *phi, double *power, double *logw) {
   estlogw = wmax;
   while ((estlogw > (wmax - drop)) && (j >= 2)) {
     j = fmax2(1, j - 2);
-    oldestlogw = estlogw;
     estlogw = j * (cc - a1 * log(j));
   }
   lowj = (int)fmax2(1, floor(j));
