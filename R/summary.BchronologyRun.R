@@ -1,5 +1,5 @@
 summary.BchronologyRun <-
-function(object,type=c('quantiles','outliers','convergence','sed_rate','acc_rate'),probs=c(0.025,0.1,0.5,0.9,0.975), ..., digits = max(3, getOption("digits")-3), useExisting = TRUE) {
+function(object,type=c('quantiles','outliers','convergence','sed_rate','acc_rate'),probs=c(0.025,0.1,0.5,0.9,0.975), useExisting = TRUE, ..., digits = max(3, getOption("digits")-3)) {
   type = match.arg(type)
 
   switch(type,

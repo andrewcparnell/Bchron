@@ -1,6 +1,5 @@
 \name{summary.BchronologyRun}
 \alias{summary.BchronologyRun}
-
 \title{
 Summarise a Bchronology object
 }
@@ -8,10 +7,9 @@ Summarise a Bchronology object
 Summarise a \code{\link{Bchronology}} object
 }
 \usage{
-\method{summary}{BchronologyRun}(object, type=c('quantiles','outliers','convergence','sed_rate','acc_rate'),
-probs = c(0.025, 0.1, 0.5, 0.9, 0.975), \ldots, 
-digits = max(3, getOption("digits") - 3), 
-useExisting = TRUE)
+\method{summary}{BchronologyRun}(object, type =c('quantiles','outliers','convergence','sed_rate','acc_rate'),
+probs = c(0.025, 0.1, 0.5, 0.9, 0.975), useExisting = TRUE, \ldots,
+digits = max(3, getOption("digits") - 3))
 }
 \arguments{
   \item{object}{
@@ -23,16 +21,15 @@ Output from a run of \code{\link{Bchronology}}
   \item{probs}{
 (optional) Probabilities (between 0 and 1) at which to summarise the predicted chronologies
 }
+  \item{useExisting}{
+Whether to use the predicted chronologies/positions to calculate the sedimentation rate (if TRUE - default) or to re-create them based on a unit-scaled position grid (if FALSE). The latter will be a little bit slower but will provide better sedimentation rate estimates if the original positions are not on a unit scale (e.g. each cm)
+}
   \item{\dots}{
 Other arguments (not currently supported)
 }
   \item{digits}{
 Number of digits to report values
 }
-  \item{useExisting}{
-Whether to use the predicted chronologies/positions to calculate the sedimentation rate (if TRUE - default) or to re-create them based on a unit-scaled position grid (if FALSE). The latter will be a little bit slower but will provide better sedimentation rate estimates if the original positions are not on a unit scale (e.g. each cm)
-}
-
 }
 \author{
 Andrew Parnell <andrew.parnell@ucd.ie

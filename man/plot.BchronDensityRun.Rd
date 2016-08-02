@@ -9,7 +9,7 @@ A plot of the output from \code{\link{BchronDensity}}
 \usage{
 \method{plot}{BchronDensityRun}(x,
 plotDates = TRUE,
-plotSum = FALSE,
+plotRawSum = FALSE,
 plotPhase = TRUE,
 phaseProb = 0.95,
 \ldots)
@@ -19,10 +19,10 @@ phaseProb = 0.95,
 Output from \code{\link{BchronDensity}}
 }
   \item{plotDates}{
-Whether to plot the individual calibrated dates (default TRUE)
+Whether to plot the individual calibrated dates
 }
-  \item{plotSum}{
-Whether to plot the sum of the probability distributions (default FALSE)
+  \item{plotRawSum}{
+Whether to plot the raw sum of the probability distributions
 }
   \item{plotPhase}{
 Whether to plot the phase values

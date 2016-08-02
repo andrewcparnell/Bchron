@@ -1,6 +1,5 @@
 \name{summary.BchronDensityRun}
 \alias{summary.BchronDensityRun}
-
 \title{
 Summarise a Bchron density object
 }
@@ -8,7 +7,7 @@ Summarise a Bchron density object
 Summarise a \code{\link{BchronDensity}} object
 }
 \usage{
-\method{summary}{BchronologyRun}(function(object,prob=0.95, ..., digits = max(3, getOption("digits")-3))
+\method{summary}{BchronDensityRun}(object,prob=0.95, \ldots, digits = max(3, getOption("digits")-3))
 }
 \arguments{
   \item{object}{
