@@ -33,7 +33,7 @@ x.df1 = BchronCalibrate(ages=ages,ageSds=ageSds,calCurves=calCurves,positions=po
 x.df2 = BchronCalibrate(ages=ages,ageSds=ageSds,calCurves=calCurves,positions=positions,ids=ids,pathToCalCurves=pathToCalCurves,eps=0,dfs=rep(dfs[2],length(ages)))
 
 # Get current positions and their order
-currPositions = sort(jitter(positions/positionScaleVal, amount = 1/positionScaleVal))
+currPositions = sort(jitter(positions/positionScaleVal, amount = .Machine$double.eps))
 diffPosition = diff(currPositions)
 do = order(currPositions)
 
