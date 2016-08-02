@@ -4,7 +4,6 @@ useDynLib(Bchron)
 
 import(inline,MASS)
 importFrom(mclust,densityMclust)
-importFrom(hdrcde,hdr)
 importFrom(utils,txtProgressBar,setTxtProgressBar)
 importFrom(ellipse,ellipse)
 importFrom(coda,geweke.diag)

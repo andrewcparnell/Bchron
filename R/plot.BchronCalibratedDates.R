@@ -5,6 +5,8 @@ function(x,
          dateHeight = 30,
          borderCol = NULL,
          fillCol = 'gray',
+         withHDR = TRUE,
+         hdrCol = 'darkgray',
          ...) {
 
   # Get extra arguments if provided
@@ -23,8 +25,20 @@ function(x,
     if(is.null(ex$main)) ex$main = names(x)
     args = utils::modifyList(ex, list(...))
     do.call("plot", args)
-    #graphics::plot(ag,den,type='l',main=names(x),xlab=xlab,ylab=ylab,...)
     graphics::mtext(paste(x[[1]]$calCurves),side=1,line=4,adj=0,cex=0.6)
+    if(withHDR) {
+      my_hdr = hdr(x[[1]])
+      for(j in 1:length(my_hdr)) {
+        x_seq = seq(my_hdr[[j]][1], my_hdr[[j]][2], by = 1)
+        y_lookup = match(x_seq, ag)
+        y_seq = den[y_lookup]
+        graphics::polygon(c(my_hdr[[j]][1], x_seq, my_hdr[[j]][2]),
+                          c(0, y_seq, 0),
+                          col = hdrCol,
+                          border = NA)
+      }
+    }
+
   }
 
   # Now for multiple dates without depths
@@ -40,6 +54,18 @@ function(x,
       args = utils::modifyList(ex_curr, list(...))
       do.call("plot", args)
       graphics::mtext(paste(x[[i]]$calCurves),side=1,line=4,adj=0,cex=0.6)
+      if(withHDR) {
+        my_hdr = hdr(x[[i]])
+        for(j in 1:length(my_hdr)) {
+          x_seq = seq(my_hdr[[j]][1], my_hdr[[j]][2], by = 1)
+          y_lookup = match(x_seq, ag)
+          y_seq = den[y_lookup]
+          graphics::polygon(c(my_hdr[[j]][1], x_seq, my_hdr[[j]][2]),
+                            c(0, y_seq, 0),
+                            col = hdrCol,
+                            border = NA)
+        }
+      }
       if(pause) if(i<length(x)) readline('Hit Enter for next plot...')
     }
   }

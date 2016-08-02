@@ -51,7 +51,7 @@ summary(ages1)
 plot(ages1)
 ```
 
-This will calibrate the radiocarbon age of 11,553 14C years BP with standard error 230 14C years on the intcal13 calibration curve. The `id` given is optional and only used for summarising and plotting. The summary command then gives the highest density regions of the calibrated date and the plot command produces a simple plot of the density.
+This will calibrate the radiocarbon age of 11,553 14C years BP with standard error 230 14C years on the intcal13 calibration curve. The `id` given is optional and only used for summarising and plotting. The summary command then gives the highest density regions of the calibrated date and the plot command produces a simple plot of the density, together with a shaded region for the 95% highest density region.
 
 Bchron can calibrate multiple dates simultaneously by inputting the dates as vectors:
 
@@ -224,15 +224,24 @@ Bchron contains two functions for running non-parametric phase models for estima
 data(Sluggan)
 SlugDens = BchronDensity(ages=Sluggan$ages,
                          ageSds=Sluggan$ageSds,
-                         calCurves=Sluggan$calCurves,
-                         numMix=50)
+                         calCurves=Sluggan$calCurves)
 ```
-The `BchronDensity` function also has an optional argument `store_density` which will output an age grid and associated density in case you wish to plot the output in a different package.
 
+You can then output the possible start/end dates of phases:
 
 ```{r, eval=FALSE}
-plot(SlugDens,xlab='Age (cal years BP)')
+summary(SlugDens, prob = 0.95)
 ```
+
+The probability argument will specify the sensitivity of the algorithm to finding phases. Lower values of `prob` will lead to more discovered phases.
+
+You can plot the density with:
+
+```{r, eval=FALSE}
+plot(SlugDens,xlab='Age (cal years BP)', xaxp=c(0, 16000, 16))
+```
+
+Phases will be shown with a thick black red line. These can be turned off by setting the argument `plotPhase=FALSE` whilst the sensitibity can be changed with `phaseProb`.
 
 BchronDensityFast is identical except for the function call:
 
