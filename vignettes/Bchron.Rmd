@@ -139,6 +139,8 @@ Finally, the `predict` command will produce predicted ages for a newly specified
 predictAges = predict(GlenOut, 
                       newPositions = c(150,725,1500), 
                       newPositionThicknesses=c(5,0,20))
+predictAges = predict(GlenOut, 
+                      newPositions = seq(0,1500,by=10))
 ```
 
 To run this model on a data set of your own, you will need to load in your data set via, e.g.

@@ -12,7 +12,7 @@ calCurves = rep("intcal13", length(ages)), ids = NULL,
 outlierProbs = rep(0.01, length(ages)), predictPositions = seq(min(positions), 
 max(positions), length = 100), pathToCalCurves = system.file('data', 
 package = "Bchron"), iterations = 10000, burn = 2000, thin = 8, 
-extractDate = 1950 - as.numeric(format(Sys.time(), "\%Y")), maxExtrap = 500, 
+extractDate = 1950 - as.numeric(format(Sys.time(), "\%Y")), maxExtrap = 1000, 
 thetaMhSd = 0.5, muMhSd = 0.1, psiMhSd = 0.1, ageScaleVal = 1000, 
 positionScaleVal = 100)
 }
@@ -57,7 +57,7 @@ A vector of values containing either 'intcal13', 'shcal13', 'marine13', or 'norm
 (optional) The top age of the core. Used for extrapolation purposes so that no extrapolated ages go beyond the top age of the core. Defaults to the current year
 }
   \item{maxExtrap}{
-(optional) The maximum number of extrapolations to perform before giving up. Useful for when large amounts of extrapolation are required, i.e. some of the predictPositions are a long way from the dated positions
+(optional) The maximum number of extrapolations to perform before giving up and setting the predicted ages to NA. Useful for when large amounts of extrapolation are required, i.e. some of the predictPositions are a long way from the dated positions
 }
   \item{thetaMhSd}{
 (optional) The Metropolis-Hastings standard deviation for the age parameters
