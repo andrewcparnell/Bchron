@@ -145,6 +145,8 @@ for(i in 1:iterations) {
     }
 
     if(any(is.na(thetaPredict[ind,]))) stop("Errors in predicted ages. Check you are not extrapolating too far away from dated levels. If you must run this core with these predicted ages, set maxExtrap to a larger value (e.g. 1000)")
+    if(any(thetaPredict[ind,]==0)) warning("Zeros in predicted ages. Check you are not extrapolating too far away from dated levels. If you must run this core with these predicted ages, set maxExtrap to a larger value (e.g. 1000)")
+    
   }
 
   # Update theta
