@@ -86,13 +86,13 @@ dtweediep1 = Vectorize(function(y,p,mu,phi) {
 
 # Some C functions to do prediction and interpolation
 predictInterp = function(alpha,lambda,beta,predictPositions,diffPositionj,currPositionsj,currPositionsjp1,thetaj,thetajp1) {
-  return(.C('predictInterp',as.double(alpha),as.double(lambda),as.double(beta),as.double(predictPositions),as.integer(length(predictPositions)), as.double(diffPositionj), as.double(currPositionsj),as.double(currPositionsjp1), as.double(thetaj), as.double(thetajp1),as.double(rep(0,length(predictPositions))))[11][[1]])
+  return(.C('predictInterp',as.double(alpha),as.double(lambda),as.double(beta),as.double(predictPositions),as.integer(length(predictPositions)), as.double(diffPositionj), as.double(currPositionsj),as.double(currPositionsjp1), as.double(thetaj), as.double(thetajp1),as.double(rep(NA_real_,length(predictPositions))), NAOK = TRUE)[11][[1]])
 }
 predictExtrapUp = function(alpha,lambda,beta,predictPositions,currPositions1,theta1,maxExtrap,extractDate) {
-  return(.C('predictExtrapUp',as.double(alpha),as.double(lambda),as.double(beta),as.double(predictPositions),as.integer(length(predictPositions)), as.double(currPositions1), as.double(theta1), as.integer(maxExtrap), as.double(extractDate),as.double(rep(0,length(predictPositions))))[10][[1]])
+  return(.C('predictExtrapUp',as.double(alpha),as.double(lambda),as.double(beta),as.double(predictPositions),as.integer(length(predictPositions)), as.double(currPositions1), as.double(theta1), as.integer(maxExtrap), as.double(extractDate),as.double(rep(NA_real_,length(predictPositions))), NAOK = TRUE)[10][[1]])
 }
 predictExtrapDown = function(alpha,lambda,beta,predictPositions,currPositionsn,thetan,maxExtrap) {
-  return(.C('predictExtrapDown',as.double(alpha),as.double(lambda),as.double(beta),as.double(predictPositions),as.integer(length(predictPositions)), as.double(currPositionsn), as.double(thetan), as.integer(maxExtrap), as.double(rep(0,length(predictPositions))))[9][[1]])
+  return(.C('predictExtrapDown',as.double(alpha),as.double(lambda),as.double(beta),as.double(predictPositions),as.integer(length(predictPositions)), as.double(currPositionsn), as.double(thetan), as.integer(maxExtrap), as.double(rep(0,length(predictPositions))), NAOK = TRUE)[9][[1]])
 }
 # End of C functions
 
@@ -144,8 +144,7 @@ for(i in 1:iterations) {
       thetaPredict[ind,depthIndRange] = round(predictExtrapDown(alpha,lambda,beta,predictPositionsRescaled[depthIndRange],currPositions[n],theta[n],maxExtrap),3)
     }
 
-    if(any(is.na(thetaPredict[ind,]))) stop("Errors in predicted ages. Check you are not extrapolating too far away from dated levels. If you must run this core with these predicted ages, set maxExtrap to a larger value (e.g. 1000)")
-    if(any(thetaPredict[ind,]==0)) warning("Zeros in predicted ages. Check you are not extrapolating too far away from dated levels. If you must run this core with these predicted ages, set maxExtrap to a larger value (e.g. 1000)")
+    if(any(is.na(thetaPredict[ind,]))) warning("NA values in predicted ages. Check you are not extrapolating too far away from dated levels. If you must run this core with these values of predictPositions, set maxExtrap to a larger value (e.g. 1000). ")
     
   }
 
