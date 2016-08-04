@@ -11,7 +11,7 @@ SampleAges(CalDates, n_samp = 1000)
 }
 \arguments{
   \item{CalDates}{
-A list created from either \code{\link{BchronCalibrate}} or \code{\link{Bchronology}}
+A list created from either \code{\link{BchronCalibrate}}.
 }
   \item{n_samp}{
 The desired number of samples
