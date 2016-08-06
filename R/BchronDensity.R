@@ -16,7 +16,7 @@ for(i in 2:n) thetaRange = range(c(thetaRange,xSmall[[i]]$ageGrid))
 # Put in offset for normal calibration curve (enables faster lookup)
 offset=vector(length=n)
 for(i in 1:n) {
-  offset[i] = ifelse(x[[i]]$calCurve == 'normal',61,0)
+  offset[i] = ifelse(x[[i]]$calCurve == 'normal',100+1,0)
 }
 
 # Create some Gaussian basis functions to use
@@ -57,7 +57,6 @@ for(j in 1:n) thetaAll[,j] = sample(xSmall[[j]]$ageGrid,size=iterations,prob=xSm
 # Create function for quick calling of mixture density
 mu2 = mu
 sigma2 = (mu[2] - mu[1]) / 2
-my_dnorm = function(x) stats::dnorm(x,mean=mu2,sd=sigma2)
 
 # Loop through iterations
 pb = utils::txtProgressBar(min = 1, max = iterations, style = 3,width=60,title='Running BchronDensity')
