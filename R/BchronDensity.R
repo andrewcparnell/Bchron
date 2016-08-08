@@ -16,7 +16,7 @@ for(i in 2:n) thetaRange = range(c(thetaRange,xSmall[[i]]$ageGrid))
 # Put in offset for normal calibration curve (enables faster lookup)
 offset=vector(length=n)
 for(i in 1:n) {
-  offset[i] = ifelse(x[[i]]$calCurve == 'normal',100+1,0)
+  offset[i] = ifelse(x[[i]]$calCurve == 'normal',100,0)
 }
 
 # Create some Gaussian basis functions to use

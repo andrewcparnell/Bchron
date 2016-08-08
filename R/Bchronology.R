@@ -41,7 +41,7 @@ do = order(currPositions)
 # For any calibration curves that don't start at 0, we need an offset to enable fast lookup - only supported one so far is normal
 offset=rep(0,length=n)
 for(i in 1:n) {
-   offset[i] = ifelse(x.df1[[i]]$calCurve == 'normal',100+1,0)
+   offset[i] = ifelse(x.df1[[i]]$calCurve == 'normal',100,0)
 }
 
 # Starting values
@@ -145,7 +145,7 @@ for(i in 1:iterations) {
     }
 
     if(any(is.na(thetaPredict[ind,]))) warning("NA values in predicted ages. Check you are not extrapolating too far away from dated levels. If you must run this core with these values of predictPositions, set maxExtrap to a larger value (e.g. 1000). ")
-    
+
   }
 
   # Update theta
