@@ -243,7 +243,7 @@ You can plot the density with:
 plot(SlugDens,xlab='Age (cal years BP)', xaxp=c(0, 16000, 16))
 ```
 
-Phases will be shown with a thick black red line. These can be turned off by setting the argument `plotPhase=FALSE` whilst the sensitibity can be changed with `phaseProb`.
+Phases will be shown with a thick black red line. These can be turned off by setting the argument `plotPhase=FALSE` whilst the sensitivity can be changed with `phaseProb`.
 
 BchronDensityFast is identical except for the function call:
 
@@ -257,12 +257,13 @@ The `BchronDensityFast` function outputs the age grid and density by default so 
 ## Including user-defined calibration curves
 
 Bchron allows for user-defined calibration curves to be created through the function `CreateCalCurve`. If inputs to this function are:
+
   - The `name` of the calibration curve (e.g. intcal13c)
   - The calibrated/calendar ages for the new calibration curve
   - The uncalibrated (e.g. 14C) ages for the new calibration curve
   - (Optionally) the 1-sigma error for the calibration curve in uncalibrated years. If not included the error is assumed to be zero
 
-One run, the calibration curve can be used for all future runs until the package is deleted or re-installed. The calibration curve can be used by simple calling it in any other Bchron function using the supplied name. Note that no name checking is done, so it is possible to over-write the pre-defined calibration curves if
+Once run, the calibration curve can be used for all future runs until the package is deleted or re-installed. The calibration curve can be used by simply calling it in any other Bchron function using the supplied name. Note that no name checking is done, so it is possible to over-write the pre-defined calibration curves if
 
 As an example, consider installing the intcal09 calibration curve, as available from (http://www.radiocarbon.org/IntCal09%20files/intcal09.14c)[here]. We can run the following code:
 
