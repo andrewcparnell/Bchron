@@ -23,13 +23,14 @@ good_ag = sort(ag[o][good_cu])
 breaks = diff(good_ag)>1
 where_breaks = which(diff(good_ag)>1)
 n_breaks = sum(breaks) + 1
-
 # Store output
 out = vector('list', length = n_breaks)
 low_seq = 1
 high_seq = ifelse(length(where_breaks)==0, length(breaks), where_breaks[1])
 for(i in 1:n_breaks) {
   out[[i]] = c(good_ag[low_seq], good_ag[high_seq])
+  curr_dens = round(100*sum(de[o][seq(good_cu[low_seq], good_cu[high_seq])]),1)
+  names(out)[[i]] = paste0(as.character(curr_dens),'%')
   low_seq = high_seq + 1
   high_seq = ifelse(i<n_breaks-1, where_breaks[i+1], length(breaks))
 }
