@@ -51,9 +51,19 @@ dfs = c(1,100) # corresponding to phi equals 1 and 0 respectively
 x.df1 = BchronCalibrate(ages=ages,ageSds=ageSds,calCurves=calCurves,positions=positions,ids=ids,pathToCalCurves=pathToCalCurves,eps=0,dfs=rep(dfs[1],length(ages)))
 x.df2 = BchronCalibrate(ages=ages,ageSds=ageSds,calCurves=calCurves,positions=positions,ids=ids,pathToCalCurves=pathToCalCurves,eps=0,dfs=rep(dfs[2],length(ages)))
 
+# Function to find decimal places of positions
+decimalplaces <- Vectorize(function(x) {
+  if ((x %% 1) != 0) {
+    nchar(strsplit(sub('0+$', '', as.character(x)), ".", fixed=TRUE)[[1]][[2]])
+  } else {
+    return(0)
+  }
+})
+
 # Get current positions and their order
 if(jitterPositions) {
-  currPositions = sort(jitter(positions/positionScaleVal, amount = .Machine$double.eps)) # Removed the above due to errors with cores at different age/position scales
+  num_decimals = max(decimalplaces(positions/positionScaleVal))
+  currPositions = sort(jitter(positions/positionScaleVal, amount = max(num_decimals/10, .Machine$double.eps))) # Removed the above due to errors with cores at different age/position scales
 } else {
   currPositions = sort(positions/positionScaleVal)
 }
