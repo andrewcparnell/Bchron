@@ -1,5 +1,5 @@
 BchronDensity <-
-function(ages,ageSds,calCurves,pathToCalCurves=system.file('data',package='Bchron'),dfs=rep(100,length(ages)),numMix=30,iterations=10000,burn=2000,thin=8,updateAges=FALSE,store_density=FALSE) {
+function(ages,ageSds,calCurves,pathToCalCurves=system.file('data',package='Bchron'),dfs=rep(100,length(ages)),numMix=50,iterations=10000,burn=2000,thin=8,updateAges=FALSE,store_density=TRUE) {
 
 if(length(ages)!=length(ageSds)) stop("ages and 1-sigma errors must be same length")
 if(length(ages)!=length(calCurves)) stop("ages and Calibration curves must be same length")
@@ -16,7 +16,7 @@ for(i in 2:n) thetaRange = range(c(thetaRange,xSmall[[i]]$ageGrid))
 # Put in offset for normal calibration curve (enables faster lookup)
 offset=vector(length=n)
 for(i in 1:n) {
-  offset[i] = ifelse(x[[i]]$calCurve == 'normal',61,0)
+  offset[i] = ifelse(x[[i]]$calCurve == 'normal',100,0)
 }
 
 # Create some Gaussian basis functions to use
@@ -57,7 +57,6 @@ for(j in 1:n) thetaAll[,j] = sample(xSmall[[j]]$ageGrid,size=iterations,prob=xSm
 # Create function for quick calling of mixture density
 mu2 = mu
 sigma2 = (mu[2] - mu[1]) / 2
-my_dnorm = function(x) stats::dnorm(x,mean=mu2,sd=sigma2)
 
 # Loop through iterations
 pb = utils::txtProgressBar(min = 1, max = iterations, style = 3,width=60,title='Running BchronDensity')
@@ -108,7 +107,7 @@ for(i in 1:iterations) {
 # Store the density if required
 if(store_density) {
   # Create the densities
-  dateGrid = seq(round(thetaRange[1]*0.9,3),round(thetaRange[2]*1.1,3),length=1000)
+  dateGrid = seq(round(thetaRange[1]*0.9,0),round(thetaRange[2]*1.1,0), by = 1)
   dens = rep(0,length=length(dateGrid))
   Gstar = gbase(dateGrid,mu)
   for(i in 1:nrow(pStore)) {
@@ -118,7 +117,7 @@ if(store_density) {
 }
 
 if(store_density) {
-  output = list(theta=thetaStore,p=pStore,mu=mu,calAges=xSmall,G=G,age_grid=dateGrid,density=densFinal)
+  output = list(theta=thetaStore,p=pStore,mu=mu,calAges=xSmall,G=G,ageGrid=dateGrid,densities=densFinal)
 } else {
   output = list(theta=thetaStore,p=pStore,mu=mu,calAges=xSmall,G=G)
 }

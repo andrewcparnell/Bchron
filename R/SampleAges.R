@@ -1,7 +1,7 @@
 SampleAges = function(CalDates, n_samp = 1000) {
   # Get a set of samples from the current set of dates
   x = CalDates
-  if(class(x) != 'BchronCalibratedDates') stop('Object must be creaed from BchronCalibrate or Bchronology')
+  if(class(x) != 'BchronCalibratedDates') stop('Object must be creaed from BchronCalibrate')
   n_dates = length(x)
   out = matrix(NA, ncol = n_dates, nrow = n_samp) 
   colnames(out) = names(x)

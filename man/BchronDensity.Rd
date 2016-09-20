@@ -8,8 +8,8 @@ This function runs a non-parametric phase model on 14C and non-14C ages via Gaus
 }
 \usage{
 BchronDensity(ages, ageSds, calCurves, pathToCalCurves = system.file('data',
-package = "Bchron"), dfs = rep(100, length(ages)), numMix = 30, iterations = 10000,
-burn = 2000, thin = 8, updateAges = FALSE, store_density=FALSE)
+package = "Bchron"), dfs = rep(100, length(ages)), numMix = 50, iterations = 10000,
+burn = 2000, thin = 8, updateAges = FALSE, store_density=TRUE)
 }
 \arguments{
   \item{ages}{
@@ -78,7 +78,7 @@ data(Sluggan)
 
 # Run the model
 SlugDens = BchronDensity(ages=Sluggan$ages,ageSds=Sluggan$ageSds,
-calCurves=Sluggan$calCurves,numMix=50)
+calCurves=Sluggan$calCurves)
 
 # plot it
 plot(SlugDens)}

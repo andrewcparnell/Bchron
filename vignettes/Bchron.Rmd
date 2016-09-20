@@ -9,6 +9,11 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.width=7, fig.height = 5, fig.align = 'center',
+                      warning=FALSE, message=FALSE)
+```
+
 ## Introduction
 
 Bchron is an R package that enables quick calibration of radiocarbon dates under various calibration curves (including user generated ones); age-depth modelling as per the algorithm of Haslett and Parnell (2008); Relative sea level rate estimation incorporating time uncertainty in polynomial regression models (Parnell and Gehrels 2015); and non-parametric phase modelling via Gaussian mixtures as a means to determine the activity of a site (and as an alternative to the Oxcal function SUM; currently unpublished).
@@ -46,7 +51,7 @@ summary(ages1)
 plot(ages1)
 ```
 
-This will calibrate the radiocarbon age of 11,553 14C years BP with standard error 230 14C years on the intcal13 calibration curve. The `id` given is optional and only used for summarising and plotting. The summary command then gives the highest density regions of the calibrated date and the plot command produces a simple plot of the density.
+This will calibrate the radiocarbon age of 11,553 14C years BP with standard error 230 14C years on the intcal13 calibration curve. The `id` given is optional and only used for summarising and plotting. The summary command then gives the highest density regions of the calibrated date and the plot command produces a simple plot of the density, together with a shaded region for the 95% highest density region.
 
 Bchron can calibrate multiple dates simultaneously by inputting the dates as vectors:
 
@@ -134,6 +139,8 @@ Finally, the `predict` command will produce predicted ages for a newly specified
 predictAges = predict(GlenOut, 
                       newPositions = c(150,725,1500), 
                       newPositionThicknesses=c(5,0,20))
+predictAges = predict(GlenOut, 
+                      newPositions = seq(0,1500,by=10))
 ```
 
 To run this model on a data set of your own, you will need to load in your data set via, e.g.
@@ -142,6 +149,38 @@ To run this model on a data set of your own, you will need to load in your data 
 mydata = read.table(file='path/to/file.txt',header=TRUE)
 run = Bchronology(ages=mydata[,1],ageSds=mydata[,2], ...
 ```
+
+### Obtaining sedimnetation and accumulation rates
+
+The summary function used above also allows for calculation of sedimentation and accumulation rates. Here is an example of calculating and plotting the accumulation rate for the `GlenOut` object created above:
+
+```{r, results ='hide'}
+acc_rate = summary(GlenOut, type = 'acc_rate')
+```
+
+```{r, eval=FALSE}
+plot(acc_rate[,'age_grid'], acc_rate[,'50%'], type='l', ylab = 'cm per year', xlab = 'Age (k cal years BP)', ylim = range(acc_rate[,-1]))
+lines(acc_rate[,'age_grid'], acc_rate[,'2.5%'], lty='dotted')
+lines(acc_rate[,'age_grid'], acc_rate[,'97.5%'], lty='dotted')
+```
+
+Clearly these accumulation rates are very uncertain, which is unsurprising given the paucity of dates.
+
+To calculate sedimentation rates, you need to either make sure that the `predictPositions` argument in the `Bchronology` call above is given with unit differences (e.g. `predictPositions=seq(0,1500,by=1)`) or set the argument `useExisting=FALSE` in the command below:
+
+```{r, eval=FALSE}
+sed_rate = summary(GlenOut, type = 'sed_rate', useExisting = FALSE)
+```
+
+This will be quite slow as it needs to predict ages on a regular unit depth grid. However, the plots can be created in the same way:
+
+```{r, eval=FALSE}
+plot(sed_rate[,'position_grid'], sed_rate[,'50%'], type='l', ylab = 'Years per cm', xlab = 'Depth (cm)', ylim = range(sed_rate[,-1]))
+lines(sed_rate[,'position_grid'], sed_rate[,'2.5%'], lty='dotted')
+lines(sed_rate[,'position_grid'], sed_rate[,'97.5%'], lty='dotted')
+```
+
+You could then for example save this to a csv file with, e.g. `write.csv(sed_rate, file = 'Glendalough_sed_rates.csv', quote=FALSE, row.names = FALSE)`
 
 ## Running RSL rate estimation
 
@@ -155,7 +194,7 @@ data(TestRSLData)
 
 These can be run through Bchronology and BchronRSL via:
 
-```{r,eval=FALSE}
+```{r,messages=FALSE, results='hide', eval=FALSE}
 RSLrun = Bchronology(ages=TestChronData$ages,
                      ageSds=TestChronData$ageSds, 
                      positions=TestChronData$position,
@@ -171,28 +210,40 @@ RSLrun2 = BchronRSL(RSLrun,
 
 The `Bchronology` run is as described in the section above. The `BChronRSL` run takes this object, an estimate of the RSL means and standard deviations, and a value of degree (here 3 indicating cubic regression). They can then be summarised and plotted via:
 
-```{r,fig.align='center',fig.width=6,fig.height=5,eval=FALSE}
-summary(RSLrun2)
-plot(RSLrun2)
+```{r, eval=FALSE}
+summary(RSLrun2, type = 'RSL', age_grid = seq(0, 2000, by  = 250))
+plot(RSLrun2, type = 'RSL', main = 'Relative sea level plot')
+plot(RSLrun2, type = 'rate', main = 'Rate of RSL change')
 ```
+
+See the help files for more options, including outputting parameter values, and plots of acceleration of RSL itself.
 
 ## Running non-parametric phase estimation
 
 Bchron contains two functions for running non-parametric phase models for estimating activity level in a site/region. The first, BchronDensity fits a full Bayesian Gaussian mixture model to the radiocarbon dates whilst the second BchronDensityFast fits an approximate version which will run on much larger data sets. An example run is
 
-```{r,results='hide'}
+```{r,results='hide', eval=FALSE}
 data(Sluggan)
 SlugDens = BchronDensity(ages=Sluggan$ages,
                          ageSds=Sluggan$ageSds,
-                         calCurves=Sluggan$calCurves,
-                         numMix=50)
+                         calCurves=Sluggan$calCurves)
 ```
-The `BchronDensity` function also has an optional argument `store_density` which will output an age grid and associated density in case you wish to plot the output in a different package.
 
+You can then output the possible start/end dates of phases:
 
-```{r,fig.align='center',fig.width=6,fig.height=5}
-plot(SlugDens,xlab='Age (cal years BP)')
+```{r, eval=FALSE}
+summary(SlugDens, prob = 0.95)
 ```
+
+The probability argument will specify the sensitivity of the algorithm to finding phases. Lower values of `prob` will lead to more discovered phases.
+
+You can plot the density with:
+
+```{r, eval=FALSE}
+plot(SlugDens,xlab='Age (cal years BP)', xaxp=c(0, 16000, 16))
+```
+
+Phases will be shown with a thick black red line. These can be turned off by setting the argument `plotPhase=FALSE` whilst the sensitivity can be changed with `phaseProb`.
 
 BchronDensityFast is identical except for the function call:
 
@@ -206,12 +257,13 @@ The `BchronDensityFast` function outputs the age grid and density by default so 
 ## Including user-defined calibration curves
 
 Bchron allows for user-defined calibration curves to be created through the function `CreateCalCurve`. If inputs to this function are:
+
   - The `name` of the calibration curve (e.g. intcal13c)
   - The calibrated/calendar ages for the new calibration curve
   - The uncalibrated (e.g. 14C) ages for the new calibration curve
   - (Optionally) the 1-sigma error for the calibration curve in uncalibrated years. If not included the error is assumed to be zero
 
-One run, the calibration curve can be used for all future runs until the package is deleted or re-installed. The calibration curve can be used by simple calling it in any other Bchron function using the supplied name. Note that no name checking is done, so it is possible to over-write the pre-defined calibration curves if
+Once run, the calibration curve can be used for all future runs until the package is deleted or re-installed. The calibration curve can be used by simply calling it in any other Bchron function using the supplied name. Note that no name checking is done, so it is possible to over-write the pre-defined calibration curves if
 
 As an example, consider installing the intcal09 calibration curve, as available from (http://www.radiocarbon.org/IntCal09%20files/intcal09.14c)[here]. We can run the following code:
 
@@ -227,7 +279,7 @@ The new calibration curve can now be used via its name. For example, we can now 
 age_09 = BchronCalibrate(age=15500,ageSds=150,calCurves = 'intcal09',ids='My Date')
 age_13 = BchronCalibrate(age=15500,ageSds=150,calCurves = 'intcal13')
 plot(age_09)
-with(age_13$date1,lines(ageGrid,densities,col='red'))
+lines(age_13$Date1$ageGrid,age_13$Date1$densities,col='red')
 legend('topleft',legend=c('intcal09','intcal13'),col=c('black','red'),lty=1)
 ```
 
