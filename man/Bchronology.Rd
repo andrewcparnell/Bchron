@@ -7,14 +7,14 @@ Runs the Compound Poisson-Gamma chronology model of Haslett and Parnell (2008)
 Fits a non-parametric chronology model to age/position data according to the Compound Poisson-Gamma model defined by Haslett and Parnell (2008). This version uses a slightly modified Markov chain Monte Carlo fitting algorithm which aims to converge quicker and requires fewer iterations. It also a slightly modified procedure for identifying outliers
 }
 \usage{
-Bchronology(ages, ageSds, positions, positionThicknesses = rep(0, length(ages)), 
-calCurves = rep("intcal13", length(ages)), ids = NULL, 
-outlierProbs = rep(0.01, length(ages)), predictPositions = seq(min(positions), 
-max(positions), length = 100), pathToCalCurves = system.file('data', 
-package = "Bchron"), iterations = 10000, burn = 2000, thin = 8, 
-extractDate = 1950 - as.numeric(format(Sys.time(), "\%Y")), maxExtrap = 1000, 
-thetaMhSd = 0.5, muMhSd = 0.1, psiMhSd = 0.1, ageScaleVal = 1000, 
-positionScaleVal = 100)
+Bchronology(ages, ageSds, positions, positionThicknesses = rep(0, length(ages)),
+calCurves = rep("intcal13", length(ages)), ids = NULL,
+outlierProbs = rep(0.01, length(ages)), predictPositions = seq(min(positions),
+max(positions), length = 100), pathToCalCurves = system.file('data',
+package = "Bchron"), jitterPositions = FALSE, iterations = 10000, burn = 2000,
+thin = 8, extractDate = 1950 - as.numeric(format(Sys.time(), "\%Y")),
+maxExtrap = 1000, thetaMhSd = 0.5, muMhSd = 0.1, psiMhSd = 0.1,
+ageScaleVal = 1000, positionScaleVal = 100)
 }
 \arguments{
   \item{ages}{
@@ -39,11 +39,14 @@ A vector of values containing either 'intcal13', 'shcal13', 'marine13', or 'norm
 (optional) A vector of prior outlier probabilities, one for each age. Defaults to 0.01
 }
   \item{predictPositions}{
-(optional) A vector of positions (e.g. depths) at which predicted age values are required. Defaults to a sequence of length 100 from the top position to the bottom position 
+(optional) A vector of positions (e.g. depths) at which predicted age values are required. Defaults to a sequence of length 100 from the top position to the bottom position
 }
   \item{pathToCalCurves}{
-(optional) File path to where the calibration curves are located. Defaults to the system directory where the 3 standard calibration curves are stored. 
+(optional) File path to where the calibration curves are located. Defaults to the system directory where the 3 standard calibration curves are stored.
 }
+  \item{jitterPositions}{
+  (optional) Whether to jigger the positions at startup or not. Default is FALSE but if there are lots of dates at similar depths this may resolve some initialisation problems
+  }
   \item{iterations}{
 (optional) The number of iterations to run the procedure for
 }
@@ -97,7 +100,7 @@ Parnell, A. C., Haslett, J., Allen, J. R. M., Buck, C. E., and Huntley, B. (2008
 Andrew Parnell <andrew.parnell@ucd.ie>
 }
 \seealso{
-\code{\link{BchronCalibrate}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}} 
+\code{\link{BchronCalibrate}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
 }
 \examples{
 \dontrun{

@@ -8,7 +8,7 @@ Bchronology = function(ages,
                        outlierProbs=rep(0.01,length(ages)),
                        predictPositions=seq(min(positions),max(positions),length=100),
                        pathToCalCurves=system.file('data',package='Bchron'),
-                       jitterDepths = FALSE,
+                       jitterPositions = FALSE,
                        iterations=10000,
                        burn=2000,
                        thin=8,
@@ -52,7 +52,7 @@ x.df1 = BchronCalibrate(ages=ages,ageSds=ageSds,calCurves=calCurves,positions=po
 x.df2 = BchronCalibrate(ages=ages,ageSds=ageSds,calCurves=calCurves,positions=positions,ids=ids,pathToCalCurves=pathToCalCurves,eps=0,dfs=rep(dfs[2],length(ages)))
 
 # Get current positions and their order
-if(jitterDepths) {
+if(jitterPositions) {
   currPositions = sort(jitter(positions/positionScaleVal, amount = .Machine$double.eps)) # Removed the above due to errors with cores at different age/position scales
 } else {
   currPositions = sort(positions/positionScaleVal)
