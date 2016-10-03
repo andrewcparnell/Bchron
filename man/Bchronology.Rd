@@ -27,7 +27,7 @@ A vector of 1-sigma values for the ages given above
 Position values (e.g. depths) for each age
 }
   \item{positionThicknesses}{
-(optional) Thickness values for each of the positions. By default set to zero
+(optional) Thickness values for each of the positions. The thickness value should be the full thickness value of the slice. By default set to zero.
 }
   \item{calCurves}{
 A vector of values containing either 'intcal13', 'shcal13', 'marine13', or 'normal'. Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.
