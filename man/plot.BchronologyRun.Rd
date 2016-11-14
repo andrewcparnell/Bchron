@@ -10,7 +10,9 @@ Plots output from a run of \code{\link{Bchronology}}
 \method{plot}{BchronologyRun}(x, dateHeight = 30,
 chronCol = grDevices::rgb(190/255,190/255,190/255,alpha=0.8),
 chronBorder = grDevices::rgb(190/255,190/255,190/255,alpha=0.8),
-alpha = 0.95,\ldots)
+alpha = 0.95,
+legLoc = 'topleft',
+\ldots)
 }
 \arguments{
   \item{x}{
@@ -27,6 +29,9 @@ The colour of the border of the chronology uncertainty ribbon to be plotted
 }
   \item{alpha}{
 The credible interval of the chronology run to be plotted. Defaults to 95 percent
+}
+  \item{legLoc}{
+The location of the plot legend
 }
   \item{\dots}{
 Other graphical parameters as detailed in \code{\link{par}}

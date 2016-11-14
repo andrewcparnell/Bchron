@@ -4,6 +4,7 @@ function(x,
          chronCol = grDevices::rgb(190/255,190/255,190/255,alpha=0.8),
          chronBorder = grDevices::rgb(190/255,190/255,190/255,alpha=0.8),
          alpha = 0.95,
+         legLoc = 'topleft',
          ...) {
 
   # x contains the output from a run of the Bchronology function
@@ -56,6 +57,6 @@ function(x,
   chronHigh = apply(x$thetaPredict,2,'quantile',probs=0.975)
   graphics::polygon(c(chronLow,rev(chronHigh)),c(x$predictPositions,rev(x$predictPositions)),col=chronCol,border=NA)
 
-  graphics::legend('topleft',c('Dated positions','95% Chronology CI'),col=c('black',chronCol),pch=15)
+  graphics::legend(legLoc,c('Dated positions','95% Chronology CI'),col=c('black',chronCol),pch=15)
 
 }
