@@ -82,10 +82,17 @@ If, alternatively, you want a _credible interval_ (i.e. a single contiguous rang
 # First create age samples for each date
 age_samples = SampleAges(ages3)
 # Now summarise them with quantile - this gives a 95% credible interval
-apply(age_samples,2,quantile,prob=c(0.025,0.975))
+apply(age_samples, 2, quantile, prob=c(0.025,0.975))
 ```
 
-The calibration code is very fast. On standard PC you should have no trouble calibrating thousands of dates simultaneously without a noticeably long wait.
+The `SampleAges` function introduces some uncertainty as it is a simple random sample. This means that repeatedly running it will give you slightly different results. If you are introduced in precision at a yearly level, you might want to increate the `n_samp` argument though will slow the function down a litt.e
+
+If you wanted to find each date's median age (though this is often an inappropriate summary and should be treated with caution), use:
+```{r}
+apply(age_samples, 2, quantile, prob=c(0.5))
+```
+
+The calibration code is very fast. On a standard PC you should have no trouble calibrating thousands of dates simultaneously without a noticeably long wait.
 
 ## Running the Bchronology age-depth model
 

@@ -7,7 +7,7 @@ Get sample ages from a set of Bchron calibrated dates
 A function for extracting sample ages from Bchron calibrated dates
 }
 \usage{
-SampleAges(CalDates, n_samp = 1000)
+SampleAges(CalDates, n_samp = 10000)
 }
 \arguments{
   \item{CalDates}{
