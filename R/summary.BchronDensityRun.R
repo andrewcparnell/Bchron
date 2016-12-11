@@ -1,3 +1,18 @@
+#' Summarise a Bchron density object
+#'
+#' Summarise a \code{\link{BchronDensity}} object
+#'
+#' @param object Output from a run of \code{\link{BchronDensity}}
+#' @param prob Probability for identifying phases
+#' @param ... Other arguments (not currently supported)
+#' @param digits Number of digits to report values
+#'
+#' @seealso \code{\link{BchronDensity}}
+#'
+#' @return
+#' @export
+#'
+#' @examples
 summary.BchronDensityRun <-
 function(object,prob=0.95, ..., digits = max(3, getOption("digits")-3)) {
 

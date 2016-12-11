@@ -47,7 +47,7 @@ Other arguments to plot, e.g. axis limits, titles, etc. See \code{\link{par}}.
 }
 }
 \details{
-These plots are intented to be pretty basic and used simply for quick information. Users are encouraged to learn the R plotting features to produce publication quality graphics
+These plots are intended to be pretty basic and used simply for quick information. Users are encouraged to learn the R plotting features to produce publication quality graphics
 }
 \references{
 Forthcoming!

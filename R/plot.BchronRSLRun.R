@@ -1,3 +1,17 @@
+#' Plot output from BchronRSL
+#'
+#' Plot output from the \code{\link{BchronRSL}} function
+#' 
+#' @param x An object created by \code{\link{BchronRSL}}
+#' @param type One of 'RSL', 'rate', or 'accel'. If RSL produces a plot of RSL esimtates from the model. If rate, produces rate estimates. If accel produces acceleration estimates.
+#' @param ... Other arguments to plot, see \code{\link{par}}
+#'
+#' @seealso \code{\link{BchronCalibrate}}, \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
+#'
+#' @return
+#' @export
+#'
+#' @examples
 plot.BchronRSLRun <-
 function(x, type = c('RSL','rate','accel'), ...) {
 

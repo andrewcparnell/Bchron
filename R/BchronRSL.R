@@ -1,3 +1,52 @@
+#' Relative sea level rate (RSL) estimation
+#'
+#' @param BchronologyRun Output from a run of \code{\link{Bchronology}}
+#' @param RSLmean A vector of RSL mean estimates of the same length as the number of predictPositions given to the \code{\link{Bchronology}} function
+#' @param RSLsd A vector RSL standard deviations of the same length as the number of predictPositions given to the \code{\link{Bchronology}} function
+#' @param degree The degree of the polynomial regression: linear=1 (default), quadratic=2, etc. Supports up to degree 5, though this will depend on the data given
+#' @param iterations The number of MCMC iterations to run
+#' @param burn The number of starting iterations to discard
+#' @param thin The step size of iterations to discard
+#'
+#' @details 
+#' This function fits an errors-in-variables regression model to relative sea level (RSL) data. An errors-in-variables regression model allows for uncertainty in the explanatory variable, here the age of sea level data point. The algorithm is more fully defined in the reference below
+#' 
+#' @return An object of class BchronRSLRun with elements
+#' itemize{
+#' \item{BchronologyRun}{The output from the run of \code{\link{Bchronology}}}
+#' \item{samples}{The posterior samples of the regression parameters}
+#' \item{degree}{The degree of the polynomial regression}
+#' \item{RSLmean}{The RSL mean values given to the function}
+#' \item{RSLsd}{The RSL standard deviations as given to the function}
+#' \item{const}{The mean of the predicted age values. Used to standardise the design matrix and avoid computational issues}
+#' }
+#' 
+#' @references 
+#' Andrew C. Parnell and W. Roland Gehrels (2013) 'Using chronological models in late holocene sea level reconstructions from salt marsh sediments' In: I. Shennan, B.P. Horton, and A.J. Long (eds). Handbook of Sea Level Research. Chichester: Wiley
+#' 
+#' @seealso \code{\link{BchronCalibrate}}, \code{\link{Bchronology}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}} 
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' # Load in data
+#' data(TestChronData)
+#' data(TestRSLData)
+#' 
+#' # Run through Bchronology
+#' RSLrun = Bchronology(ages=TestChronData$ages,ageSds=TestChronData$ageSds,
+#'                      positions=TestChronData$position,positionThicknesses=TestChronData$thickness,
+#'                      ids=TestChronData$id,calCurves=TestChronData$calCurves,
+#'                      predictPositions=TestRSLData$Depth)
+#' 
+#' # Now run through BchronRSL
+#' RSLrun2 = BchronRSL(RSLrun,RSLmean=TestRSLData$RSL,RSLsd=TestRSLData$Sigma,degree=3)
+#' 
+#' # Summarise it
+#' summary(RSLrun2)
+#' 
+#' # Plot it
+#' plot(RSLrun2)}
 BchronRSL <-
 function(BchronologyRun,RSLmean,RSLsd,degree=1,iterations=10000,burn=2000,thin=8) {
   if(degree>5) stop('Degree not supported')

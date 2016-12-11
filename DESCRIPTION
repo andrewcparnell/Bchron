@@ -1,17 +1,31 @@
 Package: Bchron
 Type: Package
-Title: Radiocarbon Dating, Age-Depth Modelling, Relative Sea Level Rate Estimation, and Non-Parametric Phase Modelling
+Title: Radiocarbon Dating, Age-Depth Modelling, Relative Sea Level Rate
+    Estimation, and Non-Parametric Phase Modelling
 Version: 4.2.6
-Date: 2016-09-20
-Depends: inline
-Imports: utils, MASS, ellipse, coda, mclust
+Date: 2016-12-11
+Depends:
+    inline
+Imports:
+    utils,
+    MASS,
+    ellipse,
+    coda,
+    mclust
 Encoding: UTF-8
 Author: Andrew Parnell
 Maintainer: Andrew Parnell <Andrew.Parnell@ucd.ie>
-Description: Enables quick calibration of radiocarbon dates under various calibration curves (including user generated ones); Age-depth modelling as per the algorithm of Haslett and Parnell (2008); Relative sea level rate estimation incorporating time uncertainty in polynomial regression models; and non-parametric phase modelling via Gaussian mixtures as a means to determine the activity of a site (and as an alternative to the Oxcal function SUM). The package includes a vignette which can be accessed via the vignette.
+Description: Enables quick calibration of radiocarbon dates under various
+    calibration curves (including user generated ones); Age-depth modelling as
+    per the algorithm of Haslett and Parnell (2008); Relative sea level rate
+    estimation incorporating time uncertainty in polynomial regression models; and
+    non-parametric phase modelling via Gaussian mixtures as a means to determine
+    the activity of a site (and as an alternative to the Oxcal function SUM). The
+    package includes a vignette which can be accessed via the vignette.
 License: GPL (>= 2)
-Suggests: knitr
+URL: https://github.com/andrewcparnell/Bchron
+Suggests:
+    knitr
 VignetteBuilder: knitr
 NeedsCompilation: no
-
-
+RoxygenNote: 5.0.1

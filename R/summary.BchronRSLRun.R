@@ -1,3 +1,18 @@
+#' Summarise a BchronRSL run
+#'
+#' Summarise a \code{\link{BchronRSL}} run
+#'
+#' @param object The output from a run of \code{\link{BchronRSL}}
+#' @param type One of 'parameters', 'RSL', 'rate', or 'accel'. If parameters, provides posterior credibility intervals of the regression coefficients. If RSL provides predicted RSL values. If rate, provides rate estimates. If accel provides acceleration estimates.
+#' @param age_grid An optional age grid for computing RSL, rate, or acceleration estimates. If not provided uses the age range of the Bchronology run
+#' @param ... Other arugments to functions (not currently implemented)
+#'
+#' @seealso \code{\link{BchronCalibrate}}, \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
+#'
+#' @return
+#' @export
+#'
+#' @examples
 summary.BchronRSLRun <-
 function(object, type = c('parameters', 'RSL', 'rate', 'accel'), age_grid = NULL, ...) {
   cat('Posterior Medians with 95% credible intervals...\n')

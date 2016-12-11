@@ -1,3 +1,18 @@
+#' Plot output from BchronDensity
+#'
+#' @param x Output from \code{\link{BchronDensity}}
+#' @param plotDates Whether to plot the individual calibrated dates
+#' @param plotRawSum Whether to plot the raw sum of the probability distributions
+#' @param plotPhase Whether to plot the phase values
+#' @param phaseProb The probability value for the phase identification
+#' @param ... Other graphical commands. See \code{\link{par}}
+#'
+#' @seealso See  \code{\link{BchronDensity}} for examples, also \code{\link{Bchronology}}, \code{\link{BchronRSL}}, and \code{\link{BchronDensityFast}} for a faster approximate version of this function
+#'
+#' @return
+#' @export
+#'
+#' @examples
 plot.BchronDensityRun <-
 function(x,plotDates=TRUE,plotRawSum=FALSE,plotPhase=TRUE,phaseProb=0.95,...) {
 

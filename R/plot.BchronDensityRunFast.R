@@ -1,3 +1,20 @@
+#' Plot run from BchronDensityFast
+#'
+#' Plots output from \code{\link{BchronDensityFast}}
+#'
+#' @param x Output from \code{\link{BchronDensityFast}}
+#' @param plotDates Whether to include individual age pdfs (default TRUE)
+#' @param plotSum Whether to include sum of age pdfs (default FALSE)
+#' @param ... Other graphical parameters, see \code{\link{par}}
+#'
+#' @details Creates a basic plot of output for a run of \code{\link{BchronDensityFast}}
+#'
+#' @seealso Examples in \code{\link{BchronDensityFast}}, and see \code{\link{BchronDensity}}, for a slower, more accurate version of this function
+#'
+#' @return
+#' @export
+#'
+#' @examples
 plot.BchronDensityRunFast <-
 function(x,plotDates=TRUE,plotSum=FALSE,...) {
 

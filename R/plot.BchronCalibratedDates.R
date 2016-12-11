@@ -1,4 +1,27 @@
-plot.BchronCalibratedDates <-
+#' Plot calibrated dates from a BchronCalibrate run
+#'
+#' Plots calibrated radiocarbon dates from a \code{\link{BchronCalibrate}} run. Has options to plot on a position (usually depth) scale if supplied with the original run
+#'
+#' @param Output from BchronCalibrate 
+#' @param withPositions Whether to plot with positions (i.e. using the position values as the y axis). Default is FALSE in which case it will produce a sequence of plots, one for each calibrated age.
+#' @param pause Whether to pause between plots or go ahead and create them all
+#' @param dateHeight The height of the dates in the same units as the positions (e.g. cm). Only relevant if \code{withPositions=TRUE}.
+#' @param borderCol The colour of the edges of the dates. If \code{NULL} there are no edges drawn
+#' @param fillCol The fill colour of the dates
+#' @param withHDR Whether to plot the 95% highest density region values
+#' @param hdrCol The colour of the HDR regions
+#' @param ... Other arguments to plot, e.g. axis limits, titles, etc. See \code{\link{par}}.
+#'
+#' @details These plots are intended to be pretty basic and used simply for quick information. Users are encouraged to learn the R plotting features to produce publication quality graphics
+#'
+#' @seealso \code{\link{BchronCalibrate}}, \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#' # Examples in BchronCalibrate
+plot.BchronCalibratedDates =
 function(x,
          withPositions=FALSE,
          pause=FALSE,
