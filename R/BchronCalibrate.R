@@ -55,7 +55,10 @@ function(ages,ageSds,calCurves,ids=NULL,positions=NULL,pathToCalCurves=system.fi
   for(i in 1:length(ages)) {
 
     # Get rid of ages outside the range of the uncalibrated dates
-    if(ages[i]>max(mu[[matchCalCurves[i]]]) | ages[i]<min(mu[[matchCalCurves[i]]])) stop(paste("Date",ids[i],"outside of calibration range"))
+    if(ages[i]>max(mu[[matchCalCurves[i]]]) | ages[i]<min(mu[[matchCalCurves[i]]])) {
+      cal_range = range(mu[[matchCalCurves[i]]])
+      stop(paste("Date",ids[i],"outside of calibration range. Range of", calCurves[i], 'is',cal_range[1],'to',cal_range[2]))
+    }
 
     tau = ageSds[i]^2 + tau1[[matchCalCurves[i]]]
 
