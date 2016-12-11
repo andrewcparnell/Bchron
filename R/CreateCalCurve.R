@@ -41,10 +41,10 @@ CreateCalCurve = function(name,cal_ages,uncal_ages,one_sigma=rep(0,length(cal_ag
   cal_order = order(cal_ages,decreasing=TRUE)
   out = cbind(cal_ages[cal_order],uncal_ages[cal_order],one_sigma[cal_order])
 
-  # Now write to a gzipped file
-  gz1 = gzfile(paste0(file_loc,'/',name,'.txt.gz'),"w")
-  for(i in 1:nrow(out)) write(out[i,],gz1)
-  close(gz1)
+  # Now write to an rda file
+  fl = file(paste0(file_loc,'/',name,'.rda'),"w")
+  for(i in 1:nrow(out)) save(out[i,],fl)
+  close(fl)
 
   # And we're done
   cat('Completed!\n')

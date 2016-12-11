@@ -41,7 +41,7 @@
 #'                          calCurves=Sluggan$calCurves)
 #' 
 #' # plot it
-#' plot(SlugDens)}
+#' plot(SlugDens)
 #' }
 BchronDensity <-
 function(ages,ageSds,calCurves,pathToCalCurves=system.file('data',package='Bchron'),dfs=rep(100,length(ages)),numMix=50,iterations=10000,burn=2000,thin=8,updateAges=FALSE,store_density=TRUE) {

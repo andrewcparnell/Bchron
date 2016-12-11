@@ -9,7 +9,7 @@
 #'
 #' @seealso \code{\link{BchronCalibrate}}
 #'
-#' @return
+#' @return A vector of length \code{n_samp} containing sample ages for the specified date
 #' @export
 #'
 #' @examples

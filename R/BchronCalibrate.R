@@ -82,9 +82,9 @@ function(ages,ageSds,calCurves,ids=NULL,positions=NULL,pathToCalCurves=system.fi
   allCalCurves = unique(calCurves)
   calCurve = calBP = c14BP = calSd = ageGrid = mu = tau1 = list()
   for(i in 1:length(allCalCurves)) {
-    calCurveFile = paste(pathToCalCurves,'/',allCalCurves[i],'.txt.gz',sep='')
+    calCurveFile = paste(pathToCalCurves,'/',allCalCurves[i],'.rda',sep='')
     if(!file.exists(calCurveFile)) stop(paste('Calibration curve file',calCurveFile,'not found'))
-    calCurve = as.matrix(utils::read.table(calCurveFile))
+    calCurve = as.matrix(load(calCurveFile))
     calBP[[i]] = calCurve[,1]
     c14BP[[i]] = calCurve[,2]
     calSd[[i]] = calCurve[,3]

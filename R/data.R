@@ -14,7 +14,7 @@
 #' 
 #' @details This Glendalough data can be used with \code{\link{Bchronology}} or \code{\link{BchronDensity}}
 #' 
-#' @source Haslett, J., Whiley, M., Bhattacharya, S., Mitchell, F. J. G., Allen, J. R. M., Huntley, B., \& Salter-Townshend, M. (2006). Bayesian palaeoclimate reconstruction. Journal of the Royal Statistical Society, Series A, 169, 395-438.}
+#' @source Haslett, J., Whiley, M., Bhattacharya, S., Mitchell, F. J. G., Allen, J. R. M., Huntley, B., \& Salter-Townshend, M. (2006). Bayesian palaeoclimate reconstruction. Journal of the Royal Statistical Society, Series A, 169, 395-438.
 "Glendalough"
 
 
@@ -36,7 +36,6 @@
 #' 
 #' @details For full details and reference see \url{http://www.radiocarbon.org/IntCal13%20files/marine13.14c}. For usage details see \code{\link{BchronCalibrate}}
 "marine13"
-
 
 #' Data for dummy calibration of normally distributed ages
 #'
