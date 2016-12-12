@@ -24,7 +24,7 @@ If you find bugs or want to suggest new features please visit the Bchron [GitHub
 
 ## Installing Bchron
 
-Bchron will run in Windows, Mac OS X or Linux. To install Bchron you first need to install [R](http://www.r-project.org). I would also recommend installing [Rstudio](http://www.rstudio.com) as a nice desktop environment for using R. Once in R you can type:
+Bchron will run in Windows, Mac OS X or Linux. To install Bchron you first need to install [R](https://www.r-project.org). I would also recommend installing [Rstudio](http://www.rstudio.com) as a nice desktop environment for using R. Once in R you can type:
 
 ```{r,eval=FALSE}
 install.packages('Bchron')
