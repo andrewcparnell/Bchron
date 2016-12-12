@@ -2,6 +2,7 @@
 
 #include<R.h>
 #include<Rmath.h>
+#include <Rinternals.h>
 
 void rtruncn(double *a, double *b, double *x) {
   double A, B;

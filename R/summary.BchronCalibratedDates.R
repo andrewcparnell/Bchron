@@ -9,10 +9,7 @@
 #'
 #' @seealso \code{\link{BchronCalibrate}}, \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
 #'
-#' @return
 #' @export
-#'
-#' @examples
 summary.BchronCalibratedDates <-
 function(object, prob = 95, ..., digits = max(3, getOption("digits")-3)) {
   out = vector('list', length=length(object))

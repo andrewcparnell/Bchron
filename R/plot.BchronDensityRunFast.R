@@ -11,10 +11,7 @@
 #'
 #' @seealso Examples in \code{\link{BchronDensityFast}}, and see \code{\link{BchronDensity}}, for a slower, more accurate version of this function
 #'
-#' @return
 #' @export
-#'
-#' @examples
 plot.BchronDensityRunFast <-
 function(x,plotDates=TRUE,plotSum=FALSE,...) {
 

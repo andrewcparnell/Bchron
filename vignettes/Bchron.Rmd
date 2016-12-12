@@ -202,17 +202,18 @@ data(TestRSLData)
 These can be run through Bchronology and BchronRSL via:
 
 ```{r,messages=FALSE, results='hide', eval=FALSE}
-RSLrun = Bchronology(ages=TestChronData$ages,
-                     ageSds=TestChronData$ageSds, 
-                     positions=TestChronData$position,
-                     positionThicknesses=TestChronData$thickness, 
-                     ids=TestChronData$id,
-                     calCurves=TestChronData$calCurves, 
-                     predictPositions=TestRSLData$Depth)
+RSLrun = Bchronology(ages = TestChronData$ages,
+                     ageSds = TestChronData$ageSds,
+                     positions = TestChronData$position,
+                     positionThicknesses = TestChronData$thickness,
+                     ids = TestChronData$id,
+                     calCurves = TestChronData$calCurves,
+                     jitterPositions = TRUE,
+                     predictPositions = TestRSLData$Depth)
 RSLrun2 = BchronRSL(RSLrun,
-                    RSLmean=TestRSLData$RSL,
-                    RSLsd=TestRSLData$Sigma,
-                    degree=3)
+                    RSLmean = TestRSLData$RSL,
+                    RSLsd = TestRSLData$Sigma,
+                    degree = 3)
 ```
 
 The `Bchronology` run is as described in the section above. The `BChronRSL` run takes this object, an estimate of the RSL means and standard deviations, and a value of degree (here 3 indicating cubic regression). They can then be summarised and plotted via:

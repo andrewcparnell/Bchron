@@ -9,10 +9,7 @@
 #'
 #' @seealso See  \code{\link{BchronDensity}} for examples, also \code{\link{Bchronology}}, \code{\link{BchronRSL}}, and \code{\link{BchronDensityFast}} for a faster approximate version of this function
 #'
-#' @return
 #' @export
-#'
-#' @examples
 plot.BchronDensityRun <-
 function(x,plotDates=TRUE,plotRawSum=FALSE,plotPhase=TRUE,phaseProb=0.95,...) {
 
@@ -73,7 +70,7 @@ function(x,plotDates=TRUE,plotRawSum=FALSE,plotPhase=TRUE,phaseProb=0.95,...) {
   if(plotPhase) {
     phases = hdr(x, prob = phaseProb)
     for(i in 1:length(phases)) {
-      lines(c(phases[[i]][1],phases[[i]][2]), c(0,0), lwd = 3)
+      graphics::lines(c(phases[[i]][1],phases[[i]][2]), c(0,0), lwd = 3)
     }
   }
 

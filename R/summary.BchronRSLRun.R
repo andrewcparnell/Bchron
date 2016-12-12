@@ -9,10 +9,7 @@
 #'
 #' @seealso \code{\link{BchronCalibrate}}, \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
 #'
-#' @return
 #' @export
-#'
-#' @examples
 summary.BchronRSLRun <-
 function(object, type = c('parameters', 'RSL', 'rate', 'accel'), age_grid = NULL, ...) {
   cat('Posterior Medians with 95% credible intervals...\n')
@@ -24,15 +21,15 @@ function(object, type = c('parameters', 'RSL', 'rate', 'accel'), age_grid = NULL
     cat('Power Lower Median Upper \n')
     pow.names = c('mean','linear','quadratic','cubic','quartic','quintic')
     for(j in 1:(object$degree+1)) {
-      cat(pow.names[j],round(quantile(object$samples[,j],probs=c(0.025,0.5,0.975)),4),'\n')
+      cat(pow.names[j],round(stats::quantile(object$samples[,j],probs=c(0.025,0.5,0.975)),4),'\n')
     }
   }
 
   # Provide an age grid if not provided
   if(is.null(age_grid)) {
-    age_low = apply(object$BchronologyRun$thetaPredict,2,'quantile',probs=0.025)
-    age_med = apply(object$BchronologyRun$thetaPredict,2,'quantile',probs=0.5)
-    age_high = apply(object$BchronologyRun$thetaPredict,2,'quantile',probs=0.975)
+    age_low = apply(object$BchronologyRun$thetaPredict,2,stats::quantile,probs=0.025)
+    age_med = apply(object$BchronologyRun$thetaPredict,2,stats::quantile,probs=0.5)
+    age_high = apply(object$BchronologyRun$thetaPredict,2,stats::quantile,probs=0.975)
     age_grid = seq(max(age_low),min(age_high),length=100)
   }
   age_grid_use = age_grid / 1000
@@ -47,9 +44,9 @@ function(object, type = c('parameters', 'RSL', 'rate', 'accel'), age_grid = NULL
       pred.lines[i,] = X.pred%*%matrix(object$samples[i,],ncol=1,nrow=object$degree+1)
     }
 
-    pred.med = apply(pred.lines,2,'quantile',probs=0.5)
-    pred.low = apply(pred.lines,2,'quantile',probs=0.025)
-    pred.high = apply(pred.lines,2,'quantile',probs=0.975)
+    pred.med = apply(pred.lines,2,stats::quantile,probs=0.5)
+    pred.low = apply(pred.lines,2,stats::quantile,probs=0.025)
+    pred.high = apply(pred.lines,2,stats::quantile,probs=0.975)
     df = data.frame('Age' = age_grid,
                     'RSL_2.5' = pred.low,
                     'RSL_50' = pred.med,
@@ -67,9 +64,9 @@ function(object, type = c('parameters', 'RSL', 'rate', 'accel'), age_grid = NULL
       pred.lines[i,] = X.pred%*%matrix(object$samples[i,],ncol=1,nrow=object$degree+1)
     }
 
-    pred.med = apply(pred.lines,2,'quantile',probs=0.5)
-    pred.low = apply(pred.lines,2,'quantile',probs=0.025)
-    pred.high = apply(pred.lines,2,'quantile',probs=0.975)
+    pred.med = apply(pred.lines,2,stats::quantile,probs=0.5)
+    pred.low = apply(pred.lines,2,stats::quantile,probs=0.025)
+    pred.high = apply(pred.lines,2,stats::quantile,probs=0.975)
 
     df = data.frame('Age' = age_grid,
                     'RSL_rate_2.5' = pred.low,
@@ -89,9 +86,9 @@ function(object, type = c('parameters', 'RSL', 'rate', 'accel'), age_grid = NULL
       pred.lines[i,] = X.pred%*%matrix(object$samples[i,],ncol=1,nrow=object$degree+1)
     }
 
-    pred.med = apply(pred.lines,2,'quantile',probs=0.5)
-    pred.low = apply(pred.lines,2,'quantile',probs=0.025)
-    pred.high = apply(pred.lines,2,'quantile',probs=0.975)
+    pred.med = apply(pred.lines,2,stats::quantile,probs=0.5)
+    pred.low = apply(pred.lines,2,stats::quantile,probs=0.025)
+    pred.high = apply(pred.lines,2,stats::quantile,probs=0.975)
 
     df = data.frame('Age' = age_grid,
                     'RSL_accel_2.5' = pred.low,

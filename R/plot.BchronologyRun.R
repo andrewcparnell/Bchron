@@ -1,3 +1,20 @@
+#' Plot output from Bchronology
+#' 
+#' Plots output from a run of \code{\link{Bchronology}}
+#'
+#' @param x The object created by \code{\link{Bchronology}}
+#' @param dateHeight The height of the date densities plotted in position/depth units
+#' @param chronCol The colour of the chronology uncertainty ribbon to be plotted
+#' @param chronBorder The colour of the border of the chronology uncertainty ribbon to be plotted
+#' @param alpha The credible interval of the chronology run to be plotted. Defaults to 95 percent
+#' @param legLoc The location of the plot legend
+#' @param ... Other graphical parameters as detailed in \code{\link{par}}
+#'
+#' @details Creates a simple plot of the chronology output. The height of the date densities in the plots can be manipulated via the \code{dateHeight} argument which is represented in the same units as the positions/depths provided. More detailed plots can be created by manipulating the Bchronology object as required.
+#' 
+#' @seealso For examples see \code{\link{Bchronology}}. Also \code{\link{BchronCalibrate}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
+#'
+#' @export
 plot.BchronologyRun <-
 function(x,
          dateHeight = 30,

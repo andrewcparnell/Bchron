@@ -1,12 +1,12 @@
-#' #' Runs the Compound Poisson-Gamma chronology model of Haslett and Parnell (2008) 
+#' Runs the Compound Poisson-Gamma chronology model of Haslett and Parnell (2008) 
 #'
-#'Fits a non-parametric chronology model to age/position data according to the Compound Poisson-Gamma model defined by Haslett and Parnell (2008). This version uses a slightly modified Markov chain Monte Carlo fitting algorithm which aims to converge quicker and requires fewer iterations. It also a slightly modified procedure for identifying outliers
+#' Fits a non-parametric chronology model to age/position data according to the Compound Poisson-Gamma model defined by Haslett and Parnell (2008). This version uses a slightly modified Markov chain Monte Carlo fitting algorithm which aims to converge quicker and requires fewer iterations. It also a slightly modified procedure for identifying outliers
 #'
 #' @param ages A vector of ages (most likely 14C)
 #' @param ageSds A vector of 1-sigma values for the ages given above
 #' @param positions Position values (e.g. depths) for each age
 #' @param positionThicknesses Thickness values for each of the positions. The thickness value should be the full thickness value of the slice. By default set to zero.
-#' @param calCurves A vector of values containing either 'intcal13', 'shcal13', 'marine13', or 'normal'. Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory, or created via \code{\link{createCalCurve}}. Normal indicates a normally-distributed (non-14C) age.
+#' @param calCurves A vector of values containing either 'intcal13', 'shcal13', 'marine13', or 'normal'. Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory, or created via \code{\link{CreateCalCurve}}. Normal indicates a normally-distributed (non-14C) age.
 #' @param ids ID names for each age
 #' @param outlierProbs A vector of prior outlier probabilities, one for each age. Defaults to 0.01
 #' @param predictPositions A vector of positions (e.g. depths) at which predicted age values are required. Defaults to a sequence of length 100 from the top position to the bottom position
@@ -26,6 +26,7 @@
 #' @details
 #' The Bchronology function fits a compound Poisson-Gamma distribution to the increments between the dated levels. This involves a stochastic linear interpolation step where the age gaps are Gamma distributed, and the position gaps are Exponential. Radiocarbon and non-radiocarbon dates (including outliers) are updated within the function also by MCMC.
 #'
+#' @useDynLib Bchron
 #'
 #' @return A list of class BchronologyRun which include elements:
 #' \itemize{
@@ -166,7 +167,7 @@ Bchronology = function(ages,
     )) # Removed the above due to errors with cores at different age/position scales
   } else {
     currPositions = sort(positions / positionScaleVal)
-    warning(
+    if(any(diff(currPositions)==0)) warning(
       'jitterPositions is set to FALSE which means calibration will fail if repeated positions are given'
     )
   }

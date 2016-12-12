@@ -5,13 +5,14 @@ Title: Radiocarbon Dating, Age-Depth Modelling, Relative Sea Level Rate
 Version: 4.2.6
 Date: 2016-12-11
 Depends:
-    inline
+    R (>= 2.10),
 Imports:
     utils,
     MASS,
     ellipse,
     coda,
-    mclust
+    mclust,
+    inline
 Encoding: UTF-8
 Author: Andrew Parnell
 Maintainer: Andrew Parnell <Andrew.Parnell@ucd.ie>

@@ -42,10 +42,9 @@ CreateCalCurve = function(name,cal_ages,uncal_ages,one_sigma=rep(0,length(cal_ag
   out = cbind(cal_ages[cal_order],uncal_ages[cal_order],one_sigma[cal_order])
 
   # Now write to an rda file
-  fl = file(paste0(file_loc,'/',name,'.rda'),"w")
-  for(i in 1:nrow(out)) save(out[i,],fl)
-  close(fl)
-
+  fl = paste0(file_loc,'/',name,'.rda')
+  save(out, file = fl)
+  
   # And we're done
   cat('Completed!\n')
 }

@@ -8,10 +8,7 @@
 #'
 #' @seealso \code{\link{BchronCalibrate}}, \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
 #'
-#' @return
 #' @export
-#'
-#' @examples
 plot.BchronRSLRun <-
 function(x, type = c('RSL','rate','accel'), ...) {
 

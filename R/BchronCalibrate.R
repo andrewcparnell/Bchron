@@ -84,7 +84,8 @@ function(ages,ageSds,calCurves,ids=NULL,positions=NULL,pathToCalCurves=system.fi
   for(i in 1:length(allCalCurves)) {
     calCurveFile = paste(pathToCalCurves,'/',allCalCurves[i],'.rda',sep='')
     if(!file.exists(calCurveFile)) stop(paste('Calibration curve file',calCurveFile,'not found'))
-    calCurve = as.matrix(load(calCurveFile))
+    x = load(calCurveFile)
+    calCurve = get(x)
     calBP[[i]] = calCurve[,1]
     c14BP[[i]] = calCurve[,2]
     calSd[[i]] = calCurve[,3]

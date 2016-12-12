@@ -9,7 +9,7 @@
 #'
 #' @seealso \code{\link{BchronCalibrate}}
 #'
-#' @return
+#' @return A list where each element is one of the contiguous sets making up the HDR
 #' @export
 #'
 #' @examples
