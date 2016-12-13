@@ -189,6 +189,31 @@ lines(sed_rate[,'position_grid'], sed_rate[,'97.5%'], lty='dotted')
 
 You could then for example save this to a csv file with, e.g. `write.csv(sed_rate, file = 'Glendalough_sed_rates.csv', quote=FALSE, row.names = FALSE)`
 
+## Identifying influential dates and positions
+
+Bchron contains two functions which can help with future data strategies. They are:
+
+1. Identifying the position at which the maximum age variance occurs. This is useful if you wanted to pick the one next position to date
+2. Identifying which date is the most influential on the chronology. This is useful if you are concerned that one date might be leading the chronology astray.
+
+Identifying the position of maximum age variance can be created with the `summary` command:
+```{r}
+summary(GlenOut, type = 'max_var')
+```
+
+You can control the number of positions reported with `numPos`. For example you could now add this to the plot with
+```{r}
+max_var = summary(GlenOut, type = 'max_var', numPos = 1)
+plot(GlenOut,
+     main="Glendalough",
+     xlab='Age (cal years BP)',
+     ylab='Depth (cm)',
+     las=1)
+abline(h = max_var, lty = 'dotted')
+```
+
+Finding the age of maximum influence is a more computationally intensive procedure and involves running the Bchron model repeatedly, leaving each date out in turn, and quantifying the effect on the chronology of removing each date. The function is called `dateInfluence`.
+
 ## Running RSL rate estimation
 
 The function `BchronRSL` will produce estimated relative sea level rates from a regression model taking into account the uncertainties in age provided by a `Bchronology` run as above. Two example data sets are provided:
