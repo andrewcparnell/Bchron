@@ -37,6 +37,7 @@
 #'  \item{thetaPredict}{The posterior estimated ages for each of the values in predictPosition}
 #'  \item{predictPositions}{The positions at which estimated ages were required}
 #'  \item{calAges}{The calibrated ages as output from \code{\link{BchronCalibrate}}}
+#'  \item{inputVals}{All of the input values to the Bchronology run}
 #' }
 #'
 #' @references 
@@ -562,6 +563,28 @@ Bchronology = function(ages,
     
   }
   
+  # Collect up the input values to return
+  inputVals = list(ages = ages,
+                   ageSds = ageSds,
+                   positions = positions,
+                   positionThicknesses = positionThicknesses,
+                   calCurves = calCurves,
+                   ids = ids,
+                   outlierProbs = outlierProbs,
+                   predictPositions = predictPositions,
+                   pathToCalCurves = pathToCalCurves,
+                   jitterPositions = jitterPositions,
+                   iterations = iterations,
+                   burn = burn,
+                   thin = thin,
+                   extractDate = extractDate,
+                   maxExtrap = maxExtrap,
+                   thetaMhSd = thetaMhSd,
+                   muMhSd = muMhSd,
+                   psiMhSd = psiMhSd,
+                   ageScaleVal = ageScaleVal,
+                   positionScaleVal = positionScaleVal)
+  
   # Return everything
   out = list(
     theta = thetaStore,
@@ -574,7 +597,8 @@ Bchronology = function(ages,
     positions = positions,
     extractDate = extractDate,
     ageScaleVal = ageScaleVal,
-    positionScaleVal = positionScaleVal
+    positionScaleVal = positionScaleVal,
+    inputVals = inputVals
   )
   class(out) = 'BchronologyRun'
   return(out)

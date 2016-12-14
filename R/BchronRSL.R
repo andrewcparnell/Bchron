@@ -47,8 +47,12 @@
 #' 
 #' # Plot it
 #' plot(RSLrun2)}
-BchronRSL <-
-function(BchronologyRun,RSLmean,RSLsd,degree=1,iterations=10000,burn=2000,thin=8) {
+BchronRSL = function(BchronologyRun,RSLmean,RSLsd,degree=1,iterations=10000,burn=2000,thin=8) {
+  UseMethod('BchronRSL')
+}
+
+#' @export
+BchronRSL.BchronologyRun = function(BchronologyRun,RSLmean,RSLsd,degree=1,iterations=10000,burn=2000,thin=8) {
   if(degree>5) stop('Degree not supported')
   remaining=(iterations-burn)/thin
   betaStore = matrix(NA,ncol=degree+1,nrow=remaining)

@@ -201,7 +201,7 @@ Identifying the position of maximum age variance can be created with the `summar
 summary(GlenOut, type = 'max_var')
 ```
 
-You can control the number of positions reported with `numPos`. For example you could now add this to the plot with
+You can control the number of positions reported with `numPos`. For example you could now add a line to mark the most variably layer to the plot with:
 ```{r}
 max_var = summary(GlenOut, type = 'max_var', numPos = 1)
 plot(GlenOut,
@@ -212,7 +212,31 @@ plot(GlenOut,
 abline(h = max_var, lty = 'dotted')
 ```
 
-Finding the age of maximum influence is a more computationally intensive procedure and involves running the Bchron model repeatedly, leaving each date out in turn, and quantifying the effect on the chronology of removing each date. The function is called `dateInfluence`.
+Finding the date which has maximum influence in the core is a more computationally intensive procedure and involves running the Bchron model repeatedly, leaving each date out in turn, and quantifying the effect on the chronology of removing each date. The function is called `dateInfluence`. Note that you provide this function with a full run of the Bchron model.
+
+To find the influence, say, of date `Beta-100901` as the median date shift in years when is removed, we would run:
+```{r, eval=FALSE}
+dateInfluence(GlenOut, 
+              whichDate = 'Beta-100901',
+              measure = 'absMedianDiff')
+```
+
+Alternatively, to find the influence of all the dates in terms of the median shift we could use:
+```{r, eval=FALSE}
+dateInfluence(GlenOut, 
+              whichDate = 'all',
+              measure = 'absMedianDiff')
+```
+
+A more compete measure of influence is the Kullback-Leibler (KL) divergence which takes account of the change in the full probability distribution rather than just looking at mean or median age differences when that particular date is left out. The KL divergence version could then be run using:
+
+```{r, eval=FALSE}
+dateInfluence(GlenOut, 
+              whichDate = 'all',
+              measure = 'KL')
+```
+
+The interpretation here is relative. The dates with the largest KL divergence values have the most influence on the chronology in the core.
 
 ## Running RSL rate estimation
 
@@ -227,26 +251,26 @@ data(TestRSLData)
 These can be run through Bchronology and BchronRSL via:
 
 ```{r,messages=FALSE, results='hide', eval=FALSE}
-RSLrun = Bchronology(ages = TestChronData$ages,
-                     ageSds = TestChronData$ageSds,
-                     positions = TestChronData$position,
-                     positionThicknesses = TestChronData$thickness,
-                     ids = TestChronData$id,
-                     calCurves = TestChronData$calCurves,
-                     jitterPositions = TRUE,
-                     predictPositions = TestRSLData$Depth)
-RSLrun2 = BchronRSL(RSLrun,
-                    RSLmean = TestRSLData$RSL,
-                    RSLsd = TestRSLData$Sigma,
-                    degree = 3)
+RSLchron = Bchronology(ages = TestChronData$ages,
+                       ageSds = TestChronData$ageSds,
+                       positions = TestChronData$position,
+                       positionThicknesses = TestChronData$thickness,
+                       ids = TestChronData$id,
+                       calCurves = TestChronData$calCurves,
+                       jitterPositions = TRUE,
+                       predictPositions = TestRSLData$Depth)
+RSLrun = BchronRSL(RSLchron,
+                   RSLmean = TestRSLData$RSL,
+                   RSLsd = TestRSLData$Sigma,
+                   degree = 3)
 ```
 
 The `Bchronology` run is as described in the section above. The `BChronRSL` run takes this object, an estimate of the RSL means and standard deviations, and a value of degree (here 3 indicating cubic regression). They can then be summarised and plotted via:
 
 ```{r, eval=FALSE}
-summary(RSLrun2, type = 'RSL', age_grid = seq(0, 2000, by  = 250))
-plot(RSLrun2, type = 'RSL', main = 'Relative sea level plot')
-plot(RSLrun2, type = 'rate', main = 'Rate of RSL change')
+summary(RSLrun, type = 'RSL', age_grid = seq(0, 2000, by  = 250))
+plot(RSLrun, type = 'RSL', main = 'Relative sea level plot')
+plot(RSLrun, type = 'rate', main = 'Rate of RSL change')
 ```
 
 See the help files for more options, including outputting parameter values, and plots of acceleration of RSL itself.

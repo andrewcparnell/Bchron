@@ -65,6 +65,7 @@ A list of class BchronologyRun which include elements:
  \item{thetaPredict}{The posterior estimated ages for each of the values in predictPosition}
  \item{predictPositions}{The positions at which estimated ages were required}
  \item{calAges}{The calibrated ages as output from \code{\link{BchronCalibrate}}}
+ \item{inputVals}{All of the input values to the Bchronology run}
 }
 }
 \description{
