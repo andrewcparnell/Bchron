@@ -340,6 +340,46 @@ lines(age_13$Date1$ageGrid,age_13$Date1$densities,col='red')
 legend('topleft',legend=c('intcal09','intcal13'),col=c('black','red'),lty=1)
 ```
 
+## Uncalibrating dates
+
+Sometimes it is useful to turn a calendar age estimate into an uncalibrated age. This might be for simulation or model checking purposes. 'Un-calibrating' dates can be implemented in Bchron using the `unCalibrate` function. For example:
+
+```{r, results = 'hide'}
+unCal1 = unCalibrate(2350)
+```
+```{r}
+print(unCal1)
+```
+
+The above un-calibrates the age 2350 BP to the age 2346 14C years BP on the intcal13 calibration curve. A more advanced version would be:
+
+```{r, results = 'hide'}
+unCal2 = unCalibrate(calAge = c(2350, 4750, 11440),
+                     calCurve = c('marine13', 'intcal13', 'shcal13'))
+```
+```{r}
+print(unCal2)
+```
+
+A fun experiment can then be run to see what the distribution of 14C ages would look like for an even distribution of calendar ages:
+
+```{r, results = 'hide'}
+ageRange = seq(8000, 9000, by = 5)
+c14Ages = unCalibrate(ageRange)
+load(system.file('data/intcal13.rda', package = 'Bchron'))
+plot(intcal13[,1], intcal13[, 2], 
+     xlim = range(ageRange),
+     ylim = range(c14Ages),
+     type = 'l',
+     las = 1,
+     xlab = '14C years BP',
+     ylab = 'Cal years BP')
+axis(side = 1, at = ageRange, labels = FALSE, tcl = 0.5)
+axis(side = 2, at = c14Ages, labels = FALSE, tcl = 0.5)
+```
+
+Unsurprisingly the places where the calibration curve is flat (or reverses) leads to 'clumps' of calendar ages. 
+
 ## References
 
 For a description of the kind of things that Bchron can do:  
