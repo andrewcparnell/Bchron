@@ -342,10 +342,12 @@ legend('topleft',legend=c('intcal09','intcal13'),col=c('black','red'),lty=1)
 
 ## Uncalibrating dates
 
-Sometimes it is useful to turn a calendar age estimate into an uncalibrated age. This might be for simulation or model checking purposes. 'Un-calibrating' dates can be implemented in Bchron using the `unCalibrate` function. For example:
+Sometimes it is useful to turn a calendar age estimate into an uncalibrated age. This might be for simulation or model checking purposes. 'Un-calibrating' dates can be implemented in Bchron using the `unCalibrate` function. There are two versions, one where you have a single age and just want to get a quick look up of the 14C age, and another where you have the full distribution of the calibrated age and want to estimate both the 14C age and its associated error
+
+The simple version can be run with, e.g.:
 
 ```{r, results = 'hide'}
-unCal1 = unCalibrate(2350)
+unCal1 = unCalibrate(2350, type = 'ages')
 ```
 ```{r}
 print(unCal1)
@@ -355,7 +357,8 @@ The above un-calibrates the age 2350 BP to the age 2346 14C years BP on the intc
 
 ```{r, results = 'hide'}
 unCal2 = unCalibrate(calAge = c(2350, 4750, 11440),
-                     calCurve = c('marine13', 'intcal13', 'shcal13'))
+                     calCurve = 'shcal13',
+                     type = 'ages')
 ```
 ```{r}
 print(unCal2)
@@ -365,7 +368,8 @@ A fun experiment can then be run to see what the distribution of 14C ages would 
 
 ```{r, results = 'hide'}
 ageRange = seq(8000, 9000, by = 5)
-c14Ages = unCalibrate(ageRange)
+c14Ages = unCalibrate(ageRange,
+                      type = 'ages')
 load(system.file('data/intcal13.rda', package = 'Bchron'))
 plot(intcal13[,1], intcal13[, 2], 
      xlim = range(ageRange),
@@ -379,6 +383,12 @@ axis(side = 2, at = c14Ages, labels = FALSE, tcl = 0.5)
 ```
 
 Unsurprisingly the places where the calibration curve is flat (or reverses) leads to 'clumps' of calendar ages. 
+
+The more complicated version is run by providing it with a (preferably large) sample of ages which form a calibrated date. Such a set is created with Bchron via `sampleAges`, e.g.:
+```{r}
+
+
+```
 
 ## References
 

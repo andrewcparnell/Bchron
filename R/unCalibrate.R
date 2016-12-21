@@ -14,49 +14,100 @@
 #' 
 #' unCalibrate(calAge = c(2350, 4750, 11440), 
 #' calCurve = c('marine13', 'intcal13', 'shcal13'))
-unCalibrate = function(calAge, 
-                       calCurve = rep('intcal13',
-                                      length(calAge)),
-                       pathToCalCurves = system.file('data', package = 'Bchron')) {
+unCalibrate = function(calAges,
+                       calCurve = 'intcal13',
+                       type = c('samples', 'ages'),
+                       pathToCalCurves = system.file('data', package = 'Bchron'),
+                       ...) {
+  
+  # First get the calibration curve
+  calCurveFile = paste(pathToCalCurves,'/',calCurve,'.rda',sep='')
+  if(!file.exists(calCurveFile)) stop(paste('Calibration curve file',calCurveFile,'not found'))
+  x = load(calCurveFile)
+  currCalCurve = get(x)
+  
+  # Sort out into useful columns
+  calBP = currCalCurve[,1]
+  c14BP = currCalCurve[,2]
 
-  # Length of first two arguments must be the same
-  stopifnot(length(calAge) == length(calCurve))
+  # Simple case first
+  if(type == 'ages') {
+    # Get ready to store ages
+    unCalAges = rep(NA, length(calAges))
+    # Start up the progress bar
+    pb = utils::txtProgressBar(min = 1,
+                               max = length(calAges)+1,
+                               style = 3,
+                               width = options()$width,
+                               title = 'Uncalibrating...')
+    # Now loop through each age and uncalibrate
+    for(i in 1:length(calAges)) {
+      # Progress bar
+      utils::setTxtProgressBar(pb, i+1)
+      
+      # Approx uncal age - rule = 1 specifies NAs for extrapolation
+      unCalAges[i] = approx(calBP, 
+                            c14BP, 
+                            xout = calAges[i],
+                            rule = 1)$y
+    }
+  }
+  return(unCalAges)
   
-  # Get ready to store ages
-  unCalAges = rep(NA, length(calAge))
+  browser()
+  if(type == 'samples') {
+    stopifnot(length(calAges) == 1)
+    # Optimise KL divergence between samples and calibrated age
+    # KL divergence defined as sum_i p(i) log(p(i)/q(i)
+    
+    # Write function for an optim type command
+    opt_fun = function(pars, samples) {
+      s1 = samples
+      calDate = BchronCalibrate(ages = pars[1],
+                                ageSds = pars[2],
+                                calCurves = currCalCurve)
+      s2 = SampleAges(calDate)
+      
+      # Calculate densities
+      s1Dens = density(s1, 
+                       from = min(c(s1, s2)), 
+                       to = max(c(s1, s2)))$y
+      s2Dens = density(s2, 
+                       from = min(c(s1, s2)), 
+                       to = max(c(s1, s2)))$y
+      
+      # Re-scale them so that they sum to 1
+      s1DensResc = s1Dens/sum(s1Dens)
+      s2DensResc = s2Dens/sum(s2Dens)
+      
+      # Calculate the KL divergence
+      int = s1DensResc*log(s1DensResc/s2DensResc)
+      # Get rid of NA values created above
+      int = int[s1DensResc>0]
+      int = int[!is.infinite(int)]
+      out = sum(int)
+    }
+    
+    # Get initial guesses
+    init_mean = unCalibrate(median(calAges),
+                            calCurve = currCalCurve)
+    init_sd = sd(calAges)
+    
+    opt_run = optim(par = c(init_mean, init_sd),
+                    fn = opt_fun,
+                    method = ,
+                    lower = c(0,0), 
+                    upper = c(max(C14BP), 500))
 
-  # Start up the progress bar
-  pb = utils::txtProgressBar(min = 1,
-                             max = length(calCurve)+1,
-                             style = 3,
-                             width = 60,
-                             title = 'Uncalibrating...')
-  
-  # Get the calibration curve for each one and unCalibrate
-  allCalCurves = unique(calCurve)
-  matchCal = match(calCurve, allCalCurves)
-  calBP = c14BP = vector('list', length = length(allCalCurves))
-  for(i in 1:length(allCalCurves)) {
-    calCurveFile = paste(pathToCalCurves,'/',calCurve[i],'.rda',sep='')
-    if(!file.exists(calCurveFile)) stop(paste('Calibration curve file',calCurveFile,'not found'))
-    x = load(calCurveFile)
-    currCalCurve = get(x)
     
-    # Sort out into useful columns
-    calBP[[i]] = currCalCurve[,1]
-    c14BP[[i]] = currCalCurve[,2]
-  }
-  
-  for(i in 1:length(calCurve)) {
-    # Progress bar
-    utils::setTxtProgressBar(pb, i+1)
     
-    # Approx uncal age - rule = 1 specifies NAs for extrapolation
-    unCalAges[i] = approx(calBP[[matchCal[i]]], 
-                          c14BP[[matchCal[i]]], 
-                          xout = calAge[i],
-                          rule = 1)$y
   }
+
+
+
+  
+ 
+
   cat('\n')
   return(unCalAges)
 }
