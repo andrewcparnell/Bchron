@@ -16,13 +16,15 @@ Imports:
 Encoding: UTF-8
 Author: Andrew Parnell
 Maintainer: Andrew Parnell <Andrew.Parnell@ucd.ie>
-Description: Enables quick calibration of radiocarbon dates under various
-    calibration curves (including user generated ones); Age-depth modelling as
-    per the algorithm of Haslett and Parnell (2008)<DOI:10.1111/j.1467-9876.2008.00623.x>; Relative sea level rate
-    estimation incorporating time uncertainty in polynomial regression models; and
-    non-parametric phase modelling via Gaussian mixtures as a means to determine
-    the activity of a site (and as an alternative to the Oxcal function SUM). The
-    package includes a vignette which can be accessed via the vignette.
+Description: Enables quick calibration of radiocarbon dates under various 
+  calibration curves (including user generated ones); age-depth modelling 
+  as per the algorithm of Haslett and Parnell (2008) <DOI:10.1111/j.1467-9876.2008.00623.x>; Relative sea level 
+  rate estimation incorporating time uncertainty in polynomial regression 
+  models (Parnell and Gehrels 2015) <DOI:10.1002/9781118452547.ch32>; non-parametric phase modelling via 
+  Gaussian mixtures as a means to determine the activity of a site 
+  (and as an alternative to the Oxcal function SUM; currently 
+  unpublished), and reverse calibration of dates from calibrated into 
+  un-calibrated years (also unpublished).
 License: GPL (>= 2)
 URL: https://github.com/andrewcparnell/Bchron
 Suggests:
