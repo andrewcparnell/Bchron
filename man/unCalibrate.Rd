@@ -4,15 +4,15 @@
 \alias{unCalibrate}
 \title{Uncalibrate a Radiocarbon date}
 \usage{
-unCalibrate(calAge, calCurve = rep("intcal13", length(calAge)),
-  pathToCalCurves = system.file("data", package = "Bchron"))
+unCalibrate(calAges, calCurve = "intcal13", type = c("samples", "ages"),
+  pathToCalCurves = system.file("data", package = "Bchron"), ...)
 }
 \arguments{
-\item{calAge}{The calibrated age value (can be a vector)}
-
 \item{calCurve}{The calibration curve to use. Must be the same length as \code{calAge}}
 
 \item{pathToCalCurves}{The path to the calibration curve directory. Defaults to the location of the standard calibration curves given in the package.}
+
+\item{calAge}{The calibrated age value (can be a vector)}
 }
 \value{
 A vector of uncalibrated ages

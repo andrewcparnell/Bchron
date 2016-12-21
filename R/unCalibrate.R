@@ -38,7 +38,7 @@ unCalibrate = function(calAges,
     pb = utils::txtProgressBar(min = 1,
                                max = length(calAges)+1,
                                style = 3,
-                               width = options()$width,
+                               width = 0.8*options()$width,
                                title = 'Uncalibrating...')
     # Now loop through each age and uncalibrate
     for(i in 1:length(calAges)) {
@@ -51,22 +51,25 @@ unCalibrate = function(calAges,
                             xout = calAges[i],
                             rule = 1)$y
     }
+    return(unCalAges)
   }
-  return(unCalAges)
   
-  browser()
   if(type == 'samples') {
-    stopifnot(length(calAges) == 1)
+    stopifnot(length(calAges) != 1)
     # Optimise KL divergence between samples and calibrated age
     # KL divergence defined as sum_i p(i) log(p(i)/q(i)
+    
+    # Get extra arguments
+    ex = list(...)
+    if(is.null(ex$method)) ex$method = 'Nelder-Mead' #'SANN'
     
     # Write function for an optim type command
     opt_fun = function(pars, samples) {
       s1 = samples
-      calDate = BchronCalibrate(ages = pars[1],
-                                ageSds = pars[2],
-                                calCurves = currCalCurve)
-      s2 = SampleAges(calDate)
+      calDate = BchronCalibrate(ages = round(pars[1]),
+                                ageSds = round(pars[2]),
+                                calCurves = calCurve)
+      s2 = sampleAges(calDate)
       
       # Calculate densities
       s1Dens = density(s1, 
@@ -85,30 +88,30 @@ unCalibrate = function(calAges,
       # Get rid of NA values created above
       int = int[s1DensResc>0]
       int = int[!is.infinite(int)]
-      out = sum(int)
+      return(sum(int))
     }
     
     # Get initial guesses
     init_mean = unCalibrate(median(calAges),
-                            calCurve = currCalCurve)
+                            calCurve = calCurve,
+                            type = 'ages')
+    cat('\n')
     init_sd = sd(calAges)
     
-    opt_run = optim(par = c(init_mean, init_sd),
+    # Test function
+    #opt_fun(round(c(init_mean, init_sd)), calAges)
+    
+    # Run optimisation
+    opt_run = optim(par = round(c(init_mean, init_sd)),
                     fn = opt_fun,
-                    method = ,
-                    lower = c(0,0), 
-                    upper = c(max(C14BP), 500))
-
+                    method = ex$method,
+                    samples = calAges)#,
+                    #lower = c(0,0), 
+                    #upper = c(max(c14BP), 500))
     
-    
+    out = opt_run$par
+    return(list(mean = round(out[1]), sd = round(out[2])))
   }
-
-
-
   
- 
-
-  cat('\n')
-  return(unCalAges)
 }
 

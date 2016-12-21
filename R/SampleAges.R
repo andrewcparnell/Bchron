@@ -17,10 +17,10 @@
 #' ages = BchronCalibrate(ages=c(3445,11553,7456),ageSds=c(50,230,110),
 #'                        calCurves=c('intcal13','intcal13','shcal13'))
 #' # Get samples
-#' age_samples = SampleAges(ages)
+#' age_samples = sampleAges(ages)
 #' # Create a credible interval and the median for each date
 #' apply(age_samples, 2, quantile, probs = c(0.05, 0.5, 0.95))
-SampleAges = function(CalDates, n_samp = 10000) {
+sampleAges = function(CalDates, n_samp = 10000) {
   # Get a set of samples from the current set of dates
   x = CalDates
   if(class(x) != 'BchronCalibratedDates') stop('Object must be creaed from BchronCalibrate')

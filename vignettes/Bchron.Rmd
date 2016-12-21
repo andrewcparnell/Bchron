@@ -38,6 +38,8 @@ library(Bchron)
 
 it will load in all the Bchron functions.
 
+If you want to install the development version of Bchron please visit the Bchron [GitHub page](https://github.com/andrewcparnell/Bchron). The GitHub version contains a few more features but some of these can be quite untested, and occasionally this version will break when it is in the process of being updated. 
+
 ## Calibrating radiocarbon dates
 
 Bchron will calibrate single or multiple dates under multiple (even user defined) calibration curves. By default, the intcal13, shcal13 and marine13 calibration curves are included. You can calibrate a single radiocarbon date with, e.g.
@@ -76,16 +78,16 @@ summary(ages3)
 plot(ages3,withPositions=TRUE)
 ```
 
-If, alternatively, you want a _credible interval_ (i.e. a single contiguous range) rather than an HDR, you could use the `SampleAges` function:
+If, alternatively, you want a _credible interval_ (i.e. a single contiguous range) rather than an HDR, you could use the `sampleAges` function:
 
 ```{r}
 # First create age samples for each date
-age_samples = SampleAges(ages3)
+age_samples = sampleAges(ages3)
 # Now summarise them with quantile - this gives a 95% credible interval
 apply(age_samples, 2, quantile, prob=c(0.025,0.975))
 ```
 
-The `SampleAges` function introduces some uncertainty as it is a simple random sample. This means that repeatedly running it will give you slightly different results. If you are introduced in precision at a yearly level, you might want to increate the `n_samp` argument though will slow the function down a litt.e
+The `sampleAges` function introduces some uncertainty as it is a simple random sample. This means that repeatedly running it will give you slightly different results. If you are introduced in precision at a yearly level, you might want to increase the `n_samp` argument though will slow the function down a little..e
 
 If you wanted to find each date's median age (though this is often an inappropriate summary and should be treated with caution), use:
 ```{r}
@@ -277,7 +279,7 @@ See the help files for more options, including outputting parameter values, and 
 
 ## Running non-parametric phase estimation
 
-Bchron contains two functions for running non-parametric phase models for estimating activity level in a site/region. The first, BchronDensity fits a full Bayesian Gaussian mixture model to the radiocarbon dates whilst the second BchronDensityFast fits an approximate version which will run on much larger data sets. An example run is
+Bchron contains two functions for running non-parametric phase models for estimating activity level in a site/region. The first, BchronDensity fits a full Bayesian Gaussian mixture model to the radiocarbon dates whilst the second `BchronDensityFast` fits an approximate version which will run on much larger data sets. An example run is
 
 ```{r,results='hide', eval=FALSE}
 data(Sluggan)
@@ -302,7 +304,7 @@ plot(SlugDens,xlab='Age (cal years BP)', xaxp=c(0, 16000, 16))
 
 Phases will be shown with a thick black red line. These can be turned off by setting the argument `plotPhase=FALSE` whilst the sensitivity can be changed with `phaseProb`.
 
-BchronDensityFast is identical except for the function call:
+`BchronDensityFast` is identical except for the function call:
 
 ```{r,eval=FALSE}
 SlugDensFast = BchronDensityFast(ages=Sluggan$ages,
@@ -386,9 +388,23 @@ Unsurprisingly the places where the calibration curve is flat (or reverses) lead
 
 The more complicated version is run by providing it with a (preferably large) sample of ages which form a calibrated date. Such a set is created with Bchron via `sampleAges`, e.g.:
 ```{r}
-
-
+calAge = BchronCalibrate(ages = 11255,
+                         ageSds = 25,
+                         calCurves = 'intcal13')
+calSampleAges = sampleAges(calAge)
 ```
+
+We can now uncalibrate such a set of samples
+
+```{r, results = 'hide'}
+unCal = unCalibrate(calSampleAges,
+            type = 'samples')
+```
+```{r}
+print(unCal)
+```
+
+This will provide a single best estimate of the mean and standard deviation of the uncalibrated (here 14C) date.
 
 ## References
 
