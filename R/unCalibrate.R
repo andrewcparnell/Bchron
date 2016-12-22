@@ -1,19 +1,32 @@
 #' Uncalibrate a Radiocarbon date
-#' 
-#' Turns a calibrated age estimate into an uncalibrated age based on a given calibration curve
 #'
-#' @param calAge The calibrated age value (can be a vector)
-#' @param calCurve The calibration curve to use. Must be the same length as \code{calAge}
+#' @param calAges Either a vector of calibrated ages (when type = 'ages'), or a vector of calibrated samples (type = 'samples')
+#' @param calCurve he calibration curve to use. Only a single calibration curve is currently supported
+#' @param type Either 'ages' which uncalibrates a calibrated age values without error (i.e. just a lookup on the calibration curve), or a 'samples' which estimates both an uncalibrated mean age and a standard deviation
 #' @param pathToCalCurves The path to the calibration curve directory. Defaults to the location of the standard calibration curves given in the package.
+#' @param ... 
 #'
-#' @return A vector of uncalibrated ages
+#' @return Eitehr a vector of uncalibrated ages (\code{type = 'ages'}) or a list containing the estimated mean age and standard deviation (\code{type = 'samples'})
 #' @export
 #'
 #' @examples
-#' unCalibrate(2350)
+#' # Single version outputting just an uncalibrated age
+#' unCalibrate(2350, type = 'ages')
 #' 
-#' unCalibrate(calAge = c(2350, 4750, 11440), 
-#' calCurve = c('marine13', 'intcal13', 'shcal13'))
+#' # Vector version giving a vector of uncalibrated ages
+#' unCalibrate(calAge = c(2350, 4750, 11440),
+#'   calCurve = 'shcal13',
+#'   type = 'ages')
+#' 
+#' # A version where calibrated standard deviations are required too
+#' calAge = BchronCalibrate(ages = 11255,
+#'   ageSds = 25,
+#'   calCurves = 'intcal13')
+#' calSampleAges = sampleAges(calAge)
+#' 
+#' # Uncalibrate the above
+#' unCalibrate(calSampleAges,
+#'   type = 'samples')
 unCalibrate = function(calAges,
                        calCurve = 'intcal13',
                        type = c('samples', 'ages'),
