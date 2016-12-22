@@ -9,14 +9,25 @@ unCalibrate(calAges, calCurve = "intcal13", type = c("samples", "ages"),
 }
 \arguments{
 \item{calAges}{Either a vector of calibrated ages (when type = 'ages'), or a vector of calibrated samples (type = 'samples')}
+<<<<<<< HEAD
+=======
 
 \item{calCurve}{he calibration curve to use. Only a single calibration curve is currently supported}
 
+\item{type}{Either 'ages' which uncalibrates a calibrated age values without error (i.e. just a lookup on the calibration curve), or a 'samples' which estimates both an uncalibrated mean age and a standard deviation}
+>>>>>>> f007539b768088a7f64e26896e921909cd71320f
+
+\item{calCurve}{he calibration curve to use. Only a single calibration curve is currently supported}
+
+<<<<<<< HEAD
 \item{type}{Either 'ages' which uncalibrates a calibrated age values without error (i.e. just a lookup on the calibration curve), or a 'samples' which estimates both an uncalibrated mean age and a standard deviation}
 
 \item{pathToCalCurves}{The path to the calibration curve directory. Defaults to the location of the standard calibration curves given in the package}
 
 \item{...}{Other arguements to the \link{\code{optim}} function used to match the probability dsitributions under \code{type = 'samples'}}
+=======
+\item{...}{}
+>>>>>>> f007539b768088a7f64e26896e921909cd71320f
 }
 \value{
 Eitehr a vector of uncalibrated ages (\code{type = 'ages'}) or a list containing the estimated mean age and standard deviation (\code{type = 'samples'})
