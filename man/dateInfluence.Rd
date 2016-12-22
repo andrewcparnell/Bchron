@@ -8,11 +8,11 @@ dateInfluence(bchrRun, whichDate = "all", measure = c("KL", "absMeanDiff",
   "absMedianDiff"))
 }
 \arguments{
-\item{bchrRun}{}
+\item{bchrRun}{The output of a run of the \code{\link{Bchronology}} function}
 
-\item{whichDate}{}
+\item{whichDate}{The chosen date to remove. Either \code{'all'} which removes each date in turn, or \code{'internal'} which removes all but the top/bottom dates, or the date number (in the order same order as in argument 1), or the name of the date from the Bchronology run output file.}
 
-\item{measure}{}
+\item{measure}{Either \code{'KL'} for Kullback Leibler divergence (recommended); or \code{'absMeanDiff'} or \code{'absMedianDiff'} for distances in years from the mean/median age respectively}
 }
 \value{
 Outputs some text providing the influence values for the date(s) in question. If given a n assignment value also return a list containing all the probabiliy distributions.
@@ -39,6 +39,6 @@ dateInfluence(GlenOut, whichDate = 4, measure = 'absMeanDiff')
 }
 }
 \seealso{
-\code{\link{Bchronology}}, \code{\link{summary.Bchronology}} for finding the position of maximum age variance
+\code{\link{Bchronology}}, \code{\link{summary.BchronologyRun}} for finding the position of maximum age variance
 }
 

@@ -109,7 +109,7 @@ unCalibrate = function(calAges,
                             calCurve = calCurve,
                             type = 'ages')
     cat('\n')
-    init_sd = stast::sd(calAges)
+    init_sd = stats::sd(calAges)
     
     # Test function
     #opt_fun(round(c(init_mean, init_sd)), calAges)
