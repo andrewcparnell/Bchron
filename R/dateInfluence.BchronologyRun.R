@@ -2,15 +2,15 @@
 #' 
 #' This function takes as input a \code{\link{Bchronology}} run and allows the user to estimate a value of 'influence' for either a particular date (by name or number), for all dates in a core (\code{whichDate = 'all'}), or for all internal dates (\code{whichDate = 'internal'}). It measures the influence by either the Kullback-Leibler divergence (\code{KL}), the absolute mean difference (\code{absMeanDiff}), or the absolute median difference (\code{absMedianDiff}).
 #'
-#' @param bchrRun 
-#' @param whichDate 
-#' @param measure 
+#' @param bchrRun The output of a run of the \code{\link{Bchronology}} function
+#' @param whichDate The chosen date to remove. Either \code{'all'} which removes each date in turn, or \code{'internal'} which removes all but the top/bottom dates, or the date number (in the order same order as in argument 1), or the name of the date from the Bchronology run output file.
+#' @param measure Either \code{'KL'} for Kullback Leibler divergence (recommended); or \code{'absMeanDiff'} or \code{'absMedianDiff'} for distances in years from the mean/median age respectively
 #'
 #' @details The \code{KL} measure is preferred as it takes account of the full probability distributions but it lacks a simple interpretation. The best way to use it is with \code{whichDate = 'all'}: the largest value corresponds to the most influential date in the chronology. For simpler interpretation use \code{measure = 'absMeanDiff'} or \code{measure = 'absMedianDiff'} as for these the influence is measured in years. 
 #' 
 #' When the predictPositions from the original \code{Bchronology} run do not include those of the date(s) being left out then the function uses the closest position and reports a warning.
 #'
-#' @seealso \code{\link{Bchronology}}, \code{\link{summary.Bchronology}} for finding the position of maximum age variance
+#' @seealso \code{\link{Bchronology}}, \code{\link{summary.BchronologyRun}} for finding the position of maximum age variance
 #'
 #' @return Outputs some text providing the influence values for the date(s) in question. If given a n assignment value also return a list containing all the probabiliy distributions.
 #' @export
@@ -49,10 +49,10 @@ dateInfluence.BchronologyRun = function(bchrRun,
         # KL divergence defined as sum_i p(i) log(p(i)/q(i)
         
         # Calculate densities
-        s1Dens = density(s1, 
+        s1Dens = stats::density(s1, 
                          from = min(c(s1, s2)), 
                          to = max(c(s1, s2)))$y
-        s2Dens = density(s2, 
+        s2Dens = stats::density(s2, 
                          from = min(c(s1, s2)), 
                          to = max(c(s1, s2)))$y
         
@@ -71,7 +71,7 @@ dateInfluence.BchronologyRun = function(bchrRun,
         out = abs(mean(s1) - mean(s2))
       },
       absMedianDiff = {
-        out = abs(median(s1) - median(s2))
+        out = abs(stats::median(s1) - stats::median(s2))
       }
     )
     return(out)

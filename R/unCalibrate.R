@@ -4,7 +4,7 @@
 #' @param calCurve he calibration curve to use. Only a single calibration curve is currently supported
 #' @param type Either 'ages' which uncalibrates a calibrated age values without error (i.e. just a lookup on the calibration curve), or a 'samples' which estimates both an uncalibrated mean age and a standard deviation
 #' @param pathToCalCurves The path to the calibration curve directory. Defaults to the location of the standard calibration curves given in the package
-#' @param ... Other arguements to the \link{\code{optim}} function used to match the probability dsitributions under \code{type = 'samples'}
+#' @param ... Other arguements to the \code{\link{optim}} function used to match the probability dsitributions under \code{type = 'samples'}
 #'
 #' @return Eitehr a vector of uncalibrated ages (\code{type = 'ages'}) or a list containing the estimated mean age and standard deviation (\code{type = 'samples'})
 #' @export
@@ -59,7 +59,7 @@ unCalibrate = function(calAges,
       utils::setTxtProgressBar(pb, i+1)
       
       # Approx uncal age - rule = 1 specifies NAs for extrapolation
-      unCalAges[i] = approx(calBP, 
+      unCalAges[i] = stats::approx(calBP, 
                             c14BP, 
                             xout = calAges[i],
                             rule = 1)$y
@@ -85,10 +85,10 @@ unCalibrate = function(calAges,
       s2 = sampleAges(calDate)
       
       # Calculate densities
-      s1Dens = density(s1, 
+      s1Dens = stats::density(s1, 
                        from = min(c(s1, s2)), 
                        to = max(c(s1, s2)))$y
-      s2Dens = density(s2, 
+      s2Dens = stats::density(s2, 
                        from = min(c(s1, s2)), 
                        to = max(c(s1, s2)))$y
       
@@ -105,11 +105,11 @@ unCalibrate = function(calAges,
     }
     
     # Get initial guesses
-    init_mean = unCalibrate(median(calAges),
+    init_mean = unCalibrate(stats::median(calAges),
                             calCurve = calCurve,
                             type = 'ages')
     cat('\n')
-    init_sd = sd(calAges)
+    init_sd = stast::sd(calAges)
     
     # Test function
     #opt_fun(round(c(init_mean, init_sd)), calAges)
