@@ -3,8 +3,8 @@
 #' @param calAges Either a vector of calibrated ages (when type = 'ages'), or a vector of calibrated samples (type = 'samples')
 #' @param calCurve he calibration curve to use. Only a single calibration curve is currently supported
 #' @param type Either 'ages' which uncalibrates a calibrated age values without error (i.e. just a lookup on the calibration curve), or a 'samples' which estimates both an uncalibrated mean age and a standard deviation
-#' @param pathToCalCurves The path to the calibration curve directory. Defaults to the location of the standard calibration curves given in the package.
-#' @param ... 
+#' @param pathToCalCurves The path to the calibration curve directory. Defaults to the location of the standard calibration curves given in the package
+#' @param ... Other arguements to the \link{\code{optim}} function used to match the probability dsitributions under \code{type = 'samples'}
 #'
 #' @return Eitehr a vector of uncalibrated ages (\code{type = 'ages'}) or a list containing the estimated mean age and standard deviation (\code{type = 'samples'})
 #' @export
@@ -115,7 +115,7 @@ unCalibrate = function(calAges,
     #opt_fun(round(c(init_mean, init_sd)), calAges)
     
     # Run optimisation
-    opt_run = optim(par = round(c(init_mean, init_sd)),
+    opt_run = stats::optim(par = round(c(init_mean, init_sd)),
                     fn = opt_fun,
                     method = ex$method,
                     samples = calAges)#,
