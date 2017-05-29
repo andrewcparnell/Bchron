@@ -26,6 +26,8 @@ function(x,plotDates=TRUE,plotSum=FALSE,...) {
   # Get the means and standard deviations for each chosen cluster
   clusterMeans = x$out$parameters$mean
   clusterSds = sqrt(x$out$parameters$variance$sigmasq)
+  # Repeat the clusterSds if it uses the E mclust rather than V mcluster model
+  if(length(clusterSds)==1) clusterSds = rep(clusterSds, length(clusterMeans))
   clusterProps = x$out$parameters$pro
 
   # Get a range of age values

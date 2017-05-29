@@ -51,8 +51,7 @@ for(i in 1:n) thetaBig[((i-1)*samples+1):(i*samples)] = sample(x[[i]]$ageGrid,si
 
 # Now run mclust
 mclustOutput = mclust::densityMclust(data = thetaBig,
-                                     G = G,
-                                     modelNames = "V")
+                                     G = G)
 
 output = list(out=mclustOutput,calAges=x)
 class(output) = 'BchronDensityRunFast'
