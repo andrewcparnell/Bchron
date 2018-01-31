@@ -78,6 +78,8 @@ summary(ages3)
 plot(ages3,withPositions=TRUE)
 ```
 
+## Credible intervals
+
 If, alternatively, you want a _credible interval_ (i.e. a single contiguous range) rather than an HDR, you could use the `sampleAges` function:
 
 ```{r}
@@ -95,6 +97,17 @@ apply(age_samples, 2, quantile, prob=c(0.5))
 ```
 
 The calibration code is very fast. On a standard PC you should have no trouble calibrating thousands of dates simultaneously without a noticeably long wait.
+
+## Comparing ages
+
+If you want to compare two dates, a good method is to look at the posterior difference between them. Because Bchron provides all the information about the dates through the `sample_ages` function, this difference can be calculated in just a few lines of code.  
+
+```{r}
+age_diff = age_samples[,2] - age_samples[,1]
+hist(age_diff, breaks = 30, freq = FALSE,
+     main = 'Age difference between 3445+/-50 and 11553+/-230')
+```
+
 
 ## Running the Bchronology age-depth model
 
