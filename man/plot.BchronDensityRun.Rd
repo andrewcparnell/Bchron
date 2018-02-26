@@ -26,4 +26,3 @@ Plot output from BchronDensity
 \seealso{
 See  \code{\link{BchronDensity}} for examples, also \code{\link{Bchronology}}, \code{\link{BchronRSL}}, and \code{\link{BchronDensityFast}} for a faster approximate version of this function
 }
-

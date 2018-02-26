@@ -66,4 +66,3 @@ Andrew C. Parnell and W. Roland Gehrels (2013) 'Using chronological models in la
 \seealso{
 \code{\link{BchronCalibrate}}, \code{\link{Bchronology}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
 }
-

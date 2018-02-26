@@ -10,6 +10,7 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' # Single version outputting just an uncalibrated age
 #' unCalibrate(2350, type = 'ages')
 #' 
@@ -27,6 +28,7 @@
 #' # Uncalibrate the above
 #' unCalibrate(calSampleAges,
 #'   type = 'samples')
+#' }
 unCalibrate = function(calAges,
                        calCurve = 'intcal13',
                        type = c('samples', 'ages'),

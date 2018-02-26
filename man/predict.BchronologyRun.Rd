@@ -27,4 +27,3 @@ This function will predict the ages of new positions (usually depths) based on a
 \seealso{
 \code{\link{BchronCalibrate}}, \code{\link{Bchronology}} \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
 }
-

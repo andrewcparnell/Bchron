@@ -5,7 +5,7 @@
 \title{Create a new calibration curve}
 \usage{
 CreateCalCurve(name, cal_ages, uncal_ages, one_sigma = rep(0,
-  length(cal_ages)))
+  length(cal_ages)), path_to_cal_curves = getwd())
 }
 \arguments{
 \item{name}{The name of the new calibration curve}
@@ -15,12 +15,14 @@ CreateCalCurve(name, cal_ages, uncal_ages, one_sigma = rep(0,
 \item{uncal_ages}{A vector of values of uncalibrated ages in appropriate units (e.g. 14C years BP)}
 
 \item{one_sigma}{The one sigma (one standard devation) values in uncalibrated units. If left blank it assumes these are all zero}
+
+\item{path_to_cal_curves}{The path to the calibration curves. Will write by default to the working directory}
 }
 \description{
 A function for creating a new calibration curve not already avialable in Bchron
 }
 \details{
-Calibration curves are stored by Bchron in the standard R gzipped text format. You can find the location of the calibration curves by typing \code{system.file('data',package='Bchron')}. Any calibration curve supplied will be converted to this format and put in the appropriate directory. It can then be used as in the examples below. However note that re-installing Bchron will likely over-write previously created calibration curves so you should make sure to store the code used to create it.
+All calibration curves are stored by Bchron in the standard R gzipped text format. You can find the location of the calibration curves by typing \code{system.file('data',package='Bchron')}. Any created calibration curve will be converted to this format. However R packages are not allowed to write to this directory so it is up to the user to put the resulting calibration curve file in the appropriate directory. It can then be used as in the examples below. However note that re-installing Bchron will likely over-write previously created calibration curves so you should make sure to store the code used to create it.
 }
 \examples{
 \dontrun{
@@ -43,4 +45,3 @@ legend('topleft',legend=c('intcal09','intcal13'),col=c('black','red'),lty=1)
 \seealso{
 \code{\link{BchronCalibrate}}
 }
-

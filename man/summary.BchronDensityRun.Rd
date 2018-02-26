@@ -22,4 +22,3 @@ Summarise a \code{\link{BchronDensity}} object
 \seealso{
 \code{\link{BchronDensity}}
 }
-

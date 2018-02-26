@@ -19,4 +19,3 @@ Plot output from the \code{\link{BchronRSL}} function
 \seealso{
 \code{\link{BchronCalibrate}}, \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
 }
-

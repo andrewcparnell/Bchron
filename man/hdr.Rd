@@ -30,4 +30,3 @@ hdr(ages$Date1)
 \seealso{
 \code{\link{BchronCalibrate}}
 }
-

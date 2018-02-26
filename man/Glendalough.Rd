@@ -26,4 +26,3 @@ Chronology data for Glendalough data set
 This Glendalough data can be used with \code{\link{Bchronology}} or \code{\link{BchronDensity}}
 }
 \keyword{datasets}
-

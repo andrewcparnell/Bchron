@@ -71,4 +71,3 @@ plot(ages3,withDepths=TRUE)
 \seealso{
 \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}, \code{\link{CreateCalCurve}}
 }
-

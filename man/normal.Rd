@@ -15,4 +15,3 @@ Data for dummy calibration of normally distributed ages
 This is dummy data so that \code{\link{BchronCalibrate}} can calibrate normally distributed dates.
 }
 \keyword{datasets}
-

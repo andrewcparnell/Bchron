@@ -20,4 +20,3 @@ TestRSLData
 A set of relative sea level data for use with \code{\link{BchronRSL}}
 }
 \keyword{datasets}
-

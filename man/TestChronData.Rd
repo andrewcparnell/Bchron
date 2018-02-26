@@ -23,4 +23,3 @@ TestChronData
 Some example chronology data for use with the \code{\link{BchronRSL}} function
 }
 \keyword{datasets}
-

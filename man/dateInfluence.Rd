@@ -41,4 +41,3 @@ dateInfluence(GlenOut, whichDate = 4, measure = 'absMeanDiff')
 \seealso{
 \code{\link{Bchronology}}, \code{\link{summary.BchronologyRun}} for finding the position of maximum age variance
 }
-

@@ -33,4 +33,3 @@ Creates a simple plot of the chronology output. The height of the date densities
 \seealso{
 For examples see \code{\link{Bchronology}}. Also \code{\link{BchronCalibrate}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
 }
-

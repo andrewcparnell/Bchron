@@ -25,4 +25,3 @@ Creates a basic plot of output for a run of \code{\link{BchronDensityFast}}
 \seealso{
 Examples in \code{\link{BchronDensityFast}}, and see \code{\link{BchronDensity}}, for a slower, more accurate version of this function
 }
-

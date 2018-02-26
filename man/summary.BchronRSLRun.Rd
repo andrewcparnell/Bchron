@@ -22,4 +22,3 @@ Summarise a \code{\link{BchronRSL}} run
 \seealso{
 \code{\link{BchronCalibrate}}, \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
 }
-

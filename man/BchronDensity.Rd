@@ -66,4 +66,3 @@ plot(SlugDens)
 \seealso{
 \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensityFast}} for a faster approximate version of this function
 }
-

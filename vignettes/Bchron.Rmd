@@ -334,20 +334,21 @@ Bchron allows for user-defined calibration curves to be created through the func
   - The calibrated/calendar ages for the new calibration curve
   - The uncalibrated (e.g. 14C) ages for the new calibration curve
   - (Optionally) the 1-sigma error for the calibration curve in uncalibrated years. If not included the error is assumed to be zero
+  - (Optionally) The path to where the resulting file will be stored
 
-Once run, the calibration curve can be used for all future runs until the package is deleted or re-installed. The calibration curve can be used by simply calling it in any other Bchron function using the supplied name. Note that no name checking is done, so it is possible to over-write the pre-defined calibration curves if
+Once run, the calibration curve needs to be moved from the chosen path (by default the working direcory) to the location of the other calibration curves. This is by default `system.file('data',package='Bchron')`. The resulting calibration curve can be used for all future runs until the package is deleted or re-installed. The calibration curve can be used by simply calling it in any other Bchron function using the supplied name. Note that no name checking is done, so it is possible to over-write the pre-defined calibration curves if
 
 As an example, consider installing the intcal09 calibration curve, as available from (http://www.radiocarbon.org/IntCal09%20files/intcal09.14c)[here]. We can run the following code:
 
-```{r}
+```{r, eval = FALSE}
 # Load in the calibration curve with:
 intcal09 = read.table('http://www.radiocarbon.org/IntCal09%20files/intcal09.14c',sep=',')
 # Run CreateCalCurve
 CreateCalCurve(name='intcal09',cal_ages=intcal09[,1],uncal_ages=intcal09[,2],one_sigma=intcal09[,3])
 ```
 
-The new calibration curve can now be used via its name. For example, we can now compare the calibration of a date under the intcal09 curve with that of intcal13:
-```{r}
+The new calibration curve now needs to be moved to the Bchron package directory. It can then be used via its name. For example, we can now compare the calibration of a date under the intcal09 curve with that of intcal13:
+```{r, eval = FALSE}
 age_09 = BchronCalibrate(age=15500,ageSds=150,calCurves = 'intcal09',ids='My Date')
 age_13 = BchronCalibrate(age=15500,ageSds=150,calCurves = 'intcal13')
 plot(age_09)

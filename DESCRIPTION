@@ -2,8 +2,8 @@ Package: Bchron
 Type: Package
 Title: Radiocarbon Dating, Age-Depth Modelling, Relative Sea Level Rate
     Estimation, and Non-Parametric Phase Modelling
-Version: 4.2.6.9000
-Date: 2016-12-11
+Version: 4.2.7
+Date: 2018-02-26
 Depends:
     R (>= 2.10),
 Imports:
@@ -31,4 +31,4 @@ Suggests:
     knitr
 VignetteBuilder: knitr
 NeedsCompilation: no
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

@@ -30,4 +30,3 @@ Summarise a \code{\link{Bchronology}} object
 \seealso{
 \code{\link{BchronCalibrate}}, \code{\link{Bchronology}} \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
 }
-

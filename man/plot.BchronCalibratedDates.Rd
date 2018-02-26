@@ -36,4 +36,3 @@ These plots are intended to be pretty basic and used simply for quick informatio
 \seealso{
 \code{\link{BchronCalibrate}}, \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
 }
-

@@ -22,4 +22,3 @@ Produces summary output from a \code{\link{BchronCalibrate}} run, including the 
 \seealso{
 \code{\link{BchronCalibrate}}, \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
 }
-
