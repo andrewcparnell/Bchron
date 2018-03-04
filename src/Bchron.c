@@ -10,7 +10,6 @@ void R_init_markovchain(DllInfo* info) {
   R_useDynamicSymbols(info, TRUE);
 }
 
-
 void rtruncn(double *a, double *b, double *x) {
   double A, B;
   double maxA, maxB, maxR, r2, r, th, u, accept=0.0;

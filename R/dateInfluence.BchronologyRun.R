@@ -12,7 +12,7 @@
 #'
 #' @seealso \code{\link{Bchronology}}, \code{\link{summary.BchronologyRun}} for finding the position of maximum age variance
 #'
-#' @return Outputs some text providing the influence values for the date(s) in question. If given a n assignment value also return a list containing all the probabiliy distributions.
+#' @return Outputs some text providing the influence values for the date(s) in question. If given an assignment value also return a list containing all the probabiliy distributions.
 #' @export
 #'
 #' @examples

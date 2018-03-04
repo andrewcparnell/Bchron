@@ -15,7 +15,7 @@ dateInfluence(bchrRun, whichDate = "all", measure = c("KL", "absMeanDiff",
 \item{measure}{Either \code{'KL'} for Kullback Leibler divergence (recommended); or \code{'absMeanDiff'} or \code{'absMedianDiff'} for distances in years from the mean/median age respectively}
 }
 \value{
-Outputs some text providing the influence values for the date(s) in question. If given a n assignment value also return a list containing all the probabiliy distributions.
+Outputs some text providing the influence values for the date(s) in question. If given an assignment value also return a list containing all the probabiliy distributions.
 }
 \description{
 This function takes as input a \code{\link{Bchronology}} run and allows the user to estimate a value of 'influence' for either a particular date (by name or number), for all dates in a core (\code{whichDate = 'all'}), or for all internal dates (\code{whichDate = 'internal'}). It measures the influence by either the Kullback-Leibler divergence (\code{KL}), the absolute mean difference (\code{absMeanDiff}), or the absolute median difference (\code{absMedianDiff}).
