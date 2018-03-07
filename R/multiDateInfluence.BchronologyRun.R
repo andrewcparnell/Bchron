@@ -88,26 +88,32 @@ multiDateInfluence.BchronologyRun = function(bchrRun1,
                            diff_chron2 = summ_2_diff[match_dates2])
 
   # If type is the mean then just report the means and their differences
-  cat('Mean width of chronology 1 at',100*percentile,'% is', mean(final_diffs$diff_chron1),'years \n')
-  cat('Mean width of chronology 2 at',100*percentile,'% is', mean(final_diffs$diff_chron2),'years \n')
+  cat(paste0('Mean width of chronology 1 at ',100*percentile,'% is ', round(mean(final_diffs$diff_chron1)),' years \n'))
+  cat(paste0('Mean width of chronology 2 at ',100*percentile,'% is ', round(mean(final_diffs$diff_chron2)),' years \n'))
   
   # Distribution of widths 
-  cat('Distribution of widths is:\n')
-  print(quantile(final_diffs$diff_chron1, 
-        probs = c(0.025, 0.25, 0.5, 0.75, 0.95, 0.975)))
-  print(quantile(final_diffs$diff_chron2,
-        probs = c(0.025, 0.25, 0.5, 0.75, 0.95, 0.975)))
+  cat(paste0('Distribution of widths at ', 100*percentile, '% is:\n'))
+  cat('Chronology 1\n')
+  print(round(quantile(final_diffs$diff_chron1, 
+        probs = c(0.025, 0.25, 0.5, 0.75, 0.95, 0.975))))
+  cat('Chronology 2\n')
+  print(round(quantile(final_diffs$diff_chron2,
+        probs = c(0.025, 0.25, 0.5, 0.75, 0.95, 0.975))))
   
   # Difference in widths
-  cat('Distribution of difference in widths is:\n')
-  print(quantile(final_diffs$diff_chron1 - final_diffs$diff_chron2, 
-                 probs = c(0.025, 0.25, 0.5, 0.75, 0.95, 0.975)))
+  cat(paste0('Distribution of difference in widths at ',100*percentile,'% is:\n'))
+  print(round(quantile(final_diffs$diff_chron1 - final_diffs$diff_chron2, 
+                 probs = c(0.025, 0.25, 0.5, 0.75, 0.95, 0.975))))
   
   # Histogram
-  hist(final_diffs$diff_chron1 - final_diffs$diff_chron2, breaks = 30,
+  diff = final_diffs$diff_chron1 - final_diffs$diff_chron2
+  hist(diff, breaks = 30,
        xlab = 'Years',
        main = 'Histogram of age difference between Bchron cores',
        freq = FALSE,
        las = 1)
+  
+  # Probability less than 0
+  cat('P(reduction in uncertainty between chornology 1 and chronology 2) = ',round(sum(diff<0)/length(diff),3))
   
 }
