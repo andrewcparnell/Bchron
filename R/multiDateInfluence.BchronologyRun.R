@@ -1,11 +1,11 @@
 #' Find the influence of multiple dates in a pair of Bchronology runs
 #' 
-#' This function takes as input two \code{\link{Bchronology}} runs and compares the uncertainty intervals. It does this by either: computing the mean uncertainty across the core (\code{type = 'mean'}) at a specified percentile level (e.g. 95%); or by plotting the distribution of uncertainty over the depths in both cores (\code{type = 'distribution'}). Both cores must have the same set of depths at regular depths intervals. 
+#' This function takes as input two \code{\link{Bchronology}} runs and compares the uncertainty intervals. It does this by either: computing the mean uncertainty across the core (\code{type = 'mean'}) at a specified percentile level (e.g. 95\%); or by plotting the distribution of uncertainty over the depths in both cores (\code{type = 'distribution'}). Both cores must have the same set of depths at regular depths intervals. 
 #'
 #' @param bchrRun1 The output of a run of the \code{\link{Bchronology}} function
 #' @param bchrRun2 The output of another run of the \code{\link{Bchronology}} function, possibly with different dates. Note this must have the same value of \code{predictPositions} as \code{bchrRun1}
-#' @param percentile The value of the percentile to compare the uncertainties. Default is 50%
-#' @param type Either \code{'mean'} for the mean level ofuncertainty across the core  of \code{'distribution'} for the distribution of changes
+#' @param percentile The value of the percentile to compare the uncertainties. Default is 50\%
+#' @param type Either \code{'mean'} for the mean level of uncertainty across the core or \code{'distribution'} for the distribution of changes
 #' @param plot if \code{TRUE} will create a plot of the histograms when using 
 
 #'

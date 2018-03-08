@@ -12,9 +12,9 @@ multiDateInfluence(bchrRun1, bchrRun2, type = "distribution",
 
 \item{bchrRun2}{The output of another run of the \code{\link{Bchronology}} function, possibly with different dates. Note this must have the same value of \code{predictPositions} as \code{bchrRun1}}
 
-\item{type}{Either \code{'mean'} for the mean level ofuncertainty across the core  of \code{'distribution'} for the distribution of changes}
+\item{type}{Either \code{'mean'} for the mean level of uncertainty across the core or \code{'distribution'} for the distribution of changes}
 
-\item{percentile}{The value of the percentile to compare the uncertainties. Default is 50%}
+\item{percentile}{The value of the percentile to compare the uncertainties. Default is 50\%}
 
 \item{plot}{if \code{TRUE} will create a plot of the histograms when using}
 }
@@ -22,7 +22,7 @@ multiDateInfluence(bchrRun1, bchrRun2, type = "distribution",
 Outputs some text providing the influence values for the cores in question.
 }
 \description{
-This function takes as input two \code{\link{Bchronology}} runs and compares the uncertainty intervals. It does this by either: computing the mean uncertainty across the core (\code{type = 'mean'}) at a specified percentile level (e.g. 95%); or by plotting the distribution of uncertainty over the depths in both cores (\code{type = 'distribution'}). Both cores must have the same set of depths at regular depths intervals.
+This function takes as input two \code{\link{Bchronology}} runs and compares the uncertainty intervals. It does this by either: computing the mean uncertainty across the core (\code{type = 'mean'}) at a specified percentile level (e.g. 95\%); or by plotting the distribution of uncertainty over the depths in both cores (\code{type = 'distribution'}). Both cores must have the same set of depths at regular depths intervals.
 }
 \details{
 The argument \code{type = 'distribution'} is preferred as it takes account of the full probability distribution of the uncertainty across the core.

@@ -15,3 +15,7 @@
 # Mac files
 .DS_Store
 .Rproj.user
+
+# Compiled files
+src/*.so
+Src/*.o
