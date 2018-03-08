@@ -10,7 +10,6 @@
 
 #'
 #' @details The argument \code{type = 'distribution'} is preferred as it takes account of the full probability distribution of the uncertainty across the core. 
-#' 
 #'
 #' @seealso \code{\link{Bchronology}}, \code{\link{dateInfluence.BchronologyRun}} for finding the influence of removing a single date from a core
 #'
