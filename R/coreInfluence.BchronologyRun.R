@@ -102,7 +102,7 @@ coreInfluence.BchronologyRun = function(bchrRun1,
   if('plot' %in% type) {
     # Return a plot of the chronology differences
     with(diffs,plot(all_diff, positions, 
-                    ylim = rev(range(positions)),
+                    #ylim = rev(range(positions)),
                     type = 'l',
                     ...))
     abline(v = 0)
