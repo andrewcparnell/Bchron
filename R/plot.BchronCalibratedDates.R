@@ -7,7 +7,7 @@
 #' @param pause Whether to pause between plots or go ahead and create them all
 #' @param dateHeight The height of the dates in the same units as the positions (e.g. cm). Only relevant if \code{withPositions=TRUE}.
 #' @param borderCol The colour of the edges of the dates. If \code{NULL} there are no edges drawn
-#' @param fillCol The fill colour of the dates
+#' @param fillCols A vector of colours to fill each date density
 #' @param withHDR Whether to plot the 95\% highest density region values
 #' @param hdrCol The colour of the HDR regions
 #' @param ... Other arguments to plot, e.g. axis limits, titles, etc. See \code{\link{par}}.
@@ -23,7 +23,7 @@ function(x,
          pause=FALSE,
          dateHeight = 30,
          borderCol = NULL,
-         fillCol = 'gray',
+         fillCols = rep('gray', length(x)),
          withHDR = TRUE,
          hdrCol = 'darkgray',
          ...) {
@@ -113,7 +113,7 @@ function(x,
       graphics::polygon(c(curr_xlimit[1], x[[i]]$ageGrid, curr_xlimit[2]),
                         c(curr_pos, x[[i]]$positions-x[[i]]$densities*dateHeight/max(x[[i]]$densities), curr_pos),
                         border=ifelse(is.null(borderCol),NA,borderCol),
-                        col=fillCol)
+                        col=fillCols[i])
     }
   }
 
