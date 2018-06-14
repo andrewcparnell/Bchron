@@ -25,7 +25,7 @@ Eitehr a vector of uncalibrated ages (\code{type = 'ages'}) or a list containing
 Uncalibrate a Radiocarbon date
 }
 \examples{
-\dontrun{
+\donttest{
 # Single version outputting just an uncalibrated age
 unCalibrate(2350, type = 'ages')
 

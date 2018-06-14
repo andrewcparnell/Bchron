@@ -26,15 +26,15 @@ The \code{KL} measure is preferred as it takes account of the full probability d
 When the predictPositions from the original \code{Bchronology} run do not include those of the date(s) being left out then the function uses the closest position and reports a warning.
 }
 \examples{
-\dontrun{
+\donttest{
 data(Glendalough)
 GlenOut = Bchronology(ages=Glendalough$ages,
-ageSds=Glendalough$ageSds, 
-calCurves=Glendalough$calCurves,
-positions=Glendalough$position, 
-positionThicknesses=Glendalough$thickness,
-ids=Glendalough$id, 
-predictPositions=seq(0,1500,by=10))
+                      ageSds=Glendalough$ageSds, 
+                      calCurves=Glendalough$calCurves,
+                      positions=Glendalough$position, 
+                      positionThicknesses=Glendalough$thickness,
+                      ids=Glendalough$id, 
+                      predictPositions=seq(0,1500,by=10))
 dateInfluence(GlenOut, whichDate = 4, measure = 'absMeanDiff')
 }
 }

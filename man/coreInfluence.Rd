@@ -38,7 +38,7 @@ For example, if the \code{ageTolerance} value is 500 years, then \code{coreInflu
 which the uncertainty reduction is bigger than 500.
 }
 \examples{
-\dontrun{
+\donttest{
 data(Glendalough)
 # Start with a run that remove two dates
 GlenOut1 = Bchronology(ages=Glendalough$ages[-c(3:4)],
@@ -56,7 +56,7 @@ GlenOut2 = Bchronology(ages=Glendalough$ages,
                        ids=Glendalough$id, 
                        predictPositions=seq(0,1500,by=10))
 
-Now compare their influence
+# Now compare their influence
 coreInfluence(GlenOut1, 
               GlenOut2, 
               type = c('max', 'plot'), 

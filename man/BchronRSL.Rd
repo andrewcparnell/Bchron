@@ -40,7 +40,7 @@ Relative sea level rate (RSL) estimation
 This function fits an errors-in-variables regression model to relative sea level (RSL) data. An errors-in-variables regression model allows for uncertainty in the explanatory variable, here the age of sea level data point. The algorithm is more fully defined in the reference below
 }
 \examples{
-\dontrun{
+\donttest{
 # Load in data
 data(TestChronData)
 data(TestRSLData)

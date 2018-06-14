@@ -28,7 +28,7 @@
 #' @seealso \code{\link{Bchronology}} for the main function to create chronologies, \code{\link{unCalibrate}} for the ability to invert calendar dates for a given calibration curve.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' data(Glendalough)
 #' GlenOut = Bchronology(ages=Glendalough$ages,
 #'                       ageSds=Glendalough$ageSds,
@@ -40,7 +40,7 @@
 #' 
 #' # Find out which two positions (depths) to date if we have room for two more dates
 #' # Here going to choose 3 new positions to date
-#' newPositions = choosePositions.BchronologyRun(GlenOut, N = 3)
+#' newPositions = choosePositions(GlenOut, N = 3)
 #' print(newPositions)
 #' }
 choosePositions = function(bchrRun,
@@ -54,7 +54,7 @@ choosePositions = function(bchrRun,
                            plot = TRUE,
                            count = 1,
                            linesAt = NULL) {
-  UseMethod('dateInfluence')
+  UseMethod('choosePositions')
 }
 
 #' @export
@@ -97,7 +97,7 @@ choosePositions.BchronologyRun = function(bchrRun,
   upper = level + lower
   # Use capture.output to suppress printing of summary
   currUnc = apply(apply(bchrRun$thetaPredict, 
-                         2, 'stats::quantile', 
+                         2, 'quantile', 
                          probs = c(lower, upper)),
                    2, diff)
   
@@ -174,16 +174,16 @@ choosePositions.BchronologyRun = function(bchrRun,
     if(plot) plot(newOut, main = 'Bchronology plot with extra psuedo-dates')
     
     # Now run the function again with N = N - 1
-    linesAt = choosePositions.BchronologyRun(newOut, 
-                                             N = N - 1,
-                                             newSds = newSds,
-                                             newThicknesses = newThicknesses,
-                                             positions = positions,
-                                             newCalCurve = newCalCurve,
-                                             newOutlierProb = newOutlierProb,
-                                             level = level,
-                                             count = count + 1,
-                                             linesAt = linesAt)
+    linesAt = choosePositions(newOut,
+                              N = N - 1,
+                              newSds = newSds,
+                              newThicknesses = newThicknesses,
+                              positions = positions,
+                              newCalCurve = newCalCurve,
+                              newOutlierProb = newOutlierProb,
+                              level = level,
+                              count = count + 1,
+                              linesAt = linesAt)
 
   }
   invisible(linesAt)

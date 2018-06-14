@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Single version outputting just an uncalibrated age
 #' unCalibrate(2350, type = 'ages')
 #' 

@@ -47,7 +47,7 @@
 #' @seealso 
 #' \code{\link{BchronCalibrate}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Data from Glendalough
 #' data(Glendalough)
 #' 

@@ -25,7 +25,7 @@ A function for creating a new calibration curve not already avialable in Bchron
 All calibration curves are stored by Bchron in the standard R gzipped text format. You can find the location of the calibration curves by typing \code{system.file('data',package='Bchron')}. Any created calibration curve will be converted to this format. However R packages are not allowed to write to this directory so it is up to the user to put the resulting calibration curve file in the appropriate directory. It can then be used as in the examples below. However note that re-installing Bchron will likely over-write previously created calibration curves so you should make sure to store the code used to create it.
 }
 \examples{
-\dontrun{
+\donttest{
 # Load in the calibration curve with:
 intcal09 = read.table('http://www.radiocarbon.org/IntCal09\%20files/intcal09.14c',sep=',')
 # Run CreateCalCurve

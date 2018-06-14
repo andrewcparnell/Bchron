@@ -37,7 +37,7 @@ This function runs a non-parametric phase model on 14C and non-14C ages via Gaus
 This is a faster approximate version of \code{\link{BchronDensity}} that uses the \code{\link{densityMclust}} function to compute the Gaussian mixtures for a set of calibrated ages. The method is an approximation as it does not fit a fully Bayesian model as \code{\link{BchronDensity}} does. It is designed to be a probabilistic version of the Oxcal SUM command which takes calibrated ages and sums the probability distributions with the aim of estimating activity through age as a proxy.
 }
 \examples{
-\dontrun{
+\donttest{
 # Read in some data from Sluggan Moss
 data(Sluggan)
 

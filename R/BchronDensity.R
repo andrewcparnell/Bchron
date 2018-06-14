@@ -32,7 +32,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Read in some data from Sluggan Moss
 #' data(Sluggan)
 #' 

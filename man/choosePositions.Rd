@@ -47,7 +47,7 @@ with the un-calibrated age estimated at the median of the chronology
  for newly inserted psuedo-dates.
 }
 \examples{
-\dontrun{
+\donttest{
 data(Glendalough)
 GlenOut = Bchronology(ages=Glendalough$ages,
                       ageSds=Glendalough$ageSds,
@@ -59,7 +59,7 @@ GlenOut = Bchronology(ages=Glendalough$ages,
 
 # Find out which two positions (depths) to date if we have room for two more dates
 # Here going to choose 3 new positions to date
-newPositions = choosePositions.BchronologyRun(GlenOut, N = 3)
+newPositions = choosePositions(GlenOut, N = 3)
 print(newPositions)
 }
 }

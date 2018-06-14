@@ -51,7 +51,7 @@ This function runs a non-parametric phase model on 14C and non-14C ages via Gaus
 This model places a Gaussian mixture prior distribution on the calibrated ages and so estimates the density of the overall set of radiocarbon ages. It is designed to be a probabilistic version of the Oxcal SUM command which takes calibrated ages and sums the probability distributions with the aim of estimating activity through age as a proxy.
 }
 \examples{
-\dontrun{
+\donttest{
 # Read in some data from Sluggan Moss
 data(Sluggan)
 

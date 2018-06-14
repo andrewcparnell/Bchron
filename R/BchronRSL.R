@@ -28,7 +28,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Load in data
 #' data(TestChronData)
 #' data(TestRSLData)

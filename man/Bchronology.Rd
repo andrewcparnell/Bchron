@@ -75,7 +75,7 @@ Fits a non-parametric chronology model to age/position data according to the Com
 The Bchronology function fits a compound Poisson-Gamma distribution to the increments between the dated levels. This involves a stochastic linear interpolation step where the age gaps are Gamma distributed, and the position gaps are Exponential. Radiocarbon and non-radiocarbon dates (including outliers) are updated within the function also by MCMC.
 }
 \examples{
-\dontrun{
+\donttest{
 # Data from Glendalough
 data(Glendalough)
 

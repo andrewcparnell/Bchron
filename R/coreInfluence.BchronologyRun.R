@@ -25,7 +25,7 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' data(Glendalough)
 #' # Start with a run that remove two dates
 #' GlenOut1 = Bchronology(ages=Glendalough$ages[-c(3:4)],
@@ -43,7 +43,7 @@
 #'                        ids=Glendalough$id, 
 #'                        predictPositions=seq(0,1500,by=10))
 #' 
-#' Now compare their influence
+#' # Now compare their influence
 #' coreInfluence(GlenOut1, 
 #'               GlenOut2, 
 #'               type = c('max', 'plot'), 
@@ -88,9 +88,9 @@ coreInfluence.BchronologyRun = function(bchrRun1,
   
   # Now summarise the two chronologies
   perc_range = c((1 - percentile)/2, percentile + (1 - percentile)/2)
-  summ_1 = t(apply(bchrRun1$thetaPredict, 2, 'stats::quantile', 
+  summ_1 = t(apply(bchrRun1$thetaPredict, 2, 'quantile', 
                    probs = perc_range))
-  summ_2 = t(apply(bchrRun2$thetaPredict, 2, 'stats::quantile', 
+  summ_2 = t(apply(bchrRun2$thetaPredict, 2, 'quantile', 
                    probs = perc_range))
   
   # Get the difference
