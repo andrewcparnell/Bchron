@@ -15,7 +15,7 @@ Imports:
     inline
 Encoding: UTF-8
 Author: Andrew Parnell
-Maintainer: Andrew Parnell <Andrew.Parnell@ucd.ie>
+Maintainer: Andrew Parnell <Andrew.Parnell@mu.ie>
 Description: Enables quick calibration of radiocarbon dates under various 
   calibration curves (including user generated ones); age-depth modelling 
   as per the algorithm of Haslett and Parnell (2008) <DOI:10.1111/j.1467-9876.2008.00623.x>; Relative sea level 
