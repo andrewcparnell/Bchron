@@ -1,29 +1,16 @@
-[![cran version](http://www.r-pkg.org/badges/version/Bchron)](https://cran.rstudio.com/web/packages/Bchron) 
-[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/Bchron?)](https://github.com/metacran/cranlogs.app)
-[![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/Bchron?color=82b4e8)](https://github.com/metacran/cranlogs.app)
+## Test environments
+* local OS X install, R 3.4.3
+* win-builder (devel and release)
 
-Bchron is a Bayesian chronology model implemented in R. 
+## R CMD check results
+There were no ERRORs or WARNINGs or NOTEs. 
 
-The package enables quick calibration of radiocarbon dates under various calibration curves (including user generated ones); Age-depth modelling as per the algorithm of Haslett and Parnell (2008); Relative sea level rate estimation incorporating time uncertainty in polynomial regression models; and non-parametric phase modelling via Gaussian mixtures as a means to determine the activity of a site (and as an alternative to the Oxcal function SUM).
+## Downstream dependencies
+I have also run R CMD check on downstream dependencies of httr 
+(https://github.com/wch/checkresults/blob/master/httr/r-release). 
+All packages that I could install passed except:
 
-To install the development version of the package type:
-
-```
-# If required install devtools:
-#install.packages('devtools')
-devtools::install_github('andrewcparnell/Bchron')
-```
-
-You can then explore the package with:
-
-```
-library(Bchron)
-help(Bchronology) # Help on the chronology modelling function
-help(BchronCalibrate) # Help on the calibrate function
-```
-
-To install the stable version of the package go to R and type:
-
-```
-install.packages('Bchron')
-```
+* Ecoengine: this appears to be a failure related to config on 
+  that machine. I couldn't reproduce it locally, and it doesn't 
+  seem to be related to changes in httr (the same problem exists 
+  with httr 0.4).
