@@ -134,7 +134,7 @@ choosePositions.BchronologyRun = function(bchrRun,
     blankVec[posPlace] = NA
     agesNew = sdNew = positionsNew = positionThicknessesNew = outlierProbsNew = blankVec
     calCurvesNew = unlist(list(oldInput$calCurves, oldInput$calCurves[1]))
-    idsNew = unlist(list(oldInput$ids, oldInput$ids[1]))
+    #idsNew = unlist(list(oldInput$ids, oldInput$ids[1]))
       
     # Now go through and fill in all the info
     agesNew[!is.na(blankVec)] = oldInput$ages
@@ -148,9 +148,9 @@ choosePositions.BchronologyRun = function(bchrRun,
     calCurvesNew[!is.na(blankVec)] = oldInput$calCurves
     levels(calCurvesNew) = c(levels(calCurvesNew), newCalCurve)
     calCurvesNew[posPlace] = newCalCurve 
-    idsNew[!is.na(blankVec)] = oldInput$ids
-    levels(idsNew) = c(levels(oldInput$ids), 'newDate')
-    idsNew[posPlace] = 'newDate' 
+    #idsNew[!is.na(blankVec)] = oldInput$ids
+    #levels(idsNew) = c(levels(oldInput$ids), 'newDate')
+    #idsNew[posPlace] = 'newDate' 
     outlierProbsNew[!is.na(blankVec)] = oldInput$outlierProbs
     outlierProbsNew[posPlace] = newOutlierProb
 
@@ -166,7 +166,7 @@ choosePositions.BchronologyRun = function(bchrRun,
                          calCurves=calCurvesNew,
                          positions=positionsNew,
                          positionThicknesses=positionThicknessesNew,
-                         ids=idsNew,
+                         #ids=idsNew,
                          outlierProbs = outlierProbsNew,
                          predictPositions = positions)
     cat('\n')

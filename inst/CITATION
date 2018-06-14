@@ -1,0 +1,19 @@
+citHeader("To cite Bchron in publications use:")
+
+
+
+citEntry(entry = "Article",
+  title        = "A simple monotone process with application to radiocarbon-dated depth chronologiesy",
+  author       = personList(as.person("John Haslett"),
+                   as.person("Andrew C Parnell")),
+  journal      = "Journal of the Royal Statistical Society: Series C (Applied Statistics)",
+  year         = "2008",
+  volume       = "57",
+  number       = "4",
+  pages        = "399--418",
+  publisher    = "Wiley Online Library",  
+  url          = "http://onlinelibrary.wiley.com/doi/10.1111/j.1467-9876.2008.00623.x/full",
+
+  textVersion  =
+  paste("Haslett, J., & Parnell, A.C. (2008). A simple monotone process with application to radiocarbon‐dated depth chronologies. Journal of the Royal Statistical Society: Series C (Applied Statistics), 57(4), 399-418.")
+)
