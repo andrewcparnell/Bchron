@@ -10,7 +10,7 @@
 #' 
 #' When the predictPositions from the original \code{Bchronology} run do not include those of the date(s) being left out then the function uses the closest position and reports a warning.
 #'
-#' @seealso \code{\link{Bchronology}}, \code{\link{summary.BchronologyRun}} for finding the position of maximum age variance
+#' @seealso \code{\link{Bchronology}}, \code{\link{summary.BchronologyRun}}, \code{\link{coreInfluence}}, \code{\link{choosePositions}}
 #'
 #' @return Outputs some text providing the influence values for the date(s) in question. If given an assignment value also return a list containing all the probabiliy distributions.
 #' @export

@@ -19,7 +19,7 @@
 #' @details For example, if the \code{ageTolerance} value is 500 years, then \code{coreInfluence} will return all of the positions at 
 #' which the uncertainty reduction is bigger than 500.
 #'
-#' @seealso \code{\link{Bchronology}}, \code{\link{dateInfluence.BchronologyRun}} for finding the influence of removing a single date from a core
+#' @seealso \code{\link{Bchronology}},  \code{\link{choosePositions}}, \code{\link{dateInfluence}} for finding the influence of removing a single date from a core
 #'
 #' @return Depending on type will outputs some text and plots providing the influence values for the cores in question. 
 #' @export
@@ -44,7 +44,14 @@
 #'                        predictPositions=seq(0,1500,by=10))
 #' 
 #' Now compare their influence
-#' coreInfluence(GlenOut1, GlenOut2, type = c('max', 'plot'), xlab = 'Age (cal years BP)', ylab = 'Depth (cm)', main = 'Chronology difference at 95% for Glendalough removing two dates', las = 1)
+#' coreInfluence(GlenOut1, 
+#'               GlenOut2, 
+#'               type = c('max', 'plot'), 
+#'               xlab = 'Age (cal years BP)', 
+#'               ylab = 'Depth (cm)', 
+#'               main = 'Chronology difference at 95% for 
+#'               Glendalough removing two dates', 
+#'               las = 1)
 #' }
 coreInfluence = function(bchrRun1,
                          bchrRun2,
@@ -81,8 +88,10 @@ coreInfluence.BchronologyRun = function(bchrRun1,
   
   # Now summarise the two chronologies
   perc_range = c((1 - percentile)/2, percentile + (1 - percentile)/2)
-  summ_1 = t(apply(bchrRun1$thetaPredict, 2, quantile, probs = perc_range))
-  summ_2 = t(apply(bchrRun2$thetaPredict, 2, quantile, probs = perc_range))
+  summ_1 = t(apply(bchrRun1$thetaPredict, 2, 'stats::quantile', 
+                   probs = perc_range))
+  summ_2 = t(apply(bchrRun2$thetaPredict, 2, 'stats::quantile', 
+                   probs = perc_range))
   
   # Get the difference
   summ_1_diff = apply(summ_1,1,diff)
@@ -105,7 +114,7 @@ coreInfluence.BchronologyRun = function(bchrRun1,
                     #ylim = rev(range(positions)),
                     type = 'l',
                     ...))
-    abline(v = 0)
+    graphics::abline(v = 0)
     
   }
   if('summary' %in% type) {

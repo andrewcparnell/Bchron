@@ -57,9 +57,16 @@ GlenOut2 = Bchronology(ages=Glendalough$ages,
                        predictPositions=seq(0,1500,by=10))
 
 Now compare their influence
-coreInfluence(GlenOut1, GlenOut2, type = c('max', 'plot'), xlab = 'Age (cal years BP)', ylab = 'Depth (cm)', main = 'Chronology difference at 95\% for Glendalough removing two dates', las = 1)
+coreInfluence(GlenOut1, 
+              GlenOut2, 
+              type = c('max', 'plot'), 
+              xlab = 'Age (cal years BP)', 
+              ylab = 'Depth (cm)', 
+              main = 'Chronology difference at 95\% for 
+              Glendalough removing two dates', 
+              las = 1)
 }
 }
 \seealso{
-\code{\link{Bchronology}}, \code{\link{dateInfluence.BchronologyRun}} for finding the influence of removing a single date from a core
+\code{\link{Bchronology}},  \code{\link{choosePositions}}, \code{\link{dateInfluence}} for finding the influence of removing a single date from a core
 }

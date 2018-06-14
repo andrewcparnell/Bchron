@@ -5,8 +5,9 @@
 \title{Plot calibrated dates from a BchronCalibrate run}
 \usage{
 \method{plot}{BchronCalibratedDates}(x, withPositions = FALSE,
-  pause = FALSE, dateHeight = 30, borderCol = NULL, fillCol = "gray",
-  withHDR = TRUE, hdrCol = "darkgray", ...)
+  pause = FALSE, dateHeight = 30, borderCol = NULL,
+  fillCols = rep("gray", length(x)), withHDR = TRUE, hdrCol = "darkgray",
+  ...)
 }
 \arguments{
 \item{x}{Output from BchronCalibrate}
@@ -19,7 +20,7 @@
 
 \item{borderCol}{The colour of the edges of the dates. If \code{NULL} there are no edges drawn}
 
-\item{fillCol}{The fill colour of the dates}
+\item{fillCols}{A vector of colours to fill each date density}
 
 \item{withHDR}{Whether to plot the 95\% highest density region values}
 
