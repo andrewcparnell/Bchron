@@ -34,10 +34,14 @@
 #' data(TestRSLData)
 #' 
 #' # Run through Bchronology
-#' RSLrun = Bchronology(ages=TestChronData$ages,ageSds=TestChronData$ageSds,
-#'                      positions=TestChronData$position,positionThicknesses=TestChronData$thickness,
-#'                      ids=TestChronData$id,calCurves=TestChronData$calCurves,
-#'                      predictPositions=TestRSLData$Depth)
+#' RSLrun = Bchronology(ages=TestChronData$ages,
+#'                      ageSds=TestChronData$ageSds,
+#'                      positions=TestChronData$position,
+#'                      positionThicknesses=TestChronData$thickness,
+#'                      ids=TestChronData$id,
+#'                      calCurves=TestChronData$calCurves,
+#'                      predictPositions=TestRSLData$Depth,
+#'                      jitterPositions = TRUE)
 #' 
 #' # Now run through BchronRSL
 #' RSLrun2 = BchronRSL(RSLrun,RSLmean=TestRSLData$RSL,RSLsd=TestRSLData$Sigma,degree=3)
@@ -46,7 +50,8 @@
 #' summary(RSLrun2)
 #' 
 #' # Plot it
-#' plot(RSLrun2)}
+#' plot(RSLrun2)
+#' }
 BchronRSL = function(BchronologyRun,RSLmean,RSLsd,degree=1,iterations=10000,burn=2000,thin=8) {
   UseMethod('BchronRSL')
 }
