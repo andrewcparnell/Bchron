@@ -22,7 +22,9 @@
 #' CreateCalCurve(name='intcal09',cal_ages=intcal09[,1],uncal_ages=intcal09[,2],one_sigma=intcal09[,3])
 #' 
 #' # Calibrate the ages under two calibration curves
-#' age_09 = BchronCalibrate(age=15500,ageSds=150,calCurves = 'intcal09',ids='My Date', pathToCalCurves = getwd())
+#' age_09 = BchronCalibrate(age=15500, ageSds=150,
+#'                          calCurves = 'intcal09',ids='My Date', 
+#'                          pathToCalCurves = getwd())
 #' age_13 = BchronCalibrate(age=15500,ageSds=150,calCurves = 'intcal13')
 #' 
 #' # Finally plot the difference
