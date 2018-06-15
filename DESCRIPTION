@@ -12,7 +12,6 @@ Imports:
     ellipse,
     coda,
     mclust,
-    inline
 Encoding: UTF-8
 Author: Andrew Parnell
 Maintainer: Andrew Parnell <Andrew.Parnell@mu.ie>
