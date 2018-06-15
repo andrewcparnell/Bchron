@@ -14,7 +14,7 @@ BchronDensity(ages, ageSds, calCurves, pathToCalCurves = system.file("data",
 
 \item{ageSds}{A vector of 1-sigma values for the ages given above}
 
-\item{calCurves}{A vector of values containing either 'intcal13', 'shcal13', 'marine13', or 'normal'. Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.}
+\item{calCurves}{A vector of values containing either \code{intcal13}, \code{shcal13}, \code{marine13}, or \code{normal}. Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.}
 
 \item{pathToCalCurves}{File path to where the calibration curves are located. Defaults to the system directory where the 3 standard calibration curves are stored}
 
@@ -33,7 +33,7 @@ BchronDensity(ages, ageSds, calCurves, pathToCalCurves = system.file("data",
 \item{store_density}{Whether or not to store the density and age grid. Useful for plotting the output in other packages}
 }
 \value{
-An object of class BchronDensityRun with the following elements:
+An object of class \code{BchronDensityRun} with the following elements:
 \itemize{
 \item{theta}{The posterior samples of the restricted ages}
 \item{p}{Posterior samples of the mixture proportions}

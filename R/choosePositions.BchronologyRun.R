@@ -4,7 +4,7 @@
 #' \code{\link{Bchronology}}, which positions (depths) to date next
 #' If N = 1 it just finds the position with the biggest uncertainty
 #' If N>1 it puts a date at the N = 1 position and re-runs 
-#' \code{\link{Bchronology} with the extra psuedo date. It uses the 
+#' \code{\link{Bchronology}} with the extra psuedo date. It uses the 
 #' \code{\link{unCalibrate}} function with the un-calibrated age estimated 
 #' at the median of the chronology and the sd as specified via the 
 #' \code{newSds} argument. Other arguments specify the new thicknesses, 

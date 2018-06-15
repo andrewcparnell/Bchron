@@ -10,11 +10,11 @@
 \arguments{
 \item{object}{The output from a run of \code{\link{BchronRSL}}}
 
-\item{type}{One of 'parameters', 'RSL', 'rate', or 'accel'. If parameters, provides posterior credibility intervals of the regression coefficients. If RSL provides predicted RSL values. If rate, provides rate estimates. If accel provides acceleration estimates.}
+\item{type}{One of \code{parameters}, \code{RSL}, \code{rate}, or \code{accel}. If \code{parameters}, provides posterior credibility intervals of the regression coefficients. If \code{RSL} provides predicted RSL values. If \code{rate}, provides rate estimates. If \code{accel} provides acceleration estimates.}
 
 \item{age_grid}{An optional age grid for computing RSL, rate, or acceleration estimates. If not provided uses the age range of the Bchronology run}
 
-\item{...}{Other arugments to functions (not currently implemented)}
+\item{...}{Other arguments to functions (not currently implemented)}
 }
 \description{
 Summarise a \code{\link{BchronRSL}} run

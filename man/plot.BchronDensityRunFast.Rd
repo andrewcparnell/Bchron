@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.BchronDensityRunFast.R
 \name{plot.BchronDensityRunFast}
 \alias{plot.BchronDensityRunFast}
-\title{Plot run from BchronDensityFast}
+\title{Plot run from \code{BchronDensityFast}}
 \usage{
 \method{plot}{BchronDensityRunFast}(x, plotDates = TRUE, plotSum = FALSE,
   ...)

@@ -15,7 +15,7 @@ Note this must have the same value of \code{predictPositions} as \code{bchrRun1}
 
 \item{percentile}{The value of the percentile to compare the uncertainties. Default is 95\%}
 
-\item{type}{if \code{plot} will return a plot of the difference in ucnertainties at the specified percentile level. 
+\item{type}{if \code{plot} will return a plot of the difference in uncertainties at the specified percentile level. 
 If \code{summary} will return text output of the reduction in uncertainty at each position. If \code{max} will return the 
 position of the maximum decrease in uncertainty and a list of all the positions where the reduction in uncertainty exceeds the value of 
 \code{ageTolerance}}

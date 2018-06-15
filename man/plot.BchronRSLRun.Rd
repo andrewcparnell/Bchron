@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{An object created by \code{\link{BchronRSL}}}
 
-\item{type}{One of 'RSL', 'rate', or 'accel'. If RSL produces a plot of RSL esimtates from the model. If rate, produces rate estimates. If accel produces acceleration estimates.}
+\item{type}{One of \code{RSL}, \code{rate}, or \code{accel}. If \code{RSL} produces a plot of RSL estimates from the model. If \code{rate}, produces rate estimates. If \code{accel} produces acceleration estimates.}
 
 \item{...}{Other arguments to plot, see \code{\link{par}}}
 }

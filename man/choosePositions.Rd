@@ -18,7 +18,8 @@ choosePositions(bchrRun, N = 1, newSds = 30, newThicknesses = 0,
 
 \item{newThicknesses}{The new thicknesses of the psuedo-added dates}
 
-\item{positions}{The positions allowed to estimate the new positions to date. Defaults to the value of \code{predictPositions} from the Bchronology run}
+\item{positions}{The positions allowed to estimate the new positions to date. Defaults to the value of \code{predictPositions} from the 
+\code{\link{Bchronology}} run}
 
 \item{newCalCurve}{The new calibration curve of the psuedo-added dates}
 
@@ -39,12 +40,12 @@ Some plots and the positions to date next
 This function finds, for a given current chronology, created via
 \code{\link{Bchronology}}, which positions (depths) to date next
 If N = 1 it just finds the position with the biggest uncertainty
-If N>1 it puts a date at the N = 1 position and re-runs Bchronology
-with the extra psuedo date. It uses the \code{\link{unCalibrate}} function
-with the un-calibrated age estimated at the median of the chronology
- and the sd as specified via the \code{newSds} argument. Other arguments 
- specify the new thicknesses, calibration curves, and outlier probabilities 
- for newly inserted psuedo-dates.
+If N>1 it puts a date at the N = 1 position and re-runs 
+\code{\link{Bchronology}} with the extra psuedo date. It uses the 
+\code{\link{unCalibrate}} function with the un-calibrated age estimated 
+at the median of the chronology and the sd as specified via the 
+\code{newSds} argument. Other arguments specify the new thicknesses, 
+calibration curves, and outlier probabilities for newly inserted psuedo-dates.
 }
 \examples{
 \donttest{

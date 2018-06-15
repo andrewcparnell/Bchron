@@ -51,13 +51,12 @@ Bchronology(ages, ageSds, positions, positionThicknesses = rep(0,
 
 \item{psiMhSd}{The Metropolis-Hastings standard deviation for the Compound Poisson-Gamma scale}
 
-\item{ageScaleVal}{A scale value for the ages. Bchronology works best when the ages are scaled to be approximately between 0 and 100. The default value is thus 1000 for ages given in years.}
+\item{ageScaleVal}{A scale value for the ages. \code{Bchronology} works best when the ages are scaled to be approximately between 0 and 100. The default value is thus 1000 for ages given in years.}
 
-\item{positionScaleVal}{A scale value for the positions. Bchronology works best when the positions are scaled to be approximately between 0 and 100. The default value is thus 100 for positions given in cm.}
+\item{positionScaleVal}{A scale value for the positions. \code{Bchronology} works best when the positions are scaled to be approximately between 0 and 100. The default value is thus 100 for positions given in cm.}
 }
 \value{
-A list of class BchronologyRun which include elements:
-\itemize{
+A list of class \code{BchronologyRun} which include elements:
  \item{theta}{The posterior estimated values of the ages}
  \item{phi}{The posterior estimated outlier values (1=outlier, 2=not outlier). The means of this parameter give the posterior estimated outlier probabilities}
  \item{mu}{The posterior values of the Compound Poisson-Gamma mean}
@@ -65,14 +64,13 @@ A list of class BchronologyRun which include elements:
  \item{thetaPredict}{The posterior estimated ages for each of the values in predictPosition}
  \item{predictPositions}{The positions at which estimated ages were required}
  \item{calAges}{The calibrated ages as output from \code{\link{BchronCalibrate}}}
- \item{inputVals}{All of the input values to the Bchronology run}
-}
+ \item{inputVals}{All of the input values to the \code{Bchronology} run}
 }
 \description{
 Fits a non-parametric chronology model to age/position data according to the Compound Poisson-Gamma model defined by Haslett and Parnell (2008) <DOI:10.1111/j.1467-9876.2008.00623.x>. This version uses a slightly modified Markov chain Monte Carlo fitting algorithm which aims to converge quicker and requires fewer iterations. It also a slightly modified procedure for identifying outliers
 }
 \details{
-The Bchronology function fits a compound Poisson-Gamma distribution to the increments between the dated levels. This involves a stochastic linear interpolation step where the age gaps are Gamma distributed, and the position gaps are Exponential. Radiocarbon and non-radiocarbon dates (including outliers) are updated within the function also by MCMC.
+The \code{Bchronology} function fits a compound Poisson-Gamma distribution to the increments between the dated levels. This involves a stochastic linear interpolation step where the age gaps are Gamma distributed, and the position gaps are Exponential. Radiocarbon and non-radiocarbon dates (including outliers) are updated within the function also by MCMC.
 }
 \examples{
 \donttest{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.BchronDensityRun.R
 \name{plot.BchronDensityRun}
 \alias{plot.BchronDensityRun}
-\title{Plot output from BchronDensity}
+\title{Plot output from \code{BchronDensity}}
 \usage{
 \method{plot}{BchronDensityRun}(x, plotDates = TRUE, plotRawSum = FALSE,
   plotPhase = TRUE, phaseProb = 0.95, ...)
@@ -21,7 +21,7 @@
 \item{...}{Other graphical commands. See \code{\link{par}}}
 }
 \description{
-Plot output from BchronDensity
+Plot output from \code{BchronDensity}
 }
 \seealso{
 See  \code{\link{BchronDensity}} for examples, also \code{\link{Bchronology}}, \code{\link{BchronRSL}}, and \code{\link{BchronDensityFast}} for a faster approximate version of this function

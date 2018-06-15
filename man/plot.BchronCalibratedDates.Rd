@@ -10,7 +10,7 @@
   ...)
 }
 \arguments{
-\item{x}{Output from BchronCalibrate}
+\item{x}{Output from \code{\link{BchronCalibrate}}}
 
 \item{withPositions}{Whether to plot with positions (i.e. using the position values as the y axis). Default is FALSE in which case it will produce a sequence of plots, one for each calibrated age.}
 

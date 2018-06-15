@@ -16,10 +16,10 @@ unCalibrate(calAges, calCurve = "intcal13", type = c("samples", "ages"),
 
 \item{pathToCalCurves}{The path to the calibration curve directory. Defaults to the location of the standard calibration curves given in the package}
 
-\item{...}{Other arguements to the \code{\link{optim}} function used to match the probability dsitributions under \code{type = 'samples'}}
+\item{...}{Other arguments to the \code{\link{optim}} function used to match the probability distributions under \code{type = 'samples'}}
 }
 \value{
-Eitehr a vector of uncalibrated ages (\code{type = 'ages'}) or a list containing the estimated mean age and standard deviation (\code{type = 'samples'})
+Either a vector of uncalibrated ages (\code{type = 'ages'}) or a list containing the estimated mean age and standard deviation (\code{type = 'samples'})
 }
 \description{
 Uncalibrate a Radiocarbon date

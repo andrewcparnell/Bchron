@@ -13,7 +13,7 @@ BchronCalibrate(ages, ageSds, calCurves, ids = NULL, positions = NULL,
 
 \item{ageSds}{A vector of 1-sigma values for the ages given above}
 
-\item{calCurves}{A vector of values containing either 'intcal13', 'shcal13', 'marine13', or 'normal'. Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.}
+\item{calCurves}{A vector of values containing either \code{intcal13}, \code{shcal13}, \code{marine13}, or \code{normal}. Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.}
 
 \item{ids}{ID names for each age}
 
@@ -27,16 +27,14 @@ BchronCalibrate(ages, ageSds, calCurves, ids = NULL, positions = NULL,
 }
 \value{
 A list of lists where each element corresponds to a single age. Each element contains:
-\itemize{
-\item{ages}{The original age supplied}
-\item{ageSDs}{The original age standard deviation supplied}
-\item{positions}{The position of the age (usually the depth)}
-\item{calCurves}{The calibration curve used for that age}
-\item{ageGrid}{A grid of age values over which the density was created}
-\item{densities}{A vector of probability values indicating the probability value for each element in ageGrid}
-\item{ageLab}{The label given to the age variable}
-\item{positionLab}{The label given to the position variable}
-}
+ \item{ages}{The original age supplied}
+ \item{ageSds}{The original age standard deviation supplied}
+ \item{positions}{The position of the age (usually the depth)}
+ \item{calCurves}{The calibration curve used for that age}
+ \item{ageGrid}{A grid of age values over which the density was created}
+ \item{densities}{A vector of probability values indicating the probability value for each element in \code{ageGrid}}
+ \item{ageLab}{The label given to the age variable}
+ \item{positionLab}{The label given to the position variable}
 }
 \description{
 A fast function for calibrating large numbers of radiocarbon dates involving multiple calibration curves
