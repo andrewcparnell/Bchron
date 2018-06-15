@@ -9,7 +9,7 @@
 #' @param bchrRun2 The output of another run of the \code{\link{Bchronology}} function, possibly with different dates. 
 #' Note this must have the same value of \code{predictPositions} as \code{bchrRun1}
 #' @param percentile The value of the percentile to compare the uncertainties. Default is 95\%
-#' @param type if \code{plot} will return a plot of the difference in ucnertainties at the specified percentile level. 
+#' @param type if \code{plot} will return a plot of the difference in uncertainties at the specified percentile level. 
 #' If \code{summary} will return text output of the reduction in uncertainty at each position. If \code{max} will return the 
 #' position of the maximum decrease in uncertainty and a list of all the positions where the reduction in uncertainty exceeds the value of 
 #' \code{ageTolerance}

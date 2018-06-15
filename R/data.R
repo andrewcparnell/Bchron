@@ -18,7 +18,7 @@
 "Glendalough"
 
 
-#' Nothern hemisphere 2013 calibration curve
+#' Northern hemisphere 2013 calibration curve
 #'
 #' Northern hemisphere 2013 calibration curve
 #'

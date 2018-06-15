@@ -2,7 +2,7 @@
 #'
 #' Plots calibrated radiocarbon dates from a \code{\link{BchronCalibrate}} run. Has options to plot on a position (usually depth) scale if supplied with the original run
 #'
-#' @param x Output from BchronCalibrate 
+#' @param x Output from \code{\link{BchronCalibrate}}
 #' @param withPositions Whether to plot with positions (i.e. using the position values as the y axis). Default is FALSE in which case it will produce a sequence of plots, one for each calibrated age.
 #' @param pause Whether to pause between plots or go ahead and create them all
 #' @param dateHeight The height of the dates in the same units as the positions (e.g. cm). Only relevant if \code{withPositions=TRUE}.

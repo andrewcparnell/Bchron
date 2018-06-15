@@ -3,7 +3,7 @@
 #' Plot output from the \code{\link{BchronRSL}} function
 #' 
 #' @param x An object created by \code{\link{BchronRSL}}
-#' @param type One of 'RSL', 'rate', or 'accel'. If RSL produces a plot of RSL esimtates from the model. If rate, produces rate estimates. If accel produces acceleration estimates.
+#' @param type One of \code{RSL}, \code{rate}, or \code{accel}. If \code{RSL} produces a plot of RSL estimates from the model. If \code{rate}, produces rate estimates. If \code{accel} produces acceleration estimates.
 #' @param ... Other arguments to plot, see \code{\link{par}}
 #'
 #' @seealso \code{\link{BchronCalibrate}}, \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}

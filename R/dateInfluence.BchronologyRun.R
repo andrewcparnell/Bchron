@@ -12,7 +12,7 @@
 #'
 #' @seealso \code{\link{Bchronology}}, \code{\link{summary.BchronologyRun}}, \code{\link{coreInfluence}}, \code{\link{choosePositions}}
 #'
-#' @return Outputs some text providing the influence values for the date(s) in question. If given an assignment value also return a list containing all the probabiliy distributions.
+#' @return Outputs some text providing the influence values for the date(s) in question. If given an assignment value also return a list containing all the probability distributions.
 #' @export
 #'
 #' @examples

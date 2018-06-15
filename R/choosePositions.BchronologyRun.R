@@ -3,18 +3,19 @@
 #' This function finds, for a given current chronology, created via
 #' \code{\link{Bchronology}}, which positions (depths) to date next
 #' If N = 1 it just finds the position with the biggest uncertainty
-#' If N>1 it puts a date at the N = 1 position and re-runs Bchronology
-#' with the extra psuedo date. It uses the \code{\link{unCalibrate}} function
-#' with the un-calibrated age estimated at the median of the chronology
-#'  and the sd as specified via the \code{newSds} argument. Other arguments 
-#'  specify the new thicknesses, calibration curves, and outlier probabilities 
-#'  for newly inserted psuedo-dates.
+#' If N>1 it puts a date at the N = 1 position and re-runs 
+#' \code{\link{Bchronology} with the extra psuedo date. It uses the 
+#' \code{\link{unCalibrate}} function with the un-calibrated age estimated 
+#' at the median of the chronology and the sd as specified via the 
+#' \code{newSds} argument. Other arguments specify the new thicknesses, 
+#' calibration curves, and outlier probabilities for newly inserted psuedo-dates.
 #'
 #' @param bchrRun A run of the current chronology as output from \code{\link{Bchronology}}
 #' @param N The number of new positions required
 #' @param newSds The new standard deviations of the psuedo-added dates
 #' @param newThicknesses The new thicknesses of the psuedo-added dates
-#' @param positions The positions allowed to estimate the new positions to date. Defaults to the value of \code{predictPositions} from the Bchronology run
+#' @param positions The positions allowed to estimate the new positions to date. Defaults to the value of \code{predictPositions} from the 
+#' \code{\link{Bchronology}} run
 #' @param newCalCurve The new calibration curve of the psuedo-added dates
 #' @param newOutlierProb  The new outlier probabilities of the psuedo-added dates
 #' @param level The confidence level required for minimising the uncertainty. Defaults to 50\%. (Note: this will be estimated more robustly than the 95\% level)

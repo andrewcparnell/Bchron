@@ -1,4 +1,4 @@
-#' Plot run from BchronDensityFast
+#' Plot run from \code{BchronDensityFast}
 #'
 #' Plots output from \code{\link{BchronDensityFast}}
 #'

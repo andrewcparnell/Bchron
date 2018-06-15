@@ -46,10 +46,14 @@ data(TestChronData)
 data(TestRSLData)
 
 # Run through Bchronology
-RSLrun = Bchronology(ages=TestChronData$ages,ageSds=TestChronData$ageSds,
-                     positions=TestChronData$position,positionThicknesses=TestChronData$thickness,
-                     ids=TestChronData$id,calCurves=TestChronData$calCurves,
-                     predictPositions=TestRSLData$Depth)
+RSLrun = Bchronology(ages=TestChronData$ages,
+                     ageSds=TestChronData$ageSds,
+                     positions=TestChronData$position,
+                     positionThicknesses=TestChronData$thickness,
+                     ids=TestChronData$id,
+                     calCurves=TestChronData$calCurves,
+                     predictPositions=TestRSLData$Depth,
+                     jitterPositions = TRUE)
 
 # Now run through BchronRSL
 RSLrun2 = BchronRSL(RSLrun,RSLmean=TestRSLData$RSL,RSLsd=TestRSLData$Sigma,degree=3)
@@ -58,7 +62,8 @@ RSLrun2 = BchronRSL(RSLrun,RSLmean=TestRSLData$RSL,RSLsd=TestRSLData$Sigma,degre
 summary(RSLrun2)
 
 # Plot it
-plot(RSLrun2)}
+plot(RSLrun2)
+}
 }
 \references{
 Andrew C. Parnell and W. Roland Gehrels (2013) 'Using chronological models in late holocene sea level reconstructions from salt marsh sediments' In: I. Shennan, B.P. Horton, and A.J. Long (eds). Handbook of Sea Level Research. Chichester: Wiley

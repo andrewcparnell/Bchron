@@ -1,4 +1,4 @@
-#' Plot output from BchronDensity
+#' Plot output from \code{BchronDensity}
 #'
 #' @param x Output from \code{\link{BchronDensity}}
 #' @param plotDates Whether to plot the individual calibrated dates

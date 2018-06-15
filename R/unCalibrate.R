@@ -4,9 +4,9 @@
 #' @param calCurve he calibration curve to use. Only a single calibration curve is currently supported
 #' @param type Either 'ages' which uncalibrates a calibrated age values without error (i.e. just a lookup on the calibration curve), or a 'samples' which estimates both an uncalibrated mean age and a standard deviation
 #' @param pathToCalCurves The path to the calibration curve directory. Defaults to the location of the standard calibration curves given in the package
-#' @param ... Other arguements to the \code{\link{optim}} function used to match the probability dsitributions under \code{type = 'samples'}
+#' @param ... Other arguments to the \code{\link{optim}} function used to match the probability distributions under \code{type = 'samples'}
 #'
-#' @return Eitehr a vector of uncalibrated ages (\code{type = 'ages'}) or a list containing the estimated mean age and standard deviation (\code{type = 'samples'})
+#' @return Either a vector of uncalibrated ages (\code{type = 'ages'}) or a list containing the estimated mean age and standard deviation (\code{type = 'samples'})
 #' @export
 #'
 #' @examples

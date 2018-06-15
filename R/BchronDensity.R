@@ -4,7 +4,7 @@
 #'
 #' @param ages A vector of ages (most likely 14C)
 #' @param ageSds A vector of 1-sigma values for the ages given above
-#' @param calCurves A vector of values containing either 'intcal13', 'shcal13', 'marine13', or 'normal'. Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.
+#' @param calCurves A vector of values containing either \code{intcal13}, \code{shcal13}, \code{marine13}, or \code{normal}. Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.
 #' @param pathToCalCurves File path to where the calibration curves are located. Defaults to the system directory where the 3 standard calibration curves are stored
 #' @param dfs Degrees-of-freedom values for the t-distribution associated with the calibration calculation. A large value indicates Gaussian distributions assumed for the 14C ages
 #' @param numMix The number of mixture components in the phase model. Might need to be increased if the data set is large and the phase behaviour is very complex
@@ -16,7 +16,7 @@
 #'
 #' @details This model places a Gaussian mixture prior distribution on the calibrated ages and so estimates the density of the overall set of radiocarbon ages. It is designed to be a probabilistic version of the Oxcal SUM command which takes calibrated ages and sums the probability distributions with the aim of estimating activity through age as a proxy.
 #'
-#' @return An object of class BchronDensityRun with the following elements:
+#' @return An object of class \code{BchronDensityRun} with the following elements:
 #' \itemize{
 #' \item{theta}{The posterior samples of the restricted ages}
 #' \item{p}{Posterior samples of the mixture proportions}

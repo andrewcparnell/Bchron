@@ -3,9 +3,9 @@
 #' Summarise a \code{\link{BchronRSL}} run
 #'
 #' @param object The output from a run of \code{\link{BchronRSL}}
-#' @param type One of 'parameters', 'RSL', 'rate', or 'accel'. If parameters, provides posterior credibility intervals of the regression coefficients. If RSL provides predicted RSL values. If rate, provides rate estimates. If accel provides acceleration estimates.
+#' @param type One of \code{parameters}, \code{RSL}, \code{rate}, or \code{accel}. If \code{parameters}, provides posterior credibility intervals of the regression coefficients. If \code{RSL} provides predicted RSL values. If \code{rate}, provides rate estimates. If \code{accel} provides acceleration estimates.
 #' @param age_grid An optional age grid for computing RSL, rate, or acceleration estimates. If not provided uses the age range of the Bchronology run
-#' @param ... Other arugments to functions (not currently implemented)
+#' @param ... Other arguments to functions (not currently implemented)
 #'
 #' @seealso \code{\link{BchronCalibrate}}, \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
 #'

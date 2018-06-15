@@ -20,16 +20,15 @@
 #' @param thetaMhSd The Metropolis-Hastings standard deviation for the age parameters
 #' @param muMhSd The Metropolis-Hastings standard deviation for the Compound Poisson-Gamma mean
 #' @param psiMhSd The Metropolis-Hastings standard deviation for the Compound Poisson-Gamma scale
-#' @param ageScaleVal A scale value for the ages. Bchronology works best when the ages are scaled to be approximately between 0 and 100. The default value is thus 1000 for ages given in years.
-#' @param positionScaleVal A scale value for the positions. Bchronology works best when the positions are scaled to be approximately between 0 and 100. The default value is thus 100 for positions given in cm.
+#' @param ageScaleVal A scale value for the ages. \code{Bchronology} works best when the ages are scaled to be approximately between 0 and 100. The default value is thus 1000 for ages given in years.
+#' @param positionScaleVal A scale value for the positions. \code{Bchronology} works best when the positions are scaled to be approximately between 0 and 100. The default value is thus 100 for positions given in cm.
 #'
 #' @details
-#' The Bchronology function fits a compound Poisson-Gamma distribution to the increments between the dated levels. This involves a stochastic linear interpolation step where the age gaps are Gamma distributed, and the position gaps are Exponential. Radiocarbon and non-radiocarbon dates (including outliers) are updated within the function also by MCMC.
+#' The \code{Bchronology} function fits a compound Poisson-Gamma distribution to the increments between the dated levels. This involves a stochastic linear interpolation step where the age gaps are Gamma distributed, and the position gaps are Exponential. Radiocarbon and non-radiocarbon dates (including outliers) are updated within the function also by MCMC.
 #'
 #' @useDynLib Bchron
 #'
-#' @return A list of class BchronologyRun which include elements:
-#' \itemize{
+#' @return A list of class \code{BchronologyRun} which include elements:
 #'  \item{theta}{The posterior estimated values of the ages}
 #'  \item{phi}{The posterior estimated outlier values (1=outlier, 2=not outlier). The means of this parameter give the posterior estimated outlier probabilities}
 #'  \item{mu}{The posterior values of the Compound Poisson-Gamma mean}
@@ -37,8 +36,7 @@
 #'  \item{thetaPredict}{The posterior estimated ages for each of the values in predictPosition}
 #'  \item{predictPositions}{The positions at which estimated ages were required}
 #'  \item{calAges}{The calibrated ages as output from \code{\link{BchronCalibrate}}}
-#'  \item{inputVals}{All of the input values to the Bchronology run}
-#' }
+#'  \item{inputVals}{All of the input values to the \code{Bchronology} run}
 #'
 #' @references 
 #' Haslett, J., and Parnell, A. C. (2008). A simple monotone process with application to radiocarbon-dated depth chronologies. Journal of the Royal Statistical Society, Series C, 57, 399-418. DOI:10.1111/j.1467-9876.2008.00623.x
