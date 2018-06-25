@@ -43,6 +43,12 @@
 #' # Here going to choose 3 new positions to date
 #' newPositions = choosePositions(GlenOut, N = 3)
 #' print(newPositions)
+#' 
+#' # Suppose you are only interested in dating the new depths at 500, 600, or 700 cm
+#' newPositions2 = choosePositions(GlenOut, N = 2, 
+#'                                 positions = seq(500, 700, by = 10))
+#' print(newPositions2)
+#' 
 #' }
 choosePositions = function(bchrRun,
                            N = 1,
@@ -78,17 +84,23 @@ choosePositions.BchronologyRun = function(bchrRun,
   # with the 14C age estimated at the median of the chronology and the sd
   # as specified in the function. It then recursively calls itself with N = N-1
   
+  if(isTRUE(all.equal(positions,bchrRun$predictPositions))) {
+    thetaPredict = bchrRun$thetaPredict 
+  } else {
+    thetaPredict = predict(bchrRun,
+                           newPositions = positions)
+  }
   if(N == 1 & count == 1) {
     if(isTRUE(all.equal(positions,bchrRun$predictPositions))) {
       cat('Using predict positions from Bchron run provided.\n')
     } else {
-      cat('Predicting new positions for object.\n')
-      positions = predict.BchronologyRun(bchrRun, 
-                          newPositions = positions)
+      cat('Using new positions for object.\n')
     }
   }
   
-  main = ifelse(count == 1, 'Bchronology plot with position of maximum uncertainty', 'Bchronology plot with extra psuedo-dates')
+  main = ifelse(count == 1, 
+                'Bchronology plot with position of maximum uncertainty',
+                'Bchronology plot with extra psuedo-dates')
   if(plot) plot(bchrRun, main = main)
   
   # First find the position which the biggest uncertainty
@@ -97,7 +109,7 @@ choosePositions.BchronologyRun = function(bchrRun,
   lower = (1 - level)/2
   upper = level + lower
   # Use capture.output to suppress printing of summary
-  currUnc = apply(apply(bchrRun$thetaPredict, 
+  currUnc = apply(apply(thetaPredict, 
                          2, 'quantile', 
                          probs = c(lower, upper)),
                    2, diff)
@@ -117,7 +129,7 @@ choosePositions.BchronologyRun = function(bchrRun,
   
   if(N > 1) {
     # Find the biggest uncertain date and add it in to the mix
-    newCalDate = round(stats::median(bchrRun$thetaPredict[,which.max(currUnc)]))
+    newCalDate = round(stats::median(thetaPredict[,which.max(currUnc)]))
     # Need to uncalibrate this based on the calibration curve required
     newDate = round(unCalibrate(newCalDate, calCurve = newCalCurve, type = 'ages'))
     newPos = returnPos
