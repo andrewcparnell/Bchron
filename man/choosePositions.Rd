@@ -62,6 +62,12 @@ GlenOut = Bchronology(ages=Glendalough$ages,
 # Here going to choose 3 new positions to date
 newPositions = choosePositions(GlenOut, N = 3)
 print(newPositions)
+
+# Suppose you are only interested in dating the new depths at 500, 600, or 700 cm
+newPositions2 = choosePositions(GlenOut, N = 2, 
+                                positions = seq(500, 700, by = 10))
+print(newPositions2)
+
 }
 }
 \seealso{

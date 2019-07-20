@@ -21,7 +21,6 @@ function(object,
                 'sed_rate', 
                 'acc_rate',
                 'max_var'),
-         probs=c(0.025, 0.1, 0.5, 0.9, 0.975), 
          useExisting = TRUE, 
          numPos = 3,
          ..., 
@@ -65,13 +64,13 @@ function(object,
       if(!isTRUE(all.equal(diff_position_grid, rep(1, length(diff_position_grid))))) if(useExisting) warning('predictPositions does not seem to be unit spaced. If not done alreday, set useExisting = FALSE')
       if(!useExisting) {
         position_grid = seq(min(object$predictPositions), max(object$predictPositions), by = 1)
-        chrons = predict.BchronologyRun(object, newPositions = position_grid)
+        chrons = predict(object, newPositions = position_grid)
     }
       sed_rate = apply(chrons, 1, 'diff')
       sed_rate_ci = cbind(position_grid[-1], t(apply(sed_rate, 1, stats::quantile, probs = probs)))
       colnames(sed_rate_ci)[1] = 'position_grid'
       print(round(sed_rate_ci, digits=digits),row.names=FALSE)
-      invisible(sed_rate_ci)
+      invisible(as.data.frame(sed_rate_ci))
     },
     acc_rate = {
       cat('Accumulation rate (position units per time unit): \n')
@@ -83,7 +82,7 @@ function(object,
       acc_rate_ci = cbind(age_grid[-1], t(apply(acc_rate, 1, stats::quantile, probs = probs)))
       colnames(acc_rate_ci)[1] = 'age_grid'
       print(round(acc_rate_ci, digits=digits),row.names=FALSE)
-      invisible(acc_rate_ci)
+      invisible(as.data.frame(acc_rate_ci))
     },
     max_var = {
       if(numPos==1) {

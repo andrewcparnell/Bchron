@@ -4,8 +4,8 @@
 \alias{summary.BchronRSLRun}
 \title{Summarise a BchronRSL run}
 \usage{
-\method{summary}{BchronRSLRun}(object, type = c("parameters", "RSL", "rate",
-  "accel"), age_grid = NULL, ...)
+\method{summary}{BchronRSLRun}(object, type = c("parameters", "RSL",
+  "rate", "accel"), age_grid = NULL, ...)
 }
 \arguments{
 \item{object}{The output from a run of \code{\link{BchronRSL}}}

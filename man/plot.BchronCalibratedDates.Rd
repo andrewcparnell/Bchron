@@ -4,29 +4,23 @@
 \alias{plot.BchronCalibratedDates}
 \title{Plot calibrated dates from a BchronCalibrate run}
 \usage{
-\method{plot}{BchronCalibratedDates}(x, withPositions = FALSE,
-  pause = FALSE, dateHeight = 30, borderCol = NULL,
-  fillCols = rep("gray", length(x)), withHDR = TRUE, hdrCol = "darkgray",
-  ...)
+\method{plot}{BchronCalibratedDates}(x, withPositions = ifelse(length(x)
+  > 1 & !is.null(x[[1]]$positions), TRUE, FALSE), dateHeight = 100,
+  dateLabels = TRUE, fillCol = "darkslategray", withHDR = TRUE,
+  ggargs = NULL, showPlot = TRUE)
 }
 \arguments{
 \item{x}{Output from \code{\link{BchronCalibrate}}}
 
-\item{withPositions}{Whether to plot with positions (i.e. using the position values as the y axis). Default is FALSE in which case it will produce a sequence of plots, one for each calibrated age.}
+\item{withPositions}{Whether to plot with positions (i.e. using the position values as the y axis). By detault TRUE if \code{x} has more than one date and contains positions}
 
-\item{pause}{Whether to pause between plots or go ahead and create them all}
+\item{dateHeight}{The height of the dates in the plot in the same units as the position values. Only relevant if \code{withPositions=TRUE}.}
 
-\item{dateHeight}{The height of the dates in the same units as the positions (e.g. cm). Only relevant if \code{withPositions=TRUE}.}
+\item{dateLabels}{Whether to add the names of the dates to the left of them. Default TRUE}
 
-\item{borderCol}{The colour of the edges of the dates. If \code{NULL} there are no edges drawn}
-
-\item{fillCols}{A vector of colours to fill each date density}
+\item{fillCol}{A colour to fill the date densities when \code{withPositions} is TRUE, or HDR ranges when it is FALSE}
 
 \item{withHDR}{Whether to plot the 95\% highest density region values}
-
-\item{hdrCol}{The colour of the HDR regions}
-
-\item{...}{Other arguments to plot, e.g. axis limits, titles, etc. See \code{\link{par}}.}
 }
 \description{
 Plots calibrated radiocarbon dates from a \code{\link{BchronCalibrate}} run. Has options to plot on a position (usually depth) scale if supplied with the original run

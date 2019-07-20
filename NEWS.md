@@ -1,3 +1,7 @@
+# Bchron 4.4
+
+  - Changed plots to use ggplot2 via ggridges
+
 # Bchron 4.3
 
 Added some new functions:

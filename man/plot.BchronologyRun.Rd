@@ -4,25 +4,25 @@
 \alias{plot.BchronologyRun}
 \title{Plot output from Bchronology}
 \usage{
-\method{plot}{BchronologyRun}(x, dateHeight = 30,
-  chronCol = grDevices::rgb(190/255, 190/255, 190/255, alpha = 0.8),
-  chronBorder = grDevices::rgb(190/255, 190/255, 190/255, alpha = 0.8),
-  alpha = 0.95, legLoc = "topleft", ...)
+\method{plot}{BchronologyRun}(x, dateHeight = 100, dateLabels = TRUE,
+  dateCol = "darkslategray", chronCol = "deepskyblue4",
+  chronTransparency = 0.75, alpha = 0.95, expandX = if (dateLabels) {
+      c(0.1, 0) } else {     c(0, 0) }, expandY = c(0.05, 0))
 }
 \arguments{
 \item{x}{The object created by \code{\link{Bchronology}}}
 
-\item{dateHeight}{The height of the date densities plotted in position/depth units}
+\item{dateHeight}{The height of the dates in the plot. Values in the range 0 to 1 tend to work best.}
 
 \item{chronCol}{The colour of the chronology uncertainty ribbon to be plotted}
 
-\item{chronBorder}{The colour of the border of the chronology uncertainty ribbon to be plotted}
-
 \item{alpha}{The credible interval of the chronology run to be plotted. Defaults to 95 percent}
 
-\item{legLoc}{The location of the plot legend}
+\item{expandX}{The amount to expand the horizontal axis in case part are missed off the plot. See \code{\link[ggplot2]{expand_limits}} for details}
 
-\item{...}{Other graphical parameters as detailed in \code{\link{par}}}
+\item{expandY}{The amount to expand the vertical axis in case part are missed off the plot. See \code{\link[ggplot2]{expand_limits}} for details}
+
+\item{chronBorder}{The colour of the border of the chronology uncertainty ribbon to be plotted}
 }
 \description{
 Plots output from a run of \code{\link{Bchronology}}

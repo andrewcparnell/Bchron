@@ -4,8 +4,8 @@
 \alias{summary.BchronDensityRun}
 \title{Summarise a Bchron density object}
 \usage{
-\method{summary}{BchronDensityRun}(object, prob = 0.95, ..., digits = max(3,
-  getOption("digits") - 3))
+\method{summary}{BchronDensityRun}(object, prob = 0.95, ...,
+  digits = max(3, getOption("digits") - 3))
 }
 \arguments{
 \item{object}{Output from a run of \code{\link{BchronDensity}}}

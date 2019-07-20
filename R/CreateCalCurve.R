@@ -18,8 +18,8 @@
 #' \donttest{
 #' # Load in the calibration curve with:
 #' intcal09 = read.table('http://www.radiocarbon.org/IntCal09%20files/intcal09.14c',sep=',')
-#' # Run CreateCalCurve
-#' CreateCalCurve(name='intcal09',cal_ages=intcal09[,1],uncal_ages=intcal09[,2],one_sigma=intcal09[,3])
+#' # Run createCalCurve
+#' createCalCurve(name='intcal09',cal_ages=intcal09[,1],uncal_ages=intcal09[,2],one_sigma=intcal09[,3])
 #' 
 #' # Copy the file to the right place
 #' file.copy(from = 'intcal09.rda',
@@ -38,7 +38,7 @@
 #' legend('topleft',legend=c('intcal09','intcal13'),col=c('black','red'),lty=1)
 #' }
 #' 
-CreateCalCurve = function(name,
+createCalCurve = function(name,
                           cal_ages,
                           uncal_ages,
                           one_sigma=rep(0,length(cal_ages)),

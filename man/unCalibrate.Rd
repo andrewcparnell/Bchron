@@ -4,8 +4,9 @@
 \alias{unCalibrate}
 \title{Uncalibrate a Radiocarbon date}
 \usage{
-unCalibrate(calAges, calCurve = "intcal13", type = c("samples", "ages"),
-  pathToCalCurves = system.file("data", package = "Bchron"), ...)
+unCalibrate(calAges, calCurve = "intcal13", type = c("samples",
+  "ages"), pathToCalCurves = system.file("data", package = "Bchron"),
+  ...)
 }
 \arguments{
 \item{calAges}{Either a vector of calibrated ages (when type = 'ages'), or a vector of calibrated samples (type = 'samples')}
