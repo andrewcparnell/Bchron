@@ -9,6 +9,8 @@
 #' @param alpha The credible interval of the chronology run to be plotted. Defaults to 95 percent
 #' @param expandX The amount to expand the horizontal axis in case part are missed off the plot. See \code{\link[ggplot2]{expand_limits}} for details
 #' @param expandY The amount to expand the vertical axis in case part are missed off the plot. See \code{\link[ggplot2]{expand_limits}} for details
+#' @param nudgeX The amount to move the date labels in the x direction. Can be negative. See \code{\link[ggplot2]{geom_text}} for details
+#' @param nudgeY The amount to move the date labels in the y direction. Can be negative. See \code{\link[ggplot2]{geom_text}} for details
 #'
 #' @details Creates a simple plot of the chronology output. The height of the date densities in the plots can be manipulated via the \code{dateHeight} argument which is represented in the same units as the positions/depths provided. More detailed plots can be created by manipulating the Bchronology object as required.
 #' 
@@ -23,6 +25,8 @@ function(x,
          chronCol = "deepskyblue4",
          chronTransparency = 0.75,
          alpha = 0.95,
+         nudgeX = 0,
+         nudgeY = 0,
          expandX = if(dateLabels) { c(0.1,0) } else { c(0, 0) },
          expandY = c(0.05, 0)) {
 
@@ -104,6 +108,8 @@ function(x,
                       check_overlap = TRUE,
                       vjust = 0.5, 
                       hjust = 'right',
+                      nudge_x = nudgeX,
+                      nudge_y = nudgeY,
                       size = 2)
   }
   p

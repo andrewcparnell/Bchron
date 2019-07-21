@@ -6,8 +6,9 @@
 \usage{
 \method{plot}{BchronologyRun}(x, dateHeight = 100, dateLabels = TRUE,
   dateCol = "darkslategray", chronCol = "deepskyblue4",
-  chronTransparency = 0.75, alpha = 0.95, expandX = if (dateLabels) {
-      c(0.1, 0) } else {     c(0, 0) }, expandY = c(0.05, 0))
+  chronTransparency = 0.75, alpha = 0.95, nudgeX = 0, nudgeY = 0,
+  expandX = if (dateLabels) {     c(0.1, 0) } else {     c(0, 0) },
+  expandY = c(0.05, 0))
 }
 \arguments{
 \item{x}{The object created by \code{\link{Bchronology}}}
@@ -17,6 +18,10 @@
 \item{chronCol}{The colour of the chronology uncertainty ribbon to be plotted}
 
 \item{alpha}{The credible interval of the chronology run to be plotted. Defaults to 95 percent}
+
+\item{nudgeX}{The amount to move the date labels in the x direction. Can be negative. See \code{\link[ggplot2]{geom_text}} for details}
+
+\item{nudgeY}{The amount to move the date labels in the y direction. Can be negative. See \code{\link[ggplot2]{geom_text}} for details}
 
 \item{expandX}{The amount to expand the horizontal axis in case part are missed off the plot. See \code{\link[ggplot2]{expand_limits}} for details}
 
