@@ -4,9 +4,14 @@
 \alias{plot.BchronRSLRun}
 \title{Plot output from BchronRSL}
 \usage{
-\method{plot}{BchronRSLRun}(x, type = c("RSL", "rate", "accel"),
-  alpha = 0.95, ellipseCol = "darkslategray",
-  lineCol = "deepskyblue4")
+\method{plot}{BchronRSLRun}(
+  x,
+  type = c("RSL", "rate", "accel"),
+  alpha = 0.95,
+  ellipseCol = "darkslategray",
+  lineCol = "deepskyblue4",
+  ...
+)
 }
 \arguments{
 \item{x}{An object created by \code{\link{BchronRSL}}}
@@ -14,6 +19,12 @@
 \item{type}{One of \code{RSL}, \code{rate}, or \code{accel}. If \code{RSL} produces a plot of RSL estimates from the model. If \code{rate}, produces rate estimates. If \code{accel} produces acceleration estimates.}
 
 \item{alpha}{confidence level used for plotting ellipses}
+
+\item{ellipseCol}{The colour of the ellipse used for plotting dates}
+
+\item{lineCol}{The colour of the sea level curve lines}
+
+\item{...}{Other arguments to plot (currently ignored)}
 }
 \description{
 Plot output from the \code{\link{BchronRSL}} function

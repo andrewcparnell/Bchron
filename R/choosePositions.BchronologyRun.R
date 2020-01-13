@@ -87,7 +87,7 @@ choosePositions.BchronologyRun = function(bchrRun,
   if(isTRUE(all.equal(positions,bchrRun$predictPositions))) {
     thetaPredict = bchrRun$thetaPredict 
   } else {
-    thetaPredict = predict(bchrRun,
+    thetaPredict = predict.BchronologyRun(bchrRun,
                            newPositions = positions)
   }
   if(N == 1 & count == 1) {

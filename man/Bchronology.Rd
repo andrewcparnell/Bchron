@@ -4,15 +4,28 @@
 \alias{Bchronology}
 \title{Runs the Compound Poisson-Gamma chronology model of Haslett and Parnell (2008)}
 \usage{
-Bchronology(ages, ageSds, positions, positionThicknesses = rep(0,
-  length(ages)), calCurves = rep("intcal13", length(ages)), ids = NULL,
+Bchronology(
+  ages,
+  ageSds,
+  positions,
+  positionThicknesses = rep(0, length(ages)),
+  calCurves = rep("intcal13", length(ages)),
+  ids = NULL,
   outlierProbs = rep(0.01, length(ages)),
   predictPositions = seq(min(positions), max(positions), length = 100),
   pathToCalCurves = system.file("data", package = "Bchron"),
-  jitterPositions = FALSE, iterations = 10000, burn = 2000,
-  thin = 8, extractDate = 1950 - as.numeric(format(Sys.time(), "\%Y")),
-  maxExtrap = 1000, thetaMhSd = 0.5, muMhSd = 0.1, psiMhSd = 0.1,
-  ageScaleVal = 1000, positionScaleVal = 100)
+  jitterPositions = FALSE,
+  iterations = 10000,
+  burn = 2000,
+  thin = 8,
+  extractDate = 1950 - as.numeric(format(Sys.time(), "\%Y")),
+  maxExtrap = 1000,
+  thetaMhSd = 0.5,
+  muMhSd = 0.1,
+  psiMhSd = 0.1,
+  ageScaleVal = 1000,
+  positionScaleVal = 100
+)
 }
 \arguments{
 \item{ages}{A vector of ages (most likely 14C)}
@@ -23,7 +36,7 @@ Bchronology(ages, ageSds, positions, positionThicknesses = rep(0,
 
 \item{positionThicknesses}{Thickness values for each of the positions. The thickness value should be the full thickness value of the slice. By default set to zero.}
 
-\item{calCurves}{A vector of values containing either 'intcal13', 'shcal13', 'marine13', or 'normal'. Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory, or created via \code{\link{CreateCalCurve}}. Normal indicates a normally-distributed (non-14C) age.}
+\item{calCurves}{A vector of values containing either 'intcal13', 'shcal13', 'marine13', or 'normal'. Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory, or created via \code{\link{createCalCurve}}. Normal indicates a normally-distributed (non-14C) age.}
 
 \item{ids}{ID names for each age}
 

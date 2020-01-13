@@ -4,8 +4,15 @@
 \alias{BchronRSL}
 \title{Relative sea level rate (RSL) estimation}
 \usage{
-BchronRSL(BchronologyRun, RSLmean, RSLsd, degree = 1,
-  iterations = 10000, burn = 2000, thin = 8)
+BchronRSL(
+  BchronologyRun,
+  RSLmean,
+  RSLsd,
+  degree = 1,
+  iterations = 10000,
+  burn = 2000,
+  thin = 8
+)
 }
 \arguments{
 \item{BchronologyRun}{Output from a run of \code{\link{Bchronology}}}

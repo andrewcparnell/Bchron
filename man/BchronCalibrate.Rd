@@ -4,9 +4,16 @@
 \alias{BchronCalibrate}
 \title{Fast radiocarbon calibration}
 \usage{
-BchronCalibrate(ages, ageSds, calCurves, ids = NULL, positions = NULL,
+BchronCalibrate(
+  ages,
+  ageSds,
+  calCurves,
+  ids = NULL,
+  positions = NULL,
   pathToCalCurves = system.file("data", package = "Bchron"),
-  eps = 1e-05, dfs = rep(100, length(ages)))
+  eps = 1e-05,
+  dfs = rep(100, length(ages))
+)
 }
 \arguments{
 \item{ages}{A vector of ages (most likely 14C)}
@@ -63,9 +70,9 @@ plot(ages2)
 ages3 = BchronCalibrate(ages=c(3445,11553),ageSds=c(50,230),positions=c(100,150),
                         calCurves=c('intcal13','normal'))
 summary(ages3)
-plot(ages3,withDepths=TRUE)
+plot(ages3,withPositions=TRUE)
 
 }
 \seealso{
-\code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}, \code{\link{CreateCalCurve}}
+\code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}, \code{\link{createCalCurve}}
 }

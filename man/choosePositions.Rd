@@ -4,10 +4,19 @@
 \alias{choosePositions}
 \title{Compute positions to date next which result in maximal decrease of chronological uncertainty}
 \usage{
-choosePositions(bchrRun, N = 1, newSds = 30, newThicknesses = 0,
-  positions = bchrRun$predictPositions, newCalCurve = "intcal13",
-  newOutlierProb = 0.05, level = 0.5, plot = TRUE, count = 1,
-  linesAt = NULL)
+choosePositions(
+  bchrRun,
+  N = 1,
+  newSds = 30,
+  newThicknesses = 0,
+  positions = bchrRun$predictPositions,
+  newCalCurve = "intcal13",
+  newOutlierProb = 0.05,
+  level = 0.5,
+  plot = TRUE,
+  count = 1,
+  linesAt = NULL
+)
 }
 \arguments{
 \item{bchrRun}{A run of the current chronology as output from \code{\link{Bchronology}}}

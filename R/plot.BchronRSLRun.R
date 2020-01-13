@@ -5,8 +5,15 @@
 #' @param x An object created by \code{\link{BchronRSL}}
 #' @param type One of \code{RSL}, \code{rate}, or \code{accel}. If \code{RSL} produces a plot of RSL estimates from the model. If \code{rate}, produces rate estimates. If \code{accel} produces acceleration estimates.
 #' @param alpha confidence level used for plotting ellipses
-#'
+#' @param ellipseCol The colour of the ellipse used for plotting dates
+#' @param lineCol The colour of the sea level curve lines
+#' @param ... Other arguments to plot (currently ignored)
+#' 
 #' @seealso \code{\link{BchronCalibrate}}, \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
+#'
+#' @import ggplot2
+#' @importFrom ggforce geom_ellipse
+#' @importFrom stats predict qnorm sd
 #'
 #' @export
 plot.BchronRSLRun <-
@@ -14,14 +21,15 @@ function(x,
          type = c('RSL','rate','accel'), 
          alpha = 0.95,
          ellipseCol = 'darkslategray',
-         lineCol = 'deepskyblue4') {
+         lineCol = 'deepskyblue4',
+         ...) {
 
   # Match type
   type = match.arg(type, several.ok = TRUE)
 
   # Summarise the ages for later use by everything
-  mult = qnorm(alpha + (1 - alpha)/2)
-  fun1 = function(x) c(mean(x), mult*sd(x))
+  mult = stats::qnorm(alpha + (1 - alpha)/2)
+  fun1 = function(x) c(mean(x), mult*stats::sd(x))
   ageAll = t(apply(x$BchronologyRun$thetaPredict, 
                    2, fun1)) %>% 
     as.data.frame
@@ -38,9 +46,9 @@ function(x,
       RSL = x$RSLmean,
       rslErr = mult*x$RSLsd
     )
-    p = ggplot(data = rslDf, aes(x = Age, y = RSL)) + 
-      geom_ellipse(aes(x0 = Age, y0 = RSL, 
-                       a = ageErr, b = rslErr, angle = 0),
+    p = ggplot(data = rslDf, aes_string(x = "Age", y = "RSL")) + 
+      geom_ellipse(aes_string(x0 = "Age", y0 = "RSL", 
+                       a = "ageErr", b = "rslErr", angle = 0),
                    colour = ellipseCol) + 
       theme_bw() + 
       scale_x_reverse()
@@ -66,9 +74,9 @@ function(x,
     )
     
     p = p + geom_line(data = predAll, colour = lineCol) + 
-      geom_line(data = predAll, aes(x = Age, y = predLow), 
+      geom_line(data = predAll, aes_string(x = "Age", y = "predLow"), 
                 linetype = 2, colour = lineCol) + 
-      geom_line(data = predAll, aes(x = Age, y = predHigh), 
+      geom_line(data = predAll, aes_string(x = "Age", y = "predHigh"), 
                 linetype = 2, colour = lineCol)
   }
 
@@ -95,12 +103,12 @@ function(x,
       rateHigh = apply(predLines,2,'quantile',probs=alpha + (1 - alpha)/2)
     )
     
-    p = ggplot(predAll, aes(x = Age, y = Rate)) +
+    p = ggplot(predAll, aes_string(x = "Age", y = "Rate")) +
       geom_line(colour = lineCol) + 
       theme_bw() + 
-      geom_line(aes(x = Age, y = rateLow), 
+      geom_line(aes_string(x = "Age", y = "rateLow"), 
                 linetype = 2, colour = lineCol) + 
-      geom_line(aes(x = Age, y = rateHigh), 
+      geom_line(aes_string(x = "Age", y = "rateHigh"), 
                 linetype = 2, colour = lineCol) + 
       scale_x_reverse()
   }
@@ -129,12 +137,12 @@ function(x,
       accelHigh = apply(predLines,2,'quantile',probs=alpha + (1 - alpha)/2)
     )
     
-    p = ggplot(predAll, aes(x = Age, y = Acceleration)) +
+    p = ggplot(predAll, aes_string(x = "Age", y = "Acceleration")) +
       geom_line(colour = lineCol) + 
       theme_bw() + 
-      geom_line(aes(x = Age, y = accelLow), 
+      geom_line(aes_string(x = "Age", y = "accelLow"), 
                 linetype = 2, colour = lineCol) + 
-      geom_line(aes(x = Age, y = accelHigh), 
+      geom_line(aes_string(x = "Age", y = "accelHigh"), 
                 linetype = 2, colour = lineCol) + 
       scale_x_reverse()
   }

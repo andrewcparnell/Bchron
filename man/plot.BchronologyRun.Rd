@@ -4,18 +4,35 @@
 \alias{plot.BchronologyRun}
 \title{Plot output from Bchronology}
 \usage{
-\method{plot}{BchronologyRun}(x, dateHeight = 100, dateLabels = TRUE,
-  dateCol = "darkslategray", chronCol = "deepskyblue4",
-  chronTransparency = 0.75, alpha = 0.95, nudgeX = 0, nudgeY = 0,
+\method{plot}{BchronologyRun}(
+  x,
+  dateHeight = 100,
+  dateLabels = TRUE,
+  dateCol = "darkslategray",
+  chronCol = "deepskyblue4",
+  chronTransparency = 0.75,
+  alpha = 0.95,
+  nudgeX = 0,
+  nudgeY = 0,
   expandX = if (dateLabels) {     c(0.1, 0) } else {     c(0, 0) },
-  expandY = c(0.05, 0))
+  expandY = c(0.05, 0),
+  ageScale = c("bp", "bc", "b2k"),
+  scaleReverse = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{The object created by \code{\link{Bchronology}}}
 
 \item{dateHeight}{The height of the dates in the plot. Values in the range 0 to 1 tend to work best.}
 
+\item{dateLabels}{Whether to label the dates on the vertical axis (default TRUE)}
+
+\item{dateCol}{The colour of the date labels}
+
 \item{chronCol}{The colour of the chronology uncertainty ribbon to be plotted}
+
+\item{chronTransparency}{The amount of transparency for the chronology ribbon}
 
 \item{alpha}{The credible interval of the chronology run to be plotted. Defaults to 95 percent}
 
@@ -27,7 +44,11 @@
 
 \item{expandY}{The amount to expand the vertical axis in case part are missed off the plot. See \code{\link[ggplot2]{expand_limits}} for details}
 
-\item{chronBorder}{The colour of the border of the chronology uncertainty ribbon to be plotted}
+\item{ageScale}{Either \code{bp} for years before present, \code{bc} for years BC/AD (BC will be negative), \code{b2k} for years before 2000. Others not supported (yet).}
+
+\item{scaleReverse}{Whether to reverse the x-axis scale. Defaults to TRUE which works best for dates presented in e.g. years BP}
+
+\item{...}{Other arguments to plot (currently ignored)}
 }
 \description{
 Plots output from a run of \code{\link{Bchronology}}

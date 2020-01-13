@@ -5,8 +5,10 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette 
 vignette: >
   %\VignetteIndexEntry{Bchron}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r global_options, include=FALSE}
@@ -80,12 +82,20 @@ plot(ages3)
 
 ... or change the axes/titles if you want:
 ```{r}
+library(ggplot2)
 plot(ages3) +
   labs(x = 'Age (years BP)',
        y = 'Depth (cm)',
        title = 'Two dates at different depths')
 ```
 
+... or change to BC/AD
+```{r}
+plot(ages3, ageScale = 'bc') +
+  labs(x = 'Age (years BC/AD)',
+       y = 'Depth (cm)',
+       title = 'Two dates at different depths')
+```
 
 ## Credible intervals
 

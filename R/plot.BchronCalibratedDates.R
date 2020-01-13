@@ -8,11 +8,17 @@
 #' @param dateLabels Whether to add the names of the dates to the left of them. Default TRUE
 #' @param fillCol A colour to fill the date densities when \code{withPositions} is TRUE, or HDR ranges when it is FALSE
 #' @param withHDR Whether to plot the 95\% highest density region values
+#' @param ageScale Either \code{bp} for years before present, \code{bc} for years BC/AD (BC will be negative), \code{b2k} for years before 2000. Others not supported (yet).
+#' @param scaleReverse Whether to reverse the x-axis scale. Defaults to TRUE which works best for dates presented in e.g. years BP
+#' @param ... Other arguments to plot (currently ignored)
 #'
 #' @details These plots are intended to be pretty basic and used simply for quick information. Users are encouraged to learn the R plotting features to produce publication quality graphics
 #'
 #' @seealso \code{\link{BchronCalibrate}}, \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
 #'
+#' @import ggplot2
+#' @import dplyr
+#' @importFrom purrr map_dfr map_dbl
 #'
 #' @export
 plot.BchronCalibratedDates =
@@ -24,17 +30,25 @@ function(x,
          dateLabels = TRUE,
          fillCol = "darkslategray",
          withHDR = TRUE,
-         ggargs = NULL,
-         showPlot = TRUE) {
-
+         ageScale = c('bp', 'bc', 'b2k'),
+         scaleReverse = TRUE,
+         ...) {
+  
+  # Scale function for age scales
+  ageScale = match.arg(ageScale, several.ok = FALSE)
+  ageScaleFun = function(z) switch(ageScale,
+                                   bp = z,
+                                   bc = 1950 - z,
+                                   b2k = z + 50)
+  
   # First plot for individual dates
   if(length(x)==1) {
     df = data.frame(
-      Age = x[[1]]$ageGrid,
+      Age = ageScaleFun(x[[1]]$ageGrid),
       Density = x[[1]]$densities
     )
     
-    p = ggplot(df, aes(x = Age, y = Density)) + 
+    p = ggplot(df, aes_string(x = "Age", y = "Density")) + 
       geom_line() + 
       theme_bw() + 
       ggtitle(names(x)[1])
@@ -42,11 +56,12 @@ function(x,
       my_hdr = hdr(x[[1]])
       hdr_list = vector('list', length(my_hdr))
       for(j in 1:length(my_hdr)) {
-        x_seq = seq(my_hdr[[j]][1], my_hdr[[j]][2], by = 1)
+        x_seq = ageScaleFun(seq(my_hdr[[j]][1], my_hdr[[j]][2], by = 1))
         y_lookup = match(x_seq, df$Age)
         y_seq = df$Density[y_lookup]
-        hdr_list[[j]] = data.frame(Age = c(my_hdr[[j]][1], 
-                                           x_seq, my_hdr[[j]][2]), 
+        hdr_list[[j]] = data.frame(Age = c(ageScaleFun(my_hdr[[j]][1]), 
+                                           x_seq, 
+                                           ageScaleFun(my_hdr[[j]][2])), 
                                    Density = c(0, y_seq, 0),
                                    hdr = j)
       }
@@ -60,10 +75,10 @@ function(x,
     p = vector('list', length(x))
     for(i in 1:length(x)) {
       df = data.frame(
-        Age = x[[i]]$ageGrid,
+        Age = ageScaleFun(x[[i]]$ageGrid),
         Density = x[[i]]$densities
       )
-      p[[i]] = ggplot(df, aes(x = Age, y = Density)) + 
+      p[[i]] = ggplot(df, aes_string(x = "Age", y = "Density")) + 
         geom_line() + 
         theme_bw() + 
         ggtitle(names(x)[i])
@@ -71,11 +86,12 @@ function(x,
         my_hdr = hdr(x[[i]])
         hdr_list = vector('list', length(my_hdr))
         for(j in 1:length(my_hdr)) {
-          x_seq = seq(my_hdr[[j]][1], my_hdr[[j]][2], by = 1)
+          x_seq = ageScaleFun(seq(my_hdr[[j]][1], my_hdr[[j]][2], by = 1))
           y_lookup = match(x_seq, df$Age)
           y_seq = df$Density[y_lookup]
-          hdr_list[[j]] = data.frame(Age = c(my_hdr[[j]][1], 
-                                             x_seq, my_hdr[[j]][2]), 
+          hdr_list[[j]] = data.frame(Age = c(ageScaleFun(my_hdr[[j]][1]), 
+                                             x_seq, 
+                                             ageScaleFun(my_hdr[[j]][2])), 
                                      Density = c(0, y_seq, 0),
                                      hdr = j)
         }
@@ -87,35 +103,38 @@ function(x,
 
   # Finally for multiple dates with depths
   if(length(x)>1 & withPositions==TRUE) {
-    allAges = map_dfr(x, `[`, c("ageGrid", "densities"), .id = c('Date')) %>% 
-      rename(Age = ageGrid)
+    allAges = purrr::map_dfr(x, `[`, c("ageGrid", "densities"), .id = c('Date')) %>% 
+      dplyr::rename(Age = .data$ageGrid)
     # scale all the densities to have max value 1
     scaleMax = function(x) return(x/max(x))
-    allAges2 = allAges %>% group_by(Date) %>% 
-      mutate(densities = scaleMax(densities)) %>% 
+    allAges2 = allAges %>% group_by(.data$Date) %>% 
+      mutate(densities = scaleMax(.data$densities)) %>% 
       ungroup()
     positionLookUp = tibble(Date = names(x),
-                            Position = map_dbl(x, 'positions'))
-    allAges3 = left_join(allAges2, positionLookUp, by = 'Date')
+                            Position = purrr::map_dbl(x, 'positions'))
+    allAges3 = left_join(allAges2, positionLookUp, by = 'Date') %>% 
+      mutate(height = .data$densities*dateHeight,
+             Age = ageScaleFun(.data$Age))
     expand_x = if(dateLabels) { c(0.2,0) } else { c(0, 0) }
     expand_y = c(0.1, 0)
     p = allAges3 %>% 
-      ggplot(aes(x = Age, 
-                 y = Position,
-                 height = densities*dateHeight,
-                 group = Date)) +
-      geom_ridgeline(fill = fillCol, colour = fillCol) +
+      ggplot(aes_string(x = "Age", 
+                 y = "Position",
+                 height = "height",
+                 group = "Date")) +
+     ggridges::geom_ridgeline(fill = fillCol, colour = fillCol) +
       scale_y_reverse(breaks = scales::pretty_breaks(n = 10),
                       expand = expand_y) +
       theme_bw() +
-      scale_x_reverse(breaks = scales::pretty_breaks(n = 10),
-                      expand = expand_x)
+      scale_x_continuous(breaks = scales::pretty_breaks(n = 10),
+                         expand = expand_x,
+                         trans = ifelse(scaleReverse,'reverse','identity'))
     if(dateLabels) {
       p = p + geom_text(data = allAges3 %>% 
-                          group_by(Date) %>% 
+                          group_by(.data$Date) %>% 
                           summarise_all('mean') %>% 
                           mutate(Position = Position - 0.5*dateHeight),
-                        aes(label=Date),
+                        aes_string(label="Date"),
                         check_overlap = TRUE,
                         vjust = 0.5, hjust = 1.5)
     }

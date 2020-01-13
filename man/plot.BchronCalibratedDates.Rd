@@ -4,10 +4,17 @@
 \alias{plot.BchronCalibratedDates}
 \title{Plot calibrated dates from a BchronCalibrate run}
 \usage{
-\method{plot}{BchronCalibratedDates}(x, withPositions = ifelse(length(x)
-  > 1 & !is.null(x[[1]]$positions), TRUE, FALSE), dateHeight = 100,
-  dateLabels = TRUE, fillCol = "darkslategray", withHDR = TRUE,
-  ggargs = NULL, showPlot = TRUE)
+\method{plot}{BchronCalibratedDates}(
+  x,
+  withPositions = ifelse(length(x) > 1 & !is.null(x[[1]]$positions), TRUE, FALSE),
+  dateHeight = 100,
+  dateLabels = TRUE,
+  fillCol = "darkslategray",
+  withHDR = TRUE,
+  ageScale = c("bp", "bc", "b2k"),
+  scaleReverse = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{Output from \code{\link{BchronCalibrate}}}
@@ -21,6 +28,12 @@
 \item{fillCol}{A colour to fill the date densities when \code{withPositions} is TRUE, or HDR ranges when it is FALSE}
 
 \item{withHDR}{Whether to plot the 95\% highest density region values}
+
+\item{ageScale}{Either \code{bp} for years before present, \code{bc} for years BC/AD (BC will be negative), \code{b2k} for years before 2000. Others not supported (yet).}
+
+\item{scaleReverse}{Whether to reverse the x-axis scale. Defaults to TRUE which works best for dates presented in e.g. years BP}
+
+\item{...}{Other arguments to plot (currently ignored)}
 }
 \description{
 Plots calibrated radiocarbon dates from a \code{\link{BchronCalibrate}} run. Has options to plot on a position (usually depth) scale if supplied with the original run

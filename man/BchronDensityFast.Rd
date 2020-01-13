@@ -4,9 +4,15 @@
 \alias{BchronDensityFast}
 \title{Non-parametric phase model (faster version)}
 \usage{
-BchronDensityFast(ages, ageSds, calCurves,
+BchronDensityFast(
+  ages,
+  ageSds,
+  calCurves,
   pathToCalCurves = system.file("data", package = "Bchron"),
-  dfs = rep(100, length(ages)), samples = 2000, G = 30)
+  dfs = rep(100, length(ages)),
+  samples = 2000,
+  G = 30
+)
 }
 \arguments{
 \item{ages}{A vector of ages (most likely 14C)}

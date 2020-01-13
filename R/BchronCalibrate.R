@@ -29,7 +29,7 @@
 #'  \item{ageLab}{The label given to the age variable}
 #'  \item{positionLab}{The label given to the position variable}
 #' 
-#' @seealso \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}, \code{\link{CreateCalCurve}}
+#' @seealso \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}, \code{\link{createCalCurve}}
 #' 
 #' @export
 #'
@@ -49,7 +49,7 @@
 #' ages3 = BchronCalibrate(ages=c(3445,11553),ageSds=c(50,230),positions=c(100,150),
 #'                         calCurves=c('intcal13','normal'))
 #' summary(ages3)
-#' plot(ages3,withDepths=TRUE)
+#' plot(ages3,withPositions=TRUE)
 #' 
 BchronCalibrate <-
 function(ages,ageSds,calCurves,ids=NULL,positions=NULL,pathToCalCurves=system.file('data',package='Bchron'),eps=1e-5,dfs=rep(100,length(ages))) {

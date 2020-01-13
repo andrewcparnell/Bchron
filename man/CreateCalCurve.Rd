@@ -4,8 +4,13 @@
 \alias{createCalCurve}
 \title{Create a new calibration curve}
 \usage{
-createCalCurve(name, cal_ages, uncal_ages, one_sigma = rep(0,
-  length(cal_ages)), path_to_cal_curves = getwd())
+createCalCurve(
+  name,
+  cal_ages,
+  uncal_ages,
+  one_sigma = rep(0, length(cal_ages)),
+  path_to_cal_curves = getwd()
+)
 }
 \arguments{
 \item{name}{The name of the new calibration curve}
