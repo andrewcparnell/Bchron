@@ -13,6 +13,7 @@
 #' }
 #' 
 #' @details This Glendalough data can be used with \code{\link{Bchronology}} or \code{\link{BchronDensity}}
+#' @usage data(Glendalough)
 #' 
 #' @source Haslett, J., Whiley, M., Bhattacharya, S., Mitchell, F. J. G., Allen, J. R. M., Huntley, B., \& Salter-Townshend, M. (2006). Bayesian palaeoclimate reconstruction. Journal of the Royal Statistical Society, Series A, 169, 395-438.
 "Glendalough"
@@ -23,6 +24,7 @@
 #' Northern hemisphere 2013 calibration curve
 #'
 #' @format A data frame with 5141 observations on 5 variables.
+#' @usage data(intcal13)
 #' 
 #' @details For full details and reference see http://www.radiocarbon.org/IntCal13.htm. For usage details see \code{\link{BchronCalibrate}}
 "intcal13"
@@ -33,6 +35,7 @@
 #' Marine 2013 calibration curve
 #'
 #' @format A data frame with 4801 observations on 5 variables
+#' @usage data(marine13)
 #' 
 #' @details For full details and reference see http://www.radiocarbon.org/IntCal13.htm. For usage details see \code{\link{BchronCalibrate}}
 "marine13"
@@ -42,6 +45,7 @@
 #' Data for dummy calibration of normally distributed ages
 #'
 #' @format A data frame with 2 observations on 3 variables.
+#' @usage data(normal)
 #' 
 #' @details This is dummy data so that \code{\link{BchronCalibrate}} can calibrate normally distributed dates.
 "normal"
@@ -52,6 +56,7 @@
 #' Southern hemisphere 2013 calibration curve
 #'
 #' @format A data frame with 5141 observations on 5 variables.
+#' @usage data(shcal13)
 #' 
 #' @details For full details and reference see http://www.radiocarbon.org/IntCal13.htm. For usage details see \code{\link{BchronCalibrate}}
 "shcal13"
@@ -72,7 +77,8 @@
 #' }
 #' 
 #' @details This Sluggan Moss data can be downloaded from the European Pollen Database: \url{http://www.europeanpollendatabase.net}. For usage see \code{\link{Bchronology}} or \code{\link{BchronDensity}}
-#' 
+#' @usage data(Sluggan)
+#'
 #' @source Smith, A. G., \& Goddard, I. C. (1991). A 12,500 year record of vegetational history at Sluggan Bog, Co. Antrim, N. Ireland (incorporating a pollen zone scheme for the non-specialist). New Phytologist, 118, 167-187.
 "Sluggan"
 
@@ -91,9 +97,9 @@
 #' \item{\code{calCurves}}{Calibration curve for each age}
 #' }
 #' 
+#' @usage data(TestChronData)
 #' @source Andrew C. Parnell and W. Roland Gehrels (2013) 'Using chronological models in late holocene sea level reconstructions from salt marsh sediments' In: I. Shennan, B.P. Horton, and A.J. Long (eds). Handbook of Sea Level Research. Chichester: Wiley
 "TestChronData"
-
 
 #' Relative sea level data
 #'
@@ -105,7 +111,7 @@
 #' \item{\code{RSL}}{Relative sea level in m}
 #' \item{\code{Sigma}}{Standard deviation of RSL measurement}
 #' }
-#' 
+#' @usage data(TestRSLData)
 #' @source Andrew C. Parnell and W. Roland Gehrels (2013) 'Using chronological models in late holocene sea level reconstructions from salt marsh sediments' In: I. Shennan, B.P. Horton, and A.J. Long (eds). Handbook of Sea Level Research. Chichester: Wiley
 "TestRSLData"
 

@@ -4,8 +4,14 @@
 \alias{plot.BchronDensityRun}
 \title{Plot output from \code{BchronDensity}}
 \usage{
-\method{plot}{BchronDensityRun}(x, plotDates = TRUE,
-  plotRawSum = FALSE, plotPhase = TRUE, phaseProb = 0.95, ...)
+\method{plot}{BchronDensityRun}(
+  x,
+  plotDates = TRUE,
+  plotRawSum = FALSE,
+  plotPhase = TRUE,
+  phaseProb = 0.95,
+  ...
+)
 }
 \arguments{
 \item{x}{Output from \code{\link{BchronDensity}}}

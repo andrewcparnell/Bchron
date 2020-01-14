@@ -4,10 +4,15 @@
 \alias{summary.BchronologyRun}
 \title{Summarise a Bchronology object}
 \usage{
-\method{summary}{BchronologyRun}(object, type = c("quantiles",
-  "outliers", "convergence", "sed_rate", "acc_rate", "max_var"),
-  probs = c(0.025, 0.25, 0.5, 0.75, 0.975), useExisting = TRUE,
-  numPos = 3, ..., digits = max(3, getOption("digits") - 3))
+\method{summary}{BchronologyRun}(
+  object,
+  type = c("quantiles", "outliers", "convergence", "sed_rate", "acc_rate", "max_var"),
+  probs = c(0.025, 0.25, 0.5, 0.75, 0.975),
+  useExisting = TRUE,
+  numPos = 3,
+  ...,
+  digits = max(3, getOption("digits") - 3)
+)
 }
 \arguments{
 \item{object}{Output from a run of \code{\link{Bchronology}}}

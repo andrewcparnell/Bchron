@@ -6,7 +6,7 @@
 \title{Data for dummy calibration of normally distributed ages}
 \format{A data frame with 2 observations on 3 variables.}
 \usage{
-normal
+data(normal)
 }
 \description{
 Data for dummy calibration of normally distributed ages

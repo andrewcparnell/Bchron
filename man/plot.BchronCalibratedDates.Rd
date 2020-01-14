@@ -4,10 +4,17 @@
 \alias{plot.BchronCalibratedDates}
 \title{Plot calibrated dates from a BchronCalibrate run}
 \usage{
-\method{plot}{BchronCalibratedDates}(x, withPositions = ifelse(length(x)
-  > 1 & !is.null(x[[1]]$positions), TRUE, FALSE), dateHeight = 100,
-  dateLabels = TRUE, fillCol = "darkslategray", withHDR = TRUE,
-  ageScale = c("bp", "bc", "b2k"), scaleReverse = TRUE, ...)
+\method{plot}{BchronCalibratedDates}(
+  x,
+  withPositions = ifelse(length(x) > 1 & !is.null(x[[1]]$positions), TRUE, FALSE),
+  dateHeight = 100,
+  dateLabels = TRUE,
+  fillCol = "darkslategray",
+  withHDR = TRUE,
+  ageScale = c("bp", "bc", "b2k"),
+  scaleReverse = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{Output from \code{\link{BchronCalibrate}}}

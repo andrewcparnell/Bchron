@@ -95,7 +95,7 @@ function(x,
                           Position = map_dbl(x$calAges, 'positions'))
   allAges3 = left_join(allAges2, positionLookUp, by = 'Date') %>% 
     mutate(height = .data$densities*dateHeight)
-  
+  my_breaks = pretty(x = allAges$Age, n = 10)
   p = allAges3 %>% 
     ggplot(aes_string(x = "Age", 
                y = "Position",
@@ -105,8 +105,9 @@ function(x,
     scale_y_reverse(breaks = scales::pretty_breaks(n = 10),
                     expand = expandY) +
     theme_bw() +
-    scale_x_continuous(breaks = scales::pretty_breaks(n = 10),
+    scale_x_continuous(breaks = my_breaks,
                        expand = expandX,
+                       labels = abs(my_breaks),
                        trans = ifelse(scaleReverse,'reverse','identity')) +
     geom_ribbon(data = chronRangeSwap,
                 aes_string(x = "Age",

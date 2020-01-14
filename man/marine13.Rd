@@ -6,7 +6,7 @@
 \title{Marine 2013 calibration curve}
 \format{A data frame with 4801 observations on 5 variables}
 \usage{
-marine13
+data(marine13)
 }
 \description{
 Marine 2013 calibration curve

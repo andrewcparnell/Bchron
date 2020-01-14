@@ -6,7 +6,7 @@
 \title{Northern hemisphere 2013 calibration curve}
 \format{A data frame with 5141 observations on 5 variables.}
 \usage{
-intcal13
+data(intcal13)
 }
 \description{
 Northern hemisphere 2013 calibration curve

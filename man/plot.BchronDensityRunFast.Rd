@@ -4,8 +4,7 @@
 \alias{plot.BchronDensityRunFast}
 \title{Plot run from \code{BchronDensityFast}}
 \usage{
-\method{plot}{BchronDensityRunFast}(x, plotDates = TRUE,
-  plotSum = FALSE, ...)
+\method{plot}{BchronDensityRunFast}(x, plotDates = TRUE, plotSum = FALSE, ...)
 }
 \arguments{
 \item{x}{Output from \code{\link{BchronDensityFast}}}

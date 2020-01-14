@@ -72,7 +72,7 @@ This will calibrate three different 14C ages with the calibration curves as spec
 Finally, if you provide position information (e.g. depths) to the BchronCalibrate function it will create a plot with position on the y-axis, e.g.:
 
 ```{r,fig.align='center',fig.width=6,fig.height=5}
-ages3 = BchronCalibrate(ages=c(3445,11553), 
+ages3 = BchronCalibrate(ages=c(1000,11553), 
                         ageSds=c(50,230), 
                         positions=c(100,150), 
                         calCurves=c('intcal13','normal'))
@@ -91,7 +91,7 @@ plot(ages3) +
 
 ... or change to BC/AD
 ```{r}
-plot(ages3, ageScale = 'bc') +
+plot(ages3, ageScale = 'bc', scaleReverse = FALSE) +
   labs(x = 'Age (years BC/AD)',
        y = 'Depth (cm)',
        title = 'Two dates at different depths')
@@ -376,7 +376,7 @@ Bchron allows for user-defined calibration curves to be created through the func
 
 Once run, the calibration curve needs to be moved from the chosen path (by default the working directory) to the location of the other calibration curves. This is by default `system.file('data',package='Bchron')`. The resulting calibration curve can be used for all future runs until the package is deleted or re-installed. The calibration curve can be used by simply calling it in any other Bchron function using the supplied name. Note that no name checking is done, so it is possible to over-write the pre-defined calibration curves if
 
-As an example, consider installing the intcal09 calibration curve, as available from (http://www.radiocarbon.org/IntCal09%20files/intcal09.14c)[here]. We can run the following code:
+As an example, consider installing the intcal09 calibration curve, traditionally available from http://www.radiocarbon.org/IntCal09%20files/intcal09.14c. We can run the following code:
 
 ```{r, eval = FALSE}
 # Load in the calibration curve with:

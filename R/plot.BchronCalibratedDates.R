@@ -47,10 +47,13 @@ function(x,
       Age = ageScaleFun(x[[1]]$ageGrid),
       Density = x[[1]]$densities
     )
-    
+    my_breaks = pretty(x = df$Age, n = 10)
     p = ggplot(df, aes_string(x = "Age", y = "Density")) + 
       geom_line() + 
       theme_bw() + 
+      scale_x_continuous(breaks = my_breaks,
+                         labels = abs(my_breaks),
+                         trans = ifelse(scaleReverse,'reverse','identity')) +
       ggtitle(names(x)[1])
     if(withHDR) {
       my_hdr = hdr(x[[1]])
@@ -78,8 +81,12 @@ function(x,
         Age = ageScaleFun(x[[i]]$ageGrid),
         Density = x[[i]]$densities
       )
+      my_breaks = pretty(x = df$Age, n = 10)
       p[[i]] = ggplot(df, aes_string(x = "Age", y = "Density")) + 
-        geom_line() + 
+        geom_line() +
+        scale_x_continuous(breaks = my_breaks,
+                           labels = abs(my_breaks),
+                           trans = ifelse(scaleReverse,'reverse','identity')) +
         theme_bw() + 
         ggtitle(names(x)[i])
       if(withHDR) {
@@ -117,6 +124,7 @@ function(x,
              Age = ageScaleFun(.data$Age))
     expand_x = if(dateLabels) { c(0.2,0) } else { c(0, 0) }
     expand_y = c(0.1, 0)
+    my_breaks = pretty(x = allAges3$Age, n = 10)
     p = allAges3 %>% 
       ggplot(aes_string(x = "Age", 
                  y = "Position",
@@ -126,8 +134,9 @@ function(x,
       scale_y_reverse(breaks = scales::pretty_breaks(n = 10),
                       expand = expand_y) +
       theme_bw() +
-      scale_x_continuous(breaks = scales::pretty_breaks(n = 10),
+      scale_x_continuous(breaks = my_breaks,
                          expand = expand_x,
+                         labels = abs(my_breaks),
                          trans = ifelse(scaleReverse,'reverse','identity'))
     if(dateLabels) {
       p = p + geom_text(data = allAges3 %>% 

@@ -17,7 +17,7 @@
 Haslett, J., Whiley, M., Bhattacharya, S., Mitchell, F. J. G., Allen, J. R. M., Huntley, B., \& Salter-Townshend, M. (2006). Bayesian palaeoclimate reconstruction. Journal of the Royal Statistical Society, Series A, 169, 395-438.
 }
 \usage{
-Glendalough
+data(Glendalough)
 }
 \description{
 Chronology data for Glendalough data set

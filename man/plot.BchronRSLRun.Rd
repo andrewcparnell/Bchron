@@ -4,9 +4,14 @@
 \alias{plot.BchronRSLRun}
 \title{Plot output from BchronRSL}
 \usage{
-\method{plot}{BchronRSLRun}(x, type = c("RSL", "rate", "accel"),
-  alpha = 0.95, ellipseCol = "darkslategray",
-  lineCol = "deepskyblue4", ...)
+\method{plot}{BchronRSLRun}(
+  x,
+  type = c("RSL", "rate", "accel"),
+  alpha = 0.95,
+  ellipseCol = "darkslategray",
+  lineCol = "deepskyblue4",
+  ...
+)
 }
 \arguments{
 \item{x}{An object created by \code{\link{BchronRSL}}}

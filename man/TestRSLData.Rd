@@ -14,7 +14,7 @@
 Andrew C. Parnell and W. Roland Gehrels (2013) 'Using chronological models in late holocene sea level reconstructions from salt marsh sediments' In: I. Shennan, B.P. Horton, and A.J. Long (eds). Handbook of Sea Level Research. Chichester: Wiley
 }
 \usage{
-TestRSLData
+data(TestRSLData)
 }
 \description{
 A set of relative sea level data for use with \code{\link{BchronRSL}}
