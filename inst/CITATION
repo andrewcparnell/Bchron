@@ -3,7 +3,7 @@ citHeader("To cite Bchron in publications use:")
 
 
 citEntry(entry = "Article",
-  title        = "A simple monotone process with application to radiocarbon-dated depth chronologiesy",
+  title        = "A simple monotone process with application to radiocarbon-dated depth chronologies",
   author       = personList(as.person("John Haslett"),
                    as.person("Andrew C Parnell")),
   journal      = "Journal of the Royal Statistical Society: Series C (Applied Statistics)",
