@@ -4,14 +4,8 @@
 \alias{coreInfluence}
 \title{Find the influence of dates in a pair of Bchronology runs across the core}
 \usage{
-coreInfluence(
-  bchrRun1,
-  bchrRun2,
-  percentile = 0.95,
-  type = c("plot", "summary", "max"),
-  ageTolerance = 500,
-  ...
-)
+coreInfluence(bchrRun1, bchrRun2, percentile = 0.95, type = c("plot",
+  "summary", "max"), ageTolerance = 500, ...)
 }
 \arguments{
 \item{bchrRun1}{The output of a run of the \code{\link{Bchronology}} function}

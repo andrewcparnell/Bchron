@@ -4,22 +4,12 @@
 \alias{plot.BchronologyRun}
 \title{Plot output from Bchronology}
 \usage{
-\method{plot}{BchronologyRun}(
-  x,
-  dateHeight = 100,
-  dateLabels = TRUE,
-  dateCol = "darkslategray",
-  chronCol = "deepskyblue4",
-  chronTransparency = 0.75,
-  alpha = 0.95,
-  nudgeX = 0,
-  nudgeY = 0,
+\method{plot}{BchronologyRun}(x, dateHeight = 100, dateLabels = TRUE,
+  dateCol = "darkslategray", chronCol = "deepskyblue4",
+  chronTransparency = 0.75, alpha = 0.95, nudgeX = 0, nudgeY = 0,
   expandX = if (dateLabels) {     c(0.1, 0) } else {     c(0, 0) },
-  expandY = c(0.05, 0),
-  ageScale = c("bp", "bc", "b2k"),
-  scaleReverse = TRUE,
-  ...
-)
+  expandY = c(0.05, 0), ageScale = c("bp", "bc", "b2k"),
+  scaleReverse = TRUE, ...)
 }
 \arguments{
 \item{x}{The object created by \code{\link{Bchronology}}}

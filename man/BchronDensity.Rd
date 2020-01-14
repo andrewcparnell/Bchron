@@ -4,19 +4,10 @@
 \alias{BchronDensity}
 \title{Non-parametric phase model}
 \usage{
-BchronDensity(
-  ages,
-  ageSds,
-  calCurves,
+BchronDensity(ages, ageSds, calCurves,
   pathToCalCurves = system.file("data", package = "Bchron"),
-  dfs = rep(100, length(ages)),
-  numMix = 50,
-  iterations = 10000,
-  burn = 2000,
-  thin = 8,
-  updateAges = FALSE,
-  store_density = TRUE
-)
+  dfs = rep(100, length(ages)), numMix = 50, iterations = 10000,
+  burn = 2000, thin = 8, updateAges = FALSE, store_density = TRUE)
 }
 \arguments{
 \item{ages}{A vector of ages (most likely 14C)}

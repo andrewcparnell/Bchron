@@ -4,13 +4,8 @@
 \alias{predict.BchronologyRun}
 \title{Predict ages of other positions for a BchronologyRun object}
 \usage{
-\method{predict}{BchronologyRun}(
-  object,
-  newPositions,
-  newPositionThicknesses = NULL,
-  maxExtrap = 500,
-  ...
-)
+\method{predict}{BchronologyRun}(object, newPositions,
+  newPositionThicknesses = NULL, maxExtrap = 500, ...)
 }
 \arguments{
 \item{object}{Output from a run of \code{\link{Bchronology}}}

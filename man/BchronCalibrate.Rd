@@ -4,16 +4,9 @@
 \alias{BchronCalibrate}
 \title{Fast radiocarbon calibration}
 \usage{
-BchronCalibrate(
-  ages,
-  ageSds,
-  calCurves,
-  ids = NULL,
-  positions = NULL,
+BchronCalibrate(ages, ageSds, calCurves, ids = NULL, positions = NULL,
   pathToCalCurves = system.file("data", package = "Bchron"),
-  eps = 1e-05,
-  dfs = rep(100, length(ages))
-)
+  eps = 1e-05, dfs = rep(100, length(ages)))
 }
 \arguments{
 \item{ages}{A vector of ages (most likely 14C)}

@@ -4,7 +4,8 @@
 \alias{summary.BchronCalibratedDates}
 \title{Summarise a BchronCalibrate object}
 \usage{
-\method{summary}{BchronCalibratedDates}(object, prob = 95, ..., digits = max(3, getOption("digits") - 3))
+\method{summary}{BchronCalibratedDates}(object, prob = 95, ...,
+  digits = max(3, getOption("digits") - 3))
 }
 \arguments{
 \item{object}{The output of a run of \code{\link{BchronCalibrate}}}

@@ -4,11 +4,8 @@
 \alias{dateInfluence}
 \title{Find the influence of the dates in a Bchronology run}
 \usage{
-dateInfluence(
-  bchrRun,
-  whichDate = "all",
-  measure = c("KL", "absMeanDiff", "absMedianDiff")
-)
+dateInfluence(bchrRun, whichDate = "all", measure = c("KL",
+  "absMeanDiff", "absMedianDiff"))
 }
 \arguments{
 \item{bchrRun}{The output of a run of the \code{\link{Bchronology}} function}
