@@ -1,7 +1,7 @@
 # Bchron 4.5
 
   - Fixed some minor issues with ggplots
-  - Added in example of scaling the x-axis
+  - Added in code for scaling the x-axis
 
 # Bchron 4.4
 

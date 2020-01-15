@@ -6,10 +6,12 @@
 ## R CMD check results
 There were no ERRORs or WARNINGs.
 
-There was one NOTE produced by devtools::release. This is due to the website radiocarbon.org currently being down which hosts some of the data sets. I'm told this will be back up again shortly (perhaps even by the time you check this package)
+There was one NOTE produced by devtools::release. This is due to the website radiocarbon.org currently being down which hosts some of the data sets. I'm told this will be back up again shortly (perhaps even by the time you check this package). 
+
+There was one NOTE produced by Rhub concerning mis-spelled words in the DESCRIPTION which were not mis-spelled.
 
 ## Downstream dependencies
-I have also run R CMD check on downstream dependencies of Bchron (ArchaeoChron, deltar, Bclim) and all installed fine. 
+I have also run R CMD check on the 4 downstream dependencies of Bchron (ArchaeoChron, deltar, Bclim, c14bazAAR) and all installed fine. 
 
 Many thanks for your continuing important work with R,
 
