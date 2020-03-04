@@ -551,7 +551,7 @@ Bchronology = function(ages,
       mu = muNew
     
     # Update psi
-    psiNewAll = truncatedWalk(psi, psiMhSd, 1e-4, 1e3)
+    psiNewAll = truncatedWalk(psi, psiMhSd, 1e-3, 1e3)
     psiNew = psiNewAll$new
     
     logRpsi = sum(log(dtweediep1(
