@@ -113,8 +113,17 @@ predict.BchronologyRun = function(object,
   out = matrix(ncol = length(newPositions), nrow = nSamples)
   p = 1.2
   alpha = (2 - p) / (p - 1)
-  oldPositions = object$positions / object$positionScaleVal
-  diffPosition = diff(oldPositions)
+  originalNewPositions = newPositions
+  if(object$positionNormalise) {
+    positionRange = diff(range(object$positions))
+    oldPositions = (object$positions - min(object$positions)) / positionRange
+    diffPosition = diff(oldPositions)
+    newPositions = (newPositions - min(object$positions)) / positionRange
+    newPositionThicknesses = newPositionThicknesses / positionRange
+  } else {
+    oldPositions = object$positions / object$positionScaleVal
+    diffPosition = diff(oldPositions)
+  }
   
   # Now loop through all the values in newPositions
   pb = utils::txtProgressBar(
@@ -134,10 +143,8 @@ predict.BchronologyRun = function(object,
       currPosition = sort(
         stats::runif(
           length(newPositions),
-          newPositions / object$positionScaleVal - 0.5 * newPositionThicknesses /
-            object$positionScaleVal,
-          newPositions / object$positionScaleVal + 0.5 * newPositionThicknesses /
-            object$positionScaleVal
+          newPositions - 0.5 * newPositionThicknesses,
+          newPositions + 0.5 * newPositionThicknesses
         )
       )
     }
@@ -209,6 +216,6 @@ predict.BchronologyRun = function(object,
     # End of i loop
   }
   
-  colnames(out) = paste0('Pos', newPositions)
+  colnames(out) = paste0('Pos', originalNewPositions)
   return(out * object$ageScaleVal)
 }

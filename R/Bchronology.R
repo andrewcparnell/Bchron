@@ -21,7 +21,7 @@
 #' @param muMhSd The Metropolis-Hastings standard deviation for the Compound Poisson-Gamma mean
 #' @param psiMhSd The Metropolis-Hastings standard deviation for the Compound Poisson-Gamma scale
 #' @param ageScaleVal A scale value for the ages. \code{Bchronology} works best when the ages are scaled to be approximately between 0 and 100. The default value is thus 1000 for ages given in years.
-#' @param positionScaleVal A scale value for the positions. \code{Bchronology} works best when the positions are scaled to be approximately between 0 and 100. The default value is thus 100 for positions given in cm.
+#' @param positionNormalise Whether to normalise the position values. \code{Bchronology} works best when the positions are normalise to be between 0 and 1 The default value is \code{TRUE}
 #'
 #' @details
 #' The \code{Bchronology} function fits a compound Poisson-Gamma distribution to the increments between the dated levels. This involves a stochastic linear interpolation step where the age gaps are Gamma distributed, and the position gaps are Exponential. Radiocarbon and non-radiocarbon dates (including outliers) are updated within the function also by MCMC.
@@ -91,12 +91,23 @@ Bchronology = function(ages,
                        muMhSd = 0.1,
                        psiMhSd = 0.1,
                        ageScaleVal = 1000,
-                       positionScaleVal = 100) {
+                       positionNormalise = TRUE) {
 
   # Notation:
   # theta are the calibrated ages of ages 1 to n (not necessarily radiocarbon)
   # phi are the outlier indicators (1=TRUE or 0=FALSE) for date i
   # mu,psi are the Compound Poisson-Gamma parameters controlling sedimentation
+  
+  # Re-normalise all the positions
+  originalPositions = positions
+  originalPositionThicknesses = positionThicknesses
+  originalPredictPositions = predictPositions
+  if(positionNormalise) {
+    positionRange = diff(range(positions))
+    positions = (positions - min(positions))/positionRange
+    positionThicknesses = positionThicknesses/positionRange
+    predictPositionsRescaled = (predictPositions - min(positions)) / positionRange
+  }
   
   # Check positions don't overlap
   n = length(ages)
@@ -109,8 +120,6 @@ Bchronology = function(ages,
         'Depth layers identical with no thickness errors - not supported in Bchron. Check thickness errors'
       )
   
-  # Re-scale the predicted positions
-  predictPositionsRescaled = predictPositions / positionScaleVal
   
   # Check positions are in order
   o = order(positions)
@@ -131,7 +140,7 @@ Bchronology = function(ages,
     ages = ages,
     ageSds = ageSds,
     calCurves = calCurves,
-    positions = positions,
+    positions = originalPositions,
     ids = ids,
     pathToCalCurves = pathToCalCurves,
     eps = 0,
@@ -141,7 +150,7 @@ Bchronology = function(ages,
     ages = ages,
     ageSds = ageSds,
     calCurves = calCurves,
-    positions = positions,
+    positions = originalPositions,
     ids = ids,
     pathToCalCurves = pathToCalCurves,
     eps = 0,
@@ -159,13 +168,13 @@ Bchronology = function(ages,
   
   # Get current positions and their order
   if (jitterPositions) {
-    num_decimals = max(decimalplaces(positions / positionScaleVal))
+    num_decimals = max(decimalplaces(positions))
     currPositions = sort(jitter(
-      positions / positionScaleVal,
+      positions,
       amount = max(num_decimals / 10, .Machine$double.eps)
     )) # Removed the above due to errors with cores at different age/position scales
   } else {
-    currPositions = sort(positions / positionScaleVal)
+    currPositions = sort(positions)
     if(any(diff(currPositions)==0)) warning(
       'jitterPositions is set to FALSE which means calibration will fail if repeated positions are given'
     )
@@ -353,8 +362,8 @@ Bchronology = function(ages,
       # Get date order so I can preserve things if they change around
       currPositions = stats::runif(
         n,
-        positions / positionScaleVal - 0.5 * positionThicknesses / positionScaleVal,
-        positions / positionScaleVal + 0.5 * positionThicknesses / positionScaleVal
+        positions - 0.5 * positionThicknesses,
+        positions + 0.5 * positionThicknesses
       )
       do = order(currPositions)
       diffPosition = diff(currPositions[do])
@@ -564,8 +573,10 @@ Bchronology = function(ages,
   # Collect up the input values to return
   inputVals = list(ages = ages,
                    ageSds = ageSds,
-                   positions = positions,
-                   positionThicknesses = positionThicknesses,
+                   positions = originalPositions,
+                   positionThicknesses = originalPositionThicknesses,
+                   positionsNormalised = positions,
+                   positionThicknessesNormalised = positionThicknesses,
                    calCurves = calCurves,
                    ids = ids,
                    outlierProbs = outlierProbs,
@@ -581,7 +592,7 @@ Bchronology = function(ages,
                    muMhSd = muMhSd,
                    psiMhSd = psiMhSd,
                    ageScaleVal = ageScaleVal,
-                   positionScaleVal = positionScaleVal)
+                   positionNormalise = positionNormalise)
   
   # Return everything
   out = list(
@@ -590,12 +601,12 @@ Bchronology = function(ages,
     mu = muStore,
     psi = psiStore,
     thetaPredict = ageScaleVal * thetaPredict,
-    predictPositions = predictPositions,
+    predictPositions = originalPredictPositions,
     calAges = x.df2,
-    positions = positions,
+    positions = originalPositions,
     extractDate = extractDate,
     ageScaleVal = ageScaleVal,
-    positionScaleVal = positionScaleVal,
+    positionNormalise = positionNormalise,
     inputVals = inputVals
   )
   class(out) = 'BchronologyRun'

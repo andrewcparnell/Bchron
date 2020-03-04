@@ -24,7 +24,7 @@ Bchronology(
   muMhSd = 0.1,
   psiMhSd = 0.1,
   ageScaleVal = 1000,
-  positionScaleVal = 100
+  positionNormalise = TRUE
 )
 }
 \arguments{
@@ -66,7 +66,7 @@ Bchronology(
 
 \item{ageScaleVal}{A scale value for the ages. \code{Bchronology} works best when the ages are scaled to be approximately between 0 and 100. The default value is thus 1000 for ages given in years.}
 
-\item{positionScaleVal}{A scale value for the positions. \code{Bchronology} works best when the positions are scaled to be approximately between 0 and 100. The default value is thus 100 for positions given in cm.}
+\item{positionNormalise}{Whether to normalise the position values. \code{Bchronology} works best when the positions are normalise to be between 0 and 1 The default value is \code{TRUE}}
 }
 \value{
 A list of class \code{BchronologyRun} which include elements:

@@ -30,7 +30,8 @@
 #'                                  calCurves=Sluggan$calCurves)
 #' 
 #' # plot it
-#' plot(SlugDensFast)}
+#' plot(SlugDensFast)
+#' }
 BchronDensityFast <-
 function(ages,ageSds,calCurves,pathToCalCurves=system.file('data',package='Bchron'),dfs=rep(100,length(ages)),samples=2000,G=30) {
 
