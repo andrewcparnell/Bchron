@@ -114,10 +114,11 @@ function(ages,ageSds,calCurves,ids=NULL,positions=NULL,pathToCalCurves=system.fi
       stop(paste("Date",ids[i],"outside of calibration range. Range of", calCurves[i], 'is',cal_range[1],'to',cal_range[2]))
     }
 
-    tau = ageSds[i]^2 + tau1[[matchCalCurves[i]]]
+    tau = ageSds[i]^2 + tau1[[matchCalCurves[i]]]^2
 
     currAgeGrid = ageGrid[[matchCalCurves[i]]]
     dens = stats::dt((ages[i]-mu[[matchCalCurves[i]]])/sqrt(tau),df=dfs[i])
+    #dens = stats::dnorm((ages[i]-mu[[matchCalCurves[i]]])/sqrt(tau)) # Version should match OxCal and others (though I would argue that t-distribution is better)
     dens = dens/sum(dens)
 
     # Create list of output
