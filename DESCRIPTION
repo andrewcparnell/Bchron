@@ -2,21 +2,19 @@ Package: Bchron
 Type: Package
 Title: Radiocarbon Dating, Age-Depth Modelling, Relative Sea Level Rate
     Estimation, and Non-Parametric Phase Modelling
-Version: 4.5.0
-Date: 2020-01-13
+Version: 4.6.0
+Date: 2020-03-05
 Depends:
     R (>= 3.4.0),
 Imports:
     utils,
     MASS,
-    ellipse,
     coda,
     mclust,
     ggplot2,
     ggridges,
     magrittr,
     purrr,
-    viridis,
     ggforce,
     dplyr,
     scales,

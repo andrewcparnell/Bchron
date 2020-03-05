@@ -50,7 +50,8 @@ SlugDensFast = BchronDensityFast(ages=Sluggan$ages,ageSds=Sluggan$ageSds,
                                  calCurves=Sluggan$calCurves)
 
 # plot it
-plot(SlugDensFast)}
+plot(SlugDensFast)
+}
 }
 \seealso{
 \code{\link{Bchronology}}, \code{\link{BchronCalibrate}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}} for a slower exact version of this function

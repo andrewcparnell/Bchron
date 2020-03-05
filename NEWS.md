@@ -1,3 +1,10 @@
+# Bchron 4.6 
+
+Fixed two important bugs:
+
+  - Fixed a mistake in BchronCalibrate that will cause calibrated to have incorrect error ranges compared to OxCal
+  - Fixed a problem that occurred in very straight chronologies where a certain parameter would go to zero and cause numerical underflow
+
 # Bchron 4.5
 
   - Fixed some minor issues with ggplots

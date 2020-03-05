@@ -15,7 +15,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Load in the calibration curve with:
 #' intcal09 = read.table('http://www.radiocarbon.org/IntCal09%20files/intcal09.14c',sep=',')
 #' # Run createCalCurve
