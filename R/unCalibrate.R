@@ -1,6 +1,6 @@
 #' Uncalibrate a Radiocarbon date
 #'
-#' @param calAges Either a vector of calibrated ages (when type = 'ages'), or a vector of calibrated samples (type = 'samples')
+#' @param calAges Either a vector of calibrated ages (when \code{type = 'ages'}), or a vector of calibrated samples (\code{type = 'samples'})
 #' @param calCurve he calibration curve to use. Only a single calibration curve is currently supported
 #' @param type Either 'ages' which uncalibrates a calibrated age values without error (i.e. just a lookup on the calibration curve), or a 'samples' which estimates both an uncalibrated mean age and a standard deviation
 #' @param pathToCalCurves The path to the calibration curve directory. Defaults to the location of the standard calibration curves given in the package

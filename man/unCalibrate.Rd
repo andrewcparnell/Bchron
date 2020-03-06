@@ -13,7 +13,7 @@ unCalibrate(
 )
 }
 \arguments{
-\item{calAges}{Either a vector of calibrated ages (when type = 'ages'), or a vector of calibrated samples (type = 'samples')}
+\item{calAges}{Either a vector of calibrated ages (when \code{type = 'ages'}), or a vector of calibrated samples (\code{type = 'samples'})}
 
 \item{calCurve}{he calibration curve to use. Only a single calibration curve is currently supported}
 

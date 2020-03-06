@@ -374,9 +374,9 @@ Bchron allows for user-defined calibration curves to be created through the func
   - (Optionally) the 1-sigma error for the calibration curve in uncalibrated years. If not included the error is assumed to be zero
   - (Optionally) The path to where the resulting file will be stored
 
-Once run, the calibration curve needs to be moved from the chosen path (by default the working directory) to the location of the other calibration curves. This is by default `system.file('data',package='Bchron')`. The resulting calibration curve can be used for all future runs until the package is deleted or re-installed. The calibration curve can be used by simply calling it in any other Bchron function using the supplied name. Note that no name checking is done, so it is possible to over-write the pre-defined calibration curves if
+Once run, the calibration curve needs to be moved from the chosen path (by default the working directory) to the location of the other calibration curves. This is by default `system.file('data',package='Bchron')`. The resulting calibration curve can be used for all future runs until the package is deleted or re-installed. The calibration curve can be used by simply calling it in any other Bchron function using the supplied name. Note that no name checking is done, so it is possible to over-write the pre-defined calibration curves if the user is not careful.
 
-As an example, consider installing the intcal09 calibration curve, traditionally available from http://www.radiocarbon.org/IntCal09%20files/intcal09.14c. We can run the following code:
+We now consider an example of loading in and creating the IntCal09 calibration curve, but please note that the radiocarbon calibration curve website has been down for several months, so this may not run at present:
 
 ```{r, eval = FALSE}
 # Load in the calibration curve with:
@@ -404,7 +404,7 @@ plot(age_09) +
 
 ## Uncalibrating dates
 
-Sometimes it is useful to turn a calendar age estimate into an uncalibrated age. This might be for simulation or model checking purposes. 'Un-calibrating' dates can be implemented in Bchron using the `unCalibrate` function. There are two versions, one where you have a single age and just want to get a quick look up of the 14C age, and another where you have the full distribution of the calibrated age and want to estimate both the 14C age and its associated error
+Sometimes it is useful to turn a calendar age estimate into an uncalibrated age. This might be for simulation or model checking purposes. 'Un-calibrating' dates can be implemented in Bchron using the `unCalibrate` function. There are two versions, one where you have a single age and just want to get a quick look up of the 14C age, and another where you have the full distribution of the calibrated age and want to estimate both the 14C age and its associated error.
 
 The simple version can be run with, e.g.:
 
