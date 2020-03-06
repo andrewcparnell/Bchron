@@ -19,7 +19,8 @@
 #' # Load in the calibration curve with:
 #' # intcal09 = read.table('http://www.radiocarbon.org/IntCal09%20files/intcal09.14c',sep=',')
 #' # Run createCalCurve
-#' #  createCalCurve(name='intcal09',cal_ages=intcal09[,1],uncal_ages=intcal09[,2],one_sigma=intcal09[,3])
+#' #  createCalCurve(name='intcal09',cal_ages=intcal09[,1],
+#' # uncal_ages=intcal09[,2],one_sigma=intcal09[,3])
 #' 
 #' # Copy the file to the right place
 #' # file.copy(from = 'intcal09.rda',
