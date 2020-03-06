@@ -242,7 +242,7 @@ You could then for example save this to a csv file with, e.g. `write.csv(sed_rat
 
 ## Identifying influential dates and positions
 
-Bchron contains two functions which can help with future data strategies. They are:
+Bchron contains two functions which can help with future dating strategies. They are:
 
 1. Identifying the position at which the maximum age variance occurs. This is useful if you wanted to pick the one next position to date
 2. Identifying which date is the most influential on the chronology. This is useful if you are concerned that one date might be leading the chronology astray.
