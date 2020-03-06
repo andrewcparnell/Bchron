@@ -15,28 +15,27 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' # REMOVED DUE TO WEBSITE DOWN
 #' # Load in the calibration curve with:
-#' intcal09 = read.table('http://www.radiocarbon.org/IntCal09%20files/intcal09.14c',sep=',')
+#' # intcal09 = read.table('http://www.radiocarbon.org/IntCal09%20files/intcal09.14c',sep=',')
 #' # Run createCalCurve
-#' createCalCurve(name='intcal09',cal_ages=intcal09[,1],uncal_ages=intcal09[,2],one_sigma=intcal09[,3])
+#' #  createCalCurve(name='intcal09',cal_ages=intcal09[,1],uncal_ages=intcal09[,2],one_sigma=intcal09[,3])
 #' 
 #' # Copy the file to the right place
-#' file.copy(from = 'intcal09.rda',
-#'           to = system.file('data',package='Bchron'),
-#'                            overwrite = TRUE) # Only need this if you've run it more than once
+#' # file.copy(from = 'intcal09.rda',
+#' #            to = system.file('data',package='Bchron'),
+#' #                             overwrite = TRUE) # Only need this if you've run it more than once
 #' 
 #' # Calibrate the ages under two calibration curves
-#' age_09 = BchronCalibrate(ages=15500, ageSds=150,
-#'                          calCurves = 'intcal09',ids='My Date', 
-#'                          pathToCalCurves = getwd())
-#' age_13 = BchronCalibrate(ages=15500,ageSds=150,calCurves = 'intcal13')
+#' #  age_09 = BchronCalibrate(ages=15500, ageSds=150,
+#' #                           calCurves = 'intcal09',ids='My Date', 
+#' #                           pathToCalCurves = getwd())
+#' #  age_13 = BchronCalibrate(ages=15500,ageSds=150,calCurves = 'intcal13')
 #' 
 #' # Finally plot the difference
-#' plot(age_09)
-#' with(age_13$Date1,lines(ageGrid,densities,col='red'))
-#' legend('topleft',legend=c('intcal09','intcal13'),col=c('black','red'),lty=1)
-#' }
+#' #  plot(age_09)
+#' #  with(age_13$Date1,lines(ageGrid,densities,col='red'))
+#' #  legend('topleft',legend=c('intcal09','intcal13'),col=c('black','red'),lty=1)
 #' 
 createCalCurve = function(name,
                           cal_ages,
