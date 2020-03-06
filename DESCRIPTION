@@ -4,6 +4,8 @@ Title: Radiocarbon Dating, Age-Depth Modelling, Relative Sea Level Rate
     Estimation, and Non-Parametric Phase Modelling
 Version: 4.6.1
 Date: 2020-03-06
+URL: http://andrewcparnell.github.io/Bchron/
+BugReports: https://github.com/andrewcparnell/Bchron/issues
 Depends:
     R (>= 3.4.0),
 Imports:
