@@ -2,7 +2,7 @@
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/Bchron?)](https://github.com/metacran/cranlogs.app)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/Bchron?color=82b4e8)](https://github.com/metacran/cranlogs.app)
 
-New: Bchron website at: [http://andrewcparnell.github.io/Bchron/]
+New: Bchron website at: (http://andrewcparnell.github.io/Bchron/)
 
 Bchron is a Bayesian chronology model implemented in R. 
 
