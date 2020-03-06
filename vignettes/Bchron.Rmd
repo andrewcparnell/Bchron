@@ -108,7 +108,7 @@ age_samples = sampleAges(ages3)
 apply(age_samples, 2, quantile, prob=c(0.025,0.975))
 ```
 
-The `sampleAges` function introduces some uncertainty as it is a simple random sample. This means that repeatedly running it will give you slightly different results. If you are introduced in precision at a yearly level, you might want to increase the `n_samp` argument though will slow the function down a little.
+The `sampleAges` function introduces some uncertainty as it is a simple random sample. This means that repeatedly running it will give you slightly different results. If you require precision at a yearly level, you might want to increase the `n_samp` argument though will slow the function down a little.
 
 If you wanted to find each date's median age (though this is often an inappropriate summary and should be treated with caution), use:
 ```{r}
