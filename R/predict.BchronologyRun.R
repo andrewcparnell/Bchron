@@ -119,7 +119,8 @@ predict.BchronologyRun = function(object,
     oldPositions = (object$positions - min(object$positions)) / positionRange
     diffPosition = diff(oldPositions)
     newPositions = (newPositions - min(object$positions)) / positionRange
-    newPositionThicknesses = newPositionThicknesses / positionRange
+    if(!is.null(newPositionThicknesses))
+       newPositionThicknesses = newPositionThicknesses / positionRange
   } else {
     oldPositions = object$positions
     diffPosition = diff(oldPositions)

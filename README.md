@@ -1,6 +1,7 @@
 [![cran version](http://www.r-pkg.org/badges/version/Bchron)](https://cran.rstudio.com/web/packages/Bchron) 
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/Bchron?)](https://github.com/metacran/cranlogs.app)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/Bchron?color=82b4e8)](https://github.com/metacran/cranlogs.app)
+[![Codecov test coverage](https://codecov.io/gh/andrewcparnell/Bchron/branch/master/graph/badge.svg)](https://codecov.io/gh/andrewcparnell/Bchron?branch=master)
 
 New: Bchron website at: http://andrewcparnell.github.io/Bchron/
 

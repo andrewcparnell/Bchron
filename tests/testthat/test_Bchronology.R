@@ -30,6 +30,10 @@ predictAges1 = predict(GlenOut,
 predictAges2 = predict(GlenOut, 
                       newPositions = seq(0,1500,by=10))
 
+acc_rate = summary(GlenOut, type = 'acc_rate',
+                   probs=c(0.25, 0.5, 0.75))
+sed_rate = summary(GlenOut, type = 'sed_rate', useExisting = FALSE,
+                   probs=c(0.25, 0.5, 0.75))
 
 test_that('Data sets', {
   expect_output(print(Glendalough))
@@ -56,7 +60,6 @@ test_that("summary.BchronologyRun", {
   expect_output(summary(SlugOut, type='sed_rate'))
   expect_output(summary(SlugOut, type='acc_rate'))
   expect_output(summary(SlugOut, type='max_var'))
-  
 })  
   
 test_that("plot.BchronologyRun", {
@@ -65,5 +68,27 @@ test_that("plot.BchronologyRun", {
 })
 
 test_that("predict.BchronologyRun", {
-  
+  expect_type(predictAges1, 'matrix')
+  expect_type(predictAges2, 'matrix')
+  expect_true(any(!is.na(predictAges1)))
+  expect_true(any(!is.na(predictAges2)))
+})
+
+test_that("sedimentation and accumulation rates", {
+  expect_type(acc_rate, 'data.frame')
+  expect_type(sed_rate, 'data.frame')
+})
+
+test_that("Influence", {
+  expect_type(dateInfluence(GlenOut, 
+                whichDate = 'Beta-100901',
+                measure = 'absMedianDiff'),
+              'list')
+  expect_type(dateInfluence(GlenOut, 
+                whichDate = 'all',
+                measure = 'absMedianDiff'),
+              'list')
+  expect_type(dateInfluence(GlenOut, 
+                whichDate = 'all',
+                measure = 'KL'), 'list')
 })

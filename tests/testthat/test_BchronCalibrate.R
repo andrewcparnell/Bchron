@@ -1,4 +1,4 @@
-context("BchronCalibrate")
+context("BchronCalibrate and related functions")
 
 library(Bchron)
 
