@@ -34,9 +34,9 @@ Description: Enables quick calibration of radiocarbon dates under various
   unpublished), and reverse calibration of dates from calibrated into 
   un-calibrated years (also unpublished).
 License: GPL (>= 2)
-URL: https://github.com/andrewcparnell/Bchron
 Suggests:
-    knitr
+    knitr,
+    testthat
 VignetteBuilder: knitr
 NeedsCompilation: yes
 RoxygenNote: 7.0.2
