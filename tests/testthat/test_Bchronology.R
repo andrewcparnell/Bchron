@@ -51,14 +51,10 @@ test_that("summary.BchronologyRun", {
   expect_output(summary(GlenOut, type='quantiles'))
   expect_output(summary(GlenOut, type='convergence'))
   expect_output(summary(GlenOut, type='outliers'))
-  expect_output(summary(GlenOut, type='sed_rate'))
-  expect_output(summary(GlenOut, type='acc_rate'))
   expect_output(summary(GlenOut, type='max_var'))
   expect_output(summary(SlugOut, type='quantiles'))
   expect_output(summary(SlugOut, type='convergence'))
   expect_output(summary(SlugOut, type='outliers'))
-  expect_output(summary(SlugOut, type='sed_rate'))
-  expect_output(summary(SlugOut, type='acc_rate'))
   expect_output(summary(SlugOut, type='max_var'))
 })  
   
@@ -68,15 +64,15 @@ test_that("plot.BchronologyRun", {
 })
 
 test_that("predict.BchronologyRun", {
-  expect_type(predictAges1, 'matrix')
-  expect_type(predictAges2, 'matrix')
+  expect_type(predictAges1, 'double')
+  expect_type(predictAges2, 'double')
   expect_true(any(!is.na(predictAges1)))
   expect_true(any(!is.na(predictAges2)))
 })
 
 test_that("sedimentation and accumulation rates", {
-  expect_type(acc_rate, 'data.frame')
-  expect_type(sed_rate, 'data.frame')
+  expect_type(acc_rate, 'list')
+  expect_type(sed_rate, 'list')
 })
 
 test_that("Influence", {
@@ -88,7 +84,4 @@ test_that("Influence", {
                 whichDate = 'all',
                 measure = 'absMedianDiff'),
               'list')
-  expect_type(dateInfluence(GlenOut, 
-                whichDate = 'all',
-                measure = 'KL'), 'list')
 })
