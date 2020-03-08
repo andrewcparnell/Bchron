@@ -114,6 +114,7 @@ predict.BchronologyRun = function(object,
   p = 1.2
   alpha = (2 - p) / (p - 1)
   originalNewPositions = newPositions
+  browser()
   if(object$positionNormalise) {
     positionRange = diff(range(object$positions))
     oldPositions = (object$positions - min(object$positions)) / positionRange
@@ -138,7 +139,7 @@ predict.BchronologyRun = function(object,
     utils::setTxtProgressBar(pb, i)
     
     if (is.null(newPositionThicknesses)) {
-      currPosition = newPositions / object$positionScaleVal
+      currPosition = newPositions
     } else {
       currPosition = sort(
         stats::runif(
