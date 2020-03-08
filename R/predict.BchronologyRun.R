@@ -114,7 +114,6 @@ predict.BchronologyRun = function(object,
   p = 1.2
   alpha = (2 - p) / (p - 1)
   originalNewPositions = newPositions
-  browser()
   if(object$positionNormalise) {
     positionRange = diff(range(object$positions))
     oldPositions = (object$positions - min(object$positions)) / positionRange
@@ -122,7 +121,7 @@ predict.BchronologyRun = function(object,
     newPositions = (newPositions - min(object$positions)) / positionRange
     newPositionThicknesses = newPositionThicknesses / positionRange
   } else {
-    oldPositions = object$positions / object$positionScaleVal
+    oldPositions = object$positions
     diffPosition = diff(oldPositions)
   }
   
