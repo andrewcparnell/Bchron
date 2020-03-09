@@ -101,7 +101,6 @@ choosePositions.BchronologyRun = function(bchrRun,
   main = ifelse(count == 1, 
                 'Bchronology plot with position of maximum uncertainty',
                 'Bchronology plot with extra psuedo-dates')
-  if(plot) plot(bchrRun, main = main)
   
   # First find the position which the biggest uncertainty
   
@@ -117,7 +116,7 @@ choosePositions.BchronologyRun = function(bchrRun,
   # If N is 1 then return the position with the max uncertainty
   returnPos = positions[which.max(currUnc)]
   linesAt = c(linesAt, returnPos)
-  if(plot) graphics::abline(h = linesAt)
+  if(plot) plot(bchrRun, main = main) + geom_abline(yintercept = linesAt)
   store = sprintf("osition with largest uncertainty at %s%% level is %s",
             signif(level*100, 3), signif(returnPos, 3))
   if(N > 1 | count > 1) cat('Round', count, '\n')
