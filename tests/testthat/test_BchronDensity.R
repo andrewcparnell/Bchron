@@ -1,5 +1,5 @@
 
-context("BchronDensirt and related functions")
+context("BchronDensity and related functions")
 
 library(Bchron)
 
@@ -15,12 +15,10 @@ test_that("BchronDensity", {
 })
 
 test_that("BchronDensity", {
-  expect_s3_class(SlugDensFast, 'BchronDensityRun')
+  expect_s3_class(SlugDensFast, 'BchronDensityRunFast')
 })
 
 test_that("summary.BchronologyRun", {
   expect_output(summary(SlugDens, prob = 0.95))
 })
   
-
-plot(SlugDens,xlab='Age (cal years BP)', xaxp=c(0, 16000, 16))
