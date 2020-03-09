@@ -9,3 +9,5 @@
 ^\.travis\.yml$
 ^codecov\.yml$
 ^revdep$
+^doc$
+^Meta$
