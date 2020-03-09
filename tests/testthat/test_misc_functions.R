@@ -31,4 +31,9 @@ test_that("sampleAges", {
   expect_type(apply(age_samples, 2, quantile, prob=c(0.025,0.975)), 'double')
 })
 
+test_that("CreateCalCurve", {
+  intcal09 = read.table(system.file('extdata/intcal09.14c', package = 'Bchron'), sep=',')
+  expect_output(createCalCurve(name='intcal09',cal_ages=intcal09[,1], 
+                 uncal_ages=intcal09[,2],one_sigma=intcal09[,3]))
+})
 
