@@ -2,8 +2,8 @@ Package: Bchron
 Type: Package
 Title: Radiocarbon Dating, Age-Depth Modelling, Relative Sea Level Rate
     Estimation, and Non-Parametric Phase Modelling
-Version: 4.6.1
-Date: 2020-03-06
+Version: 4.7.0
+Date: 2020-03-09
 URL: http://andrewcparnell.github.io/Bchron/
 BugReports: https://github.com/andrewcparnell/Bchron/issues
 Depends:
@@ -37,7 +37,8 @@ License: GPL (>= 2)
 Suggests:
     knitr,
     testthat,
-    covr
+    covr,
+    vdiffr
 VignetteBuilder: knitr
 NeedsCompilation: yes
 RoxygenNote: 7.0.2

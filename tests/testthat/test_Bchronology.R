@@ -3,9 +3,6 @@ context("Bchronology and related functions")
 library(Bchron)
 
 data(Glendalough)
-data(Sluggan)
-data(TestChronData)
-data(TestRSLData)
 
 GlenOut = with(Glendalough, 
                Bchronology(ages=ages,
@@ -15,14 +12,6 @@ GlenOut = with(Glendalough,
                            positionThicknesses=thickness,
                            ids=id, 
                            predictPositions=seq(0,1500,by=10)))
-SlugOut = with(Sluggan,
-               Bchronology(ages=ages,
-                           ageSds=ageSds,
-                           calCurves=calCurves,
-                           positions=position,
-                           positionThicknesses=thickness,
-                           ids=id,
-                           jitterPositions = TRUE))
 
 predictAges1 = predict(GlenOut, 
                       newPositions = c(150,725,1500), 
@@ -35,16 +24,29 @@ acc_rate = summary(GlenOut, type = 'acc_rate',
 sed_rate = summary(GlenOut, type = 'sed_rate', useExisting = FALSE,
                    probs=c(0.25, 0.5, 0.75))
 
+# Check choosing new positions
+newPositions = choosePositions(GlenOut, N = 3)
+newPositions2 = choosePositions(GlenOut, N = 2,
+                                positions = seq(500, 700, by = 10))
+
+# Remove two dates
+GlenOut_m2 = Bchronology(ages=Glendalough$ages[-c(3:4)],
+                         ageSds=Glendalough$ageSds[-c(3:4)],
+                         calCurves=Glendalough$calCurves[-c(3:4)],
+                         positions=Glendalough$position[-c(3:4)],
+                         positionThicknesses=Glendalough$thickness[-c(3:4)],
+                         ids=Glendalough$id[-c(3:4)],
+                         predictPositions=seq(0,1500,by=10))
+
+
+
+
 test_that('Data sets', {
   expect_output(print(Glendalough))
-  expect_output(print(Sluggan))
-  expect_output(print(TestChronData))
-  expect_output(print(TestRSLData))
 })
 
 test_that("Bchronology", {
   expect_s3_class(GlenOut, 'BchronologyRun')
-  expect_s3_class(SlugOut, 'BchronologyRun')
 })
 
 test_that("summary.BchronologyRun", {
@@ -52,22 +54,17 @@ test_that("summary.BchronologyRun", {
   expect_output(summary(GlenOut, type='convergence'))
   expect_output(summary(GlenOut, type='outliers'))
   expect_output(summary(GlenOut, type='max_var'))
-  expect_output(summary(SlugOut, type='quantiles'))
-  expect_output(summary(SlugOut, type='convergence'))
-  expect_output(summary(SlugOut, type='outliers'))
-  expect_output(summary(SlugOut, type='max_var'))
 })  
   
 test_that("plot.BchronologyRun", {
   expect_s3_class(plot(GlenOut), 'ggplot')
-  expect_s3_class(plot(SlugOut), 'ggplot')
 })
 
 test_that("predict.BchronologyRun", {
   expect_type(predictAges1, 'double')
   expect_type(predictAges2, 'double')
-  expect_true(any(!is.na(predictAges1)))
-  expect_true(any(!is.na(predictAges2)))
+  expect_false(any(is.na(predictAges1)))
+  expect_false(any(is.na(predictAges2)))
 })
 
 test_that("sedimentation and accumulation rates", {
@@ -80,8 +77,24 @@ test_that("Influence", {
                 whichDate = 'Beta-100901',
                 measure = 'absMedianDiff'),
               'list')
-  expect_type(dateInfluence(GlenOut, 
-                whichDate = 'all',
-                measure = 'absMedianDiff'),
-              'list')
 })
+
+test_that('choosePositions', {
+  skip_on_cran()
+  expect_type(newPositions, 'double')
+  expect_type(newPositions2, 'double')
+  expect_false(any(is.na(newPositions)))
+  expect_false(any(is.na(newPositions2)))
+})
+
+test_that('coreInfluence', {
+  expect_output(coreInfluence(GlenOut_m2,
+                GlenOut,
+                type = c('max', 'plot'),
+                xlab = 'Age (cal years BP)',
+                ylab = 'Depth (cm)',
+                main = 'Chronology difference at 95% for
+              Glendalough removing two dates',
+                las = 1))
+})
+
