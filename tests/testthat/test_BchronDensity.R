@@ -23,9 +23,9 @@ test_that("summary.BchronDensity", {
 })
 
 test_that("plot.BchronDensityRun", {
-  expect_null(plot(SlugDens))
+  expect_null(plot(SlugDens, plotRawSum = TRUE))
 })
 
 test_that("plot.BchronDensityRunFast", {
-  expect_null(plot(SlugDensFast))
+  expect_null(plot(SlugDensFast, plotSum = TRUE))
 })

@@ -19,10 +19,10 @@ predictAges1 = predict(GlenOut,
 predictAges2 = predict(GlenOut, 
                       newPositions = seq(0,1500,by=10))
 
-# acc_rate = summary(GlenOut, type = 'acc_rate',
-#                    probs=c(0.25, 0.5, 0.75))
-# sed_rate = summary(GlenOut, type = 'sed_rate', useExisting = FALSE,
-#                    probs=c(0.25, 0.5, 0.75))
+acc_rate = summary(GlenOut, type = 'acc_rate',
+                   probs=c(0.25, 0.5, 0.75))
+sed_rate = summary(GlenOut, type = 'sed_rate', useExisting = FALSE,
+                   probs=c(0.25, 0.5, 0.75))
 
 # Check choosing new positions
 newPositions = choosePositions(GlenOut, N = 3)
@@ -65,15 +65,8 @@ test_that("predict.BchronologyRun", {
 })
 
 test_that("sedimentation and accumulation rates", {
-  # expect_type(acc_rate, 'list')
-  # expect_type(sed_rate, 'list')
-})
-
-test_that("Influence", {
-  expect_type(dateInfluence(GlenOut, 
-                whichDate = 'Beta-100901',
-                measure = 'absMedianDiff'),
-              'list')
+  expect_type(acc_rate, 'list')
+  expect_type(sed_rate, 'list')
 })
 
 test_that('choosePositions', {
@@ -82,16 +75,5 @@ test_that('choosePositions', {
   expect_type(newPositions2, 'double')
   expect_false(any(is.na(newPositions)))
   expect_false(any(is.na(newPositions2)))
-})
-
-test_that('coreInfluence', {
-  expect_output(coreInfluence(GlenOut_m2,
-                GlenOut,
-                type = c('max', 'plot'),
-                xlab = 'Age (cal years BP)',
-                ylab = 'Depth (cm)',
-                main = 'Chronology difference at 95% for
-              Glendalough removing two dates',
-                las = 1))
 })
 
