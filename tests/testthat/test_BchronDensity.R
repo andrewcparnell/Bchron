@@ -2,7 +2,6 @@
 context("BchronDensity and related functions")
 
 library(Bchron)
-library(vdiffr)
 
 data(Sluggan)
 SlugDens = BchronDensity(ages=Sluggan$ages,
@@ -24,9 +23,9 @@ test_that("summary.BchronDensity", {
 })
 
 test_that("plot.BchronDensityRun", {
-  expect_doppelganger("plot_slugDens", plot(SlugDens))
+  expect_null(plot(SlugDens))
 })
 
 test_that("plot.BchronDensityRunFast", {
-  expect_doppelganger("plot_slugDensFast", plot(SlugDensFast))
+  expect_null(plot(SlugDensFast))
 })

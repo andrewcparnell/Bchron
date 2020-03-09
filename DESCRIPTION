@@ -37,8 +37,7 @@ License: GPL (>= 2)
 Suggests:
     knitr,
     testthat,
-    covr,
-    vdiffr
+    covr
 VignetteBuilder: knitr
 NeedsCompilation: yes
 RoxygenNote: 7.0.2

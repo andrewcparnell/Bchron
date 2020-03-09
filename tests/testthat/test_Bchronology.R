@@ -38,9 +38,6 @@ GlenOut_m2 = Bchronology(ages=Glendalough$ages[-c(3:4)],
                          ids=Glendalough$id[-c(3:4)],
                          predictPositions=seq(0,1500,by=10))
 
-
-
-
 test_that('Data sets', {
   expect_output(print(Glendalough))
 })

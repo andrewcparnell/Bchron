@@ -2,6 +2,8 @@ context("RSL functions")
 
 library(Bchron)
 library(ggplot2)
+data(TestChronData)
+data(TestRSLData)
 
 RSLchron = with(TestChronData, 
                 Bchronology(ages = ages,
@@ -29,7 +31,8 @@ test_that("RSL functions", {
 })
 
 test_that("summary and plot RSL functions", {
-  expect_s3_class(plot(RSLrun, type = 'RSL') + ggtitle('Relative sea level plot'), 'ggplot')
+  expect_s3_class(plot(RSLrun, type = 'RSL') + ggtitle('Relative sea level plot'),
+                  'ggplot')
   expect_s3_class(plot(RSLrun, type = 'rate') + ggtitle('Rate of RSL change') + 
                     ylab('Rate (mm per year)'), 'ggplot')
 
