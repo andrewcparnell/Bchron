@@ -6,6 +6,7 @@ library(Bchron)
 
 test_that('Sluggan', {
   skip_on_cran()
+  skip_on_travis()
   data(Sluggan)
   expect_output(print(Sluggan))
   run = with(Sluggan, 
@@ -26,6 +27,7 @@ test_that('Sluggan', {
 
 test_that('TestChronData', {
   skip_on_cran()
+  skip_on_travis()
   data(TestChronData)
   expect_output(print(TestChronData))
   run = with(TestChronData, 
@@ -46,6 +48,7 @@ test_that('TestChronData', {
 
 test_that('Taphocoenose_Jan20', {
   skip_on_cran()
+  skip_on_travis()
   chron_df <-
     structure(
       list(
