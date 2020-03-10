@@ -401,7 +401,7 @@ age_13 = BchronCalibrate(age=15500,ageSds=150,calCurves = 'intcal13',
                          ids = 'Intcal13')
 library(ggplot2)
 plot(age_09) + 
-  geom_line(data = as.data.frame(age_13$Intcal13), 
+  geom_line(data = as.data.frame(age_13$Date1), 
             aes(x = ageGrid, y = densities), col = 'red') + 
   ggtitle('Intcal09 vs Intcal13')
 ```

@@ -16,7 +16,7 @@ test_that("dateInfluence", {
   
   # Remove two dates
   GlenOut_m2 = Bchronology(ages=Glendalough$ages[-c(3:4)],
-                           ageSds=Glendaloughalough$ageSds[-c(3:4)],
+                           ageSds=Glendalough$ageSds[-c(3:4)],
                            calCurves=Glendalough$calCurves[-c(3:4)],
                            positions=Glendalough$position[-c(3:4)],
                            positionThicknesses=Glendalough$thickness[-c(3:4)],

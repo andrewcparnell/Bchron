@@ -35,7 +35,7 @@
 #' # Finally plot the difference
 #' library(ggplot2)
 #' plot(age_09) + 
-#' geom_line(data = as.data.frame(age_13$Intcal13), 
+#' geom_line(data = as.data.frame(age_13$Date1), 
 #'          aes(x = ageGrid, y = densities), col = 'red') + 
 #'      ggtitle('Intcal09 vs Intcal13')
 #' 
