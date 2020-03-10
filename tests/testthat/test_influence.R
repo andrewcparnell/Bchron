@@ -4,6 +4,7 @@ library(Bchron)
 
 test_that("dateInfluence", {
   skip_on_cran()
+  skip_on_travis()
   GlenOut = with(Glendalough, 
                  Bchronology(ages=ages,
                              ageSds=ageSds, 

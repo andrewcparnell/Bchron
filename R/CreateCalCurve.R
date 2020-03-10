@@ -27,7 +27,7 @@
 #'                             overwrite = TRUE) # Only need this if you've run it more than once
 #' 
 #' # Calibrate the ages under two calibration curves
-#'  age_09 = BchronCalibrate(ages=15500, ageSds=150,
+#' age_09 = BchronCalibrate(ages=15500, ageSds=150,
 #'                           calCurves = 'intcal09',ids='My Date', 
 #'                           pathToCalCurves = getwd())
 #' age_13 = BchronCalibrate(ages=15500,ageSds=150,calCurves = 'intcal13')
