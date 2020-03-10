@@ -33,6 +33,7 @@
 #' age_13 = BchronCalibrate(ages=15500,ageSds=150,calCurves = 'intcal13')
 #' 
 #' # Finally plot the difference
+#' library(ggplot2)
 #' plot(age_09) + 
 #' geom_line(data = as.data.frame(age_13$Intcal13), 
 #'          aes(x = ageGrid, y = densities), col = 'red') + 
