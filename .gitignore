@@ -18,8 +18,8 @@
 
 # Compiled files
 src/*.so
-Src/*.o
-Src/*.gcda
+src/*.o
+src/*.gcda
 
 # Revdep things
 revdep/checks
