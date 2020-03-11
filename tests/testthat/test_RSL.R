@@ -13,12 +13,18 @@ RSLchron = with(TestChronData,
                             ids = id,
                             calCurves = calCurves,
                             jitterPositions = TRUE,
-                            predictPositions = TestRSLData$Depth))
+                            predictPositions = TestRSLData$Depth,
+                            iterations = 100,
+                            burn = 20,
+                            thin = 1))
 RSLrun = with(TestRSLData, 
               BchronRSL(RSLchron,
                         RSLmean = RSL,
                         RSLsd = Sigma,
-                        degree = 3))
+                        degree = 3,
+                        iterations = 100,
+                        burn = 20,
+                        thin = 1))
 
 test_that("RSL Bchronology", {
   expect_s3_class(RSLchron, 'BchronologyRun')

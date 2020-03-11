@@ -6,10 +6,14 @@ library(Bchron)
 data(Sluggan)
 SlugDens = BchronDensity(ages=Sluggan$ages,
                          ageSds=Sluggan$ageSds,
-                         calCurves=Sluggan$calCurves)
+                         calCurves=Sluggan$calCurves,
+                         iterations = 100,
+                         burn = 20,
+                         thin = 1)
 SlugDensFast = BchronDensityFast(ages=Sluggan$ages,
                                  ageSds=Sluggan$ageSds, 
-                                 calCurves=Sluggan$calCurves)
+                                 calCurves=Sluggan$calCurves,
+                                 samples = 100)
 test_that("BchronDensity", {
   expect_s3_class(SlugDens, 'BchronDensityRun')
 })

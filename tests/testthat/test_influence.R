@@ -11,7 +11,10 @@ test_that("dateInfluence", {
                              positions=position, 
                              positionThicknesses=thickness,
                              ids=id, 
-                             predictPositions=seq(0,1500,by=100)))
+                             predictPositions=seq(0,1500,by=100),
+                             iterations = 100,
+                             burn = 20,
+                             thin = 1))
   
   # Remove two dates
   GlenOut_m2 = Bchronology(ages=Glendalough$ages[-c(3:4)],
@@ -20,7 +23,10 @@ test_that("dateInfluence", {
                            positions=Glendalough$position[-c(3:4)],
                            positionThicknesses=Glendalough$thickness[-c(3:4)],
                            ids=Glendalough$id[-c(3:4)],
-                           predictPositions=seq(0,1500,by=100))
+                           predictPositions=seq(0,1500,by=100),
+                           iterations = 100,
+                           burn = 20,
+                           thin = 1)
   
   expect_type(dateInfluence(GlenOut, 
                             whichDate = 'Beta-100901',

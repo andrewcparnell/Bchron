@@ -4,6 +4,8 @@ library(Bchron)
 
 data(Glendalough)
 
+set.seed(100)
+
 GlenOut = with(Glendalough, 
                Bchronology(ages=ages,
                            ageSds=ageSds, 
@@ -11,7 +13,10 @@ GlenOut = with(Glendalough,
                            positions=position, 
                            positionThicknesses=thickness,
                            ids=id, 
-                           predictPositions=seq(0,1500,by=10)))
+                           predictPositions=seq(0,1500,by=10),
+                           iterations = 100,
+                           burn = 20,
+                           thin = 1))
 
 predictAges1 = predict(GlenOut, 
                       newPositions = c(150,725,1500), 
@@ -36,7 +41,10 @@ GlenOut_m2 = Bchronology(ages=Glendalough$ages[-c(3:4)],
                          positions=Glendalough$position[-c(3:4)],
                          positionThicknesses=Glendalough$thickness[-c(3:4)],
                          ids=Glendalough$id[-c(3:4)],
-                         predictPositions=seq(0,1500,by=10))
+                         predictPositions=seq(0,1500,by=10),
+                         iterations = 100,
+                         burn = 20,
+                         thin = 1)
 
 test_that('Data sets', {
   expect_output(print(Glendalough))

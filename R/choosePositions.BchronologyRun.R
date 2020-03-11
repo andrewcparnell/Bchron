@@ -23,6 +23,8 @@
 #' @param count Counter function (not for use other than by the function itself)
 #' @param linesAt Horizontal line positions (not for use other than by the function itself)
 #'
+#' @importFrom ggplot2 geom_hlines
+#'
 #' @return Some plots and the positions to date next
 #' @export
 #'
@@ -116,7 +118,7 @@ choosePositions.BchronologyRun = function(bchrRun,
   # If N is 1 then return the position with the max uncertainty
   returnPos = positions[which.max(currUnc)]
   linesAt = c(linesAt, returnPos)
-  if(plot) plot(bchrRun, main = main) + geom_abline(yintercept = linesAt)
+  if(plot) plot(bchrRun, main = main) + ggplot2::geom_hline(yintercept = linesAt)
   store = sprintf("osition with largest uncertainty at %s%% level is %s",
             signif(level*100, 3), signif(returnPos, 3))
   if(N > 1 | count > 1) cat('Round', count, '\n')
@@ -171,7 +173,6 @@ choosePositions.BchronologyRun = function(bchrRun,
                     newDate, newSds, signif(returnPos, 3))
     cat(store, '\n')
     
-    
     # Run Bchron on this new data set
     newOut = Bchronology(ages=agesNew,
                          ageSds=sdNew,
@@ -180,7 +181,11 @@ choosePositions.BchronologyRun = function(bchrRun,
                          positionThicknesses=positionThicknessesNew,
                          #ids=idsNew,
                          outlierProbs = outlierProbsNew,
-                         predictPositions = positions)
+                         predictPositions = positions,
+                         iterations = bchrRun$inputVals$iterations,
+                         burn = bchrRun$inputVals$burn,
+                         thin = bchrRun$inputVals$thin,
+                         jitterPositions = bchrRun$inputVals$jitterPositions)
     cat('\n')
     
     if(plot) plot(newOut, main = 'Bchronology plot with extra psuedo-dates')
