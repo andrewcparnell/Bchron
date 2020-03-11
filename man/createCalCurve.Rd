@@ -6,22 +6,25 @@
 \usage{
 createCalCurve(
   name,
-  cal_ages,
-  uncal_ages,
-  one_sigma = rep(0, length(cal_ages)),
-  path_to_cal_curves = getwd()
+  calAges,
+  uncalAges,
+  oneSigma = rep(0, length(calAges)),
+  pathToCalCurves = getwd(),
+  createFile = TRUE
 )
 }
 \arguments{
 \item{name}{The name of the new calibration curve}
 
-\item{cal_ages}{A vector of the calendar/calibrated ages in years before present}
+\item{calAges}{A vector of the calendar/calibrated ages in years before present}
 
-\item{uncal_ages}{A vector of values of uncalibrated ages in appropriate units (e.g. 14C years BP)}
+\item{uncalAges}{A vector of values of uncalibrated ages in appropriate units (e.g. 14C years BP)}
 
-\item{one_sigma}{The one sigma (one standard deviation) values in uncalibrated units. If left blank it assumes these are all zero}
+\item{oneSigma}{The one sigma (one standard deviation) values in uncalibrated units. If left blank it assumes these are all zero}
 
-\item{path_to_cal_curves}{The path to the calibration curves. Will write by default to the working directory}
+\item{pathToCalCurves}{The path to the calibration curves. Will write by default to the working directory}
+
+\item{createFile}{whether to write out the new file or not. Only turned off for testing purposes}
 }
 \description{
 A function for creating a new calibration curve not already available in Bchron
@@ -33,8 +36,8 @@ All calibration curves are stored by Bchron in the standard R gzipped text forma
 # Load in the calibration curve with:
 intcal09 = read.table(system.file('extdata/intcal09.14c', package = 'Bchron'), sep=',')
 # Run createCalCurve
-createCalCurve(name='intcal09',cal_ages=intcal09[,1], 
-uncal_ages=intcal09[,2],one_sigma=intcal09[,3])
+createCalCurve(name='intcal09',calAges=intcal09[,1], 
+uncalAges=intcal09[,2],oneSigma=intcal09[,3])
 
 # Copy the file to the right place
 file.copy(from = 'intcal09.rda',

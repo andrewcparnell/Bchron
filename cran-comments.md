@@ -7,7 +7,7 @@
 ## R CMD check results
 There were no ERRORs or WARNINGs.
 
-(I got a weird error from one of the rhub runs saying packages required were not available but this was for packages like ggplot2 so I assumed this was an rhub error)
+(I got a weird error from a couple of the rhub runs saying packages required were not available but this was for packages like ggplot2 so I assumed this was an rhub error)
 
 I got one NOTE from rhub and win-builder saying:
   Days since last update: 5
