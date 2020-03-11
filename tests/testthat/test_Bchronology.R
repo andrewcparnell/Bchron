@@ -13,7 +13,7 @@ GlenOut = with(Glendalough,
                            positions=position, 
                            positionThicknesses=thickness,
                            ids=id, 
-                           predictPositions=seq(0,1500,by=10),
+                           predictPositions=seq(-10,1500,by=10),
                            iterations = 100,
                            burn = 20,
                            thin = 1))

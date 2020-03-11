@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Bchron</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.0</span>
       </span>
     </div>
 
@@ -53,14 +53,7 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/andrewcparnell/Bchron">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
+<ul class="nav navbar-nav navbar-right"></ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -76,9 +69,9 @@
       <h1>Using Bayesian radiocarbon chronology package Bchron</h1>
                         <h4 class="author">Andrew Parnell</h4>
             
-            <h4 class="date">2020-03-06</h4>
+            <h4 class="date">2020-03-11</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/andrewcparnell/Bchron/blob/master/vignettes/Bchron.Rmd"><code>vignettes/Bchron.Rmd</code></a></small>
+      
       <div class="hidden name"><code>Bchron.Rmd</code></div>
 
     </div>
@@ -170,13 +163,13 @@
 <a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co"># Now summarise them with quantile - this gives a 95% credible interval</span></a>
 <a class="sourceLine" id="cb12-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/base/apply.html">apply</a></span>(age_samples, <span class="dv">2</span>, quantile, <span class="dt">prob=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>))</a></code></pre></div>
 <pre><code>##       Date1 Date2
-## 2.5%    796 11103
-## 97.5%  1034 12000</code></pre>
-<p>The <code>sampleAges</code> function introduces some uncertainty as it is a simple random sample. This means that repeatedly running it will give you slightly different results. If you are introduced in precision at a yearly level, you might want to increase the <code>n_samp</code> argument though will slow the function down a little.</p>
+## 2.5%    796 11090
+## 97.5%  1033 12007</code></pre>
+<p>The <code>sampleAges</code> function introduces some uncertainty as it is a simple random sample. This means that repeatedly running it will give you slightly different results. If you require precision at a yearly level, you might want to increase the <code>n_samp</code> argument though will slow the function down a little.</p>
 <p>If you wanted to find each date’s median age (though this is often an inappropriate summary and should be treated with caution), use:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/apply.html">apply</a></span>(age_samples, <span class="dv">2</span>, quantile, <span class="dt">prob=</span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.5</span>))</a></code></pre></div>
 <pre><code>## Date1 Date2 
-##   911 11549</code></pre>
+##   911 11553</code></pre>
 <p>The calibration code is very fast. On a standard PC you should have no trouble calibrating thousands of dates simultaneously without a noticeably long wait.</p>
 </div>
 <div id="comparing-ages" class="section level2">
@@ -218,29 +211,29 @@
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(GlenOut, <span class="dt">type=</span><span class="st">'convergence'</span>)</a></code></pre></div>
 <pre><code>## Convergence check (watch for too many small p-values): 
 ##             p-value
-## RateMean    0.00546
-## RateVar     0.01159
-## Outlier 5   0.01785
-## Outlier 6   0.02243
-## Outlier 4   0.05257
-## Beta-100900 0.16025
-## Outlier 3   0.18772
-## Beta-122061 0.20681
-## Beta-100897 0.27276
-## Beta-100901 0.30469
-## Top-1       0.31999
-## Outlier 1   0.35807
-## Beta-100899 0.47886
-## Outlier 2   0.49720</code></pre>
+## Outlier 4   0.00389
+## Outlier 6   0.05252
+## Beta-100897 0.06539
+## Outlier 1   0.07844
+## Beta-122061 0.10651
+## Beta-100900 0.13320
+## RateMean    0.34017
+## Top-1       0.41560
+## Outlier 5   0.42950
+## Beta-100901 0.45811
+## Beta-100899 0.48300
+## Outlier 2   0.49709
+## Outlier 3   0.49709
+## RateVar     0.49838</code></pre>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(GlenOut, <span class="dt">type=</span><span class="st">'outliers'</span>)</a></code></pre></div>
 <pre><code>## Posterior outlier probability by date: 
 ##         Date OutlierProb
-##        Top-1       0.006
-##  Beta-122061       0.010
-##  Beta-100901       0.004
-##  Beta-100900       0.005
-##  Beta-100899       0.013
-##  Beta-100897       0.005</code></pre>
+##        Top-1       0.007
+##  Beta-122061       0.008
+##  Beta-100901       0.010
+##  Beta-100900       0.010
+##  Beta-100899       0.011
+##  Beta-100897       0.007</code></pre>
 <p>The first summary command produces ages for each position supplied in the <code>predictPositions</code> argument above (output not shown as it’s too long). The second provides convergence diagnostics. The third gives outlier probabilities. The <code>plot</code> command will produce an age-position plot:</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(GlenOut)</a></code></pre></div>
 <p><img src="Bchron_files/figure-html/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;"></p>
@@ -294,7 +287,7 @@ run = Bchronology(ages=mydata[,1],ageSds=mydata[,2], ...</code></pre>
 <div id="identifying-influential-dates-and-positions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#identifying-influential-dates-and-positions" class="anchor"></a>Identifying influential dates and positions</h2>
-<p>Bchron contains two functions which can help with future data strategies. They are:</p>
+<p>Bchron contains two functions which can help with future dating strategies. They are:</p>
 <ol style="list-style-type: decimal">
 <li>Identifying the position at which the maximum age variance occurs. This is useful if you wanted to pick the one next position to date</li>
 <li>Identifying which date is the most influential on the chronology. This is useful if you are concerned that one date might be leading the chronology astray.</li>
@@ -302,11 +295,11 @@ run = Bchronology(ages=mydata[,1],ageSds=mydata[,2], ...</code></pre>
 <p>Identifying the position of maximum age variance can be created with the <code>summary</code> command:</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(GlenOut, <span class="dt">type =</span> <span class="st">'max_var'</span>)</a></code></pre></div>
 <pre><code>## Top 3 positions with maximum age variance are: 
-## 800 790 810</code></pre>
+## 770 800 780</code></pre>
 <p>You can control the number of positions reported with <code>numPos</code>. For example you could now add a line to mark the most variably layer to the plot with:</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">max_var =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>(GlenOut, <span class="dt">type =</span> <span class="st">'max_var'</span>, <span class="dt">numPos =</span> <span class="dv">1</span>)</a></code></pre></div>
 <pre><code>## Position with maximum age variance is: 
-## 800</code></pre>
+## 770</code></pre>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(GlenOut) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb37-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="dt">title =</span> <span class="st">"Glendalough"</span>,</a>
 <a class="sourceLine" id="cb37-3" data-line-number="3">       <span class="dt">x =</span> <span class="st">'Age (cal years BP)'</span>,</a>
@@ -388,11 +381,14 @@ run = Bchronology(ages=mydata[,1],ageSds=mydata[,2], ...</code></pre>
 <li>(Optionally) The path to where the resulting file will be stored</li>
 </ul>
 <p>Once run, the calibration curve needs to be moved from the chosen path (by default the working directory) to the location of the other calibration curves. This is by default <code><a href="https://rdrr.io/r/base/system.file.html">system.file('data',package='Bchron')</a></code>. The resulting calibration curve can be used for all future runs until the package is deleted or re-installed. The calibration curve can be used by simply calling it in any other Bchron function using the supplied name. Note that no name checking is done, so it is possible to over-write the pre-defined calibration curves if the user is not careful.</p>
-<p>We now consider an example of loading in and creating the IntCal09 calibration curve, but please note that the radiocarbon calibration curve website has been down for several months, so this may not run at present:</p>
+<p>We now consider an example of loading in and creating the IntCal09 calibration curve:</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="co"># Load in the calibration curve with:</span></a>
-<a class="sourceLine" id="cb48-2" data-line-number="2">intcal09 =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span>(<span class="st">'http://www.radiocarbon.org/IntCal09%20files/intcal09.14c'</span>,<span class="dt">sep=</span><span class="st">','</span>)</a>
-<a class="sourceLine" id="cb48-3" data-line-number="3"><span class="co"># Run createCalCurve</span></a>
-<a class="sourceLine" id="cb48-4" data-line-number="4"><span class="kw"><a href="../reference/createCalCurve.html">createCalCurve</a></span>(<span class="dt">name=</span><span class="st">'intcal09'</span>,<span class="dt">cal_ages=</span>intcal09[,<span class="dv">1</span>],<span class="dt">uncal_ages=</span>intcal09[,<span class="dv">2</span>],<span class="dt">one_sigma=</span>intcal09[,<span class="dv">3</span>])</a></code></pre></div>
+<a class="sourceLine" id="cb48-2" data-line-number="2">intcal09 =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">'extdata/intcal09.14c'</span>, </a>
+<a class="sourceLine" id="cb48-3" data-line-number="3">                                  <span class="dt">package =</span> <span class="st">'Bchron'</span>), <span class="dt">sep=</span><span class="st">','</span>)</a>
+<a class="sourceLine" id="cb48-4" data-line-number="4">  </a>
+<a class="sourceLine" id="cb48-5" data-line-number="5"><span class="co"># Run createCalCurve</span></a>
+<a class="sourceLine" id="cb48-6" data-line-number="6"><span class="kw"><a href="../reference/createCalCurve.html">createCalCurve</a></span>(<span class="dt">name=</span><span class="st">'intcal09'</span>,<span class="dt">cal_ages=</span>intcal09[,<span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb48-7" data-line-number="7">               <span class="dt">uncal_ages=</span>intcal09[,<span class="dv">2</span>],<span class="dt">one_sigma=</span>intcal09[,<span class="dv">3</span>])</a></code></pre></div>
 <p>The new calibration curve now needs to be moved to the Bchron package directory. You can do this with the following code:</p>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/files.html">file.copy</a></span>(<span class="st">'intcal09.rda'</span>, <span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">'data'</span>,<span class="dt">package=</span><span class="st">'Bchron'</span>))</a></code></pre></div>
 <p>It can then be used via its name. For example, we can now compare the calibration of a date under the intcal09 curve with that of intcal13:</p>
@@ -400,10 +396,11 @@ run = Bchronology(ages=mydata[,1],ageSds=mydata[,2], ...</code></pre>
 <a class="sourceLine" id="cb50-2" data-line-number="2">                         <span class="dt">ids=</span><span class="st">'IntCal09'</span>)</a>
 <a class="sourceLine" id="cb50-3" data-line-number="3">age_<span class="dv">13</span> =<span class="st"> </span><span class="kw"><a href="../reference/BchronCalibrate.html">BchronCalibrate</a></span>(<span class="dt">age=</span><span class="dv">15500</span>,<span class="dt">ageSds=</span><span class="dv">150</span>,<span class="dt">calCurves =</span> <span class="st">'intcal13'</span>,</a>
 <a class="sourceLine" id="cb50-4" data-line-number="4">                         <span class="dt">ids =</span> <span class="st">'Intcal13'</span>)</a>
-<a class="sourceLine" id="cb50-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(age_<span class="dv">09</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb50-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="dt">data =</span> <span class="kw"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(age_<span class="dv">13</span><span class="op">$</span>Intcal13), </a>
-<a class="sourceLine" id="cb50-7" data-line-number="7">            <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> ageGrid, <span class="dt">y =</span> densities), <span class="dt">col =</span> <span class="st">'red'</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb50-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">'Intcal09 vs Intcal13'</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb50-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</a>
+<a class="sourceLine" id="cb50-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(age_<span class="dv">09</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb50-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="dt">data =</span> <span class="kw"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(age_<span class="dv">13</span><span class="op">$</span>Date1), </a>
+<a class="sourceLine" id="cb50-8" data-line-number="8">            <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> ageGrid, <span class="dt">y =</span> densities), <span class="dt">col =</span> <span class="st">'red'</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb50-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">'Intcal09 vs Intcal13'</span>)</a></code></pre></div>
 </div>
 <div id="uncalibrating-dates" class="section level2">
 <h2 class="hasAnchor">
@@ -446,10 +443,10 @@ run = Bchronology(ages=mydata[,1],ageSds=mydata[,2], ...</code></pre>
 <a class="sourceLine" id="cb59-2" data-line-number="2">            <span class="dt">type =</span> <span class="st">'samples'</span>)</a></code></pre></div>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(unCal)</a></code></pre></div>
 <pre><code>## $mean
-## [1] 11256
+## [1] 11255
 ## 
 ## $sd
-## [1] 24</code></pre>
+## [1] 25</code></pre>
 <p>This will provide a single best estimate of the mean and standard deviation of the uncalibrated (here 14C) date.</p>
 </div>
 <div id="references" class="section level2">

@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Bchron</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.6.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.0</span>
       </span>
     </div>
 
@@ -92,12 +92,7 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/andrewcparnell/Bchron">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -112,7 +107,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get sample ages from a set of Bchron calibrated dates</h1>
-    <small class="dont-index">Source: <a href='https://github.com/andrewcparnell/Bchron/blob/master/R/sampleAges.R'><code>R/sampleAges.R</code></a></small>
+    
     <div class="hidden name"><code>sampleAges.Rd</code></div>
     </div>
 
@@ -152,10 +147,10 @@
 <span class='co'># Get samples</span>
 <span class='no'>age_samples</span> <span class='kw'>=</span> <span class='fu'>sampleAges</span>(<span class='no'>ages</span>)
 <span class='co'># Create a credible interval and the median for each date</span>
-<span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>age_samples</span>, <span class='fl'>2</span>, <span class='no'>quantile</span>, <span class='kw'>probs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.05</span>, <span class='fl'>0.5</span>, <span class='fl'>0.95</span>))</div><div class='output co'>#&gt;     Date1    Date2   Date3
-#&gt; 5%   3601 13049.95 8032.95
-#&gt; 50%  3708 13396.00 8227.00
-#&gt; 95%  3825 13798.05 8382.00</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>age_samples</span>, <span class='fl'>2</span>, <span class='no'>quantile</span>, <span class='kw'>probs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.05</span>, <span class='fl'>0.5</span>, <span class='fl'>0.95</span>))</div><div class='output co'>#&gt;     Date1    Date2 Date3
+#&gt; 5%   3603 13053.00  8035
+#&gt; 50%  3709 13396.50  8228
+#&gt; 95%  3824 13794.05  8382</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
