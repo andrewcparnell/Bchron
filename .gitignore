@@ -20,6 +20,7 @@
 src/*.so
 src/*.o
 src/*.gcda
+src/*.gcno
 
 # Revdep things
 revdep/checks
