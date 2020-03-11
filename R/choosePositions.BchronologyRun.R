@@ -23,7 +23,7 @@
 #' @param count Counter function (not for use other than by the function itself)
 #' @param linesAt Horizontal line positions (not for use other than by the function itself)
 #'
-#' @importFrom ggplot2 geom_hlines
+#' @importFrom ggplot2 geom_hline
 #'
 #' @return Some plots and the positions to date next
 #' @export
