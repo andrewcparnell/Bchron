@@ -3,7 +3,7 @@
 language: R
 cache: packages
 before_install:
-  - Rscript -e "install_github('r-lib/revdepcheck')"
+  - Rscript -e "devtools::install_github('r-lib/revdepcheck')"
 after_success:
   - Rscript -e 'covr::codecov(quiet = false)'
   - Rscript -e 'revdepcheck::revdep_check(num_workers = 4)'
