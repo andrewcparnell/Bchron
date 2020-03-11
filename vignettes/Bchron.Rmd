@@ -384,8 +384,8 @@ intcal09 = read.table(system.file('extdata/intcal09.14c',
                                   package = 'Bchron'), sep=',')
   
 # Run createCalCurve
-createCalCurve(name='intcal09',cal_ages=intcal09[,1],
-               uncal_ages=intcal09[,2],one_sigma=intcal09[,3])
+createCalCurve(name='intcal09',calAges=intcal09[,1],
+               uncalAges=intcal09[,2],oneSigma=intcal09[,3])
 ```
 
 The new calibration curve now needs to be moved to the Bchron package directory. You can do this with the following code:

@@ -33,7 +33,8 @@ test_that("sampleAges", {
 
 test_that("CreateCalCurve", {
   intcal09 = read.table(system.file('extdata/intcal09.14c', package = 'Bchron'), sep=',')
-  expect_output(createCalCurve(name='intcal09',cal_ages=intcal09[,1], 
-                 uncal_ages=intcal09[,2],one_sigma=intcal09[,3]))
+  expect_null(createCalCurve(name='intcal09',calAges=intcal09[,1], 
+                 uncalAges=intcal09[,2],oneSigma=intcal09[,3],
+                 createFile = FALSE))
 })
 
