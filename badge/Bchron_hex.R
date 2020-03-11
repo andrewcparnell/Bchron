@@ -27,7 +27,7 @@ p = plot(ages1, dateLabels = FALSE, fillCol = "#F0AB00") + ggtitle('') + theme_v
 
 
 ## Loading Google fonts (http://www.google.com/fonts)
-fname = "Salsa"
+fname = "Alegreya Sans" #sample(font_families_google(), 1)
 font_add_google(fname)
 ## Automatically use showtext to render text for future devices
 showtext_auto()
