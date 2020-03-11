@@ -2,8 +2,10 @@ context("Core and date influence metrics")
 
 library(Bchron)
 
+
 test_that("dateInfluence", {
   skip_on_cran()
+  data(Glendalough)
   GlenOut = with(Glendalough, 
                  Bchronology(ages=ages,
                              ageSds=ageSds, 
@@ -45,6 +47,9 @@ test_that("dateInfluence", {
               'list')
   expect_type(dateInfluence(GlenOut,
                             whichDate = 'all', measure = 'KL'),
+              'list')
+  expect_type(dateInfluence(GlenOut,
+                            whichDate = 'internal', measure = 'KL'),
               'list')
   expect_output(coreInfluence(GlenOut_m2,
                               GlenOut,
