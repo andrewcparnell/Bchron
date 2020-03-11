@@ -7,15 +7,15 @@
 ## R CMD check results
 There were no ERRORs or WARNINGs.
 
-There was one NOTE from rhub saying:
-Found the following files/directories:
-    'Bchron-Ex_i386.Rout' 'Bchron-Ex_x64.Rout' 'examples_i386'
-    'examples_x64'
+(I got a weird error from one of the rhub runs saying packages required were not available but this was for packages like ggplot2 so I assumed this was an rhub error)
 
-I don't know what to do with this and can't find any other help online about it. Hopefully just an rhub problem?
+I got one NOTE from rhub and win-builder saying:
+  Days since last update: 5
+
+Apologies for yet another update but I kept finding I was introducing bugs so decided to fully implement both testthat and codecov (95% coverage!). I promise this will be the last for a while.
 
 ## Downstream dependencies
-I have also run revdepcheck on the 4 downstream dependencies of Bchron (ArchaeoChron, deltar, Bclim, c14bazAAR) and all installed fine. 
+I have also run revdepcheck on the downstream dependencies of Bchron which reported no errors. 
 
 Many thanks for your continuing important work with R,
 
