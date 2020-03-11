@@ -35,7 +35,6 @@ Description: Enables quick calibration of radiocarbon dates under various
   un-calibrated years (also unpublished).
 License: GPL (>= 2)
 Suggests:
-    spelling,
     knitr,
     testthat,
     covr
