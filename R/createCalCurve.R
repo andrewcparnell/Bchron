@@ -16,6 +16,7 @@
 #' @export
 #'
 #' @examples
+#' \donttest{
 #' # Load in the calibration curve with:
 #' intcal09 = read.table(system.file('extdata/intcal09.14c', package = 'Bchron'), sep=',')
 #' # Run createCalCurve
@@ -39,7 +40,7 @@
 #' geom_line(data = as.data.frame(age_13$Date1), 
 #'          aes(x = ageGrid, y = densities), col = 'red') + 
 #'      ggtitle('Intcal09 vs Intcal13')
-#' 
+#' }
 createCalCurve = function(name,
                           calAges,
                           uncalAges,
