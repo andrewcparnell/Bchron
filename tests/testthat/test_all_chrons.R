@@ -16,7 +16,10 @@ test_that('Sluggan', {
                          positions=position, 
                          positionThicknesses=thickness,
                          ids=id,
-                         jitterPositions = TRUE))
+                         jitterPositions = TRUE,
+                         iterations = 1000,
+                         burn = 200,
+                         thin = 1))
   expect_s3_class(run, 'BchronologyRun')
   expect_output(summary(run, type='quantiles'))
   expect_output(summary(run, type='convergence'))
@@ -37,7 +40,10 @@ test_that('TestChronData', {
                          positions=position, 
                          positionThicknesses=thickness,
                          ids=id,
-                         jitterPositions = TRUE))
+                         jitterPositions = TRUE,
+                         iterations = 1000,
+                         burn = 200,
+                         thin = 1))
   expect_s3_class(run, 'BchronologyRun')
   expect_output(summary(run, type='quantiles'))
   expect_output(summary(run, type='convergence'))
@@ -122,7 +128,10 @@ test_that('Taphocoenose_Jan20', {
                                ageSds=error,
                                calCurves=calCurves,
                                positions=sim_depth,
-                               ids=labID))
+                               ids=labID,
+                               iterations = 1000,
+                               burn = 200,
+                               thin = 1))
   expect_s3_class(run, 'BchronologyRun')
   expect_output(summary(run, type='quantiles'))
   expect_output(summary(run, type='convergence'))

@@ -12,3 +12,6 @@
 ^doc$
 ^Meta$
 ^badge$
+^.*\.gcda$
+^.*\.gcno$
+^.*\.gcov$
