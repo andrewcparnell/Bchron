@@ -4,7 +4,8 @@
 \name{Sluggan}
 \alias{Sluggan}
 \title{Sluggan Moss data}
-\format{A data frame with 31 observations on the following 6 variables:
+\format{
+A data frame with 31 observations on the following 6 variables:
 \describe{
 \item{\code{id}}{ID of each age}
 \item{\code{ages}}{Age in (14C) years BP}
@@ -12,7 +13,8 @@
 \item{\code{position}}{Depths in cm}
 \item{\code{thickness}}{Thicknesses in cm}
 \item{\code{calCurves}}{Calibration curve for each age}
-}}
+}
+}
 \source{
 Smith, A. G., \& Goddard, I. C. (1991). A 12,500 year record of vegetational history at Sluggan Bog, Co. Antrim, N. Ireland (incorporating a pollen zone scheme for the non-specialist). New Phytologist, 118, 167-187.
 }

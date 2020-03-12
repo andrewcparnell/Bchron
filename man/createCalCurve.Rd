@@ -33,6 +33,7 @@ A function for creating a new calibration curve not already available in Bchron
 All calibration curves are stored by Bchron in the standard R gzipped text format. You can find the location of the calibration curves by typing \code{system.file('data',package='Bchron')}. Any created calibration curve will be converted to this format. However R packages are not allowed to write to this directory so it is up to the user to put the resulting calibration curve file in the appropriate directory. It can then be used as in the examples below. However note that re-installing Bchron will likely over-write previously created calibration curves so you should make sure to store the code used to create it. As a short-cut to copying it by hand you can instead use the \code{file.copy} command in the example below.
 }
 \examples{
+\dontrun{
 # Load in the calibration curve with:
 intcal09 = read.table(system.file('extdata/intcal09.14c', package = 'Bchron'), sep=',')
 # Run createCalCurve
@@ -56,7 +57,7 @@ plot(age_09) +
 geom_line(data = as.data.frame(age_13$Date1), 
          aes(x = ageGrid, y = densities), col = 'red') + 
      ggtitle('Intcal09 vs Intcal13')
-
+}
 }
 \seealso{
 \code{\link{BchronCalibrate}}

@@ -23,7 +23,9 @@ ages1 = BchronCalibrate(ages=11553,
                         ageSds=230,
                         calCurves='intcal13',
                         ids='Ox-123456')
-p = plot(ages1, dateLabels = FALSE, fillCol = "#F0AB00") + ggtitle('') + theme_void() + theme_transparent()
+p = plot(ages1, dateLabels = FALSE, fillCol = "#F0AB00") + 
+  geom_line(data = as.data.frame(ages1$`Ox-123456`), aes(x = ageGrid, y = densities), col = "#822327") +
+  ggtitle('') + theme_void() + theme_transparent()
 
 
 ## Loading Google fonts (http://www.google.com/fonts)
@@ -32,6 +34,6 @@ font_add_google(fname)
 ## Automatically use showtext to render text for future devices
 showtext_auto()
 
-sticker(p, package="Bchron", p_size=10, s_x=1, s_y=0.9, s_width=1.3, s_height=1,p_family = fname,
+sticker(p, package="Bchron", p_size=10, s_x=1, s_y=0.8, s_width=1.3, s_height=1,p_family = fname,
         h_fill="#006778", h_color="#822327",
         filename="badge/Bchron_badge.png")
