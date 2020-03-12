@@ -25,6 +25,7 @@ ages1 = BchronCalibrate(ages=11553,
                         ids='Ox-123456')
 p = plot(ages1, dateLabels = FALSE, fillCol = "#F0AB00") + 
   geom_line(data = as.data.frame(ages1$`Ox-123456`), aes(x = ageGrid, y = densities), col = "#822327", size = 2) +
+  geom_line(data = as.data.frame(ages1$`Ox-123456`), aes(x = ageGrid, y = 0), col = "#822327", size = 2) +
   ggtitle('') + theme_void() + theme_transparent()
 
 
