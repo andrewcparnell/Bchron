@@ -4,9 +4,7 @@
 \name{marine13}
 \alias{marine13}
 \title{Marine 2013 calibration curve}
-\format{
-A data frame with 4801 observations on 5 variables
-}
+\format{A data frame with 4801 observations on 5 variables}
 \usage{
 data(marine13)
 }

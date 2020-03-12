@@ -4,8 +4,7 @@
 \name{TestChronData}
 \alias{TestChronData}
 \title{Example chronology file for use with the BchronRSL function.}
-\format{
-A data frame with 27 observations on the following 6 variables:
+\format{A data frame with 27 observations on the following 6 variables:
 \describe{
 \item{\code{id}}{ID names}
 \item{\code{ages}}{Ages in years BP}
@@ -13,8 +12,7 @@ A data frame with 27 observations on the following 6 variables:
 \item{\code{position}}{Depths in cm}
 \item{\code{thickness}}{Thicknesses in cm}
 \item{\code{calCurves}}{Calibration curve for each age}
-}
-}
+}}
 \source{
 Andrew C. Parnell and W. Roland Gehrels (2013) 'Using chronological models in late holocene sea level reconstructions from salt marsh sediments' In: I. Shennan, B.P. Horton, and A.J. Long (eds). Handbook of Sea Level Research. Chichester: Wiley
 }

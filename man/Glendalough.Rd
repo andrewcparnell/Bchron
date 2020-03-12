@@ -4,8 +4,7 @@
 \name{Glendalough}
 \alias{Glendalough}
 \title{Glendalough data}
-\format{
-A data frame with 6 observations on the following 6 variables:
+\format{A data frame with 6 observations on the following 6 variables:
 \describe{
   \item{\code{id}}{ID of each age}
   \item{\code{ages}}{Age in (14C) years BP}
@@ -13,8 +12,7 @@ A data frame with 6 observations on the following 6 variables:
   \item{\code{position}}{Depths in cm}
   \item{\code{thickness}}{Thicknesses in cm}
   \item{\code{calCurves}}{Calibration curve for each age}
-}
-}
+}}
 \source{
 Haslett, J., Whiley, M., Bhattacharya, S., Mitchell, F. J. G., Allen, J. R. M., Huntley, B., \& Salter-Townshend, M. (2006). Bayesian palaeoclimate reconstruction. Journal of the Royal Statistical Society, Series A, 169, 395-438.
 }

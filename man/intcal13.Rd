@@ -4,9 +4,7 @@
 \name{intcal13}
 \alias{intcal13}
 \title{Northern hemisphere 2013 calibration curve}
-\format{
-A data frame with 5141 observations on 5 variables.
-}
+\format{A data frame with 5141 observations on 5 variables.}
 \usage{
 data(intcal13)
 }

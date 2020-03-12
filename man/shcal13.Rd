@@ -4,9 +4,7 @@
 \name{shcal13}
 \alias{shcal13}
 \title{Southern hemisphere 2013 calibration curve}
-\format{
-A data frame with 5141 observations on 5 variables.
-}
+\format{A data frame with 5141 observations on 5 variables.}
 \usage{
 data(shcal13)
 }

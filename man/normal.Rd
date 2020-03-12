@@ -4,9 +4,7 @@
 \name{normal}
 \alias{normal}
 \title{Data for dummy calibration of normally distributed ages}
-\format{
-A data frame with 2 observations on 3 variables.
-}
+\format{A data frame with 2 observations on 3 variables.}
 \usage{
 data(normal)
 }
