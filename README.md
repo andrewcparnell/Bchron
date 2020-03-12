@@ -6,7 +6,7 @@
 
 <a href="http://andrewcparnell.github.io/Bchron/"><img src="https://raw.githubusercontent.com/andrewcparnell/Bchron/master/badge/Bchron_badge.png" height="200" align="right" /></a>
 
-*New:* <a href = "http://andrewcparnell.github.io/Bchron/">Bchron website</a>
+**New:** <a href = "http://andrewcparnell.github.io/Bchron/">Bchron website</a>
 
 Bchron is a Bayesian chronology model implemented in R. 
 
