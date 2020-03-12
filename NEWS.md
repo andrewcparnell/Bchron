@@ -1,3 +1,12 @@
+# Bchron 4.7.0
+
+  - Fixed a(nother) small bug in predict.Bchronologies
+  - Included proper testthat, travis, and code coverage
+
+# Bchron 4.6.1
+
+  - Fixed bug in predict.Bchronologies
+
 # Bchron 4.6 
 
 Fixed two important bugs:

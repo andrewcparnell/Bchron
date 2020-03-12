@@ -119,9 +119,10 @@ predict.BchronologyRun = function(object,
     oldPositions = (object$positions - min(object$positions)) / positionRange
     diffPosition = diff(oldPositions)
     newPositions = (newPositions - min(object$positions)) / positionRange
-    newPositionThicknesses = newPositionThicknesses / positionRange
+    if(!is.null(newPositionThicknesses))
+       newPositionThicknesses = newPositionThicknesses / positionRange
   } else {
-    oldPositions = object$positions / object$positionScaleVal
+    oldPositions = object$positions
     diffPosition = diff(oldPositions)
   }
   
@@ -138,7 +139,7 @@ predict.BchronologyRun = function(object,
     utils::setTxtProgressBar(pb, i)
     
     if (is.null(newPositionThicknesses)) {
-      currPosition = newPositions / object$positionScaleVal
+      currPosition = newPositions
     } else {
       currPosition = sort(
         stats::runif(

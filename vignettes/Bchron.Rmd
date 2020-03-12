@@ -108,7 +108,7 @@ age_samples = sampleAges(ages3)
 apply(age_samples, 2, quantile, prob=c(0.025,0.975))
 ```
 
-The `sampleAges` function introduces some uncertainty as it is a simple random sample. This means that repeatedly running it will give you slightly different results. If you are introduced in precision at a yearly level, you might want to increase the `n_samp` argument though will slow the function down a little.
+The `sampleAges` function introduces some uncertainty as it is a simple random sample. This means that repeatedly running it will give you slightly different results. If you require precision at a yearly level, you might want to increase the `n_samp` argument though will slow the function down a little.
 
 If you wanted to find each date's median age (though this is often an inappropriate summary and should be treated with caution), use:
 ```{r}
@@ -242,7 +242,7 @@ You could then for example save this to a csv file with, e.g. `write.csv(sed_rat
 
 ## Identifying influential dates and positions
 
-Bchron contains two functions which can help with future data strategies. They are:
+Bchron contains two functions which can help with future dating strategies. They are:
 
 1. Identifying the position at which the maximum age variance occurs. This is useful if you wanted to pick the one next position to date
 2. Identifying which date is the most influential on the chronology. This is useful if you are concerned that one date might be leading the chronology astray.
@@ -374,15 +374,18 @@ Bchron allows for user-defined calibration curves to be created through the func
   - (Optionally) the 1-sigma error for the calibration curve in uncalibrated years. If not included the error is assumed to be zero
   - (Optionally) The path to where the resulting file will be stored
 
-Once run, the calibration curve needs to be moved from the chosen path (by default the working directory) to the location of the other calibration curves. This is by default `system.file('data',package='Bchron')`. The resulting calibration curve can be used for all future runs until the package is deleted or re-installed. The calibration curve can be used by simply calling it in any other Bchron function using the supplied name. Note that no name checking is done, so it is possible to over-write the pre-defined calibration curves if
+Once run, the calibration curve needs to be moved from the chosen path (by default the working directory) to the location of the other calibration curves. This is by default `system.file('data',package='Bchron')`. The resulting calibration curve can be used for all future runs until the package is deleted or re-installed. The calibration curve can be used by simply calling it in any other Bchron function using the supplied name. Note that no name checking is done, so it is possible to over-write the pre-defined calibration curves if the user is not careful.
 
-As an example, consider installing the intcal09 calibration curve, traditionally available from http://www.radiocarbon.org/IntCal09%20files/intcal09.14c. We can run the following code:
+We now consider an example of loading in and creating the IntCal09 calibration curve:
 
 ```{r, eval = FALSE}
 # Load in the calibration curve with:
-intcal09 = read.table('http://www.radiocarbon.org/IntCal09%20files/intcal09.14c',sep=',')
+intcal09 = read.table(system.file('extdata/intcal09.14c', 
+                                  package = 'Bchron'), sep=',')
+  
 # Run createCalCurve
-createCalCurve(name='intcal09',cal_ages=intcal09[,1],uncal_ages=intcal09[,2],one_sigma=intcal09[,3])
+createCalCurve(name='intcal09',calAges=intcal09[,1],
+               uncalAges=intcal09[,2],oneSigma=intcal09[,3])
 ```
 
 The new calibration curve now needs to be moved to the Bchron package directory. You can do this with the following code:
@@ -396,15 +399,16 @@ age_09 = BchronCalibrate(age=15500,ageSds=150,calCurves = 'intcal09',
                          ids='IntCal09')
 age_13 = BchronCalibrate(age=15500,ageSds=150,calCurves = 'intcal13',
                          ids = 'Intcal13')
+library(ggplot2)
 plot(age_09) + 
-  geom_line(data = as.data.frame(age_13$Intcal13), 
+  geom_line(data = as.data.frame(age_13$Date1), 
             aes(x = ageGrid, y = densities), col = 'red') + 
   ggtitle('Intcal09 vs Intcal13')
 ```
 
 ## Uncalibrating dates
 
-Sometimes it is useful to turn a calendar age estimate into an uncalibrated age. This might be for simulation or model checking purposes. 'Un-calibrating' dates can be implemented in Bchron using the `unCalibrate` function. There are two versions, one where you have a single age and just want to get a quick look up of the 14C age, and another where you have the full distribution of the calibrated age and want to estimate both the 14C age and its associated error
+Sometimes it is useful to turn a calendar age estimate into an uncalibrated age. This might be for simulation or model checking purposes. 'Un-calibrating' dates can be implemented in Bchron using the `unCalibrate` function. There are two versions, one where you have a single age and just want to get a quick look up of the 14C age, and another where you have the full distribution of the calibrated age and want to estimate both the 14C age and its associated error.
 
 The simple version can be run with, e.g.:
 

@@ -107,7 +107,8 @@ dateInfluence.BchronologyRun = function(bchrRun,
                               thetaMhSd = thetaMhSd,
                               muMhSd = muMhSd,
                               psiMhSd = psiMhSd,
-                              ageScaleVal = ageScaleVal))
+                              ageScaleVal = ageScaleVal,
+                              positionNormalise = positionNormalise))
     
     newRunAgePredict = newRun$thetaPredict
     whichPredPos = match(closestPosition,
@@ -169,7 +170,8 @@ dateInfluence.BchronologyRun = function(bchrRun,
                               thetaMhSd = thetaMhSd,
                               muMhSd = muMhSd,
                               psiMhSd = psiMhSd,
-                              ageScaleVal = ageScaleVal))
+                              ageScaleVal = ageScaleVal,
+                              positionNormalise = positionNormalise))
     
     newRunAgePredict = newRun$thetaPredict
     whichPredPos = match(closestPosition,
@@ -237,7 +239,8 @@ dateInfluence.BchronologyRun = function(bchrRun,
                                 thetaMhSd = thetaMhSd,
                                 muMhSd = muMhSd,
                                 psiMhSd = psiMhSd,
-                                ageScaleVal = ageScaleVal))
+                                ageScaleVal = ageScaleVal,
+                                positionNormalise = positionNormalise))
     
       newRunAgePredict = newRun$thetaPredict
       whichPredPos = match(closestPosition,
@@ -307,7 +310,8 @@ dateInfluence.BchronologyRun = function(bchrRun,
                                 thetaMhSd = thetaMhSd,
                                 muMhSd = muMhSd,
                                 psiMhSd = psiMhSd,
-                                ageScaleVal = ageScaleVal))
+                                ageScaleVal = ageScaleVal,
+                                positionNormalise = positionNormalise))
       
       newRunAgePredict = newRun$thetaPredict
       whichPredPos = match(closestPosition,

@@ -3,3 +3,15 @@
 ^\.Rproj\.user$
 ^cran-comments\.md$
 ^CRAN-RELEASE$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.travis\.yml$
+^codecov\.yml$
+^revdep$
+^doc$
+^Meta$
+^badge$
+^.*\.gcda$
+^.*\.gcno$
+^.*\.gcov$

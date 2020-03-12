@@ -1,23 +1,21 @@
 ## Test environments
 * local OS X install, R 3.6.2
+* travis
 * rhub
-* win-builder (devel)
+* win-builder (devel and release)
 
 ## R CMD check results
 There were no ERRORs or WARNINGs.
 
-For R-hub there was one NOTE: 
-checking for non-standard things in the check directory ... NOTE
-    'Bchron-Ex_i386.Rout' 'Bchron-Ex_x64.Rout' 'examples_i386'
-  Found the following files/directories:
-    'examples_x64'
-    
-I can't see why this might have occurred and can't find any solution online to fix this. I'd be grateful for any help.
+(I got a weird error from a couple of the rhub runs saying packages required were not available but this was for packages like ggplot2 so I assumed this was an rhub error)
 
-There was one NOTE produced by devtools::check_win_devel. This is due to the website radiocarbon.org currently being down which hosts some of the data sets. I'm told this will be back up again shortly.
+I got one NOTE from win-builder and the local check saying:
+  Days since last update: 5
+
+Apologies for yet another update but I kept finding I was introducing bugs so decided to fully implement both testthat and codecov (95% coverage!). I promise this will be the last for a while.
 
 ## Downstream dependencies
-I have also run install.packages on the 4 downstream dependencies of Bchron (ArchaeoChron, deltar, Bclim, c14bazAAR) and all installed fine. 
+I have also run revdepcheck on the downstream dependencies of Bchron which reported no errors. 
 
 Many thanks for your continuing important work with R,
 

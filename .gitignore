@@ -18,4 +18,15 @@
 
 # Compiled files
 src/*.so
-Src/*.o
+src/*.o
+src/*.gcda
+src/*.gcno
+
+# Revdep things
+revdep/checks
+revdep/library
+revdep/checks.noindex
+revdep/library.noindex
+revdep/data.sqlite
+doc
+Meta

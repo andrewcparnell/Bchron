@@ -1,6 +1,12 @@
 [![cran version](http://www.r-pkg.org/badges/version/Bchron)](https://cran.rstudio.com/web/packages/Bchron) 
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/Bchron?)](https://github.com/metacran/cranlogs.app)
 [![rstudio mirror downloads](http://cranlogs.r-pkg.org/badges/grand-total/Bchron?color=82b4e8)](https://github.com/metacran/cranlogs.app)
+[![Codecov test coverage](https://codecov.io/gh/andrewcparnell/Bchron/branch/master/graph/badge.svg)](https://codecov.io/gh/andrewcparnell/Bchron?branch=master)
+[![Travis-CI Build Status](https://travis-ci.org/andrewcparnell/Bchron.svg?branch=master)](https://travis-ci.org/andrewcparnell/Bchron)
+
+<a href="http://andrewcparnell.github.io/Bchron/"><img src="https://raw.githubusercontent.com/andrewcparnell/Bchron/master/badge/Bchron_badge.png" height="200" align="right" /></a>
+
+New: <a href = "http://andrewcparnell.github.io/Bchron/">Bchron website</a>
 
 Bchron is a Bayesian chronology model implemented in R. 
 
@@ -27,3 +33,6 @@ To install the stable version of the package go to R and type:
 ```
 install.packages('Bchron')
 ```
+
+Now start <a href = "http://andrewcparnell.github.io/Bchron/">using Bchron</a>!
+
