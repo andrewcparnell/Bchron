@@ -16,7 +16,7 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Load in the calibration curve with:
 #' intcal09 = read.table(system.file('extdata/intcal09.14c', package = 'Bchron'), sep=',')
 #' # Run createCalCurve
