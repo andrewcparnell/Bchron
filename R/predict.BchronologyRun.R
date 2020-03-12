@@ -108,7 +108,7 @@ predict.BchronologyRun = function(object,
     )
   }
   
-  # Get some useful things to start off
+  # Get some useful things to start of
   nSamples = length(object$mu)
   out = matrix(ncol = length(newPositions), nrow = nSamples)
   p = 1.2
@@ -119,9 +119,9 @@ predict.BchronologyRun = function(object,
     oldPositions = (object$positions - min(object$positions)) / positionRange
     diffPosition = diff(oldPositions)
     newPositions = (newPositions - min(object$positions)) / positionRange
-    if(!is.null(newPositionThicknesses)) newPositionThicknesses = newPositionThicknesses / positionRange
+    newPositionThicknesses = newPositionThicknesses / positionRange
   } else {
-    oldPositions = object$positions
+    oldPositions = object$positions / object$positionScaleVal
     diffPosition = diff(oldPositions)
   }
   
@@ -138,7 +138,7 @@ predict.BchronologyRun = function(object,
     utils::setTxtProgressBar(pb, i)
     
     if (is.null(newPositionThicknesses)) {
-      currPosition = newPositions
+      currPosition = newPositions / object$positionScaleVal
     } else {
       currPosition = sort(
         stats::runif(
