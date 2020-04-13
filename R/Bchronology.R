@@ -104,9 +104,9 @@ Bchronology = function(ages,
   originalPredictPositions = predictPositions
   if(positionNormalise) {
     positionRange = diff(range(positions))
-    positions = (positions - min(positions))/positionRange
+    positions = (positions - min(originalPositions))/positionRange
     positionThicknesses = positionThicknesses/positionRange
-    predictPositionsRescaled = (predictPositions - min(positions)) / positionRange
+    predictPositionsRescaled = (predictPositions - min(originalPositions)) / positionRange
   }
   
   # Check positions don't overlap

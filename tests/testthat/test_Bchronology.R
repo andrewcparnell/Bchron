@@ -85,3 +85,24 @@ test_that('choosePositions', {
   expect_false(any(is.na(newPositions2)))
 })
 
+# New test due to weird bug in Bchronology prediction - 13/4/20
+df = structure(list(age = c(2975, 4270, 4480), 
+                    error = c(60, 70, 60), 
+                    depth = c(72.5, 117.5, 132.5), 
+                    calCurves = c("intcal13", "intcal13", "intcal13"), 
+                    thickness = c(5, 5, 5)), 
+               row.names = c(NA, -3L), 
+               class = c("tbl_df", "tbl", "data.frame"))
+test_chron = with(df, 
+                  Bchronology(ages=age,
+                              ageSds=error, 
+                              calCurves=calCurves,
+                              positions=depth, 
+                              positionThicknesses=thickness,
+                              iterations = 100,
+                              burn = 20,
+                              thin = 1
+                  ))
+test_that("Bchronology prediction bug", {
+  expect_true(all(summary(test_chron, type = 'quantiles') < 6000))
+})

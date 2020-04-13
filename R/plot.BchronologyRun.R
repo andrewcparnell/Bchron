@@ -95,14 +95,14 @@ function(x,
                           Position = map_dbl(x$calAges, 'positions'))
   allAges3 = left_join(allAges2, positionLookUp, by = 'Date') %>% 
     mutate(height = .data$densities*dateHeight)
-  my_breaks = pretty(x = allAges$Age, n = 10)
+  my_breaks = pretty(x = ageGrid, n = 10)
   p = allAges3 %>% 
     ggplot(aes_string(x = "Age", 
                y = "Position",
                height = "height",
                group = "Date")) +
     ggridges::geom_ridgeline(fill = dateCol, colour = dateCol) +
-    scale_y_reverse(breaks = scales::pretty_breaks(n = 10),
+    scale_y_reverse(breaks = scales::breaks_pretty(n = 10),
                     expand = expandY) +
     theme_bw() +
     scale_x_continuous(breaks = my_breaks,
