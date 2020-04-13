@@ -1,3 +1,7 @@
+# Bchron 4.7.1
+
+  - Fixed a bug in Bchronology that caused incorrect predictions
+
 # Bchron 4.7.0
 
   - Fixed a(nother) small bug in predict.Bchronologies

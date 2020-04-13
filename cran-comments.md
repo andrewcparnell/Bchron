@@ -7,12 +7,7 @@
 ## R CMD check results
 There were no ERRORs or WARNINGs.
 
-(I got a weird error from a couple of the rhub runs saying packages required were not available but this was for packages like ggplot2 so I assumed this was an rhub error)
-
-I got one NOTE from win-builder and the local check saying:
-  Days since last update: 5
-
-Apologies for yet another update but I kept finding I was introducing bugs so decided to fully implement both testthat and codecov (95% coverage!). I promise this will be the last for a while.
+There's a warning on the OSX on the Bchron web page where the vignette fails but I can't interpret the error message and I cannot re-create the problem on either my own OSX build or any of the above test environments. I'm hoping this was a bug in one of the testing environments
 
 ## Downstream dependencies
 I have also run revdepcheck on the downstream dependencies of Bchron which reported no errors. 
