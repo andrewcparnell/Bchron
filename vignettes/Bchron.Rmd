@@ -72,8 +72,8 @@ This will calibrate three different 14C ages with the calibration curves as spec
 Finally, if you provide position information (e.g. depths) to the BchronCalibrate function it will create a plot with position on the y-axis, e.g.:
 
 ```{r,fig.align='center',fig.width=6,fig.height=5}
-ages3 = BchronCalibrate(ages=c(1000,11553), 
-                        ageSds=c(50,230), 
+ages3 = BchronCalibrate(ages=c(3445,11000), 
+                        ageSds=c(50,200), 
                         positions=c(100,150), 
                         calCurves=c('intcal13','normal'))
 summary(ages3)
