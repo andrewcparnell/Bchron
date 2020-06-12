@@ -15,9 +15,9 @@ The package enables quick calibration of radiocarbon dates under various calibra
 To install the development version of the package type:
 
 ```
-# If required install devtools:
-#install.packages('devtools')
-devtools::install_github('andrewcparnell/Bchron')
+# If required install remotes:
+if(!require(remotes)) install.packages('remotes')
+remotes::install_github('andrewcparnell/Bchron')
 ```
 
 You can then explore the package with:
