@@ -2,7 +2,9 @@
 title: "Using Bayesian radiocarbon chronology package Bchron"
 author: "Andrew Parnell"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette 
+output: 
+  rmarkdown::html_vignette:
+     toc: true
 vignette: >
   %\VignetteIndexEntry{Bchron}
   %\VignetteEncoding{UTF-8}
@@ -470,6 +472,46 @@ print(unCal)
 ```
 
 This will provide a single best estimate of the mean and standard deviation of the uncalibrated (here 14C) date.
+
+# Miscelaneous other queries
+
+## I would like to plot some extra dates on my chronology
+
+Suppose we created the standard Glendalough chronology
+
+```{r, results = 'hide'}
+data(Glendalough)
+GlenOut = with(Glendalough, 
+               Bchronology(ages=ages,
+                           ageSds=ageSds, 
+                           calCurves=calCurves,
+                           positions=position, 
+                           positionThicknesses=thickness,
+                           ids=id, 
+                           predictPositions=seq(0,1500,by=10)))
+```
+
+Now suppose we want to plot the chronology but add in the 14C date $7000 \pm 40$ at depth 600cm. First we calibrated that date
+```{r}
+new_cal = BchronCalibrate(ages = 7000, ageSds = 40, calCurve = 'intcal13')
+```
+
+Finally we create the plot and add the date as a new layer (with a new colour too):
+
+```{r}
+library(ggplot2)
+library(ggridges)
+plot(GlenOut) +
+  geom_ridgeline(data = as.data.frame(new_cal$Date1), 
+                 aes(x = ageGrid, 
+                     y = 600,
+                     height = densities*10000, # Note the 10000 came from trial and error
+                     group = 'New date',
+                     ),
+                 fill = 'grey',
+                 colour = 'black') +
+  annotate("text", x = 9000, y = 570, label = "New date")
+```
 
 ## References
 

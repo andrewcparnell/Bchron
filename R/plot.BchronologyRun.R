@@ -3,7 +3,7 @@
 #' Plots output from a run of \code{\link{Bchronology}}
 #'
 #' @param x The object created by \code{\link{Bchronology}}
-#' @param dateHeight The height of the dates in the plot. Values in the range 0 to 1 tend to work best.
+#' @param dateHeight The height of the dates in the plot (on the same scale as the positions)
 #' @param chronCol The colour of the chronology uncertainty ribbon to be plotted
 #' @param alpha The credible interval of the chronology run to be plotted. Defaults to 95 percent
 #' @param expandX The amount to expand the horizontal axis in case part are missed off the plot. See \code{\link[ggplot2]{expand_limits}} for details
