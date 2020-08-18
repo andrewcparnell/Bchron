@@ -10,7 +10,7 @@ choosePositions(
   newSds = 30,
   newThicknesses = 0,
   positions = bchrRun$predictPositions,
-  newCalCurve = "intcal13",
+  newCalCurve = "intcal20",
   newOutlierProb = 0.05,
   level = 0.5,
   plot = TRUE,

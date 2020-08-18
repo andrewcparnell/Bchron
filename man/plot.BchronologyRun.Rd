@@ -24,7 +24,7 @@
 \arguments{
 \item{x}{The object created by \code{\link{Bchronology}}}
 
-\item{dateHeight}{The height of the dates in the plot. Values in the range 0 to 1 tend to work best.}
+\item{dateHeight}{The height of the dates in the plot (on the same scale as the positions)}
 
 \item{dateLabels}{Whether to label the dates on the vertical axis (default TRUE)}
 

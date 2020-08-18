@@ -26,8 +26,18 @@
 #' @format A data frame with 5141 observations on 5 variables.
 #' @usage data(intcal13)
 #' 
-#' @details For full details and reference see http://www.radiocarbon.org/IntCal13.htm. For usage details see \code{\link{BchronCalibrate}}
+#' @details For full details and reference see http://intcal.org/blurb.html. For usage details see \code{\link{BchronCalibrate}}
 "intcal13"
+
+#' Northern hemisphere 2020 calibration curve
+#'
+#' Northern hemisphere 2020 calibration curve
+#'
+#' @format A data frame with 9501 observations on 5 variables.
+#' @usage data(intcal20)
+#' 
+#' @details For full details and reference see http://intcal.org/blurb.html. For usage details see \code{\link{BchronCalibrate}}
+"intcal20"
 
 
 #' Marine 2013 calibration curve
@@ -37,8 +47,18 @@
 #' @format A data frame with 4801 observations on 5 variables
 #' @usage data(marine13)
 #' 
-#' @details For full details and reference see http://www.radiocarbon.org/IntCal13.htm. For usage details see \code{\link{BchronCalibrate}}
+#' @details For full details and reference see http://intcal.org/blurb.html. For usage details see \code{\link{BchronCalibrate}}
 "marine13"
+
+#' Marine 2020 calibration curve
+#'
+#' Marine 2020 calibration curve
+#'
+#' @format A data frame with 5501 observations on 5 variables
+#' @usage data(marine20)
+#' 
+#' @details For full details and reference see http://intcal.org/blurb.html. For usage details see \code{\link{BchronCalibrate}}
+"marine20"
 
 #' Data for dummy calibration of normally distributed ages
 #'
@@ -58,9 +78,18 @@
 #' @format A data frame with 5141 observations on 5 variables.
 #' @usage data(shcal13)
 #' 
-#' @details For full details and reference see http://www.radiocarbon.org/IntCal13.htm. For usage details see \code{\link{BchronCalibrate}}
+#' @details For full details and reference see http://intcal.org/blurb.html. For usage details see \code{\link{BchronCalibrate}}
 "shcal13"
 
+#' Southern hemisphere 2020 calibration curve
+#'
+#' Southern hemisphere 2020 calibration curve
+#'
+#' @format A data frame with 9501 observations on 5 variables.
+#' @usage data(shcal20)
+#' 
+#' @details For full details and reference see http://intcal.org/blurb.html. For usage details see \code{\link{BchronCalibrate}}
+"shcal20"
 
 #' Sluggan Moss data
 #'

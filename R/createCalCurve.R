@@ -32,14 +32,14 @@
 #' age_09 = BchronCalibrate(ages=15500, ageSds=150,
 #'                           calCurves = 'intcal09',ids='My Date', 
 #'                           pathToCalCurves = getwd())
-#' age_13 = BchronCalibrate(ages=15500,ageSds=150,calCurves = 'intcal13')
+#' age_20 = BchronCalibrate(ages=15500,ageSds=150,calCurves = 'intcal20')
 #' 
 #' # Finally plot the difference
 #' library(ggplot2)
 #' plot(age_09) + 
-#' geom_line(data = as.data.frame(age_13$Date1), 
+#' geom_line(data = as.data.frame(age_20$Date1), 
 #'          aes(x = ageGrid, y = densities), col = 'red') + 
-#'      ggtitle('Intcal09 vs Intcal13')
+#'      ggtitle('Intcal09 vs Intcal20')
 #' }
 createCalCurve = function(name,
                           calAges,

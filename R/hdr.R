@@ -15,7 +15,7 @@
 #' @examples
 #' # Calibrate multiple ages and summarise them
 #' ages = BchronCalibrate(ages=11553,ageSds=230,
-#'                        calCurves='intcal13')
+#'                        calCurves='intcal20')
 #' # Get samples
 #' hdr(ages$Date1)
 hdr = function(date, prob = 0.95) {

@@ -4,7 +4,7 @@
 #'
 #' @param ages A vector of ages (most likely 14C)
 #' @param ageSds A vector of 1-sigma values for the ages given above
-#' @param calCurves A vector of values containing either \code{intcal13}, \code{shcal13}, \code{marine13}, or \code{normal}. Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.
+#' @param calCurves A vector of values containing either \code{intcal20}, \code{shcal20}, \code{marine20}, or \code{normal} (older calibration curves such as intcal13 are also supported). Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.
 #' @param pathToCalCurves File path to where the calibration curves are located. Defaults to the system directory where the 3 standard calibration curves are stored
 #' @param dfs Degrees-of-freedom values for the t-distribution associated with the calibration calculation. A large value indicates Gaussian distributions assumed for the 14C ages
 #' @param numMix The number of mixture components in the phase model. Might need to be increased if the data set is large and the phase behaviour is very complex

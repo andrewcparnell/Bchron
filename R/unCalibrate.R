@@ -16,13 +16,13 @@
 #' 
 #' # Vector version giving a vector of uncalibrated ages
 #' unCalibrate(calAge = c(2350, 4750, 11440),
-#'   calCurve = 'shcal13',
+#'   calCurve = 'shcal20',
 #'   type = 'ages')
 #' 
 #' # A version where calibrated standard deviations are required too
 #' calAge = BchronCalibrate(ages = 11255,
 #'   ageSds = 25,
-#'   calCurves = 'intcal13')
+#'   calCurves = 'intcal20')
 #' calSampleAges = sampleAges(calAge)
 #' 
 #' # Uncalibrate the above
@@ -30,7 +30,7 @@
 #'   type = 'samples')
 #' }
 unCalibrate = function(calAges,
-                       calCurve = 'intcal13',
+                       calCurve = 'intcal20',
                        type = c('samples', 'ages'),
                        pathToCalCurves = system.file('data', package = 'Bchron'),
                        ...) {

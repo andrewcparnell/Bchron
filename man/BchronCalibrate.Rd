@@ -7,7 +7,7 @@
 BchronCalibrate(
   ages,
   ageSds,
-  calCurves,
+  calCurves = rep("intcal20", length(ages)),
   ids = NULL,
   positions = NULL,
   pathToCalCurves = system.file("data", package = "Bchron"),
@@ -20,7 +20,7 @@ BchronCalibrate(
 
 \item{ageSds}{A vector of 1-sigma values for the ages given above}
 
-\item{calCurves}{A vector of values containing either \code{intcal13}, \code{shcal13}, \code{marine13}, or \code{normal}. Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.}
+\item{calCurves}{A vector of values containing either \code{intcal20}, \code{shcal20}, \code{marine20}, or \code{normal} (older calibration curves are supposed such as intcal13). Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.}
 
 \item{ids}{ID names for each age}
 
@@ -56,19 +56,19 @@ Multiple calibration curves can be specified so that each 14C age can have a dif
 }
 \examples{
 # Calibrate a single age
-ages1 = BchronCalibrate(ages=11553,ageSds=230,calCurves='intcal13',ids='Date-1')
+ages1 = BchronCalibrate(ages=11553,ageSds=230,calCurves='intcal20',ids='Date-1')
 summary(ages1)
 plot(ages1)
 
 # Calibrate multiple ages with different calibration curves
 ages2 = BchronCalibrate(ages=c(3445,11553,7456),ageSds=c(50,230,110),
-                        calCurves=c('intcal13','intcal13','shcal13'))
+                        calCurves=c('intcal20','intcal20','shcal20'))
 summary(ages2)
 plot(ages2)
 
 # Calibrate multiple ages with multiple calibration curves and including depth
 ages3 = BchronCalibrate(ages=c(3445,11553),ageSds=c(50,230),positions=c(100,150),
-                        calCurves=c('intcal13','normal'))
+                        calCurves=c('intcal20','normal'))
 summary(ages3)
 plot(ages3,withPositions=TRUE)
 

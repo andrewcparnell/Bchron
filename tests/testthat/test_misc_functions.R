@@ -6,11 +6,11 @@ library(Bchron)
 test_that('unCalibrate', {
   unCal1 = unCalibrate(2350, type = 'ages')
   unCal2 = unCalibrate(calAge = c(2350, 4750, 11440),
-                       calCurve = 'shcal13',
+                       calCurve = 'shcal20',
                        type = 'ages')
   calAge = BchronCalibrate(ages = 11255,
                            ageSds = 25,
-                           calCurves = 'intcal13')
+                           calCurves = 'intcal20')
   calSampleAges = sampleAges(calAge)
   unCalSamples = unCalibrate(calSampleAges,
               type = 'samples')
@@ -25,7 +25,7 @@ test_that("sampleAges", {
   ages3 = BchronCalibrate(ages=c(1000,11553), 
                           ageSds=c(50,230), 
                           positions=c(100,150), 
-                          calCurves=c('intcal13','normal'))
+                          calCurves=c('intcal20','normal'))
   age_samples = sampleAges(ages3)
   expect_type(age_samples, 'double')
   expect_type(apply(age_samples, 2, quantile, prob=c(0.025,0.975)), 'double')

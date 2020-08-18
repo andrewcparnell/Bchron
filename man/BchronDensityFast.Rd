@@ -19,7 +19,7 @@ BchronDensityFast(
 
 \item{ageSds}{A vector of 1-sigma values for the ages given above}
 
-\item{calCurves}{A vector of values containing either \code{intcal13}, \code{shcal13}, \code{marine13}, or \code{normal}. Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.}
+\item{calCurves}{A vector of values containing either \code{intcal20}, \code{shcal20}, \code{marine20}, or \code{normal} (older calibration curves such as intcal13 are also supported). Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.}
 
 \item{pathToCalCurves}{File path to where the calibration curves are located. Defaults to the system directory where the 3 standard calibration curves are stored.}
 

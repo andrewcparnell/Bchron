@@ -46,25 +46,25 @@ If you want to install the development version of Bchron please visit the Bchron
 
 ## Calibrating radiocarbon dates
 
-Bchron will calibrate single or multiple dates under multiple (even user defined) calibration curves. By default, the intcal13, shcal13 and marine13 calibration curves are included. You can calibrate a single radiocarbon date with, e.g.
+Bchron will calibrate single or multiple dates under multiple (even user defined) calibration curves. By default, the intcal20, shcal20 and marine20 calibration curves are included (as are older calibration curves such as intcal13). You can calibrate a single radiocarbon date with, e.g.
 
 ```{r,fig.align='center',fig.width=6,fig.height=5}
 ages1 = BchronCalibrate(ages=11553,
                         ageSds=230,
-                        calCurves='intcal13',
+                        calCurves='intcal20',
                         ids='Ox-123456')
 summary(ages1)
 plot(ages1)
 ```
 
-This will calibrate the radiocarbon age of 11,553 14C years BP with standard error 230 14C years on the intcal13 calibration curve. The `id` given is optional and only used for summarising and plotting. The summary command then gives the highest density regions of the calibrated date and the plot command produces a simple plot of the density, together with a shaded region for the 95% highest density region.
+This will calibrate the radiocarbon age of 11,553 14C years BP with standard error 230 14C years on the intcal20 calibration curve. The `id` given is optional and only used for summarising and plotting. The summary command then gives the highest density regions of the calibrated date and the plot command produces a simple plot of the density, together with a shaded region for the 95% highest density region.
 
 Bchron can calibrate multiple dates simultaneously by inputting the dates as vectors:
 
 ```{r,results='hide'}
 ages2 = BchronCalibrate(ages=c(3445,11553,7456), 
                         ageSds=c(50,230,110), 
-                        calCurves=c('intcal13','intcal13','shcal13'))
+                        calCurves=c('intcal20','intcal20','shcal20'))
 summary(ages2)
 plot(ages2)
 ```
@@ -77,7 +77,7 @@ Finally, if you provide position information (e.g. depths) to the BchronCalibrat
 ages3 = BchronCalibrate(ages=c(3445,11000), 
                         ageSds=c(50,200), 
                         positions=c(100,150), 
-                        calCurves=c('intcal13','normal'))
+                        calCurves=c('intcal20','normal'))
 summary(ages3)
 plot(ages3)
 ```
@@ -370,7 +370,7 @@ The `BchronDensityFast` function outputs the age grid and density by default so 
 
 Bchron allows for user-defined calibration curves to be created through the function `createCalCurve`. If inputs to this function are:
 
-  - The `name` of the calibration curve (e.g. intcal13c)
+  - The `name` of the calibration curve (e.g. intcal20)
   - The calibrated/calendar ages for the new calibration curve
   - The uncalibrated (e.g. 14C) ages for the new calibration curve
   - (Optionally) the 1-sigma error for the calibration curve in uncalibrated years. If not included the error is assumed to be zero
@@ -395,17 +395,17 @@ The new calibration curve now needs to be moved to the Bchron package directory.
 file.copy('intcal09.rda', system.file('data',package='Bchron'))
 ```
 
-It can then be used via its name. For example, we can now compare the calibration of a date under the intcal09 curve with that of intcal13:
+It can then be used via its name. For example, we can now compare the calibration of a date under the intcal09 curve with that of intcal20:
 ```{r, eval = FALSE}
 age_09 = BchronCalibrate(age=15500,ageSds=150,calCurves = 'intcal09',
                          ids='IntCal09')
-age_13 = BchronCalibrate(age=15500,ageSds=150,calCurves = 'intcal13',
-                         ids = 'Intcal13')
+age_20 = BchronCalibrate(age=15500,ageSds=150,calCurves = 'intcal20',
+                         ids = 'Intcal20')
 library(ggplot2)
 plot(age_09) + 
-  geom_line(data = as.data.frame(age_13$Date1), 
+  geom_line(data = as.data.frame(age_20$Intcal20), 
             aes(x = ageGrid, y = densities), col = 'red') + 
-  ggtitle('Intcal09 vs Intcal13')
+  ggtitle('Intcal09 vs Intcal20')
 ```
 
 ## Uncalibrating dates
@@ -421,11 +421,11 @@ unCal1 = unCalibrate(2350, type = 'ages')
 print(unCal1)
 ```
 
-The above un-calibrates the age 2350 BP to the age 2346 14C years BP on the intcal13 calibration curve. A more advanced version would be:
+The above un-calibrates the age 2350 BP to the age 2346 14C years BP on the intcal20 calibration curve. A more advanced version would be:
 
 ```{r, results = 'hide'}
 unCal2 = unCalibrate(calAge = c(2350, 4750, 11440),
-                     calCurve = 'shcal13',
+                     calCurve = 'intcal20',
                      type = 'ages')
 ```
 ```{r}
@@ -438,8 +438,8 @@ A fun experiment can then be run to see what the distribution of 14C ages would 
 ageRange = seq(8000, 9000, by = 5)
 c14Ages = unCalibrate(ageRange,
                       type = 'ages')
-load(system.file('data/intcal13.rda', package = 'Bchron'))
-ggplot(intcal13, aes(x = V1, y = V2)) + 
+load(system.file('data/intcal20.rda', package = 'Bchron'))
+ggplot(intcal20, aes(x = V1, y = V2)) + 
   geom_line() + 
   theme_bw() + 
   scale_x_continuous(limits = range(ageRange)) + 
@@ -457,7 +457,7 @@ The more complicated version is run by providing it with a (preferably large) sa
 ```{r}
 calAge = BchronCalibrate(ages = 11255,
                          ageSds = 25,
-                         calCurves = 'intcal13')
+                         calCurves = 'intcal20')
 calSampleAges = sampleAges(calAge)
 ```
 
@@ -493,7 +493,9 @@ GlenOut = with(Glendalough,
 
 Now suppose we want to plot the chronology but add in the 14C date $7000 \pm 40$ at depth 600cm. First we calibrated that date
 ```{r}
-new_cal = BchronCalibrate(ages = 7000, ageSds = 40, calCurve = 'intcal13')
+new_cal = BchronCalibrate(ages = 7000, 
+                          ageSds = 40, 
+                          calCurve = 'intcal20')
 ```
 
 Finally we create the plot and add the date as a new layer (with a new colour too):

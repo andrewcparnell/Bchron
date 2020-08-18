@@ -4,15 +4,15 @@ library(Bchron)
 
 ages1 = BchronCalibrate(ages=11553,
                         ageSds=230,
-                        calCurves='intcal13',
+                        calCurves='intcal20',
                         ids='Ox-123456')
 ages2 = BchronCalibrate(ages=c(3445,11553,7456), 
                         ageSds=c(50,230,110), 
-                        calCurves=c('intcal13','intcal13','shcal13'))
+                        calCurves=c('intcal20','intcal20','shcal20'))
 ages3 = BchronCalibrate(ages=c(1000,11553), 
                         ageSds=c(50,230), 
                         positions=c(100,150), 
-                        calCurves=c('intcal13','normal'))
+                        calCurves=c('intcal20','normal'))
 
 test_that("BchronCalibrate works", {
   expect_s3_class(ages1, 'BchronCalibratedDates')

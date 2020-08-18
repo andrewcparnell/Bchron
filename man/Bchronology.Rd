@@ -9,7 +9,7 @@ Bchronology(
   ageSds,
   positions,
   positionThicknesses = rep(0, length(ages)),
-  calCurves = rep("intcal13", length(ages)),
+  calCurves = rep("intcal20", length(ages)),
   ids = NULL,
   outlierProbs = rep(0.01, length(ages)),
   predictPositions = seq(min(positions), max(positions), length = 100),
@@ -36,7 +36,7 @@ Bchronology(
 
 \item{positionThicknesses}{Thickness values for each of the positions. The thickness value should be the full thickness value of the slice. By default set to zero.}
 
-\item{calCurves}{A vector of values containing either 'intcal13', 'shcal13', 'marine13', or 'normal'. Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory, or created via \code{\link{createCalCurve}}. Normal indicates a normally-distributed (non-14C) age.}
+\item{calCurves}{A vector of values containing either 'intcal20', 'shcal20', 'marine20', or 'normal' (older calibration curves are also supported, e.g. intcal13). Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory, or created via \code{\link{createCalCurve}}. Normal indicates a normally-distributed (non-14C) age.}
 
 \item{ids}{ID names for each age}
 
@@ -90,7 +90,7 @@ The \code{Bchronology} function fits a compound Poisson-Gamma distribution to th
 # Data from Glendalough
 data(Glendalough)
 
-# Run in Bchronology - all but first age uses intcal13
+# Run in Bchronology - all but first age uses intcal20
 GlenOut = Bchronology(ages=Glendalough$ages,ageSds=Glendalough$ageSds,
                       calCurves=Glendalough$calCurves,positions=Glendalough$position,
                       positionThicknesses=Glendalough$thickness,ids=Glendalough$id,

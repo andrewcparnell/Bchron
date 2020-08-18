@@ -15,7 +15,7 @@
 #' @examples
 #' # Calibrate multiple ages and summarise them
 #' ages = BchronCalibrate(ages=c(3445,11553,7456),ageSds=c(50,230,110),
-#'                        calCurves=c('intcal13','intcal13','shcal13'))
+#'                        calCurves=c('intcal20','intcal20','shcal20'))
 #' # Get samples
 #' age_samples = sampleAges(ages)
 #' # Create a credible interval and the median for each date

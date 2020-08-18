@@ -23,7 +23,7 @@ The output of this function is a list of contiguous ranges which cover the proba
 \examples{
 # Calibrate multiple ages and summarise them
 ages = BchronCalibrate(ages=11553,ageSds=230,
-                       calCurves='intcal13')
+                       calCurves='intcal20')
 # Get samples
 hdr(ages$Date1)
 }

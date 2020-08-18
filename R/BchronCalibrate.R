@@ -4,7 +4,7 @@
 #'
 #' @param ages A vector of ages (most likely 14C)
 #' @param ageSds A vector of 1-sigma values for the ages given above
-#' @param calCurves A vector of values containing either \code{intcal13}, \code{shcal13}, \code{marine13}, or \code{normal}. Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.
+#' @param calCurves A vector of values containing either \code{intcal20}, \code{shcal20}, \code{marine20}, or \code{normal} (older calibration curves are supposed such as intcal13). Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.
 #' @param ids ID names for each age
 #' @param positions Position values (e.g. depths) for each age
 #' @param pathToCalCurves File path to where the calibration curves are located. Defaults to the system directory where the 3 standard calibration curves are stored.
@@ -35,24 +35,31 @@
 #'
 #' @examples
 #' # Calibrate a single age
-#' ages1 = BchronCalibrate(ages=11553,ageSds=230,calCurves='intcal13',ids='Date-1')
+#' ages1 = BchronCalibrate(ages=11553,ageSds=230,calCurves='intcal20',ids='Date-1')
 #' summary(ages1)
 #' plot(ages1)
 #' 
 #' # Calibrate multiple ages with different calibration curves
 #' ages2 = BchronCalibrate(ages=c(3445,11553,7456),ageSds=c(50,230,110),
-#'                         calCurves=c('intcal13','intcal13','shcal13'))
+#'                         calCurves=c('intcal20','intcal20','shcal20'))
 #' summary(ages2)
 #' plot(ages2)
 #' 
 #' # Calibrate multiple ages with multiple calibration curves and including depth
 #' ages3 = BchronCalibrate(ages=c(3445,11553),ageSds=c(50,230),positions=c(100,150),
-#'                         calCurves=c('intcal13','normal'))
+#'                         calCurves=c('intcal20','normal'))
 #' summary(ages3)
 #' plot(ages3,withPositions=TRUE)
 #' 
-BchronCalibrate <-
-function(ages,ageSds,calCurves,ids=NULL,positions=NULL,pathToCalCurves=system.file('data',package='Bchron'),eps=1e-5,dfs=rep(100,length(ages))) {
+BchronCalibrate <- function(ages,
+                            ageSds,
+                            calCurves = rep('intcal20', length(ages)),
+                            ids = NULL,
+                            positions = NULL,
+                            pathToCalCurves = system.file('data',
+                                                        package='Bchron'),
+                            eps = 1e-5,
+                            dfs = rep(100, length(ages))) {
 
   # This function expects ages in years BP (either 14C or not depending on calCurve values)
   # and positions (usually depths) in cm

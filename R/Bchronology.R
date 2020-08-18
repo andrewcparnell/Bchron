@@ -6,7 +6,7 @@
 #' @param ageSds A vector of 1-sigma values for the ages given above
 #' @param positions Position values (e.g. depths) for each age
 #' @param positionThicknesses Thickness values for each of the positions. The thickness value should be the full thickness value of the slice. By default set to zero.
-#' @param calCurves A vector of values containing either 'intcal13', 'shcal13', 'marine13', or 'normal'. Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory, or created via \code{\link{createCalCurve}}. Normal indicates a normally-distributed (non-14C) age.
+#' @param calCurves A vector of values containing either 'intcal20', 'shcal20', 'marine20', or 'normal' (older calibration curves are also supported, e.g. intcal13). Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory, or created via \code{\link{createCalCurve}}. Normal indicates a normally-distributed (non-14C) age.
 #' @param ids ID names for each age
 #' @param outlierProbs A vector of prior outlier probabilities, one for each age. Defaults to 0.01
 #' @param predictPositions A vector of positions (e.g. depths) at which predicted age values are required. Defaults to a sequence of length 100 from the top position to the bottom position
@@ -49,7 +49,7 @@
 #' # Data from Glendalough
 #' data(Glendalough)
 #' 
-#' # Run in Bchronology - all but first age uses intcal13
+#' # Run in Bchronology - all but first age uses intcal20
 #' GlenOut = Bchronology(ages=Glendalough$ages,ageSds=Glendalough$ageSds,
 #'                       calCurves=Glendalough$calCurves,positions=Glendalough$position,
 #'                       positionThicknesses=Glendalough$thickness,ids=Glendalough$id,
@@ -73,7 +73,7 @@ Bchronology = function(ages,
                        positions,
                        positionThicknesses = rep(0,
                                                  length(ages)),
-                       calCurves = rep('intcal13',
+                       calCurves = rep('intcal20',
                                        length(ages)),
                        ids = NULL,
                        outlierProbs = rep(0.01, length(ages)),

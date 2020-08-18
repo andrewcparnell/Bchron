@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Bchron</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.2</span>
       </span>
     </div>
 
@@ -89,9 +89,9 @@
 <p>Bchron is a Bayesian chronology model implemented in R.</p>
 <p>The package enables quick calibration of radiocarbon dates under various calibration curves (including user generated ones); Age-depth modelling as per the algorithm of Haslett and Parnell (2008); Relative sea level rate estimation incorporating time uncertainty in polynomial regression models; and non-parametric phase modelling via Gaussian mixtures as a means to determine the activity of a site (and as an alternative to the Oxcal function SUM).</p>
 <p>To install the development version of the package type:</p>
-<pre><code><a href="https://devtools.r-lib.org//reference/remote-reexports.html"># If required install devtools:
-#install.packages('devtools')
-devtools::install_github('andrewcparnell/Bchron')</a></code></pre>
+<pre><code># If required install remotes:
+if(!require(remotes)) install.packages('remotes')
+remotes::install_github('andrewcparnell/Bchron')</code></pre>
 <p>You can then explore the package with:</p>
 <pre><code><a href="https://rdrr.io/pkg/Bchron/man">library(Bchron)
 help(Bchronology) # Help on the chronology modelling function
