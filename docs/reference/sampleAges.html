@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Bchron</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.2</span>
       </span>
     </div>
 
@@ -151,14 +151,14 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Calibrate multiple ages and summarise them</span>
 <span class='no'>ages</span> <span class='kw'>=</span> <span class='fu'><a href='BchronCalibrate.html'>BchronCalibrate</a></span>(<span class='kw'>ages</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3445</span>,<span class='fl'>11553</span>,<span class='fl'>7456</span>),<span class='kw'>ageSds</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>50</span>,<span class='fl'>230</span>,<span class='fl'>110</span>),
-                       <span class='kw'>calCurves</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'intcal13'</span>,<span class='st'>'intcal13'</span>,<span class='st'>'shcal13'</span>))
+                       <span class='kw'>calCurves</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'intcal20'</span>,<span class='st'>'intcal20'</span>,<span class='st'>'shcal20'</span>))
 <span class='co'># Get samples</span>
 <span class='no'>age_samples</span> <span class='kw'>=</span> <span class='fu'>sampleAges</span>(<span class='no'>ages</span>)
 <span class='co'># Create a credible interval and the median for each date</span>
-<span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>age_samples</span>, <span class='fl'>2</span>, <span class='no'>quantile</span>, <span class='kw'>probs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.05</span>, <span class='fl'>0.5</span>, <span class='fl'>0.95</span>))</div><div class='output co'>#&gt;     Date1    Date2   Date3
-#&gt; 5%   3603 13054.95 8036.00
-#&gt; 50%  3709 13397.00 8228.00
-#&gt; 95%  3824 13797.00 8381.05</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span>(<span class='no'>age_samples</span>, <span class='fl'>2</span>, <span class='no'>quantile</span>, <span class='kw'>probs</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0.05</span>, <span class='fl'>0.5</span>, <span class='fl'>0.95</span>))</div><div class='output co'>#&gt;     Date1    Date2 Date3
+#&gt; 5%   3585 13100.95  8036
+#&gt; 50%  3703 13429.00  8229
+#&gt; 95%  3823 13842.00  8380</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
