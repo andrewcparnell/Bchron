@@ -3,7 +3,7 @@
 #' Plots calibrated radiocarbon dates from a \code{\link{BchronCalibrate}} run. Has options to plot on a position (usually depth) scale if supplied with the original run
 #'
 #' @param x Output from \code{\link{BchronCalibrate}}
-#' @param withPositions Whether to plot with positions (i.e. using the position values as the y axis). By detault TRUE if \code{x} has more than one date and contains positions
+#' @param withPositions Whether to plot with positions (i.e. using the position values as the y axis). By default TRUE if \code{x} has more than one date and contains positions
 #' @param dateHeight The height of the dates in the plot in the same units as the position values. Only relevant if \code{withPositions=TRUE}.
 #' @param dateLabels Whether to add the names of the dates to the left of them. Default TRUE
 #' @param fillCol A colour to fill the date densities when \code{withPositions} is TRUE, or HDR ranges when it is FALSE

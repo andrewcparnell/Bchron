@@ -33,3 +33,4 @@ test_that("plot.BchronDensityRun", {
 test_that("plot.BchronDensityRunFast", {
   expect_null(plot(SlugDensFast, plotSum = TRUE))
 })
+

@@ -19,7 +19,7 @@
 \arguments{
 \item{x}{Output from \code{\link{BchronCalibrate}}}
 
-\item{withPositions}{Whether to plot with positions (i.e. using the position values as the y axis). By detault TRUE if \code{x} has more than one date and contains positions}
+\item{withPositions}{Whether to plot with positions (i.e. using the position values as the y axis). By default TRUE if \code{x} has more than one date and contains positions}
 
 \item{dateHeight}{The height of the dates in the plot in the same units as the position values. Only relevant if \code{withPositions=TRUE}.}
 

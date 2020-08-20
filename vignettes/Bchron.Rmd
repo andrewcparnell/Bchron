@@ -473,7 +473,7 @@ print(unCal)
 
 This will provide a single best estimate of the mean and standard deviation of the uncalibrated (here 14C) date.
 
-# Miscelaneous other queries
+# Miscellaneous other queries
 
 ## I would like to plot some extra dates on my chronology
 
