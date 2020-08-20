@@ -8,8 +8,6 @@
 * BugReports: https://github.com/andrewcparnell/Bchron/issues
 * Number of recursive dependencies: 0
 
-Run `revdep_details(,"")` for more info
-
 </details>
 
 ## Error before installation
@@ -43,8 +41,6 @@ Run `revdep_details(,"")` for more info
 * URL: http://andrewcparnell.github.io/Bchron/
 * BugReports: https://github.com/andrewcparnell/Bchron/issues
 * Number of recursive dependencies: 0
-
-Run `revdep_details(,"")` for more info
 
 </details>
 
@@ -80,8 +76,6 @@ Run `revdep_details(,"")` for more info
 * BugReports: https://github.com/andrewcparnell/Bchron/issues
 * Number of recursive dependencies: 0
 
-Run `revdep_details(,"")` for more info
-
 </details>
 
 ## Error before installation
@@ -115,8 +109,6 @@ Run `revdep_details(,"")` for more info
 * URL: http://andrewcparnell.github.io/Bchron/
 * BugReports: https://github.com/andrewcparnell/Bchron/issues
 * Number of recursive dependencies: 0
-
-Run `revdep_details(,"")` for more info
 
 </details>
 
