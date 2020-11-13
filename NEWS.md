@@ -1,3 +1,7 @@
+# Bchron 4.7.3
+
+  - Fixed a weird bug where some hdr's were coming out sort the wrong way in plot.Bchronology
+
 # Bchron 4.7.2
 
   - Included intcal20, shcal20, and marine20 new calibration curves

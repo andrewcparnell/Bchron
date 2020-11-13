@@ -211,7 +211,7 @@ dateInfluence.BchronologyRun = function(bchrRun,
     
     # Start loop through 
     for (i in 1:nDates) {
-      cat('Leaving out date',as.character(dateNames[i]), '\n\n')
+      cat('\nLeaving out date',as.character(dateNames[i]), '\n\n')
       whichDate = i
 
       # Find the closest predictPosition to this date
@@ -282,7 +282,7 @@ dateInfluence.BchronologyRun = function(bchrRun,
     
     # Start loop through 
     for (i in 2:(nDates-1)) {
-      cat('Leaving out date',as.character(dateNames[i]), '\n\n')
+      cat('\nLeaving out date',as.character(dateNames[i]), '\n\n')
       whichDate = i
       
       # Find the closest predictPosition to this date

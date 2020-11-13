@@ -121,7 +121,7 @@ choosePositions.BchronologyRun = function(bchrRun,
   if(plot) plot(bchrRun, main = main) + ggplot2::geom_hline(yintercept = linesAt)
   store = sprintf("osition with largest uncertainty at %s%% level is %s",
             signif(level*100, 3), signif(returnPos, 3))
-  if(N > 1 | count > 1) cat('Round', count, '\n')
+  if(N > 1 | count > 1) cat('\nRound', count, '\n')
   if(count>1) {
     cat('Next p',store, '\n', sep = '') 
   } else {

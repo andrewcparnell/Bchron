@@ -14,6 +14,12 @@ ages3 = BchronCalibrate(ages=c(1000,11553),
                         positions=c(100,150), 
                         calCurves=c('intcal20','normal'))
 
+# A dodgy one that was found by a GitHub user shheidgen
+ages4 = BchronCalibrate(ages = 6885, 
+                        ageSds = 65, 
+                        calCurve = 'intcal13')
+
+
 test_that("BchronCalibrate works", {
   expect_s3_class(ages1, 'BchronCalibratedDates')
   expect_s3_class(ages2, 'BchronCalibratedDates')
@@ -30,6 +36,7 @@ test_that("plot.BchronCalibrate works", {
   expect_s3_class(plot(ages1), 'ggplot')
   expect_type(plot(ages2), 'list')
   expect_s3_class(plot(ages3), 'ggplot')
+  expect_s3_class(plot(ages4), 'ggplot')
 })
 
 test_that("predict.BchronCalibrate works", {

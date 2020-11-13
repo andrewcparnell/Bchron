@@ -31,7 +31,7 @@ if(is.null(ag)) stop('Age grid not found in date object.')
 if(is.null(de)) stop('Densities not found in date object.')
 if(findInterval(prob, c(0, 1))!=1) stop('prob value outside (0,1).')
 
-# Put the probabilities in order
+# Put the probabilities in order of density
 o = order(de)
 cu = cumsum(de[o])
 
@@ -52,7 +52,7 @@ for(i in 1:n_breaks) {
   curr_dens = round(100*sum(de[o][seq(good_cu[low_seq], good_cu[high_seq])]),1)
   names(out)[[i]] = paste0(as.character(curr_dens),'%')
   low_seq = high_seq + 1
-  high_seq = ifelse(i<n_breaks-1, where_breaks[i+1], length(breaks))
+  high_seq = ifelse(i<(n_breaks-1), where_breaks[i+1], length(good_ag))
 }
 return(out)
 

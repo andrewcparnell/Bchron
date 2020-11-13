@@ -57,7 +57,7 @@ function(object,
       invisible(pvals)
     },
     sed_rate = {
-      cat('Sedimentation rate (time units per position unit): \n')
+      cat('\nSedimentation rate (time units per position unit): \n')
       chrons = object$thetaPredict
       position_grid = object$predictPositions
       if(useExisting) cat('Note: assumes existing predictPositions are on a regular unit grid. If this is not the case set useExisting = FALSE \n')
@@ -74,7 +74,7 @@ function(object,
       invisible(as.data.frame(sed_rate_ci))
     },
     acc_rate = {
-      cat('Accumulation rate (position units per time unit): \n')
+      cat('\nAccumulation rate (position units per time unit): \n')
       chrons = object$thetaPredict
       age_grid = seq(stats::quantile(chrons, 0.05), stats::quantile(chrons, 0.95), by = 1)
       my_fun = function(x) stats::approx(x, y = object$predictPositions, xout = age_grid, rule = 2)$y
