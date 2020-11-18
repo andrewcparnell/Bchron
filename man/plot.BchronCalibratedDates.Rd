@@ -6,6 +6,7 @@
 \usage{
 \method{plot}{BchronCalibratedDates}(
   x,
+  date = NULL,
   withPositions = ifelse(length(x) > 1 & !is.null(x[[1]]$positions), TRUE, FALSE),
   includeCal = FALSE,
   dateHeight = 100,
@@ -20,6 +21,8 @@
 }
 \arguments{
 \item{x}{Output from \code{\link{BchronCalibrate}}}
+
+\item{date}{Either numbers or date names to plot (only used if multiple dates have been calibrated)}
 
 \item{withPositions}{Whether to plot with positions (i.e. using the position values as the y axis). By default TRUE if \code{x} has more than one date and contains positions}
 

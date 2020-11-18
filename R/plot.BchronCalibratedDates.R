@@ -3,6 +3,7 @@
 #' Plots calibrated radiocarbon dates from a \code{\link{BchronCalibrate}} run. Has options to plot on a position (usually depth) scale if supplied with the original run
 #'
 #' @param x Output from \code{\link{BchronCalibrate}}
+#' @param date Either numbers or date names to plot (only used if multiple dates have been calibrated)
 #' @param withPositions Whether to plot with positions (i.e. using the position values as the y axis). By default TRUE if \code{x} has more than one date and contains positions
 #' @param includeCal Whether to plot the date alongside the calibration curve and the normally distributed uncalibrated date. 
 #' @param dateHeight The height of the dates in the plot in the same units as the position values. Only relevant if \code{withPositions=TRUE}.
@@ -26,6 +27,7 @@
 #' @export
 plot.BchronCalibratedDates =
   function(x,
+           date = NULL,
            withPositions=ifelse(length(x)>1 & 
                                   !is.null(x[[1]]$positions),
                                 TRUE,FALSE),
@@ -43,6 +45,30 @@ plot.BchronCalibratedDates =
     # Check for dodgy options
     if(includeCal & withPositions) stop("Both includeCal and withPositions cannot be TRUE")
     
+    # Extract out which date to plot if given
+    if(!is.null(date)) {
+      n_dates = length(date)
+      
+      # Stop if not all the dates are character or numeric
+      if(!all(is.numeric(date))) {
+        which_dates = match(date,names(x))
+        if(any(is.na(which_dates))) stop("Some provided dates do not match date names in calibrated dates object")
+      } else if(any(is.na(match(1:length(date), 1:length(x))))) {
+        stop("Some date numbers out of range")
+      }
+      
+      x_new = vector('list', length = n_dates)
+      for(j in 1:n_dates) {
+        x_new[[j]] = x[[date[j]]]
+        if(is.numeric(date[j])) {
+          names(x_new)[j] = names(x)[[date[j]]]  
+        } else {
+          names(x_new)[j] = names(x)[[which_dates[j]]]
+        }
+      }
+      x = x_new
+    }
+      
     # Scale function for age scales
     ageScale = match.arg(ageScale, several.ok = FALSE)
     ageScaleFun = function(z) switch(ageScale,

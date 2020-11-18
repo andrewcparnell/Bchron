@@ -35,6 +35,11 @@ test_that("summary.BchronologyRun works", {
 test_that("plot.BchronCalibrate works", {
   expect_s3_class(plot(ages1), 'ggplot')
   expect_type(plot(ages2), 'list')
+  expect_s3_class(plot(ages2, date = 1), 'ggplot')
+  expect_s3_class(plot(ages2, date = 'Date1'), 'ggplot')
+  expect_type(plot(ages2, date = c("Date1", "Date2")), 'list')
+  expect_error(plot(ages2, date = '5'))
+  expect_error(plot(ages2, date = 7))
   expect_s3_class(plot(ages3), 'ggplot')
   expect_s3_class(plot(ages4), 'ggplot')
   expect_s3_class(plot(ages1, includeCal = TRUE), 'ggplot')

@@ -69,7 +69,15 @@ summary(ages2)
 plot(ages2)
 ```
 
-This will calibrate three different 14C ages with the calibration curves as specified in the `calCurves` argument. The `summary` and `plot` commands will produce individual highest density regions and density plots for the three dates.
+This will calibrate three different 14C ages with the calibration curves as specified in the `calCurves` argument. The `summary` and `plot` commands will produce individual highest density regions and density plots for the three dates. 
+
+You can plot individual dates from a calibration of multiple dates by name or number, e.g.
+
+```{r, eval=FALSE}
+plot(ages2, date = 'Date3')
+plot(ages2, date = 1:2)
+```
+
 
 Finally, if you provide position information (e.g. depths) to the BchronCalibrate function it will create a plot with position on the y-axis, e.g.:
 

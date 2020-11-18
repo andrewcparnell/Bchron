@@ -2,6 +2,7 @@
 
   - Fixed a weird bug where some hdr's were coming out sort the wrong way in plot.Bchronology
   - Add the ability to create OxCal style plots with the calibration curve
+  - Added a feature to plot individual dates in plot.BchronCalibratedDates
 
 # Bchron 4.7.2
 
