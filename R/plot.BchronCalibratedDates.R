@@ -29,7 +29,8 @@ plot.BchronCalibratedDates =
   function(x,
            date = NULL,
            withPositions=ifelse(length(x)>1 & 
-                                  !is.null(x[[1]]$positions),
+                                  !is.null(x[[1]]$positions) &
+                                             !includeCal,
                                 TRUE,FALSE),
            includeCal = FALSE,
            dateHeight = 100,
@@ -41,9 +42,6 @@ plot.BchronCalibratedDates =
            pathToCalCurves = system.file('data',
                                          package='Bchron'),
            ...) {
-    
-    # Check for dodgy options
-    if(includeCal & withPositions) stop("Both includeCal and withPositions cannot be TRUE")
     
     # Extract out which date to plot if given
     if(!is.null(date)) {
@@ -67,8 +65,9 @@ plot.BchronCalibratedDates =
         }
       }
       x = x_new
+      class(x) = "BchronCalibratedDates"
     }
-      
+    
     # Scale function for age scales
     ageScale = match.arg(ageScale, several.ok = FALSE)
     ageScaleFun = function(z) switch(ageScale,
@@ -150,7 +149,7 @@ plot.BchronCalibratedDates =
     }
     
     # Now for multiple dates without depths
-    if(length(x)>1 & withPositions==FALSE) {
+    if(length(x)>1 & withPositions==FALSE & includeCal == FALSE) {
       p = vector('list', length(x))
       for(i in 1:length(x)) {
         df = data.frame(
@@ -162,54 +161,16 @@ plot.BchronCalibratedDates =
           geom_line() +
           scale_x_continuous(breaks = my_breaks,
                              labels = abs(my_breaks),
-                             trans = ifelse(scaleReverse,'reverse','identity')) +
+                             trans = ifelse(scaleReverse,
+                                            'reverse','identity')) +
           theme_bw() + 
           ggtitle(names(x)[i])
-        
-        if(includeCal) {
-          # Include the calibration curve
-          calCurveFile = paste(pathToCalCurves,'/',x[[i]]$calCurves,
-                               '.rda',sep='')
-          if(!file.exists(calCurveFile)) stop(paste('Calibration curve file',calCurveFile,'not found'))
-          calLocation = load(calCurveFile)
-          calCurve = get(calLocation)
-          calCurveUse = subset(calCurve,
-                               calCurve$V1 > min(x[[i]]$ageGrid) &
-                                 calCurve$V1 < max(x[[i]]$ageGrid))
-          df$Density2 = df$Density/max(df$Density)*dateHeight + min(calCurveUse$V2)
-          
-          c14ageGrid = seq(x[[i]]$ages - 3 * x[[i]]$ageSds, 
-                           x[[i]]$ages + 3 * x[[i]]$ageSds, 
-                           by = 1)
-          c14density = dnorm(c14ageGrid, 
-                             mean = x[[i]]$ages,
-                             sd = x[[i]]$ageSds)
-          edge_val = ifelse(scaleReverse,max(calCurveUse$V1),
-                            min(calCurveUse$V1))
-          mult_val = ifelse(scaleReverse, -1, 1)
-          df_14C = data.frame(age = c14ageGrid,
-                              dens = mult_val*c14density/max(c14density)*
-                                dateHeight + edge_val)
-          
-          p[[i]] = ggplot(calCurveUse, aes_string(x = "V1", y = "V2")) + 
-            geom_line() + 
-            theme_bw() + 
-            scale_x_continuous(breaks = my_breaks,
-                               labels = abs(my_breaks),
-                               trans = ifelse(scaleReverse,
-                                              'reverse',
-                                              'identity')) +
-            ggtitle(names(x)[i]) + 
-            geom_polygon(data = df, aes_string(x = "Age", y = "Density2"), 
-                         fill = fillCol) + 
-            geom_polygon(data = df_14C, aes_string(x = "dens", y = "age"),
-                         fill = fillCol) + 
-            labs(x = 'Cal Age', y = '14C Age')
-        } else if(withHDR) {
+        if(withHDR) {
           my_hdr = hdr(x[[i]])
           hdr_list = vector('list', length(my_hdr))
           for(j in 1:length(my_hdr)) {
-            x_seq = ageScaleFun(seq(my_hdr[[j]][1], my_hdr[[j]][2], by = 1))
+            x_seq = ageScaleFun(seq(my_hdr[[j]][1], 
+                                    my_hdr[[j]][2], by = 1))
             y_lookup = match(x_seq, df$Age)
             y_seq = df$Density[y_lookup]
             hdr_list[[j]] = data.frame(Age = c(ageScaleFun(my_hdr[[j]][1]), 
@@ -220,12 +181,68 @@ plot.BchronCalibratedDates =
           }
           hdr_df = do.call(rbind, hdr_list)
           p[[i]] = p[[i]] + geom_polygon(data = hdr_df, fill = fillCol)
-        }
+        } 
       }
+    } else if(length(x) > 1 & 
+              withPositions==FALSE & 
+              includeCal == TRUE) {
+      # Extract calibration curves - all need to be the same
+      allCurves = purrr::map_chr(x, 'calCurves')
+      if(any(is.na(match(allCurves,allCurves[1])))) stop("All dates must be calibrated on same curve to plot against it")
+      
+      # Get the calibration curve
+      calCurveFile = paste(pathToCalCurves,'/',x[[1]]$calCurves,
+                           '.rda',sep='')
+      if(!file.exists(calCurveFile)) stop(paste('Calibration curve file',calCurveFile,'not found'))
+      calLocation = load(calCurveFile)
+      calCurve = get(calLocation)
+      
+      # Find the limits of the calibration curve to plot
+      allAgeGrid = purrr::map(x, 'ageGrid')
+      
+      # Find the minimum and maximum values across all the age grids
+      minAgeGrid = lapply(allAgeGrid, 'min') %>% unlist %>% min
+      maxAgeGrid = lapply(allAgeGrid, 'max') %>% unlist %>% max
+      
+      calCurveUse = subset(calCurve,
+                           calCurve$V1 > minAgeGrid &
+                             calCurve$V1 < maxAgeGrid)
+      caldf = t(apply(sampleAges(x), 2, 'quantile', c(0.025, 0.5, 0.975)))
+      colnames(caldf) = c('calLow','calMid','calHigh')
+      c14df = data.frame(
+        c14Mid = purrr::map_dbl(x, 'ages'),
+        c14Low = purrr::map_dbl(x, 'ages') - 2*purrr::map_dbl(x, 'ageSds'),
+        c14High = purrr::map_dbl(x, 'ages') + 2*purrr::map_dbl(x, 'ageSds')
+      )
+      
+      # Combine them together
+      alldf = cbind(caldf, c14df)
+      
+      #my_breaks = pretty(x = df$Age, n = 10)
+      p = ggplot(calCurveUse, aes_string(x = "V1", y = "V2")) + 
+        geom_line() + 
+        theme_bw() + 
+        scale_x_continuous(trans = ifelse(scaleReverse,
+                                          'reverse',
+                                          'identity')) +
+        geom_errorbar(data = alldf,
+                      aes_string(x = "calMid",
+                                 y = "c14Mid",
+                                 ymin = "c14Low",
+                                 ymax = "c14High"),
+                      width = 1, col = fillCol) +
+        geom_errorbarh(data = alldf,
+                       inherit.aes = FALSE,
+                      aes_string(y = "c14Mid",
+                                 xmin = "calLow", 
+                                 xmax = "calHigh"),
+                      height = 1, col = fillCol) +
+        labs(x = 'Cal Age', y = '14C Age')
     }
-    
-    # Finally for multiple dates with depths
-    if(length(x)>1 & withPositions==TRUE) {
+    else if(length(x)>1 & 
+            withPositions==TRUE & 
+            includeCal == FALSE) {
+      # Finally for multiple dates with depths
       allAges = purrr::map_dfr(x, `[`, c("ageGrid", "densities"), .id = c('Date')) %>% 
         dplyr::rename(Age = .data$ageGrid)
       # scale all the densities to have max value 1
@@ -263,7 +280,6 @@ plot.BchronCalibratedDates =
                           check_overlap = TRUE,
                           vjust = 0.5, hjust = 1.5)
       }
-      
     }
     p
   }

@@ -79,7 +79,7 @@ plot(ages2, date = 1:2)
 ```
 
 
-Finally, if you provide position information (e.g. depths) to the BchronCalibrate function it will create a plot with position on the y-axis, e.g.:
+If you provide position information (e.g. depths) to the BchronCalibrate function it will create a plot with position on the y-axis, e.g.:
 
 ```{r,fig.align='center',fig.width=6,fig.height=5}
 ages3 = BchronCalibrate(ages=c(3445,11000), 
@@ -110,6 +110,14 @@ plot(ages3, ageScale = 'bc', scaleReverse = FALSE) +
 ... or add the calibration curve into the plot
 ```{r}
 plot(ages1, includeCal = TRUE)
+```
+
+... or add multiple dates into the calibration curve plots
+```{r}
+ages4 = BchronCalibrate(ages=c(3445,11553,7456), 
+                        ageSds=c(50,230,110), 
+                        calCurves=rep('intcal20',3))
+plot(ages4, includeCal = TRUE, fillCol = 'orange')
 ```
 
 
