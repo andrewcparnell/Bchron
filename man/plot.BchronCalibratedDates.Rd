@@ -7,12 +7,14 @@
 \method{plot}{BchronCalibratedDates}(
   x,
   withPositions = ifelse(length(x) > 1 & !is.null(x[[1]]$positions), TRUE, FALSE),
+  includeCal = FALSE,
   dateHeight = 100,
   dateLabels = TRUE,
   fillCol = "darkslategray",
   withHDR = TRUE,
   ageScale = c("bp", "bc", "b2k"),
   scaleReverse = TRUE,
+  pathToCalCurves = system.file("data", package = "Bchron"),
   ...
 )
 }
@@ -20,6 +22,8 @@
 \item{x}{Output from \code{\link{BchronCalibrate}}}
 
 \item{withPositions}{Whether to plot with positions (i.e. using the position values as the y axis). By default TRUE if \code{x} has more than one date and contains positions}
+
+\item{includeCal}{Whether to plot the date alongside the calibration curve and the normally distributed uncalibrated date.}
 
 \item{dateHeight}{The height of the dates in the plot in the same units as the position values. Only relevant if \code{withPositions=TRUE}.}
 
@@ -32,6 +36,8 @@
 \item{ageScale}{Either \code{bp} for years before present, \code{bc} for years BC/AD (BC will be negative), \code{b2k} for years before 2000. Others not supported (yet).}
 
 \item{scaleReverse}{Whether to reverse the x-axis scale. Defaults to TRUE which works best for dates presented in e.g. years BP}
+
+\item{pathToCalCurves}{The Bchron path to calibration curves. Defaults to the package location might need to be set to another folder if user defined calibration curves are being used}
 
 \item{...}{Other arguments to plot (currently ignored)}
 }

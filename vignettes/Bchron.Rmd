@@ -99,6 +99,12 @@ plot(ages3, ageScale = 'bc', scaleReverse = FALSE) +
        title = 'Two dates at different depths')
 ```
 
+... or add the calibration curve into the plot
+```{r}
+plot(ages1, includeCal = TRUE)
+```
+
+
 ## Credible intervals
 
 If, alternatively, you want a _credible interval_ (i.e. a single contiguous range) rather than an HDR, you could use the `sampleAges` function:

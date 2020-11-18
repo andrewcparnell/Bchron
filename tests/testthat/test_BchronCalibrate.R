@@ -37,6 +37,8 @@ test_that("plot.BchronCalibrate works", {
   expect_type(plot(ages2), 'list')
   expect_s3_class(plot(ages3), 'ggplot')
   expect_s3_class(plot(ages4), 'ggplot')
+  expect_s3_class(plot(ages1, includeCal = TRUE), 'ggplot')
+  expect_type(plot(ages2, includeCal = TRUE), 'list')
 })
 
 test_that("predict.BchronCalibrate works", {
