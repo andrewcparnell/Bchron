@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Bchron</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.3</span>
       </span>
     </div>
 
@@ -123,7 +123,7 @@
     <p>A function for computing highest density regions (HDRs)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>hdr</span>(<span class='no'>date</span>, <span class='kw'>prob</span> <span class='kw'>=</span> <span class='fl'>0.95</span>)</pre>
+    <pre class="usage"><span class='fu'>hdr</span><span class='op'>(</span><span class='va'>date</span>, prob <span class='op'>=</span> <span class='fl'>0.95</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -150,17 +150,18 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Calibrate multiple ages and summarise them</span>
-<span class='no'>ages</span> <span class='kw'>=</span> <span class='fu'><a href='BchronCalibrate.html'>BchronCalibrate</a></span>(<span class='kw'>ages</span><span class='kw'>=</span><span class='fl'>11553</span>,<span class='kw'>ageSds</span><span class='kw'>=</span><span class='fl'>230</span>,
-                       <span class='kw'>calCurves</span><span class='kw'>=</span><span class='st'>'intcal20'</span>)
+<span class='va'>ages</span> <span class='op'>=</span> <span class='fu'><a href='BchronCalibrate.html'>BchronCalibrate</a></span><span class='op'>(</span>ages<span class='op'>=</span><span class='fl'>11553</span>,ageSds<span class='op'>=</span><span class='fl'>230</span>,
+                       calCurves<span class='op'>=</span><span class='st'>'intcal20'</span><span class='op'>)</span>
 <span class='co'># Get samples</span>
-<span class='fu'>hdr</span>(<span class='no'>ages</span>$<span class='no'>Date1</span>)</div><div class='output co'>#&gt; $`0.4%`
+<span class='fu'>hdr</span><span class='op'>(</span><span class='va'>ages</span><span class='op'>$</span><span class='va'>Date1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $`0.4%`
 #&gt; [1] 13004 13025
 #&gt; 
 #&gt; $`77.9%`
 #&gt; [1] 13059 13874
 #&gt; 
-#&gt; $`16.2%`
-#&gt; [1] 13923 14011
+#&gt; $`16.4%`
+#&gt; [1] 13923 14012
 #&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -177,7 +178,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

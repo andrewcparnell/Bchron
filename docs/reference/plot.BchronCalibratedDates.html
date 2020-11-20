@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Bchron</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.3</span>
       </span>
     </div>
 
@@ -124,17 +124,21 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for BchronCalibratedDates</span>
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(
-  <span class='no'>x</span>,
-  <span class='kw'>withPositions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>x</span>) <span class='kw'>&gt;</span> <span class='fl'>1</span> <span class='kw'>&amp;</span> !<span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span>(<span class='no'>x</span><span class='kw'>[[</span><span class='fl'>1</span>]]$<span class='no'>positions</span>), <span class='fl'>TRUE</span>, <span class='fl'>FALSE</span>),
-  <span class='kw'>dateHeight</span> <span class='kw'>=</span> <span class='fl'>100</span>,
-  <span class='kw'>dateLabels</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>fillCol</span> <span class='kw'>=</span> <span class='st'>"darkslategray"</span>,
-  <span class='kw'>withHDR</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>ageScale</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"bp"</span>, <span class='st'>"bc"</span>, <span class='st'>"b2k"</span>),
-  <span class='kw'>scaleReverse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
-)</pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  date <span class='op'>=</span> <span class='cn'>NULL</span>,
+  withPositions <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/ifelse.html'>ifelse</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>&gt;</span> <span class='fl'>1</span> <span class='op'>&amp;</span> <span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>$</span><span class='va'>positions</span><span class='op'>)</span> <span class='op'>&amp;</span> <span class='op'>!</span><span class='va'>includeCal</span>,
+    <span class='cn'>TRUE</span>, <span class='cn'>FALSE</span><span class='op'>)</span>,
+  includeCal <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  dateHeight <span class='op'>=</span> <span class='fl'>100</span>,
+  dateLabels <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  fillCol <span class='op'>=</span> <span class='st'>"darkslategray"</span>,
+  withHDR <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  ageScale <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"bp"</span>, <span class='st'>"bc"</span>, <span class='st'>"b2k"</span><span class='op'>)</span>,
+  scaleReverse <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  pathToCalCurves <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"data"</span>, package <span class='op'>=</span> <span class='st'>"Bchron"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -144,8 +148,16 @@
       <td><p>Output from <code><a href='BchronCalibrate.html'>BchronCalibrate</a></code></p></td>
     </tr>
     <tr>
+      <th>date</th>
+      <td><p>Either numbers or date names to plot (only used if multiple dates have been calibrated)</p></td>
+    </tr>
+    <tr>
       <th>withPositions</th>
       <td><p>Whether to plot with positions (i.e. using the position values as the y axis). By default TRUE if <code>x</code> has more than one date and contains positions</p></td>
+    </tr>
+    <tr>
+      <th>includeCal</th>
+      <td><p>Whether to plot the date alongside the calibration curve and the normally distributed uncalibrated date.</p></td>
     </tr>
     <tr>
       <th>dateHeight</th>
@@ -170,6 +182,10 @@
     <tr>
       <th>scaleReverse</th>
       <td><p>Whether to reverse the x-axis scale. Defaults to TRUE which works best for dates presented in e.g. years BP</p></td>
+    </tr>
+    <tr>
+      <th>pathToCalCurves</th>
+      <td><p>The Bchron path to calibration curves. Defaults to the package location might need to be set to another folder if user defined calibration curves are being used</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -199,7 +215,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

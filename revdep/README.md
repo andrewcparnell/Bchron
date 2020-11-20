@@ -2,30 +2,27 @@
 
 |field    |value                        |
 |:--------|:----------------------------|
-|version  |R version 4.0.1 (2020-06-06) |
-|os       |macOS High Sierra 10.13.6    |
-|system   |x86_64, darwin17.7.0         |
-|ui       |RStudio                      |
+|version  |R version 4.0.3 (2020-10-10) |
+|os       |macOS Catalina 10.15.7       |
+|system   |x86_64, darwin17.0           |
+|ui       |X11                          |
 |language |(EN)                         |
 |collate  |en_IE.UTF-8                  |
 |ctype    |en_IE.UTF-8                  |
 |tz       |Europe/Dublin                |
-|date     |2020-08-20                   |
+|date     |2020-11-20                   |
 
 # Dependencies
 
 |package |old   |new   |Δ  |
 |:-------|:-----|:-----|:--|
-|Bchron  |4.7.1 |4.7.2 |*  |
+|Bchron  |4.6.1 |4.6.1 |NA |
 
 # Revdeps
 
-## Failed to check (4)
+## Failed to check (1)
 
 |package      |version |error |warning |note |
 |:------------|:-------|:-----|:-------|:----|
-|ArchaeoChron |?       |      |        |     |
-|Bclim        |?       |      |        |     |
-|c14bazAAR    |?       |      |        |     |
-|deltar       |?       |      |        |     |
+|ArchaeoChron |0.1     |1     |        |     |
 
