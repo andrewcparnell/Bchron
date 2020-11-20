@@ -7,7 +7,8 @@
 \method{plot}{BchronCalibratedDates}(
   x,
   date = NULL,
-  withPositions = ifelse(length(x) > 1 & !is.null(x[[1]]$positions), TRUE, FALSE),
+  withPositions = ifelse(length(x) > 1 & !is.null(x[[1]]$positions) & !includeCal,
+    TRUE, FALSE),
   includeCal = FALSE,
   dateHeight = 100,
   dateLabels = TRUE,
