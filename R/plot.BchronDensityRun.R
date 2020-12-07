@@ -5,13 +5,16 @@
 #' @param plotRawSum Whether to plot the raw sum of the probability distributions
 #' @param plotPhase Whether to plot the phase values
 #' @param phaseProb The probability value for the phase identification
+#' @param dateTransparency The transparency value for the dates (default 40%)
+
 #' @param ... Other graphical commands. See \code{\link{par}}
 #'
 #' @seealso See  \code{\link{BchronDensity}} for examples, also \code{\link{Bchronology}}, \code{\link{BchronRSL}}, and \code{\link{BchronDensityFast}} for a faster approximate version of this function
 #'
 #' @export
 plot.BchronDensityRun <-
-function(x,plotDates=TRUE,plotRawSum=FALSE,plotPhase=TRUE,phaseProb=0.95,...) {
+function(x,plotDates=TRUE,plotRawSum=FALSE,plotPhase=TRUE,phaseProb=0.95,
+         dateTransparency = 0.4,...) {
 
   # x is the object with everything in it
   # Create a grid over which to plot - the range of the dates plus 10% each side
@@ -42,16 +45,18 @@ function(x,plotDates=TRUE,plotRawSum=FALSE,plotPhase=TRUE,phaseProb=0.95,...) {
   }
   densFinal = dens/sum(dens)
 
-  graphics::plot(dateGrid,densFinal,type='l',ylab='Density',ylim=range(c(0,densFinal)),...)
+  graphics::plot(dateGrid,densFinal,type='n',ylab='Density',ylim=range(c(0,densFinal)),...)
 
   if(plotDates) {
     # Plot the individual dates
     yHeight=graphics::par('usr')[4]
-    myCol = grDevices::rgb(190/255,190/255,190/255,0.4)
+    myCol = grDevices::rgb(190/255,190/255,190/255,dateTransparency)
     for(i in 1:n) {
       graphics::polygon(x$calAges[[i]]$ageGrid,0.3*yHeight*x$calAges[[i]]$densities/max(x$calAges[[i]]$densities),col=myCol,border=NA)
     }
   }
+  
+  graphics::lines(dateGrid,densFinal,...)
 
   if(plotRawSum) {
     yHeight=graphics::par('usr')[4]

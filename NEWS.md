@@ -1,3 +1,8 @@
+# Bchron 4.7.3.9000
+
+  - Updated the BchronDensity and BchronDensityFast functions to show lines on top of dates
+  - Included ablity in above functions to change amount of date transparency
+
 # Bchron 4.7.3
 
   - Fixed a weird bug where some hdrs were coming out sort the wrong way in plot.Bchronology

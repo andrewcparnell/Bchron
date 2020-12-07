@@ -30,6 +30,13 @@ test_that("BchronCalibrate works", {
   expect_s3_class(ages3, 'BchronCalibratedDates')
 })  
   
+test_that("Out of range dates produce a warning", {
+  expect_error(BchronCalibrate(ages = 85, 
+                          ageSds = 30, 
+                          calCurve = 'intcal20'))
+
+})
+
 test_that("summary.BchronologyRun works", {
   expect_output(summary(ages1))
   expect_output(summary(ages2))

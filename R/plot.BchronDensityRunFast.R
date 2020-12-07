@@ -5,6 +5,7 @@
 #' @param x Output from \code{\link{BchronDensityFast}}
 #' @param plotDates Whether to include individual age pdfs (default TRUE)
 #' @param plotSum Whether to include sum of age pdfs (default FALSE)
+#' @param dateTransparency The transparency value for the dates (default 40%)
 #' @param ... Other graphical parameters, see \code{\link{par}}
 #'
 #' @details Creates a basic plot of output for a run of \code{\link{BchronDensityFast}}
@@ -13,7 +14,7 @@
 #'
 #' @export
 plot.BchronDensityRunFast <-
-function(x,plotDates=TRUE,plotSum=FALSE,...) {
+function(x,plotDates=TRUE,plotSum=FALSE,dateTransparency = 0.4,...) {
 
   # x is the object with everything in it
   # Create a grid over which to plot - the range of the dates plus 10% each side
@@ -41,19 +42,20 @@ function(x,plotDates=TRUE,plotSum=FALSE,...) {
   }
 
   # Create a plot
-  graphics::plot(thetaSeq,dens%*%clusterProps,type='l',...)
-
-  # Add in individual densities
-  for(i in 1:ncol(dens)) graphics::lines(thetaSeq,clusterProps[i]*dens[,i],lty=2)
+  graphics::plot(thetaSeq,dens%*%clusterProps,type='n',...)
 
   if(plotDates) {
     # Plot the individual dates
     yHeight=graphics::par('usr')[4]
-    myCol = grDevices::rgb(190/255,190/255,190/255,0.4)
+    myCol = grDevices::rgb(190/255,190/255,190/255,dateTransparency)
     for(i in 1:n) {
       graphics::polygon(x$calAges[[i]]$ageGrid,0.3*yHeight*x$calAges[[i]]$densities/max(x$calAges[[i]]$densities),col=myCol,border=NA)
     }
   }
+  
+  # Add in individual densities
+  for(i in 1:ncol(dens)) graphics::lines(thetaSeq,clusterProps[i]*dens[,i],lty=2)
+  
 
   if(plotSum) {
     yHeight=graphics::par('usr')[4]
