@@ -13,7 +13,7 @@
 
 \item{plotSum}{Whether to include sum of age pdfs (default FALSE)}
 
-\item{dateTransparency}{The transparency value for the dates (default 40%)}
+\item{dateTransparency}{The transparency value for the dates (default 0.4)}
 
 \item{...}{Other graphical parameters, see \code{\link{par}}}
 }

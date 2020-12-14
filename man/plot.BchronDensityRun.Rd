@@ -25,7 +25,7 @@
 
 \item{phaseProb}{The probability value for the phase identification}
 
-\item{dateTransparency}{The transparency value for the dates (default 40%)}
+\item{dateTransparency}{The transparency value for the dates (default 0.4)}
 
 \item{...}{Other graphical commands. See \code{\link{par}}}
 }
