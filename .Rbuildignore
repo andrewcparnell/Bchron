@@ -6,7 +6,6 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
-^\.travis\.yml$
 ^codecov\.yml$
 ^revdep$
 ^doc$
@@ -15,3 +14,4 @@
 ^.*\.gcda$
 ^.*\.gcno$
 ^.*\.gcov$
+^\.github$
