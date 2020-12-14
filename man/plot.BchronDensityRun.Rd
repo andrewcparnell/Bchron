@@ -10,6 +10,7 @@
   plotRawSum = FALSE,
   plotPhase = TRUE,
   phaseProb = 0.95,
+  dateTransparency = 0.4,
   ...
 )
 }
@@ -23,6 +24,8 @@
 \item{plotPhase}{Whether to plot the phase values}
 
 \item{phaseProb}{The probability value for the phase identification}
+
+\item{dateTransparency}{The transparency value for the dates (default 40%)}
 
 \item{...}{Other graphical commands. See \code{\link{par}}}
 }

@@ -4,7 +4,7 @@
 \alias{plot.BchronDensityRunFast}
 \title{Plot run from \code{BchronDensityFast}}
 \usage{
-\method{plot}{BchronDensityRunFast}(x, plotDates = TRUE, plotSum = FALSE, ...)
+\method{plot}{BchronDensityRunFast}(x, plotDates = TRUE, plotSum = FALSE, dateTransparency = 0.4, ...)
 }
 \arguments{
 \item{x}{Output from \code{\link{BchronDensityFast}}}
@@ -12,6 +12,8 @@
 \item{plotDates}{Whether to include individual age pdfs (default TRUE)}
 
 \item{plotSum}{Whether to include sum of age pdfs (default FALSE)}
+
+\item{dateTransparency}{The transparency value for the dates (default 40%)}
 
 \item{...}{Other graphical parameters, see \code{\link{par}}}
 }
