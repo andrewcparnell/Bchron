@@ -22,10 +22,12 @@ Sometimes it is useful to have a set of sample calendar ages for your calibrated
 }
 \examples{
 # Calibrate multiple ages and summarise them
-ages = BchronCalibrate(ages=c(3445,11553,7456),ageSds=c(50,230,110),
-                       calCurves=c('intcal20','intcal20','shcal20'))
+ages <- BchronCalibrate(
+  ages = c(3445, 11553, 7456), ageSds = c(50, 230, 110),
+  calCurves = c("intcal20", "intcal20", "shcal20")
+)
 # Get samples
-age_samples = sampleAges(ages)
+age_samples <- sampleAges(ages)
 # Create a credible interval and the median for each date
 apply(age_samples, 2, quantile, probs = c(0.05, 0.5, 0.95))
 }

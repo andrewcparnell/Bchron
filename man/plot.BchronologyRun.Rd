@@ -8,6 +8,7 @@
   x,
   dateHeight = 100,
   dateLabels = TRUE,
+  dateLabelSize = 2,
   dateCol = "darkslategray",
   chronCol = "deepskyblue4",
   chronTransparency = 0.75,
@@ -27,6 +28,8 @@
 \item{dateHeight}{The height of the dates in the plot (on the same scale as the positions)}
 
 \item{dateLabels}{Whether to label the dates on the vertical axis (default TRUE)}
+
+\item{dateLabelSize}{The size of the date labels}
 
 \item{dateCol}{The colour of the date labels}
 

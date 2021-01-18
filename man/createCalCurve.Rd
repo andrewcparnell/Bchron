@@ -35,28 +35,36 @@ All calibration curves are stored by Bchron in the standard R gzipped text forma
 \examples{
 \dontrun{
 # Load in the calibration curve with:
-intcal09 = read.table(system.file('extdata/intcal09.14c', package = 'Bchron'), sep=',')
+intcal09 <- read.table(system.file("extdata/intcal09.14c", package = "Bchron"), sep = ",")
 # Run createCalCurve
-createCalCurve(name='intcal09',calAges=intcal09[,1], 
-uncalAges=intcal09[,2],oneSigma=intcal09[,3])
+createCalCurve(
+  name = "intcal09", calAges = intcal09[, 1],
+  uncalAges = intcal09[, 2], oneSigma = intcal09[, 3]
+)
 
 # Copy the file to the right place
-file.copy(from = 'intcal09.rda',
-           to = system.file('data',package='Bchron'),
-                            overwrite = TRUE) # Only need this if you've run it more than once
+file.copy(
+  from = "intcal09.rda",
+  to = system.file("data", package = "Bchron"),
+  overwrite = TRUE
+) # Only need this if you've run it more than once
 
 # Calibrate the ages under two calibration curves
-age_09 = BchronCalibrate(ages=15500, ageSds=150,
-                          calCurves = 'intcal09',ids='My Date', 
-                          pathToCalCurves = getwd())
-age_20 = BchronCalibrate(ages=15500,ageSds=150,calCurves = 'intcal20')
+age_09 <- BchronCalibrate(
+  ages = 15500, ageSds = 150,
+  calCurves = "intcal09", ids = "My Date",
+  pathToCalCurves = getwd()
+)
+age_20 <- BchronCalibrate(ages = 15500, ageSds = 150, calCurves = "intcal20")
 
 # Finally plot the difference
 library(ggplot2)
-plot(age_09) + 
-geom_line(data = as.data.frame(age_20$Date1), 
-         aes(x = ageGrid, y = densities), col = 'red') + 
-     ggtitle('Intcal09 vs Intcal20')
+plot(age_09) +
+  geom_line(
+    data = as.data.frame(age_20$Date1),
+    aes(x = ageGrid, y = densities), col = "red"
+  ) +
+  ggtitle("Intcal09 vs Intcal20")
 }
 }
 \seealso{

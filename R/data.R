@@ -11,10 +11,10 @@
 #'   \item{\code{thickness}}{Thicknesses in cm}
 #'   \item{\code{calCurves}}{Calibration curve for each age}
 #' }
-#' 
+#'
 #' @details This Glendalough data can be used with \code{\link{Bchronology}} or \code{\link{BchronDensity}}
 #' @usage data(Glendalough)
-#' 
+#'
 #' @source Haslett, J., Whiley, M., Bhattacharya, S., Mitchell, F. J. G., Allen, J. R. M., Huntley, B., \& Salter-Townshend, M. (2006). Bayesian palaeoclimate reconstruction. Journal of the Royal Statistical Society, Series A, 169, 395-438.
 "Glendalough"
 
@@ -25,7 +25,7 @@
 #'
 #' @format A data frame with 5141 observations on 5 variables.
 #' @usage data(intcal13)
-#' 
+#'
 #' @details For full details and reference see http://intcal.org/blurb.html. For usage details see \code{\link{BchronCalibrate}}
 "intcal13"
 
@@ -35,7 +35,7 @@
 #'
 #' @format A data frame with 9501 observations on 5 variables.
 #' @usage data(intcal20)
-#' 
+#'
 #' @details For full details and reference see http://intcal.org/blurb.html. For usage details see \code{\link{BchronCalibrate}}
 "intcal20"
 
@@ -46,7 +46,7 @@
 #'
 #' @format A data frame with 4801 observations on 5 variables
 #' @usage data(marine13)
-#' 
+#'
 #' @details For full details and reference see http://intcal.org/blurb.html. For usage details see \code{\link{BchronCalibrate}}
 "marine13"
 
@@ -56,7 +56,7 @@
 #'
 #' @format A data frame with 5501 observations on 5 variables
 #' @usage data(marine20)
-#' 
+#'
 #' @details For full details and reference see http://intcal.org/blurb.html. For usage details see \code{\link{BchronCalibrate}}
 "marine20"
 
@@ -66,7 +66,7 @@
 #'
 #' @format A data frame with 2 observations on 3 variables.
 #' @usage data(normal)
-#' 
+#'
 #' @details This is dummy data so that \code{\link{BchronCalibrate}} can calibrate normally distributed dates.
 "normal"
 
@@ -77,7 +77,7 @@
 #'
 #' @format A data frame with 5141 observations on 5 variables.
 #' @usage data(shcal13)
-#' 
+#'
 #' @details For full details and reference see http://intcal.org/blurb.html. For usage details see \code{\link{BchronCalibrate}}
 "shcal13"
 
@@ -87,7 +87,7 @@
 #'
 #' @format A data frame with 9501 observations on 5 variables.
 #' @usage data(shcal20)
-#' 
+#'
 #' @details For full details and reference see http://intcal.org/blurb.html. For usage details see \code{\link{BchronCalibrate}}
 "shcal20"
 
@@ -104,7 +104,7 @@
 #' \item{\code{thickness}}{Thicknesses in cm}
 #' \item{\code{calCurves}}{Calibration curve for each age}
 #' }
-#' 
+#'
 #' @details This Sluggan Moss data can be downloaded from the European Pollen Database: \url{http://www.europeanpollendatabase.net}. For usage see \code{\link{Bchronology}} or \code{\link{BchronDensity}}
 #' @usage data(Sluggan)
 #'
@@ -125,7 +125,7 @@
 #' \item{\code{thickness}}{Thicknesses in cm}
 #' \item{\code{calCurves}}{Calibration curve for each age}
 #' }
-#' 
+#'
 #' @usage data(TestChronData)
 #' @source Andrew C. Parnell and W. Roland Gehrels (2013) 'Using chronological models in late holocene sea level reconstructions from salt marsh sediments' In: I. Shennan, B.P. Horton, and A.J. Long (eds). Handbook of Sea Level Research. Chichester: Wiley
 "TestChronData"
@@ -143,4 +143,3 @@
 #' @usage data(TestRSLData)
 #' @source Andrew C. Parnell and W. Roland Gehrels (2013) 'Using chronological models in late holocene sea level reconstructions from salt marsh sediments' In: I. Shennan, B.P. Horton, and A.J. Long (eds). Handbook of Sea Level Research. Chichester: Wiley
 "TestRSLData"
-

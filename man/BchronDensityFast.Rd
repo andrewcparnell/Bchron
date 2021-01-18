@@ -46,8 +46,10 @@ This is a faster approximate version of \code{\link{BchronDensity}} that uses th
 data(Sluggan)
 
 # Run the model
-SlugDensFast = BchronDensityFast(ages=Sluggan$ages,ageSds=Sluggan$ageSds,
-                                 calCurves=Sluggan$calCurves)
+SlugDensFast <- BchronDensityFast(
+  ages = Sluggan$ages, ageSds = Sluggan$ageSds,
+  calCurves = Sluggan$calCurves
+)
 
 # plot it
 plot(SlugDensFast)

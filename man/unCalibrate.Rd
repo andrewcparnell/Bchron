@@ -32,21 +32,26 @@ Uncalibrate a Radiocarbon date
 \examples{
 \donttest{
 # Single version outputting just an uncalibrated age
-unCalibrate(2350, type = 'ages')
+unCalibrate(2350, type = "ages")
 
 # Vector version giving a vector of uncalibrated ages
-unCalibrate(calAge = c(2350, 4750, 11440),
-  calCurve = 'shcal20',
-  type = 'ages')
+unCalibrate(
+  calAge = c(2350, 4750, 11440),
+  calCurve = "shcal20",
+  type = "ages"
+)
 
 # A version where calibrated standard deviations are required too
-calAge = BchronCalibrate(ages = 11255,
+calAge <- BchronCalibrate(
+  ages = 11255,
   ageSds = 25,
-  calCurves = 'intcal20')
-calSampleAges = sampleAges(calAge)
+  calCurves = "intcal20"
+)
+calSampleAges <- sampleAges(calAge)
 
 # Uncalibrate the above
 unCalibrate(calSampleAges,
-  type = 'samples')
+  type = "samples"
+)
 }
 }

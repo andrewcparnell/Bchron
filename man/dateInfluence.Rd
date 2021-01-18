@@ -24,21 +24,23 @@ Outputs some text providing the influence values for the date(s) in question. If
 This function takes as input a \code{\link{Bchronology}} run and allows the user to estimate a value of 'influence' for either a particular date (by name or number), for all dates in a core (\code{whichDate = 'all'}), or for all internal dates (\code{whichDate = 'internal'}). It measures the influence by either the Kullback-Leibler divergence (\code{KL}), the absolute mean difference (\code{absMeanDiff}), or the absolute median difference (\code{absMedianDiff}).
 }
 \details{
-The \code{KL} measure is preferred as it takes account of the full probability distributions but it lacks a simple interpretation. The best way to use it is with \code{whichDate = 'all'}: the largest value corresponds to the most influential date in the chronology. For simpler interpretation use \code{measure = 'absMeanDiff'} or \code{measure = 'absMedianDiff'} as for these the influence is measured in years. 
+The \code{KL} measure is preferred as it takes account of the full probability distributions but it lacks a simple interpretation. The best way to use it is with \code{whichDate = 'all'}: the largest value corresponds to the most influential date in the chronology. For simpler interpretation use \code{measure = 'absMeanDiff'} or \code{measure = 'absMedianDiff'} as for these the influence is measured in years.
 
 When the predictPositions from the original \code{Bchronology} run do not include those of the date(s) being left out then the function uses the closest position and reports a warning.
 }
 \examples{
 \donttest{
 data(Glendalough)
-GlenOut = Bchronology(ages=Glendalough$ages,
-                      ageSds=Glendalough$ageSds, 
-                      calCurves=Glendalough$calCurves,
-                      positions=Glendalough$position, 
-                      positionThicknesses=Glendalough$thickness,
-                      ids=Glendalough$id, 
-                      predictPositions=seq(0,1500,by=10))
-dateInfluence(GlenOut, whichDate = 4, measure = 'absMeanDiff')
+GlenOut <- Bchronology(
+  ages = Glendalough$ages,
+  ageSds = Glendalough$ageSds,
+  calCurves = Glendalough$calCurves,
+  positions = Glendalough$position,
+  positionThicknesses = Glendalough$thickness,
+  ids = Glendalough$id,
+  predictPositions = seq(0, 1500, by = 10)
+)
+dateInfluence(GlenOut, whichDate = 4, measure = "absMeanDiff")
 }
 }
 \seealso{

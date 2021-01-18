@@ -12,6 +12,9 @@
   includeCal = FALSE,
   dateHeight = 100,
   dateLabels = TRUE,
+  dateLabelSize = 2,
+  nudgeX = 0,
+  nudgeY = 0,
   fillCol = "darkslategray",
   withHDR = TRUE,
   ageScale = c("bp", "bc", "b2k"),
@@ -32,6 +35,12 @@
 \item{dateHeight}{The height of the dates in the plot in the same units as the position values. Only relevant if \code{withPositions=TRUE}.}
 
 \item{dateLabels}{Whether to add the names of the dates to the left of them. Default TRUE}
+
+\item{dateLabelSize}{Size of the date labels}
+
+\item{nudgeX}{The amount to move the date labels in the x direction. Can be negative. See \code{\link[ggplot2]{geom_text}} for details}
+
+\item{nudgeY}{The amount to move the date labels in the y direction. Can be negative. See \code{\link[ggplot2]{geom_text}} for details}
 
 \item{fillCol}{A colour to fill the date densities when \code{withPositions} is TRUE, or HDR ranges when it is FALSE}
 

@@ -27,7 +27,7 @@ choosePositions(
 
 \item{newThicknesses}{The new thicknesses of the psuedo-added dates}
 
-\item{positions}{The positions allowed to estimate the new positions to date. Defaults to the value of \code{predictPositions} from the 
+\item{positions}{The positions allowed to estimate the new positions to date. Defaults to the value of \code{predictPositions} from the
 \code{\link{Bchronology}} run}
 
 \item{newCalCurve}{The new calibration curve of the psuedo-added dates}
@@ -49,34 +49,37 @@ Some plots and the positions to date next
 This function finds, for a given current chronology, created via
 \code{\link{Bchronology}}, which positions (depths) to date next
 If N = 1 it just finds the position with the biggest uncertainty
-If N>1 it puts a date at the N = 1 position and re-runs 
-\code{\link{Bchronology}} with the extra psuedo date. It uses the 
-\code{\link{unCalibrate}} function with the un-calibrated age estimated 
-at the median of the chronology and the sd as specified via the 
-\code{newSds} argument. Other arguments specify the new thicknesses, 
+If N>1 it puts a date at the N = 1 position and re-runs
+\code{\link{Bchronology}} with the extra psuedo date. It uses the
+\code{\link{unCalibrate}} function with the un-calibrated age estimated
+at the median of the chronology and the sd as specified via the
+\code{newSds} argument. Other arguments specify the new thicknesses,
 calibration curves, and outlier probabilities for newly inserted psuedo-dates.
 }
 \examples{
 \donttest{
 data(Glendalough)
-GlenOut = Bchronology(ages=Glendalough$ages,
-                      ageSds=Glendalough$ageSds,
-                      calCurves=Glendalough$calCurves,
-                      positions=Glendalough$position,
-                      positionThicknesses=Glendalough$thickness,
-                      ids=Glendalough$id,
-                      predictPositions=seq(0,1500,by=10))
+GlenOut <- Bchronology(
+  ages = Glendalough$ages,
+  ageSds = Glendalough$ageSds,
+  calCurves = Glendalough$calCurves,
+  positions = Glendalough$position,
+  positionThicknesses = Glendalough$thickness,
+  ids = Glendalough$id,
+  predictPositions = seq(0, 1500, by = 10)
+)
 
 # Find out which two positions (depths) to date if we have room for two more dates
 # Here going to choose 3 new positions to date
-newPositions = choosePositions(GlenOut, N = 3)
+newPositions <- choosePositions(GlenOut, N = 3)
 print(newPositions)
 
 # Suppose you are only interested in dating the new depths at 500, 600, or 700 cm
-newPositions2 = choosePositions(GlenOut, N = 2, 
-                                positions = seq(500, 700, by = 10))
+newPositions2 <- choosePositions(GlenOut,
+  N = 2,
+  positions = seq(500, 700, by = 10)
+)
 print(newPositions2)
-
 }
 }
 \seealso{

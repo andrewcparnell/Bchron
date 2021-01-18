@@ -11,56 +11,64 @@
 #'
 #' @details All calibration curves are stored by Bchron in the standard R gzipped text format. You can find the location of the calibration curves by typing \code{system.file('data',package='Bchron')}. Any created calibration curve will be converted to this format. However R packages are not allowed to write to this directory so it is up to the user to put the resulting calibration curve file in the appropriate directory. It can then be used as in the examples below. However note that re-installing Bchron will likely over-write previously created calibration curves so you should make sure to store the code used to create it. As a short-cut to copying it by hand you can instead use the \code{file.copy} command in the example below.
 #'
-#' @seealso 
+#' @seealso
 #' \code{\link{BchronCalibrate}}
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' # Load in the calibration curve with:
-#' intcal09 = read.table(system.file('extdata/intcal09.14c', package = 'Bchron'), sep=',')
+#' intcal09 <- read.table(system.file("extdata/intcal09.14c", package = "Bchron"), sep = ",")
 #' # Run createCalCurve
-#' createCalCurve(name='intcal09',calAges=intcal09[,1], 
-#' uncalAges=intcal09[,2],oneSigma=intcal09[,3])
-#' 
+#' createCalCurve(
+#'   name = "intcal09", calAges = intcal09[, 1],
+#'   uncalAges = intcal09[, 2], oneSigma = intcal09[, 3]
+#' )
+#'
 #' # Copy the file to the right place
-#' file.copy(from = 'intcal09.rda',
-#'            to = system.file('data',package='Bchron'),
-#'                             overwrite = TRUE) # Only need this if you've run it more than once
-#' 
+#' file.copy(
+#'   from = "intcal09.rda",
+#'   to = system.file("data", package = "Bchron"),
+#'   overwrite = TRUE
+#' ) # Only need this if you've run it more than once
+#'
 #' # Calibrate the ages under two calibration curves
-#' age_09 = BchronCalibrate(ages=15500, ageSds=150,
-#'                           calCurves = 'intcal09',ids='My Date', 
-#'                           pathToCalCurves = getwd())
-#' age_20 = BchronCalibrate(ages=15500,ageSds=150,calCurves = 'intcal20')
-#' 
+#' age_09 <- BchronCalibrate(
+#'   ages = 15500, ageSds = 150,
+#'   calCurves = "intcal09", ids = "My Date",
+#'   pathToCalCurves = getwd()
+#' )
+#' age_20 <- BchronCalibrate(ages = 15500, ageSds = 150, calCurves = "intcal20")
+#'
 #' # Finally plot the difference
 #' library(ggplot2)
-#' plot(age_09) + 
-#' geom_line(data = as.data.frame(age_20$Date1), 
-#'          aes(x = ageGrid, y = densities), col = 'red') + 
-#'      ggtitle('Intcal09 vs Intcal20')
+#' plot(age_09) +
+#'   geom_line(
+#'     data = as.data.frame(age_20$Date1),
+#'     aes(x = ageGrid, y = densities), col = "red"
+#'   ) +
+#'   ggtitle("Intcal09 vs Intcal20")
 #' }
-createCalCurve = function(name,
-                          calAges,
-                          uncalAges,
-                          oneSigma=rep(0, length(calAges)),
-                          pathToCalCurves = getwd(),
-                          createFile = TRUE) {
+createCalCurve <- function(name,
+                           calAges,
+                           uncalAges,
+                           oneSigma = rep(0, length(calAges)),
+                           pathToCalCurves = getwd(),
+                           createFile = TRUE) {
 
   # This function creates a calibration curve and puts it in the appropriate place for future use with Bchron
 
   # First identify the place where the file needs to go
-  fileLoc = pathToCalCurves
+  fileLoc <- pathToCalCurves
 
   # Now interpolate so that everything is on a regular grid in calendar years
-  calOrder = order(calAges,decreasing=TRUE)
-  out = cbind(calAges[calOrder],uncalAges[calOrder],oneSigma[calOrder])
+  calOrder <- order(calAges, decreasing = TRUE)
+  out <- cbind(calAges[calOrder], uncalAges[calOrder], oneSigma[calOrder])
 
   # Now write to an rda file
-  fl = paste0(fileLoc,'/',name,'.rda')
-  if(createFile) save(out, file = fl)
-  
+  fl <- paste0(fileLoc, "/", name, ".rda")
+  if (createFile) save(out, file = fl)
+
   # And we're done
-  cat('Completed!\n')
+  cat("Completed!\n")
 }

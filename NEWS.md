@@ -2,6 +2,7 @@
 
   - Updated the BchronDensity and BchronDensityFast functions to show lines on top of dates
   - Included ablity in above functions to change amount of date transparency
+  - Used styler to make the syntax follow tidyverse style guidelines
 
 # Bchron 4.7.3
 

@@ -14,33 +14,34 @@
 #'
 #' @return A matrix of dimension num_samples by num_positions so that each row represents a set of monotonic sample predicted ages
 #' @export
-predict.BchronologyRun = function(object,
-                                  newPositions,
-                                  newPositionThicknesses = NULL,
-                                  maxExtrap = 500,
-                                  ...) {
+predict.BchronologyRun <- function(object,
+                                   newPositions,
+                                   newPositionThicknesses = NULL,
+                                   maxExtrap = 500,
+                                   ...) {
   # This function takes a BchronologyRun object and produces new age predictions based on the values given in newPositions. If thicknesses are given as well it will produce values for that too
   # The output is a matrix of values where the number of rows is the number of stored iterations in object, and the number of columns is the number of positions given (averaged over thicknesses)
-  
+
   # Check that, if thicknesses are given, they are the same length as newPositions
   if (!is.null(newPositionThicknesses)) {
-    if (length(newPositionThicknesses) != length(newPositions))
+    if (length(newPositionThicknesses) != length(newPositions)) {
       stop("newPositionThicknesses and newPositions must be of same length")
+    }
   }
-  
+
   # Need some of the C functions for prediction
-  predictInterp = function(alpha,
-                           lambda,
-                           beta,
-                           predictPositions,
-                           diffPositionj,
-                           currPositionsj,
-                           currPositionsjp1,
-                           thetaj,
-                           thetajp1) {
+  predictInterp <- function(alpha,
+                            lambda,
+                            beta,
+                            predictPositions,
+                            diffPositionj,
+                            currPositionsj,
+                            currPositionsjp1,
+                            thetaj,
+                            thetajp1) {
     return(
       .C(
-        'predictInterp',
+        "predictInterp",
         as.double(alpha),
         as.double(lambda),
         as.double(beta),
@@ -57,17 +58,17 @@ predict.BchronologyRun = function(object,
       )[11][[1]]
     )
   }
-  predictExtrapUp = function(alpha,
-                             lambda,
-                             beta,
-                             predictPositions,
-                             currPositions1,
-                             theta1,
-                             maxExtrap,
-                             extractDate) {
+  predictExtrapUp <- function(alpha,
+                              lambda,
+                              beta,
+                              predictPositions,
+                              currPositions1,
+                              theta1,
+                              maxExtrap,
+                              extractDate) {
     return(
       .C(
-        'predictExtrapUp',
+        "predictExtrapUp",
         as.double(alpha),
         as.double(lambda),
         as.double(beta),
@@ -83,16 +84,16 @@ predict.BchronologyRun = function(object,
       )[10][[1]]
     )
   }
-  predictExtrapDown = function(alpha,
-                               lambda,
-                               beta,
-                               predictPositions,
-                               currPositionsn,
-                               thetan,
-                               maxExtrap) {
+  predictExtrapDown <- function(alpha,
+                                lambda,
+                                beta,
+                                predictPositions,
+                                currPositionsn,
+                                thetan,
+                                maxExtrap) {
     return(
       .C(
-        'predictExtrapDown',
+        "predictExtrapDown",
         as.double(alpha),
         as.double(lambda),
         as.double(beta),
@@ -107,41 +108,42 @@ predict.BchronologyRun = function(object,
       )[9][[1]]
     )
   }
-  
+
   # Get some useful things to start of
-  nSamples = length(object$mu)
-  out = matrix(ncol = length(newPositions), nrow = nSamples)
-  p = 1.2
-  alpha = (2 - p) / (p - 1)
-  originalNewPositions = newPositions
-  if(object$positionNormalise) {
-    positionRange = diff(range(object$positions))
-    oldPositions = (object$positions - min(object$positions)) / positionRange
-    diffPosition = diff(oldPositions)
-    newPositions = (newPositions - min(object$positions)) / positionRange
-    if(!is.null(newPositionThicknesses))
-       newPositionThicknesses = newPositionThicknesses / positionRange
+  nSamples <- length(object$mu)
+  out <- matrix(ncol = length(newPositions), nrow = nSamples)
+  p <- 1.2
+  alpha <- (2 - p) / (p - 1)
+  originalNewPositions <- newPositions
+  if (object$positionNormalise) {
+    positionRange <- diff(range(object$positions))
+    oldPositions <- (object$positions - min(object$positions)) / positionRange
+    diffPosition <- diff(oldPositions)
+    newPositions <- (newPositions - min(object$positions)) / positionRange
+    if (!is.null(newPositionThicknesses)) {
+      newPositionThicknesses <- newPositionThicknesses / positionRange
+    }
   } else {
-    oldPositions = object$positions
-    diffPosition = diff(oldPositions)
+    oldPositions <- object$positions
+    diffPosition <- diff(oldPositions)
   }
-  
+
   # Now loop through all the values in newPositions
-  pb = utils::txtProgressBar(
+  pb <- utils::txtProgressBar(
     min = 1,
     max = nSamples,
     style = 3,
     width = 60,
-    title = 'Calculating predictions... '
+    title = "Calculating predictions... "
   )
-  n = length(object$positions)
+  n <- length(object$positions)
   for (i in 1:nSamples) {
     utils::setTxtProgressBar(pb, i)
-    
+
     if (is.null(newPositionThicknesses)) {
-      currPosition = newPositions
+      currPosition <- newPositions
     } else {
-      currPosition = sort(
+      currPosition <- sort(
         stats::runif(
           length(newPositions),
           newPositions - 0.5 * newPositionThicknesses,
@@ -149,19 +151,19 @@ predict.BchronologyRun = function(object,
         )
       )
     }
-    
+
     # Get sedimentation rate parameters
-    lambda = (object$mu[i] ^ (2 - p)) / (object$psi[i] * (2 - p))
-    beta = 1 / (object$psi[i] * (p - 1) * (object$mu[i] ^ (p - 1)))
-    theta = object$theta[i, ] / object$ageScaleVal
-    
+    lambda <- (object$mu[i]^(2 - p)) / (object$psi[i] * (2 - p))
+    beta <- 1 / (object$psi[i] * (p - 1) * (object$mu[i]^(p - 1)))
+    theta <- object$theta[i, ] / object$ageScaleVal
+
     # First interpolation
     for (j in 1:n) {
       # Find which positions we need to interpolate for
-      depthIndRange = which(currPosition >= oldPositions[j] &
-                              currPosition <= oldPositions[j + 1])
+      depthIndRange <- which(currPosition >= oldPositions[j] &
+        currPosition <= oldPositions[j + 1])
       if (length(depthIndRange) > 0) {
-        out[i, depthIndRange] = round(
+        out[i, depthIndRange] <- round(
           predictInterp(
             alpha,
             lambda,
@@ -178,11 +180,11 @@ predict.BchronologyRun = function(object,
       }
       # End of j loop
     }
-    
+
     # Extrapolation up
     if (any(currPosition < oldPositions[1])) {
-      depthIndRange = which(currPosition <= oldPositions[1])
-      out[i, depthIndRange] = round(
+      depthIndRange <- which(currPosition <= oldPositions[1])
+      out[i, depthIndRange] <- round(
         predictExtrapUp(
           alpha,
           lambda,
@@ -196,11 +198,11 @@ predict.BchronologyRun = function(object,
         3
       )
     }
-    
+
     # Extrapolate down
     if (any(currPosition >= oldPositions[n])) {
-      depthIndRange = which(currPosition >= oldPositions[n])
-      out[i, depthIndRange] = round(
+      depthIndRange <- which(currPosition >= oldPositions[n])
+      out[i, depthIndRange] <- round(
         predictExtrapDown(
           alpha,
           lambda,
@@ -213,10 +215,10 @@ predict.BchronologyRun = function(object,
         3
       )
     }
-    
+
     # End of i loop
   }
-  
-  colnames(out) = paste0('Pos', originalNewPositions)
+
+  colnames(out) <- paste0("Pos", originalNewPositions)
   return(out * object$ageScaleVal)
 }

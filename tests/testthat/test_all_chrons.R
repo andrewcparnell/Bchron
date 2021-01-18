@@ -4,55 +4,63 @@ library(Bchron)
 
 # data(Glendalough) # Glendalough already tested in main functions
 
-test_that('Sluggan', {
+test_that("Sluggan", {
   skip_on_cran()
   skip_on_travis()
   data(Sluggan)
   expect_output(print(Sluggan))
-  run = with(Sluggan, 
-             Bchronology(ages=ages,
-                         ageSds=ageSds, 
-                         calCurves=calCurves,
-                         positions=position, 
-                         positionThicknesses=thickness,
-                         ids=id,
-                         jitterPositions = TRUE,
-                         iterations = 1000,
-                         burn = 200,
-                         thin = 1))
-  expect_s3_class(run, 'BchronologyRun')
-  expect_output(summary(run, type='quantiles'))
-  expect_output(summary(run, type='convergence'))
-  expect_output(summary(run, type='outliers'))
-  expect_output(summary(run, type='max_var'))
-  expect_s3_class(plot(run), 'ggplot')
+  run <- with(
+    Sluggan,
+    Bchronology(
+      ages = ages,
+      ageSds = ageSds,
+      calCurves = calCurves,
+      positions = position,
+      positionThicknesses = thickness,
+      ids = id,
+      jitterPositions = TRUE,
+      iterations = 1000,
+      burn = 200,
+      thin = 1
+    )
+  )
+  expect_s3_class(run, "BchronologyRun")
+  expect_output(summary(run, type = "quantiles"))
+  expect_output(summary(run, type = "convergence"))
+  expect_output(summary(run, type = "outliers"))
+  expect_output(summary(run, type = "max_var"))
+  expect_s3_class(plot(run), "ggplot")
 })
 
-test_that('TestChronData', {
+test_that("TestChronData", {
   skip_on_cran()
   skip_on_travis()
   data(TestChronData)
   expect_output(print(TestChronData))
-  run = with(TestChronData, 
-             Bchronology(ages=ages,
-                         ageSds=ageSds, 
-                         calCurves=calCurves,
-                         positions=position, 
-                         positionThicknesses=thickness,
-                         ids=id,
-                         jitterPositions = TRUE,
-                         iterations = 1000,
-                         burn = 200,
-                         thin = 1))
-  expect_s3_class(run, 'BchronologyRun')
-  expect_output(summary(run, type='quantiles'))
-  expect_output(summary(run, type='convergence'))
-  expect_output(summary(run, type='outliers'))
-  expect_output(summary(run, type='max_var'))
-  expect_s3_class(plot(run), 'ggplot')
+  run <- with(
+    TestChronData,
+    Bchronology(
+      ages = ages,
+      ageSds = ageSds,
+      calCurves = calCurves,
+      positions = position,
+      positionThicknesses = thickness,
+      ids = id,
+      jitterPositions = TRUE,
+      iterations = 1000,
+      burn = 200,
+      thin = 1
+    )
+  )
+  expect_s3_class(run, "BchronologyRun")
+  expect_output(summary(run, type = "quantiles"))
+  expect_output(summary(run, type = "convergence"))
+  expect_output(summary(run, type = "outliers"))
+  expect_output(summary(run, type = "max_var"))
+  expect_s3_class(plot(run), "ggplot")
 })
 
-test_that('Taphocoenose_Jan20', {
+test_that("Taphocoenose_Jan20", {
   skip_on_cran()
   skip_on_travis()
   chron_df <-
@@ -71,8 +79,10 @@ test_that('Taphocoenose_Jan20', {
           501L,
           1L
         ),
-        sim_acc_rate = c(0, 1,
-                         1, 1, 1, 1, 1, 1, 1, 1, 1),
+        sim_acc_rate = c(
+          0, 1,
+          1, 1, 1, 1, 1, 1, 1, 1, 1
+        ),
         labID = c(
           "id_ 4750",
           "id_ 4501",
@@ -99,12 +109,18 @@ test_that('Taphocoenose_Jan20', {
           4249L,
           4749L
         ),
-        sim_age = c(0,
-                    249, 749, 1249, 1749, 2249, 2749, 3249, 3749, 4249, 4749),
-        sim_age_round = c(0,
-                          249, 749, 1249, 1749, 2249, 2749, 3249, 3749, 4249, 4749),
-        error = c(10,
-                  47, 62, 57, 70, 59, 64, 59, 57, 72, 69),
+        sim_age = c(
+          0,
+          249, 749, 1249, 1749, 2249, 2749, 3249, 3749, 4249, 4749
+        ),
+        sim_age_round = c(
+          0,
+          249, 749, 1249, 1749, 2249, 2749, 3249, 3749, 4249, 4749
+        ),
+        error = c(
+          10,
+          47, 62, 57, 70, 59, 64, 59, 57, 72, 69
+        ),
         calCurves = c(
           "normal",
           "normal",
@@ -119,24 +135,29 @@ test_that('Taphocoenose_Jan20', {
           "normal"
         )
       ),
-      row.names = c(NA,-11L),
-      class = c("tbl_df",
-                "tbl", "data.frame")
+      row.names = c(NA, -11L),
+      class = c(
+        "tbl_df",
+        "tbl", "data.frame"
+      )
     )
-  run = with(chron_df,
-                   Bchronology(ages=sim_age_round,
-                               ageSds=error,
-                               calCurves=calCurves,
-                               positions=sim_depth,
-                               ids=labID,
-                               iterations = 1000,
-                               burn = 200,
-                               thin = 1))
-  expect_s3_class(run, 'BchronologyRun')
-  expect_output(summary(run, type='quantiles'))
-  expect_output(summary(run, type='convergence'))
-  expect_output(summary(run, type='outliers'))
-  expect_output(summary(run, type='max_var'))
-  expect_s3_class(plot(run), 'ggplot')
+  run <- with(
+    chron_df,
+    Bchronology(
+      ages = sim_age_round,
+      ageSds = error,
+      calCurves = calCurves,
+      positions = sim_depth,
+      ids = labID,
+      iterations = 1000,
+      burn = 200,
+      thin = 1
+    )
+  )
+  expect_s3_class(run, "BchronologyRun")
+  expect_output(summary(run, type = "quantiles"))
+  expect_output(summary(run, type = "convergence"))
+  expect_output(summary(run, type = "outliers"))
+  expect_output(summary(run, type = "max_var"))
+  expect_s3_class(plot(run), "ggplot")
 })
-

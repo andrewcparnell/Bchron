@@ -65,8 +65,10 @@ This model places a Gaussian mixture prior distribution on the calibrated ages a
 data(Sluggan)
 
 # Run the model
-SlugDens = BchronDensity(ages=Sluggan$ages,ageSds=Sluggan$ageSds,
-                         calCurves=Sluggan$calCurves)
+SlugDens <- BchronDensity(
+  ages = Sluggan$ages, ageSds = Sluggan$ageSds,
+  calCurves = Sluggan$calCurves
+)
 
 # plot it
 plot(SlugDens)
