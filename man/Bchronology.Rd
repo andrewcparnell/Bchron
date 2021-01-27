@@ -91,16 +91,18 @@ The \code{Bchronology} function fits a compound Poisson-Gamma distribution to th
 data(Glendalough)
 
 # Run in Bchronology - all but first age uses intcal20
-GlenOut <- with(Glendalough,
-                Bchronology(
-                  ages = ages, 
-                  ageSds = ageSds,
-                  calCurves = calCurves, 
-                  positions = position,
-                  positionThicknesses = thickness, 
-                  ids = id,
-                  predictPositions = seq(0, 1500, by = 10)
-                )
+GlenOut <- with(
+  Glendalough,
+  Bchronology(
+    ages = ages,
+    ageSds = ageSds,
+    calCurves = calCurves,
+    positions = position,
+    positionThicknesses = thickness,
+    ids = id,
+    predictPositions = seq(0, 1500, by = 10)
+  )
+)
 
 # Summarise it a few different ways
 summary(GlenOut) # Default is for quantiles of ages at predictPosition values

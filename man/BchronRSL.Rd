@@ -62,7 +62,7 @@ RSLrun <- with(TestChronData, Bchronology(
   calCurves = calCurves,
   predictPositions = Depth,
   jitterPositions = TRUE
-)
+))
 
 # Now run through BchronRSL
 RSLrun2 <- BchronRSL(RSLrun, RSLmean = TestRSLData$RSL, RSLsd = TestRSLData$Sigma, degree = 3)
