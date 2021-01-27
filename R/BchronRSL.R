@@ -41,7 +41,7 @@
 #'   positionThicknesses = thickness,
 #'   ids = id,
 #'   calCurves = calCurves,
-#'   predictPositions = Depth,
+#'   predictPositions = TestRSLData$Depth,
 #'   jitterPositions = TRUE
 #' ))
 #'
