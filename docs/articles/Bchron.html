@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Bchron</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.4</span>
       </span>
     </div>
 
@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -56,7 +56,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/andrewcparnell/Bchron/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -70,14 +70,13 @@
 
       
 
-      </header><script src="Bchron_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="Bchron_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="Bchron_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="Bchron_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using Bayesian radiocarbon chronology package Bchron</h1>
                         <h4 class="author">Andrew Parnell</h4>
             
-            <h4 class="date">2020-11-20</h4>
+            <h4 class="date">2021-01-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/andrewcparnell/Bchron/blob/master/vignettes/Bchron.Rmd"><code>vignettes/Bchron.Rmd</code></a></small>
       <div class="hidden name"><code>Bchron.Rmd</code></div>
@@ -96,12 +95,12 @@
 <div id="installing-bchron" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installing-bchron" class="anchor"></a>Installing Bchron</h2>
-<p>Bchron will run in Windows, Mac OS X or Linux. To install Bchron you first need to install <a href="https://www.r-project.org">R</a>. I would also recommend installing <a href="https://www.rstudio.com">Rstudio</a> as a nice desktop environment for using R. Once in R you can type:</p>
+<p>Bchron will run in Windows, Mac OS X or Linux. To install Bchron you first need to install <a href="https://www.r-project.org">R</a>. I would also recommend installing <a href="https://rstudio.com">Rstudio</a> as a nice desktop environment for using R. Once in R you can type:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'Bchron'</span><span class="op">)</span></code></pre></div>
 <p>at the R command prompt to install Bchron. If you then type:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://andrewcparnell.github.io/Bchron/">Bchron</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewcparnell.github.io/Bchron/">Bchron</a></span><span class="op">)</span></code></pre></div>
 <p>it will load in all the Bchron functions.</p>
 <p>If you want to install the development version of Bchron please visit the Bchron <a href="https://github.com/andrewcparnell/Bchron">GitHub page</a>. The GitHub version contains a few more features but some of these can be quite untested, and occasionally this version will break when it is in the process of being updated.</p>
 </div>
@@ -161,7 +160,7 @@
 <p><img src="Bchron_files/figure-html/unnamed-chunk-6-1.png" width="576" style="display: block; margin: auto;"></p>
 <p>… or change the axes/titles if you want:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">ages3</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">'Age (years BP)'</span>,
        y <span class="op">=</span> <span class="st">'Depth (cm)'</span>,
@@ -195,15 +194,15 @@
 <span class="va">age_samples</span> <span class="op">=</span> <span class="fu"><a href="../reference/sampleAges.html">sampleAges</a></span><span class="op">(</span><span class="va">ages3</span><span class="op">)</span>
 <span class="co"># Now summarise them with quantile - this gives a 95% credible interval</span>
 <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">age_samples</span>, <span class="fl">2</span>, <span class="va">quantile</span>, prob<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.025</span>,<span class="fl">0.975</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>##       Date1 Date2
-## 2.5%   3572 10603
-## 97.5%  3834 11382</code></pre>
+<pre><code>##       Date1    Date2
+## 2.5%   3573 10604.00
+## 97.5%  3838 11403.02</code></pre>
 <p>The <code>sampleAges</code> function introduces some uncertainty as it is a simple random sample. This means that repeatedly running it will give you slightly different results. If you require precision at a yearly level, you might want to increase the <code>n_samp</code> argument though will slow the function down a little.</p>
 <p>If you wanted to find each date’s median age (though this is often an inappropriate summary and should be treated with caution), use:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">age_samples</span>, <span class="fl">2</span>, <span class="va">quantile</span>, prob<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## Date1 Date2 
-##  3704 11002</code></pre>
+##  3704 10998</code></pre>
 <p>The calibration code is very fast. On a standard PC you should have no trouble calibrating thousands of dates simultaneously without a noticeably long wait.</p>
 </div>
 <div id="comparing-ages" class="section level2">
@@ -251,30 +250,30 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">GlenOut</span>, type<span class="op">=</span><span class="st">'convergence'</span><span class="op">)</span></code></pre></div>
 <pre><code>## Convergence check (watch for too many small p-values): 
 ##             p-value
-## RateMean    0.00210
-## Outlier 3   0.00389
-## Outlier 1   0.00691
-## Outlier 4   0.00691
-## Top-1       0.00771
-## RateVar     0.01530
-## Outlier 2   0.04132
-## Outlier 5   0.08915
-## Beta-122061 0.12647
-## Beta-100899 0.21017
-## Beta-100901 0.25384
-## Beta-100900 0.31669
-## Outlier 6   0.35820
-## Beta-100897 0.46999</code></pre>
+## RateVar     0.00000
+## RateMean    0.00001
+## Beta-100897 0.00285
+## Beta-100899 0.08373
+## Top-1       0.09624
+## Beta-100900 0.09755
+## Beta-100901 0.14023
+## Outlier 3   0.15866
+## Beta-122061 0.28286
+## Outlier 4   0.28299
+## Outlier 6   0.28299
+## Outlier 5   0.29694
+## Outlier 2   0.36239
+## Outlier 1   0.42872</code></pre>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">GlenOut</span>, type<span class="op">=</span><span class="st">'outliers'</span><span class="op">)</span></code></pre></div>
 <pre><code>## Posterior outlier probability by date: 
 ##         Date OutlierProb
-##        Top-1       0.006
-##  Beta-122061       0.006
-##  Beta-100901       0.012
-##  Beta-100900       0.007
-##  Beta-100899       0.010
-##  Beta-100897       0.010</code></pre>
+##        Top-1       0.008
+##  Beta-122061       0.014
+##  Beta-100901       0.009
+##  Beta-100900       0.004
+##  Beta-100899       0.014
+##  Beta-100897       0.011</code></pre>
 <p>The first summary command produces ages for each position supplied in the <code>predictPositions</code> argument above (output not shown as it’s too long). The second provides convergence diagnostics. The third gives outlier probabilities. The <code>plot</code> command will produce an age-position plot:</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">GlenOut</span><span class="op">)</span></code></pre></div>
@@ -343,12 +342,12 @@ run = Bchronology(ages=mydata[,1],ageSds=mydata[,2], ...</code></pre>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">GlenOut</span>, type <span class="op">=</span> <span class="st">'max_var'</span><span class="op">)</span></code></pre></div>
 <pre><code>## Top 3 positions with maximum age variance are: 
-## 780 790 770</code></pre>
+## 760 740 770</code></pre>
 <p>You can control the number of positions reported with <code>numPos</code>. For example you could now add a line to mark the most variably layer to the plot with:</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">max_var</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">GlenOut</span>, type <span class="op">=</span> <span class="st">'max_var'</span>, numPos <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <pre><code>## Position with maximum age variance is: 
-## 780</code></pre>
+## 760</code></pre>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">GlenOut</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Glendalough"</span>,
@@ -459,7 +458,7 @@ run = Bchronology(ages=mydata[,1],ageSds=mydata[,2], ...</code></pre>
                          ids<span class="op">=</span><span class="st">'IntCal09'</span><span class="op">)</span>
 <span class="va">age_20</span> <span class="op">=</span> <span class="fu"><a href="../reference/BchronCalibrate.html">BchronCalibrate</a></span><span class="op">(</span>age<span class="op">=</span><span class="fl">15500</span>,ageSds<span class="op">=</span><span class="fl">150</span>,calCurves <span class="op">=</span> <span class="st">'intcal20'</span>,
                          ids <span class="op">=</span> <span class="st">'Intcal20'</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">age_09</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">age_20</span><span class="op">$</span><span class="va">Intcal20</span><span class="op">)</span>, 
             <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">ageGrid</span>, y <span class="op">=</span> <span class="va">densities</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">'red'</span><span class="op">)</span> <span class="op">+</span> 
@@ -514,10 +513,10 @@ run = Bchronology(ages=mydata[,1],ageSds=mydata[,2], ...</code></pre>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">unCal</span><span class="op">)</span></code></pre></div>
 <pre><code>## $mean
-## [1] 11249
+## [1] 11254
 ## 
 ## $sd
-## [1] 29</code></pre>
+## [1] 25</code></pre>
 <p>This will provide a single best estimate of the mean and standard deviation of the uncalibrated (here 14C) date.</p>
 </div>
 <div id="miscellaneous-other-queries" class="section level1">
@@ -544,8 +543,8 @@ run = Bchronology(ages=mydata[,1],ageSds=mydata[,2], ...</code></pre>
                           calCurve <span class="op">=</span> <span class="st">'intcal20'</span><span class="op">)</span></code></pre></div>
 <p>Finally we create the plot and add the date as a new layer (with a new colour too):</p>
 <div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/ggridges">ggridges</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/ggridges/">ggridges</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">GlenOut</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://wilkelab.org/ggridges/reference/geom_ridgeline.html">geom_ridgeline</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">new_cal</span><span class="op">$</span><span class="va">Date1</span><span class="op">)</span>, 
                  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">ageGrid</span>, 

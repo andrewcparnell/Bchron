@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Bchron</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.4</span>
       </span>
     </div>
 
@@ -79,7 +79,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -96,7 +96,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/andrewcparnell/Bchron/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -117,12 +117,24 @@
       <small>Source: <a href='https://github.com/andrewcparnell/Bchron/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="bchron-473" class="section level1">
-<h1 class="page-header" data-toc-text="4.7.3">
-<a href="#bchron-473" class="anchor"></a>Bchron 4.7.3<small> Unreleased </small>
+    <div id="bchron-474" class="section level1">
+<h1 class="page-header" data-toc-text="4.7.4">
+<a href="#bchron-474" class="anchor"></a>Bchron 4.7.4<small> Unreleased </small>
 </h1>
 <ul>
-<li>Fixed a weird bug where some hdrs were coming out sort the wrong way in plot.Bchronology</li>
+<li>Updated the BchronDensity and BchronDensityFast functions to show lines on top of dates</li>
+<li>Included ability in above functions to change amount of date transparency</li>
+<li>Used styler to make the syntax follow tidyverse style guidelines</li>
+<li>Fixed bug in starting values which occasionally produced values before the extractDate</li>
+<li>Fixed bug in choosePositions where position chosen was at the edge of the domain</li>
+</ul>
+</div>
+    <div id="bchron-473" class="section level1">
+<h1 class="page-header" data-toc-text="4.7.3">
+<a href="#bchron-473" class="anchor"></a>Bchron 4.7.3<small> 2020-11-21 </small>
+</h1>
+<ul>
+<li>Fixed a weird bug where some hdrs were coming out the wrong way in plot.Bchronology</li>
 <li>Add the ability to create OxCal style plots with the calibration curve</li>
 <li>Added a feature to plot individual dates in plot.BchronCalibratedDates</li>
 </ul>

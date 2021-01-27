@@ -56,13 +56,17 @@ Multiple calibration curves can be specified so that each 14C age can have a dif
 }
 \examples{
 # Calibrate a single age
-ages1 <- BchronCalibrate(ages = 11553, ageSds = 230, calCurves = "intcal20", ids = "Date-1")
+ages1 <- BchronCalibrate(ages = 11553,
+                         ageSds = 230, 
+                         calCurves = "intcal20", 
+                         ids = "Date-1")
 summary(ages1)
 plot(ages1)
 
 # Calibrate multiple ages with different calibration curves
 ages2 <- BchronCalibrate(
-  ages = c(3445, 11553, 7456), ageSds = c(50, 230, 110),
+  ages = c(3445, 11553, 7456), 
+  ageSds = c(50, 230, 110),
   calCurves = c("intcal20", "intcal20", "shcal20")
 )
 summary(ages2)
@@ -70,7 +74,9 @@ plot(ages2)
 
 # Calibrate multiple ages with multiple calibration curves and including depth
 ages3 <- BchronCalibrate(
-  ages = c(3445, 11553), ageSds = c(50, 230), positions = c(100, 150),
+  ages = c(3445, 11553), 
+  ageSds = c(50, 230), 
+  positions = c(100, 150),
   calCurves = c("intcal20", "normal")
 )
 summary(ages3)

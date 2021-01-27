@@ -149,8 +149,15 @@ choosePositions.BchronologyRun <- function(bchrRun,
     oldInput <- bchrRun$inputVals
 
     # Find where the new position lies in the input positions
-    posPlaceBin <- findInterval(oldInput$positions, newPos)
-    posPlace <- min(which(posPlaceBin == 1))
+    # Need to be careful if it's outside the range
+    if (newPos >= max(oldInput$positions)) {
+      posPlace <- length(oldInput$positions) + 1
+    } else if (newPos <= min(oldInput$positions)) {
+      posPlace <- 1
+    } else {
+      posPlaceBin <- findInterval(oldInput$positions, newPos)
+      posPlace <- min(which(posPlaceBin == 1))
+    }
 
     # Need to specify new dates, sds, positions, positionThicknesses, calCurves,
     # outlierprobs, and predictPositions
@@ -184,6 +191,9 @@ choosePositions.BchronologyRun <- function(bchrRun,
       newDate, newSds, signif(returnPos, 3)
     )
     cat(store, "\n")
+
+    diffPosition <- diff(positionsNew)
+    if (any(diffPosition == 0)) browser()
 
     # Run Bchron on this new data set
     newOut <- Bchronology(

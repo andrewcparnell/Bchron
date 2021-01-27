@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Bchron</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.4</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -97,7 +97,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/andrewcparnell/Bchron/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -185,8 +185,12 @@
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>Sluggan</span><span class='op'>)</span>
 
 <span class='co'># Run the model</span>
-<span class='va'>SlugDensFast</span> <span class='op'>=</span> <span class='fu'>BchronDensityFast</span><span class='op'>(</span>ages<span class='op'>=</span><span class='va'>Sluggan</span><span class='op'>$</span><span class='va'>ages</span>,ageSds<span class='op'>=</span><span class='va'>Sluggan</span><span class='op'>$</span><span class='va'>ageSds</span>,
-                                 calCurves<span class='op'>=</span><span class='va'>Sluggan</span><span class='op'>$</span><span class='va'>calCurves</span><span class='op'>)</span>
+<span class='va'>SlugDensFast</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>Sluggan</span>,
+                     <span class='fu'>BchronDensityFast</span><span class='op'>(</span>
+                       ages <span class='op'>=</span> <span class='va'>ages</span>,
+                       ageSds <span class='op'>=</span> <span class='va'>ageSds</span>,
+                       calCurves <span class='op'>=</span> <span class='va'>calCurves</span>
+                     <span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># plot it</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>SlugDensFast</span><span class='op'>)</span>

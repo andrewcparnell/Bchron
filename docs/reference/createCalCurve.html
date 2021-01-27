@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Bchron</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.4</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -97,7 +97,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/andrewcparnell/Bchron/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -171,28 +171,36 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># Load in the calibration curve with:</span>
-<span class='va'>intcal09</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.table</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>'extdata/intcal09.14c'</span>, package <span class='op'>=</span> <span class='st'>'Bchron'</span><span class='op'>)</span>, sep<span class='op'>=</span><span class='st'>','</span><span class='op'>)</span>
+<span class='va'>intcal09</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.table</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"extdata/intcal09.14c"</span>, package <span class='op'>=</span> <span class='st'>"Bchron"</span><span class='op'>)</span>, sep <span class='op'>=</span> <span class='st'>","</span><span class='op'>)</span>
 <span class='co'># Run createCalCurve</span>
-<span class='fu'>createCalCurve</span><span class='op'>(</span>name<span class='op'>=</span><span class='st'>'intcal09'</span>,calAges<span class='op'>=</span><span class='va'>intcal09</span><span class='op'>[</span>,<span class='fl'>1</span><span class='op'>]</span>, 
-uncalAges<span class='op'>=</span><span class='va'>intcal09</span><span class='op'>[</span>,<span class='fl'>2</span><span class='op'>]</span>,oneSigma<span class='op'>=</span><span class='va'>intcal09</span><span class='op'>[</span>,<span class='fl'>3</span><span class='op'>]</span><span class='op'>)</span>
+<span class='fu'>createCalCurve</span><span class='op'>(</span>
+  name <span class='op'>=</span> <span class='st'>"intcal09"</span>, calAges <span class='op'>=</span> <span class='va'>intcal09</span><span class='op'>[</span>, <span class='fl'>1</span><span class='op'>]</span>,
+  uncalAges <span class='op'>=</span> <span class='va'>intcal09</span><span class='op'>[</span>, <span class='fl'>2</span><span class='op'>]</span>, oneSigma <span class='op'>=</span> <span class='va'>intcal09</span><span class='op'>[</span>, <span class='fl'>3</span><span class='op'>]</span>
+<span class='op'>)</span>
 
 <span class='co'># Copy the file to the right place</span>
-<span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.copy</a></span><span class='op'>(</span>from <span class='op'>=</span> <span class='st'>'intcal09.rda'</span>,
-           to <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>'data'</span>,package<span class='op'>=</span><span class='st'>'Bchron'</span><span class='op'>)</span>,
-                            overwrite <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='co'># Only need this if you've run it more than once</span>
+<span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.copy</a></span><span class='op'>(</span>
+  from <span class='op'>=</span> <span class='st'>"intcal09.rda"</span>,
+  to <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"data"</span>, package <span class='op'>=</span> <span class='st'>"Bchron"</span><span class='op'>)</span>,
+  overwrite <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span> <span class='co'># Only need this if you've run it more than once</span>
 
 <span class='co'># Calibrate the ages under two calibration curves</span>
-<span class='va'>age_09</span> <span class='op'>=</span> <span class='fu'><a href='BchronCalibrate.html'>BchronCalibrate</a></span><span class='op'>(</span>ages<span class='op'>=</span><span class='fl'>15500</span>, ageSds<span class='op'>=</span><span class='fl'>150</span>,
-                          calCurves <span class='op'>=</span> <span class='st'>'intcal09'</span>,ids<span class='op'>=</span><span class='st'>'My Date'</span>, 
-                          pathToCalCurves <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>age_20</span> <span class='op'>=</span> <span class='fu'><a href='BchronCalibrate.html'>BchronCalibrate</a></span><span class='op'>(</span>ages<span class='op'>=</span><span class='fl'>15500</span>,ageSds<span class='op'>=</span><span class='fl'>150</span>,calCurves <span class='op'>=</span> <span class='st'>'intcal20'</span><span class='op'>)</span>
+<span class='va'>age_09</span> <span class='op'>&lt;-</span> <span class='fu'><a href='BchronCalibrate.html'>BchronCalibrate</a></span><span class='op'>(</span>
+  ages <span class='op'>=</span> <span class='fl'>15500</span>, ageSds <span class='op'>=</span> <span class='fl'>150</span>,
+  calCurves <span class='op'>=</span> <span class='st'>"intcal09"</span>, ids <span class='op'>=</span> <span class='st'>"My Date"</span>,
+  pathToCalCurves <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>)</span>
+<span class='va'>age_20</span> <span class='op'>&lt;-</span> <span class='fu'><a href='BchronCalibrate.html'>BchronCalibrate</a></span><span class='op'>(</span>ages <span class='op'>=</span> <span class='fl'>15500</span>, ageSds <span class='op'>=</span> <span class='fl'>150</span>, calCurves <span class='op'>=</span> <span class='st'>"intcal20"</span><span class='op'>)</span>
 
 <span class='co'># Finally plot the difference</span>
-<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>age_09</span><span class='op'>)</span> <span class='op'>+</span> 
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>age_20</span><span class='op'>$</span><span class='va'>Date1</span><span class='op'>)</span>, 
-         <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>ageGrid</span>, y <span class='op'>=</span> <span class='va'>densities</span><span class='op'>)</span>, col <span class='op'>=</span> <span class='st'>'red'</span><span class='op'>)</span> <span class='op'>+</span> 
-     <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ggtitle</a></span><span class='op'>(</span><span class='st'>'Intcal09 vs Intcal20'</span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>age_09</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span>
+    data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='va'>age_20</span><span class='op'>$</span><span class='va'>Date1</span><span class='op'>)</span>,
+    <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>ageGrid</span>, y <span class='op'>=</span> <span class='va'>densities</span><span class='op'>)</span>, col <span class='op'>=</span> <span class='st'>"red"</span>
+  <span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ggtitle</a></span><span class='op'>(</span><span class='st'>"Intcal09 vs Intcal20"</span><span class='op'>)</span>
 <span class='op'>}</span>
 </div></pre>
   </div>

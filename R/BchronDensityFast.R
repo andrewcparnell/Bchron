@@ -26,9 +26,13 @@
 #' data(Sluggan)
 #'
 #' # Run the model
-#' SlugDensFast <- BchronDensityFast(
-#'   ages = Sluggan$ages, ageSds = Sluggan$ageSds,
-#'   calCurves = Sluggan$calCurves
+#' SlugDensFast <- with(
+#'   Sluggan,
+#'   BchronDensityFast(
+#'     ages = ages,
+#'     ageSds = ageSds,
+#'     calCurves = calCurves
+#'   )
 #' )
 #'
 #' # plot it

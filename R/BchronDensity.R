@@ -37,9 +37,13 @@
 #' data(Sluggan)
 #'
 #' # Run the model
-#' SlugDens <- BchronDensity(
-#'   ages = Sluggan$ages, ageSds = Sluggan$ageSds,
-#'   calCurves = Sluggan$calCurves
+#' SlugDens <- with(
+#'   Sluggan,
+#'   BchronDensity(
+#'     ages = ages,
+#'     ageSds = ageSds,
+#'     calCurves = calCurves
+#'   )
 #' )
 #'
 #' # plot it

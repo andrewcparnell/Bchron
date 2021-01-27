@@ -33,6 +33,7 @@ void truncatedWalk(double *old, double *sd, double *low, double *high, double *n
   double lowlimold, upplimold, y;
   lowlimold = (*low - *old)/ *sd;
   upplimold = (*high - *old)/ *sd;
+  
   rtruncn(&lowlimold, &upplimold, &y);
   *newvalue = *old + *sd*y;
 }

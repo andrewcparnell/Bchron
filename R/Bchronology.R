@@ -50,11 +50,17 @@
 #' data(Glendalough)
 #'
 #' # Run in Bchronology - all but first age uses intcal20
-#' GlenOut <- Bchronology(
-#'   ages = Glendalough$ages, ageSds = Glendalough$ageSds,
-#'   calCurves = Glendalough$calCurves, positions = Glendalough$position,
-#'   positionThicknesses = Glendalough$thickness, ids = Glendalough$id,
-#'   predictPositions = seq(0, 1500, by = 10)
+#' GlenOut <- with(
+#'   Glendalough,
+#'   Bchronology(
+#'     ages = ages,
+#'     ageSds = ageSds,
+#'     calCurves = calCurves,
+#'     positions = position,
+#'     positionThicknesses = thickness,
+#'     ids = id,
+#'     predictPositions = seq(0, 1500, by = 10)
+#'   )
 #' )
 #'
 #' # Summarise it a few different ways
@@ -63,9 +69,10 @@
 #' summary(GlenOut, type = "outliers") # Look at outlier probabilities
 #'
 #' # Predict for some new positions
-#' predictAges <- predict(GlenOut, 
-#'                        newPositions = c(150, 725, 1500), 
-#'                        newPositionThicknesses = c(5, 0, 20))
+#' predictAges <- predict(GlenOut,
+#'   newPositions = c(150, 725, 1500),
+#'   newPositionThicknesses = c(5, 0, 20)
+#' )
 #'
 #' # Plot the output
 #' plot(GlenOut, main = "Glendalough", xlab = "Age (cal years BP)", ylab = "Depth (cm)", las = 1)
@@ -107,6 +114,9 @@ Bchronology <- function(ages,
   # phi are the outlier indicators (1=TRUE or 0=FALSE) for date i
   # mu,psi are the Compound Poisson-Gamma parameters controlling sedimentation
 
+
+  # Re-normalise positions --------------------------------------------------
+
   # Re-normalise all the positions
   originalPositions <- positions
   originalPositionThicknesses <- positionThicknesses
@@ -132,6 +142,8 @@ Bchronology <- function(ages,
   }
 
 
+  # Check order of positions ------------------------------------------------
+
   # Check positions are in order
   o <- order(positions)
   if (any(positions[o] != positions)) {
@@ -144,6 +156,9 @@ Bchronology <- function(ages,
     ids <- ids[o]
     outlierProbs <- outlierProbs[o]
   }
+
+
+  # Calibrate dates ---------------------------------------------------------
 
   # First thing to do is to calibrate the ages with the two different degrees of freedom
   dfs <- c(1, 100) # corresponding to phi equals 1 and 0 respectively
@@ -177,6 +192,9 @@ Bchronology <- function(ages,
     }
   })
 
+
+  # Jitter positions --------------------------------------------------------
+
   # Get current positions and their order
   if (jitterPositions) {
     num_decimals <- max(decimalplaces(positions))
@@ -192,6 +210,7 @@ Bchronology <- function(ages,
       )
     }
   }
+
   diffPosition <- diff(currPositions)
   do <- order(currPositions)
 
@@ -201,49 +220,15 @@ Bchronology <- function(ages,
     offset[i] <- ifelse(x.df1[[i]]$calCurve == "normal", 100, 0)
   }
 
-  # Starting values
-  theta <- vector(length = n)
-  # Make sure no theta values are identical
-  badThetas <- TRUE
-  while (badThetas) {
-    for (j in 1:n) {
-      theta[j] <- round(
-        stats::rnorm(1, x.df2[[j]]$ageGrid[match(max(x.df2[[j]]$densities), x.df2[[j]]$densities)] /
-          ageScaleVal, sd = ageSds[j] / ageScaleVal),
-        3
-      )
-    }
-    theta <- sort(theta)
-    if (all(diff(theta) != 0)) {
-      badThetas <- FALSE
-    }
-  }
-  phi <- rep(0, length(theta))
-  p <- 1.2
-  mu <- abs(stats::rnorm(
-    1,
-    mean = mean(diff(theta)) / mean(diffPosition),
-    sd = 1
-  ))
-  psi <- abs(stats::rnorm(1, 1, 1))
-
-  # Tranformed values (used for interpolation)
-  alpha <- (2 - p) / (p - 1)
-
-  # Storage
-  remaining <- (iterations - burn) / thin
-  thetaStore <- phiStore <- matrix(ncol = length(theta), nrow = remaining)
-  muStore <- psiStore <- vector(length = remaining)
-  thetaPredict <- matrix(ncol = length(predictPositions), nrow = remaining)
-
-  # Some C functions which are useful
-  #################################################
+  # Useful C functions ------------------------------------------------------
 
   # C function for truncated random walk
   truncatedWalk <- function(old, sd, low, high) {
     if (isTRUE(all.equal(low, high, tolerance = 1e-4))) {
       return(list(new = low, rat = 1))
     }
+    if (high < low) stop("Error - truncatedWalk has lower limit higher than upper limit")
+
     new <- .C(
       "truncatedWalk",
       as.double(old),
@@ -269,6 +254,8 @@ Bchronology <- function(ages,
 
   # C functions for tweedie
   dtweediep1 <- Vectorize(function(y, p, mu, phi) {
+    if (phi < 0) stop("Bad phi parameter value")
+    if (mu < 0) stop("Bad mu parameter value")
     return(.C(
       "dtweediep1",
       as.double(y),
@@ -363,8 +350,63 @@ Bchronology <- function(ages,
   }
   # End of C functions
 
-  # Main iteration loop
-  #################################################
+
+  # Starting values ---------------------------------------------------------
+
+  # Starting values
+  theta <- vector(length = n)
+  # Make sure no theta values are identical
+  badThetas <- TRUE
+
+  while (badThetas) {
+    for (j in 1:n) {
+      # Use truncatedWalk to get new values to avoid going outside range of extractDate
+      theta[j] <- round(
+        truncatedWalk(
+          old = x.df2[[j]]$ageGrid[match(max(x.df2[[j]]$densities), x.df2[[j]]$densities)] / ageScaleVal,
+          sd = ageSds[j] / ageScaleVal,
+          low = extractDate / ageScaleVal,
+          high = 1e9
+        )$new,
+        digits = 3
+      )
+      # OLD VERSION USING RNORM
+      # theta[j] <- round(
+      #   stats::rnorm(n = 1,
+      #                mean = x.df2[[j]]$ageGrid[match(max(x.df2[[j]]$densities), x.df2[[j]]$densities)] /ageScaleVal,
+      #     sd = ageSds[j] / ageScaleVal),
+      #   digits = 3
+      # )
+    }
+    theta <- sort(theta)
+    if (all(diff(theta) != 0)) {
+      badThetas <- FALSE
+    }
+  }
+
+  phi <- rep(0, length(theta))
+  p <- 1.2
+  mu <- abs(stats::rnorm(
+    1,
+    mean = mean(diff(theta)) / mean(diffPosition),
+    sd = 1
+  ))
+  psi <- abs(stats::rnorm(1, 1, 1))
+
+  # Tranformed values (used for interpolation)
+  alpha <- (2 - p) / (p - 1)
+
+
+  # Storage -----------------------------------------------------------------
+
+  # Storage
+  remaining <- (iterations - burn) / thin
+  thetaStore <- phiStore <- matrix(ncol = length(theta), nrow = remaining)
+  muStore <- psiStore <- vector(length = remaining)
+  thetaPredict <- matrix(ncol = length(predictPositions), nrow = remaining)
+
+
+  # Main iteration loop -----------------------------------------------------
 
   pb <- utils::txtProgressBar(
     min = 1,
@@ -375,6 +417,8 @@ Bchronology <- function(ages,
   )
   for (i in 1:iterations) {
     utils::setTxtProgressBar(pb, i)
+
+    # Update positions --------------------------------------------------------
 
     if (any(positionThicknesses > 0) &
       i > 0.5 * burn & i %% thin == 0) {
@@ -389,6 +433,9 @@ Bchronology <- function(ages,
       theta[do] <- sort(theta)
     }
 
+
+    # Put things in storage ---------------------------------------------------
+
     # If we're in the right place put things in storage
     if (i > burn & i %% thin == 0) {
       ind <- (i - burn) / thin
@@ -400,6 +447,9 @@ Bchronology <- function(ages,
       # Run interpolation/extrapolation stage
       lambda <- (mu^(2 - p)) / (psi * (2 - p))
       beta <- 1 / (psi * (p - 1) * (mu^(p - 1)))
+
+
+      # Interpolation and extrapolation -----------------------------------------
 
       # First interpolation
       for (j in 1:(n - 1)) {
@@ -468,17 +518,22 @@ Bchronology <- function(ages,
       }
     }
 
+
+    # Update theta ------------------------------------------------------------
+
     # Update theta
     for (j in 1:n) {
+      lowerLimit <- ifelse(
+        j == 1,
+        ifelse(x.df1[[j]]$calCurve == "normal", extractDate / ageScaleVal, 0),
+        theta[do[j - 1]] + 0.001
+      )
+      upperLimit <- ifelse(j == n, 100000, theta[do[j + 1]] - 0.001)
       thetaNewAll <- truncatedWalk(
         theta[do[j]],
         thetaMhSd,
-        ifelse(
-          j == 1,
-          ifelse(x.df1[[j]]$calCurve == "normal", extractDate / ageScaleVal, 0),
-          theta[do[j - 1]] + 0.001
-        ),
-        ifelse(j == n, 100000, theta[do[j + 1]] - 0.001)
+        lowerLimit,
+        upperLimit
       )
       thetaNew <- round(thetaNewAll$new, 3)
       # Calculate ratio
@@ -524,6 +579,9 @@ Bchronology <- function(ages,
         theta[do[j]] <- thetaNew
       }
     }
+
+
+    # Update other parameters -------------------------------------------------
 
     # Update phi
     for (j in 1:n) {
@@ -595,6 +653,9 @@ Bchronology <- function(ages,
       psi <- psiNew
     }
   }
+
+
+  # Collect up and return ---------------------------------------------------
 
   # Collect up the input values to return
   inputVals <- list(

@@ -1,12 +1,14 @@
-# Bchron 4.7.3.9000
+# Bchron 4.7.4
 
   - Updated the BchronDensity and BchronDensityFast functions to show lines on top of dates
-  - Included ablity in above functions to change amount of date transparency
+  - Included ability in above functions to change amount of date transparency
   - Used styler to make the syntax follow tidyverse style guidelines
+  - Fixed bug in starting values which occasionally produced values before the extractDate
+  - Fixed bug in choosePositions where position chosen was at the edge of the domain
 
 # Bchron 4.7.3
 
-  - Fixed a weird bug where some hdrs were coming out sort the wrong way in plot.Bchronology
+  - Fixed a weird bug where some hdrs were coming out the wrong way in plot.Bchronology
   - Add the ability to create OxCal style plots with the calibration curve
   - Added a feature to plot individual dates in plot.BchronCalibratedDates
 

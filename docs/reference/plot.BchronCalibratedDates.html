@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Bchron</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.4</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -97,7 +97,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/andrewcparnell/Bchron/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -132,6 +132,9 @@
   includeCal <span class='op'>=</span> <span class='cn'>FALSE</span>,
   dateHeight <span class='op'>=</span> <span class='fl'>100</span>,
   dateLabels <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  dateLabelSize <span class='op'>=</span> <span class='fl'>2</span>,
+  nudgeX <span class='op'>=</span> <span class='fl'>0</span>,
+  nudgeY <span class='op'>=</span> <span class='fl'>0</span>,
   fillCol <span class='op'>=</span> <span class='st'>"darkslategray"</span>,
   withHDR <span class='op'>=</span> <span class='cn'>TRUE</span>,
   ageScale <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"bp"</span>, <span class='st'>"bc"</span>, <span class='st'>"b2k"</span><span class='op'>)</span>,
@@ -166,6 +169,18 @@
     <tr>
       <th>dateLabels</th>
       <td><p>Whether to add the names of the dates to the left of them. Default TRUE</p></td>
+    </tr>
+    <tr>
+      <th>dateLabelSize</th>
+      <td><p>Size of the date labels</p></td>
+    </tr>
+    <tr>
+      <th>nudgeX</th>
+      <td><p>The amount to move the date labels in the x direction. Can be negative. See <code><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a></code> for details</p></td>
+    </tr>
+    <tr>
+      <th>nudgeY</th>
+      <td><p>The amount to move the date labels in the y direction. Can be negative. See <code><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a></code> for details</p></td>
     </tr>
     <tr>
       <th>fillCol</th>

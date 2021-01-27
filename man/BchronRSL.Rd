@@ -53,14 +53,14 @@ data(TestChronData)
 data(TestRSLData)
 
 # Run through Bchronology
-RSLrun <- Bchronology(
-  ages = TestChronData$ages,
-  ageSds = TestChronData$ageSds,
-  positions = TestChronData$position,
-  positionThicknesses = TestChronData$thickness,
-  ids = TestChronData$id,
-  calCurves = TestChronData$calCurves,
-  predictPositions = TestRSLData$Depth,
+RSLrun <- with(TestChronData, Bchronology(
+  ages = ages,
+  ageSds = ageSds,
+  positions = position,
+  positionThicknesses = thickness,
+  ids = id,
+  calCurves = calCurves,
+  predictPositions = Depth,
   jitterPositions = TRUE
 )
 
