@@ -158,10 +158,10 @@
 <span class='va'>age_samples</span> <span class='op'>&lt;-</span> <span class='fu'>sampleAges</span><span class='op'>(</span><span class='va'>ages</span><span class='op'>)</span>
 <span class='co'># Create a credible interval and the median for each date</span>
 <span class='fu'><a href='https://rdrr.io/r/base/apply.html'>apply</a></span><span class='op'>(</span><span class='va'>age_samples</span>, <span class='fl'>2</span>, <span class='va'>quantile</span>, probs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.05</span>, <span class='fl'>0.5</span>, <span class='fl'>0.95</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;     Date1    Date2  Date3
-#&gt; 5%   3584 13102.00 8036.0
-#&gt; 50%  3704 13431.00 8227.5
-#&gt; 95%  3824 13834.05 8381.0</div></pre>
+</div><div class='output co'>#&gt;     Date1 Date2 Date3
+#&gt; 5%   3585 13099  8036
+#&gt; 50%  3703 13429  8229
+#&gt; 95%  3823 13842  8379</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

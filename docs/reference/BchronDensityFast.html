@@ -185,12 +185,14 @@
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>Sluggan</span><span class='op'>)</span>
 
 <span class='co'># Run the model</span>
-<span class='va'>SlugDensFast</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>Sluggan</span>,
-                     <span class='fu'>BchronDensityFast</span><span class='op'>(</span>
-                       ages <span class='op'>=</span> <span class='va'>ages</span>,
-                       ageSds <span class='op'>=</span> <span class='va'>ageSds</span>,
-                       calCurves <span class='op'>=</span> <span class='va'>calCurves</span>
-                     <span class='op'>)</span><span class='op'>)</span>
+<span class='va'>SlugDensFast</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span>
+  <span class='va'>Sluggan</span>,
+  <span class='fu'>BchronDensityFast</span><span class='op'>(</span>
+    ages <span class='op'>=</span> <span class='va'>ages</span>,
+    ageSds <span class='op'>=</span> <span class='va'>ageSds</span>,
+    calCurves <span class='op'>=</span> <span class='va'>calCurves</span>
+  <span class='op'>)</span>
+<span class='op'>)</span>
 
 <span class='co'># plot it</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>SlugDensFast</span><span class='op'>)</span>
