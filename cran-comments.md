@@ -5,7 +5,7 @@
 * win-builder (devel and release)
 
 ## R CMD check results
-There were no ERRORs or WARNINGs or NOTEs. 
+There were no ERRORs or WARNINGs or NOTEs. Some of the Rhub runs failed to complete but this looked like a problem with Rhub rather than with the package
 
 ## Downstream dependencies
 I have also run revdepcheck on the downstream dependencies of Bchron which reported no errors. 
