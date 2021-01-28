@@ -273,3 +273,95 @@ test_that("Kemp_Jan21", {
   expect_output(summary(run, type = "max_var"))
   expect_s3_class(plot(run), "ggplot")
 })
+
+
+# Kemp Jan 21 part 2 ------------------------------------------------------
+
+test_that("Kemp_Jan21_part2", {
+  skip_on_cran()
+  skip_on_ci()
+  RC_input <- structure(list(
+    id = c(
+      "10373", "10374", "10375", "10376", "10517",
+      "10516", "10515", "10470", "10518", "10519", "10520", "10522",
+      "10521", "10523", "10524", "10525", "10526", "10527", "10528",
+      "10529", "10471", "10472", "10473", "10474", "10476", "10475",
+      "10477", "10478", "10479", "10480", "10481", "10482", "10483",
+      "10484", "10485", "10486", "10441", "10442", "10502", "10398",
+      "10399"
+    ), ages = c(
+      143, 176, 125, 125, 233, 286, 332, 367, 415,
+      530, 546, 263, 846, 837, 1039, 1012, 1111, 1243, 1323, 1321,
+      1508, 1643, 1597, 1653, 1684, 1722, 1782, 1842, 1892, 1944, 1909,
+      2017, 2168, 2234, 2359, 2422, 2492, 2470, 2481, 2578, 2705
+    ),
+    ageSds = c(
+      41, 31, 39, 35, 26, 33, 34, 33, 40, 34, 42, 29,
+      38, 36, 38, 38, 30, 39, 36, 31, 31, 29, 28, 29, 30, 31, 29,
+      28, 36, 30, 32, 30, 31, 33, 39, 35, 38, 43, 38, 40, 41
+    ),
+    position = c(
+      24, 32, 40, 48, 54, 60, 66, 74, 80, 86, 94,
+      102, 107, 108, 119, 125, 133, 141, 149, 157, 166, 174, 174,
+      182, 189, 190, 195, 203, 208, 214, 220, 229, 235, 245, 254,
+      261, 267, 271, 277, 285, 291
+    ), thickness = c(
+      4, 4, 4, 4,
+      4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+      4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4
+    ), calCurves = c(
+      "IntCal20",
+      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20",
+      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20",
+      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20",
+      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20",
+      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20",
+      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20",
+      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20",
+      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20"
+    )
+  ), class = c("spec_tbl_df", "tbl_df", "tbl", "data.frame"), row.names = c(NA, -41L), spec = structure(list(cols = list(
+    id = structure(list(), class = c("collector_character", "collector")), ages = structure(list(), class = c(
+      "collector_double",
+      "collector"
+    )), ageSds = structure(list(), class = c(
+      "collector_double",
+      "collector"
+    )), position = structure(list(), class = c(
+      "collector_double",
+      "collector"
+    )), thickness = structure(list(), class = c(
+      "collector_double",
+      "collector"
+    )), calCurves = structure(list(), class = c(
+      "collector_character",
+      "collector"
+    ))
+  ), default = structure(list(), class = c(
+    "collector_guess",
+    "collector"
+  )), skip = 1L), class = "col_spec"))
+  run <- with(
+    RC_input,
+    Bchronology(
+      ages = ages,
+      ageSds = ageSds,
+      calCurves = calCurves,
+      positions = position,
+      positionThicknesses = thickness,
+      ids = id,
+      extractDate = -49,
+      jitterPositions = TRUE,
+      iterations = 1000,
+      burn = 200,
+      thin = 1
+    )
+  )
+
+  expect_s3_class(run, "BchronologyRun")
+  expect_output(summary(run, type = "quantiles"))
+  expect_output(summary(run, type = "convergence"))
+  expect_output(summary(run, type = "outliers"))
+  expect_output(summary(run, type = "max_var"))
+  expect_s3_class(plot(run), "ggplot")
+})

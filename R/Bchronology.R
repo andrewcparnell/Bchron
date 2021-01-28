@@ -365,7 +365,8 @@ Bchronology <- function(ages,
         truncatedWalk(
           old = x.df2[[j]]$ageGrid[match(max(x.df2[[j]]$densities), x.df2[[j]]$densities)] / ageScaleVal,
           sd = ageSds[j] / ageScaleVal,
-          low = extractDate / ageScaleVal,
+          #low = extractDate / ageScaleVal,
+          low = min(x.df2[[j]]$ageGrid) / ageScaleVal,
           high = 1e9
         )$new,
         digits = 3
@@ -383,7 +384,7 @@ Bchronology <- function(ages,
       badThetas <- FALSE
     }
   }
-
+  
   phi <- rep(0, length(theta))
   p <- 1.2
   mu <- abs(stats::rnorm(
@@ -525,7 +526,9 @@ Bchronology <- function(ages,
     for (j in 1:n) {
       lowerLimit <- ifelse(
         j == 1,
-        ifelse(x.df1[[j]]$calCurve == "normal", extractDate / ageScaleVal, 0),
+        ifelse(x.df1[[j]]$calCurve == "normal", 
+               extractDate / ageScaleVal, 
+               min(x.df1[[j]]$ageGrid)),
         theta[do[j - 1]] + 0.001
       )
       upperLimit <- ifelse(j == n, 100000, theta[do[j + 1]] - 0.001)
