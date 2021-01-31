@@ -1,3 +1,7 @@
+# Bchron 4.7.4.9000
+
+  - Added in a BchronCheck function to allow for checking of all argument types using checkmate
+
 # Bchron 4.7.4
 
   - Updated the BchronDensity and BchronDensityFast functions to show lines on top of dates

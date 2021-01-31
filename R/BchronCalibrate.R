@@ -44,6 +44,9 @@
 #' summary(ages1)
 #' plot(ages1)
 #'
+#' # Or plot with Calibration curve
+#' plot(ages1, includeCal = TRUE)
+#'
 #' # Calibrate multiple ages with different calibration curves
 #' ages2 <- BchronCalibrate(
 #'   ages = c(3445, 11553, 7456),
@@ -62,6 +65,7 @@
 #' )
 #' summary(ages3)
 #' plot(ages3, withPositions = TRUE)
+#' 
 BchronCalibrate <- function(ages,
                             ageSds,
                             calCurves = rep("intcal20", length(ages)),
@@ -75,13 +79,19 @@ BchronCalibrate <- function(ages,
 
   # This function expects ages in years BP (either 14C or not depending on calCurve values)
   # and positions (usually depths) in cm
-  # It scales these by ageScaleVal and positionScaleVal respectively to calibrate and then
-  # returns them in the original units
 
-  # Check lengths of everything
-  if (length(ages) != length(ageSds)) stop("ages and ageSds should be of same length")
-  if (length(ages) != length(calCurves)) stop("ages and calCurves should be of same length")
-  if (!is.null(positions)) if (length(ages) != length(positions)) stop("ages and positions should be of same length")
+  # Run the Bchron check function in case things have gone wrong
+  BchronCheck(ages = ages,
+              ageSds = ageSds,
+              calCurves = calCurves,
+              ids = ids,
+              positions = positions,
+              pathToCalCurves = pathToCalCurves,
+              eps = eps,
+              dfs = dfs,
+              type = "BchronCalibrate")
+
+  # Insert ids if NULL
   if (is.null(ids)) ids <- paste("Date", 1:length(ages), sep = "")
 
   # Check that ages and ageSds are whole numbers (i.e. years)
@@ -100,7 +110,6 @@ BchronCalibrate <- function(ages,
   calCurve <- calBP <- c14BP <- calSd <- ageGrid <- mu <- tau1 <- list()
   for (i in 1:length(allCalCurves)) {
     calCurveFile <- paste(pathToCalCurves, "/", allCalCurves[i], ".rda", sep = "")
-    if (!file.exists(calCurveFile)) stop(paste("Calibration curve file", calCurveFile, "not found"))
     x <- load(calCurveFile)
     calCurve <- get(x)
     calBP[[i]] <- calCurve[, 1]

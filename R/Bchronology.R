@@ -114,10 +114,33 @@ Bchronology <- function(ages,
   # phi are the outlier indicators (1=TRUE or 0=FALSE) for date i
   # mu,psi are the Compound Poisson-Gamma parameters controlling sedimentation
 
+  # Run data checks ---------------------------------------------------------
+
+  # Run the Bchron check function in case things have gone wrong
+  BchronCheck(ages = ages,
+              ageSds = ageSds,
+              positions = positions,
+              positionThicknesses = positionThicknesses,
+              calCurves = calCurves,
+              ids = ids,
+              outlierProbs = outlierProbs,
+              predictPositions = predictPositions,
+              pathToCalCurves = pathToCalCurves,
+              jitterPositions = jitterPositions,
+              iterations = iterations,
+              burn = burn,
+              thin = thin,
+              extractDate = extractDate,
+              maxExtrap = maxExtrap,
+              thetaMhSd = thetaMhSd,
+              muMhSd = muMhSd,
+              psiMhSd = psiMhSd,
+              ageScaleVal = ageScaleVal,
+              positionNormalise = positionNormalise,
+              type = 'Bchronology')
 
   # Re-normalise positions --------------------------------------------------
 
-  # Re-normalise all the positions
   originalPositions <- positions
   originalPositionThicknesses <- positionThicknesses
   originalPredictPositions <- predictPositions

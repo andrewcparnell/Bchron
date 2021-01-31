@@ -20,7 +20,8 @@ Imports:
     ggforce,
     dplyr,
     scales,
-    stringr
+    stringr,
+    checkmate
 Encoding: UTF-8
 Author: Andrew Parnell
 Maintainer: Andrew Parnell <Andrew.Parnell@mu.ie>
