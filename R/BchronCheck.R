@@ -39,6 +39,7 @@ BchronCheck <- function(ages,
                         muMhSd = NULL,
                         psiMhSd = NULL,
                         ageScaleVal = NULL,
+                        positionEps = NULL,
                         positionNormalise = NULL,
                         eps = NULL, # BchronCalibrate only
                         dfs = NULL, # BchronCalibrate only
@@ -84,6 +85,7 @@ BchronCheck <- function(ages,
     assertNumber(muMhSd, finite = TRUE, null.ok = TRUE)
     assertNumber(psiMhSd, finite = TRUE, null.ok = TRUE)
     assertNumber(ageScaleVal, finite = TRUE, null.ok = TRUE)
+    assertNumber(positionEps, finite = TRUE, null.ok = TRUE)
   } else {
     # Do some of the checks for BchronCalibrate
     assertNumber(eps, finite = TRUE, null.ok = TRUE)

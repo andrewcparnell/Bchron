@@ -65,6 +65,9 @@ ages1 <- BchronCalibrate(
 summary(ages1)
 plot(ages1)
 
+# Or plot with Calibration curve
+plot(ages1, includeCal = TRUE)
+
 # Calibrate multiple ages with different calibration curves
 ages2 <- BchronCalibrate(
   ages = c(3445, 11553, 7456),
@@ -83,6 +86,7 @@ ages3 <- BchronCalibrate(
 )
 summary(ages3)
 plot(ages3, withPositions = TRUE)
+
 }
 \seealso{
 \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}, \code{\link{createCalCurve}}

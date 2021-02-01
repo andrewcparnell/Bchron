@@ -21,6 +21,7 @@
 #' @param muMhSd The Metropolis-Hastings standard deviation for the Compound Poisson-Gamma mean
 #' @param psiMhSd The Metropolis-Hastings standard deviation for the Compound Poisson-Gamma scale
 #' @param ageScaleVal A scale value for the ages. \code{Bchronology} works best when the ages are scaled to be approximately between 0 and 100. The default value is thus 1000 for ages given in years.
+#' @param positionEps A small value used to check whether simulated positions are far enough apart to avoid numerical underflow errors. If errors occur in model runs (e.g. \code{missing value where TRUE/FALSE needed} increase this value)
 #' @param positionNormalise Whether to normalise the position values. \code{Bchronology} works best when the positions are normalise to be between 0 and 1 The default value is \code{TRUE}
 #'
 #' @details
@@ -107,6 +108,7 @@ Bchronology <- function(ages,
                         muMhSd = 0.1,
                         psiMhSd = 0.1,
                         ageScaleVal = 1000,
+                        positionEps = 1e-6,
                         positionNormalise = TRUE) {
 
   # Notation:
@@ -136,6 +138,7 @@ Bchronology <- function(ages,
               muMhSd = muMhSd,
               psiMhSd = psiMhSd,
               ageScaleVal = ageScaleVal,
+              positionEps = positionEps,
               positionNormalise = positionNormalise,
               type = 'Bchronology')
 
@@ -447,14 +450,19 @@ Bchronology <- function(ages,
     if (any(positionThicknesses > 0) &
       i > 0.5 * burn & i %% thin == 0) {
       # Get date order so I can preserve things if they change around
-      currPositions <- stats::runif(
-        n,
-        positions - 0.5 * positionThicknesses,
-        positions + 0.5 * positionThicknesses
-      )
-      do <- order(currPositions)
-      diffPosition <- diff(currPositions[do])
-      theta[do] <- sort(theta)
+      badPositions = TRUE
+      while(badPositions) {
+        currPositions <- stats::runif(
+          n,
+          positions - 0.5 * positionThicknesses,
+          positions + 0.5 * positionThicknesses
+        )
+        do <- order(currPositions)
+        diffPosition <- diff(currPositions[do])
+        theta[do] <- sort(theta)
+        if(all(diffPosition>positionEps)) badPositions = FALSE
+      }
+      
     }
 
 

@@ -24,6 +24,7 @@ Bchronology(
   muMhSd = 0.1,
   psiMhSd = 0.1,
   ageScaleVal = 1000,
+  positionEps = 1e-06,
   positionNormalise = TRUE
 )
 }
@@ -65,6 +66,8 @@ Bchronology(
 \item{psiMhSd}{The Metropolis-Hastings standard deviation for the Compound Poisson-Gamma scale}
 
 \item{ageScaleVal}{A scale value for the ages. \code{Bchronology} works best when the ages are scaled to be approximately between 0 and 100. The default value is thus 1000 for ages given in years.}
+
+\item{positionEps}{A small value used to check whether simulated positions are far enough apart to avoid numerical underflow errors. If errors occur in model runs (e.g. \code{missing value where TRUE/FALSE needed} increase this value)}
 
 \item{positionNormalise}{Whether to normalise the position values. \code{Bchronology} works best when the positions are normalise to be between 0 and 1 The default value is \code{TRUE}}
 }
