@@ -1,6 +1,7 @@
 # Bchron 4.7.4.9000
 
   - Added in a BchronCheck function to allow for checking of all argument types using checkmate
+  - Added in positionEps argument to Bchronology to avoid positions being simulated too close to each other and leading to numerical underflow errors
 
 # Bchron 4.7.4
 

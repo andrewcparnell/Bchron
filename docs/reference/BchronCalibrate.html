@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Bchron</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.4.9000</span>
       </span>
     </div>
 
@@ -216,6 +216,9 @@ Multiple calibration curves can be specified so that each 14C age can have a dif
 #&gt; 
 #&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>ages1</span><span class='op'>)</span>
 </div><div class='img'><img src='BchronCalibrate-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># Or plot with Calibration curve</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>ages1</span>, includeCal <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='img'><img src='BchronCalibrate-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Calibrate multiple ages with different calibration curves</span>
 <span class='va'>ages2</span> <span class='op'>&lt;-</span> <span class='fu'>BchronCalibrate</span><span class='op'>(</span>
   ages <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3445</span>, <span class='fl'>11553</span>, <span class='fl'>7456</span><span class='op'>)</span>,
@@ -244,9 +247,9 @@ Multiple calibration curves can be specified so that each 14C age can have a dif
 #&gt; [1] 8015 8409
 #&gt; 
 #&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>ages2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [[1]]</div><div class='img'><img src='BchronCalibrate-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
-#&gt; [[2]]</div><div class='img'><img src='BchronCalibrate-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
-#&gt; [[3]]</div><div class='img'><img src='BchronCalibrate-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
+</div><div class='output co'>#&gt; [[1]]</div><div class='img'><img src='BchronCalibrate-3.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; [[2]]</div><div class='img'><img src='BchronCalibrate-4.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; 
+#&gt; [[3]]</div><div class='img'><img src='BchronCalibrate-5.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; </div><div class='input'>
 <span class='co'># Calibrate multiple ages with multiple calibration curves and including depth</span>
 <span class='va'>ages3</span> <span class='op'>&lt;-</span> <span class='fu'>BchronCalibrate</span><span class='op'>(</span>
   ages <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>3445</span>, <span class='fl'>11553</span><span class='op'>)</span>,
@@ -265,7 +268,8 @@ Multiple calibration curves can be specified so that each 14C age can have a dif
 #&gt; [1] 11100 12005
 #&gt; 
 #&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>ages3</span>, withPositions <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='img'><img src='BchronCalibrate-5.png' alt='' width='700' height='433' /></div></pre>
+</div><div class='img'><img src='BchronCalibrate-6.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

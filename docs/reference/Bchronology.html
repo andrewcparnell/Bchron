@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Bchron</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.4.9000</span>
       </span>
     </div>
 
@@ -143,6 +143,7 @@
   muMhSd <span class='op'>=</span> <span class='fl'>0.1</span>,
   psiMhSd <span class='op'>=</span> <span class='fl'>0.1</span>,
   ageScaleVal <span class='op'>=</span> <span class='fl'>1000</span>,
+  positionEps <span class='op'>=</span> <span class='fl'>1e-06</span>,
   positionNormalise <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
@@ -224,6 +225,10 @@
     <tr>
       <th>ageScaleVal</th>
       <td><p>A scale value for the ages. <code>Bchronology</code> works best when the ages are scaled to be approximately between 0 and 100. The default value is thus 1000 for ages given in years.</p></td>
+    </tr>
+    <tr>
+      <th>positionEps</th>
+      <td><p>A small value used to check whether simulated positions are far enough apart to avoid numerical underflow errors. If errors occur in model runs (e.g. <code>missing value where TRUE/FALSE needed</code> increase this value)</p></td>
     </tr>
     <tr>
       <th>positionNormalise</th>

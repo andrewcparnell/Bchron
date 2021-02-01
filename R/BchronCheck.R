@@ -1,6 +1,6 @@
 #' Check data for input into BchronCalibrate or Bchronology
 #' 
-#' Function to be used for checking the data formats in \code{\link{BchronoCalibrate}} and \code{\link{Bchronology}}. Mostly to be used internally to avoid Bchron running into problems with bad data specifications, but might also be useful for 
+#' Function to be used for checking the data formats in \code{\link{BchronCalibrate}} and \code{\link{Bchronology}}. Mostly to be used internally to avoid Bchron running into problems with bad data specifications, but might also be useful for 
 #'
 #' @inheritParams BchronCalibrate
 #' @inheritParams Bchronology
@@ -9,6 +9,7 @@
 #' @return This function returns nothing other than a message. 
 #' @export
 #'
+#' @import checkmate
 #' @examples
 #' data(Glendalough)
 #' 
