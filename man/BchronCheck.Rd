@@ -84,17 +84,20 @@ BchronCheck(
 This function returns nothing other than a message.
 }
 \description{
-Function to be used for checking the data formats in \code{\link{BchronoCalibrate}} and \code{\link{Bchronology}}. Mostly to be used internally to avoid Bchron running into problems with bad data specifications, but might also be useful for
+Function to be used for checking the data formats in \code{\link{BchronCalibrate}} and \code{\link{Bchronology}}. Mostly to be used internally to avoid Bchron running into problems with bad data specifications, but might also be useful for
 }
 \examples{
 data(Glendalough)
 
 # Check the Glendalough data are in the right format
-with(Glendalough, 
-     BchronCheck(ages,
-                 ageSds,
-                 position,
-                 pathToCalCurves = system.file("data", package = "Bchron"),
-                 calCurves,
-                 type = 'BchronCalibrate'))
+with(
+  Glendalough,
+  BchronCheck(ages,
+    ageSds,
+    position,
+    pathToCalCurves = system.file("data", package = "Bchron"),
+    calCurves,
+    type = "BchronCalibrate"
+  )
+)
 }

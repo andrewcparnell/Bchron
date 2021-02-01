@@ -86,7 +86,6 @@ ages3 <- BchronCalibrate(
 )
 summary(ages3)
 plot(ages3, withPositions = TRUE)
-
 }
 \seealso{
 \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}, \code{\link{createCalCurve}}
