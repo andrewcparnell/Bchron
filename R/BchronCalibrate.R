@@ -65,7 +65,6 @@
 #' )
 #' summary(ages3)
 #' plot(ages3, withPositions = TRUE)
-#' 
 BchronCalibrate <- function(ages,
                             ageSds,
                             calCurves = rep("intcal20", length(ages)),
@@ -81,15 +80,17 @@ BchronCalibrate <- function(ages,
   # and positions (usually depths) in cm
 
   # Run the Bchron check function in case things have gone wrong
-  BchronCheck(ages = ages,
-              ageSds = ageSds,
-              calCurves = calCurves,
-              ids = ids,
-              positions = positions,
-              pathToCalCurves = pathToCalCurves,
-              eps = eps,
-              dfs = dfs,
-              type = "BchronCalibrate")
+  BchronCheck(
+    ages = ages,
+    ageSds = ageSds,
+    calCurves = calCurves,
+    ids = ids,
+    positions = positions,
+    pathToCalCurves = pathToCalCurves,
+    eps = eps,
+    dfs = dfs,
+    type = "BchronCalibrate"
+  )
 
   # Insert ids if NULL
   if (is.null(ids)) ids <- paste("Date", 1:length(ages), sep = "")

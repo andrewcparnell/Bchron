@@ -12,6 +12,8 @@
 #' @return A list where each element is one of the contiguous sets making up the HDR
 #' @export
 #'
+#' @import checkmate
+#'
 #' @examples
 #' # Calibrate multiple ages and summarise them
 #' ages <- BchronCalibrate(
@@ -29,9 +31,9 @@ hdr <- function(date, prob = 0.95) {
   de <- date$densities
 
   # Error checking
-  if (is.null(ag)) stop("Age grid not found in date object.")
-  if (is.null(de)) stop("Densities not found in date object.")
-  if (findInterval(prob, c(0, 1)) != 1) stop("prob value outside (0,1).")
+  assertNumeric(date$ageGrid, finite = TRUE, any.missing = TRUE)
+  assertNumeric(date$densities, finite = TRUE, any.missing = TRUE)
+  assertNumber(prob, lower = 0, upper = 1)
 
   # Put the probabilities in order of density
   o <- order(de)

@@ -119,28 +119,30 @@ Bchronology <- function(ages,
   # Run data checks ---------------------------------------------------------
 
   # Run the Bchron check function in case things have gone wrong
-  BchronCheck(ages = ages,
-              ageSds = ageSds,
-              positions = positions,
-              positionThicknesses = positionThicknesses,
-              calCurves = calCurves,
-              ids = ids,
-              outlierProbs = outlierProbs,
-              predictPositions = predictPositions,
-              pathToCalCurves = pathToCalCurves,
-              jitterPositions = jitterPositions,
-              iterations = iterations,
-              burn = burn,
-              thin = thin,
-              extractDate = extractDate,
-              maxExtrap = maxExtrap,
-              thetaMhSd = thetaMhSd,
-              muMhSd = muMhSd,
-              psiMhSd = psiMhSd,
-              ageScaleVal = ageScaleVal,
-              positionEps = positionEps,
-              positionNormalise = positionNormalise,
-              type = 'Bchronology')
+  BchronCheck(
+    ages = ages,
+    ageSds = ageSds,
+    positions = positions,
+    positionThicknesses = positionThicknesses,
+    calCurves = calCurves,
+    ids = ids,
+    outlierProbs = outlierProbs,
+    predictPositions = predictPositions,
+    pathToCalCurves = pathToCalCurves,
+    jitterPositions = jitterPositions,
+    iterations = iterations,
+    burn = burn,
+    thin = thin,
+    extractDate = extractDate,
+    maxExtrap = maxExtrap,
+    thetaMhSd = thetaMhSd,
+    muMhSd = muMhSd,
+    psiMhSd = psiMhSd,
+    ageScaleVal = ageScaleVal,
+    positionEps = positionEps,
+    positionNormalise = positionNormalise,
+    type = "Bchronology"
+  )
 
   # Re-normalise positions --------------------------------------------------
 
@@ -450,8 +452,8 @@ Bchronology <- function(ages,
     if (any(positionThicknesses > 0) &
       i > 0.5 * burn & i %% thin == 0) {
       # Get date order so I can preserve things if they change around
-      badPositions = TRUE
-      while(badPositions) {
+      badPositions <- TRUE
+      while (badPositions) {
         currPositions <- stats::runif(
           n,
           positions - 0.5 * positionThicknesses,
@@ -460,9 +462,8 @@ Bchronology <- function(ages,
         do <- order(currPositions)
         diffPosition <- diff(currPositions[do])
         theta[do] <- sort(theta)
-        if(all(diffPosition>positionEps)) badPositions = FALSE
+        if (all(diffPosition > positionEps)) badPositions <- FALSE
       }
-      
     }
 
 

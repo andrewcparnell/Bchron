@@ -1,26 +1,29 @@
 #' Check data for input into BchronCalibrate or Bchronology
-#' 
-#' Function to be used for checking the data formats in \code{\link{BchronCalibrate}} and \code{\link{Bchronology}}. Mostly to be used internally to avoid Bchron running into problems with bad data specifications, but might also be useful for 
+#'
+#' Function to be used for checking the data formats in \code{\link{BchronCalibrate}} and \code{\link{Bchronology}}. Mostly to be used internally to avoid Bchron running into problems with bad data specifications, but might also be useful for
 #'
 #' @inheritParams BchronCalibrate
 #' @inheritParams Bchronology
 #' @param type Whether this function has been called to check parameters for calibration purposes (\code{BchronCalibrate}) or chronology purposes (\code{Bchronology})
 #'
-#' @return This function returns nothing other than a message. 
+#' @return This function returns nothing other than a message.
 #' @export
 #'
 #' @import checkmate
 #' @examples
 #' data(Glendalough)
-#' 
+#'
 #' # Check the Glendalough data are in the right format
-#' with(Glendalough, 
-#'      BchronCheck(ages,
-#'                  ageSds,
-#'                  position,
-#'                  pathToCalCurves = system.file("data", package = "Bchron"),
-#'                  calCurves,
-#'                  type = 'BchronCalibrate'))
+#' with(
+#'   Glendalough,
+#'   BchronCheck(ages,
+#'     ageSds,
+#'     position,
+#'     pathToCalCurves = system.file("data", package = "Bchron"),
+#'     calCurves,
+#'     type = "BchronCalibrate"
+#'   )
+#' )
 BchronCheck <- function(ages,
                         ageSds,
                         positions = NULL,
@@ -44,14 +47,13 @@ BchronCheck <- function(ages,
                         positionNormalise = NULL,
                         eps = NULL, # BchronCalibrate only
                         dfs = NULL, # BchronCalibrate only
-                        type = c("BchronCalibrate", "Bchronology")
-) {
-  
+                        type = c("BchronCalibrate", "Bchronology")) {
+
   # First check that all three necessary objects have the same length
   assertNumeric(ages, any.missing = FALSE, finite = TRUE)
   nObs <- length(ages)
   assertNumeric(ageSds, any.missing = FALSE, len = nObs)
-  
+
   # path to calCurves should be a valid file path
   assertDirectoryExists(pathToCalCurves)
   # Also do some checks here to see if the calibration curves actually exist
@@ -60,20 +62,20 @@ BchronCheck <- function(ages,
     calCurveFile <- paste(pathToCalCurves, "/", allCalCurves[i], ".rda", sep = "")
     assertFileExists(calCurveFile)
   }
-  
-  if(type == 'Bchronology') {
+
+  if (type == "Bchronology") {
     # Checks for a full chronology run
-    
+
     # Now do for some of the ones which might be NULL
     assertNumeric(positions, any.missing = FALSE, len = nObs, null.ok = TRUE)
     assertNumeric(positionThicknesses, any.missing = FALSE, len = nObs, null.ok = TRUE)
     assertVector(calCurves, any.missing = FALSE, len = nObs, null.ok = TRUE)
     assertVector(ids, any.missing = FALSE, len = nObs, null.ok = TRUE)
     assertNumeric(outlierProbs, any.missing = FALSE, len = nObs, null.ok = TRUE, lower = 0, upper = 1)
-    
+
     # predictPositions can be any length
     assertNumeric(predictPositions, any.missing = FALSE, null.ok = TRUE)
-    
+
     # Now some of the other arguments
     assertLogical(positionNormalise, null.ok = TRUE)
     assertLogical(jitterPositions, null.ok = TRUE)
@@ -92,5 +94,4 @@ BchronCheck <- function(ages,
     assertNumber(eps, finite = TRUE, null.ok = TRUE)
     assertNumeric(dfs, finite = TRUE, null.ok = TRUE, len = nObs)
   }
-  
 }
