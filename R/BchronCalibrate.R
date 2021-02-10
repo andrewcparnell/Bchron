@@ -2,7 +2,7 @@
 #'
 #' A fast function for calibrating large numbers of radiocarbon dates involving multiple calibration curves
 #'
-#' @param ages A vector of ages (most likely 14C)
+#' @param ages A vector of ages provided in years before 1950.
 #' @param ageSds A vector of 1-sigma values for the ages given above
 #' @param calCurves A vector of values containing either \code{intcal20}, \code{shcal20}, \code{marine20}, or \code{normal} (older calibration curves are supposed such as intcal13). Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.
 #' @param ids ID names for each age

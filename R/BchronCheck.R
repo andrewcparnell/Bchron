@@ -52,7 +52,8 @@ BchronCheck <- function(ages,
   # First check that all three necessary objects have the same length
   assertNumeric(ages, any.missing = FALSE, finite = TRUE)
   nObs <- length(ages)
-  assertNumeric(ageSds, any.missing = FALSE, len = nObs)
+  assertNumeric(ageSds, any.missing = FALSE, len = nObs,
+                lower = 0)
 
   # path to calCurves should be a valid file path
   assertDirectoryExists(pathToCalCurves)

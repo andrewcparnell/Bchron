@@ -33,7 +33,7 @@ plot.BchronologyRun <-
            dateHeight = 100,
            dateLabels = TRUE,
            dateLabelSize = 2,
-           dateCol = "darkslategray",
+           dateCol = rgb(47/255, 79/255, 79/255, 0.5),
            chronCol = "deepskyblue4",
            chronTransparency = 0.75,
            alpha = 0.95,

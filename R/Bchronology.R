@@ -2,7 +2,7 @@
 #'
 #' Fits a non-parametric chronology model to age/position data according to the Compound Poisson-Gamma model defined by Haslett and Parnell (2008) <DOI:10.1111/j.1467-9876.2008.00623.x>. This version uses a slightly modified Markov chain Monte Carlo fitting algorithm which aims to converge quicker and requires fewer iterations. It also a slightly modified procedure for identifying outliers
 #'
-#' @param ages A vector of ages (most likely 14C)
+#' @param ages A vector of ages provided in years before 1950.
 #' @param ageSds A vector of 1-sigma values for the ages given above
 #' @param positions Position values (e.g. depths) for each age
 #' @param positionThicknesses Thickness values for each of the positions. The thickness value should be the full thickness value of the slice. By default set to zero.

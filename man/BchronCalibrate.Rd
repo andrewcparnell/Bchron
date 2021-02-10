@@ -16,7 +16,7 @@ BchronCalibrate(
 )
 }
 \arguments{
-\item{ages}{A vector of ages (most likely 14C)}
+\item{ages}{A vector of ages provided in years before 1950.}
 
 \item{ageSds}{A vector of 1-sigma values for the ages given above}
 

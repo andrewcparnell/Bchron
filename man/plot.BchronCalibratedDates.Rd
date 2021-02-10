@@ -15,7 +15,7 @@
   dateLabelSize = 2,
   nudgeX = 0,
   nudgeY = 0,
-  fillCol = "darkslategray",
+  fillCol = rgb(47/255, 79/255, 79/255, 0.5),
   withHDR = TRUE,
   ageScale = c("bp", "bc", "b2k"),
   scaleReverse = TRUE,
