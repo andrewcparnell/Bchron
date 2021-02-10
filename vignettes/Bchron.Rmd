@@ -447,8 +447,7 @@ The above un-calibrates the age 2350 BP to the age 2346 14C years BP on the intc
 
 ```{r, results = 'hide'}
 unCal2 = unCalibrate(calAge = c(2350, 4750, 11440),
-                     calCurve = 'intcal20',
-                     type = 'ages')
+                     calCurve = 'intcal20')
 ```
 ```{r}
 print(unCal2)
