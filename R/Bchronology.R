@@ -255,7 +255,7 @@ Bchronology <- function(ages,
     if (isTRUE(all.equal(low, high, tolerance = 1e-4))) {
       return(list(new = low, rat = 1))
     }
-    if (high < low) stop("Error - truncatedWalk has lower limit higher than upper limit")
+    if (high < low) warning("truncatedWalk has lower limit higher than upper limit")
 
     new <- .C(
       "truncatedWalk",
