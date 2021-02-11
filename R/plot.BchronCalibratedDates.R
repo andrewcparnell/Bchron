@@ -27,6 +27,7 @@
 #' @import dplyr
 #' @importFrom purrr map_dfr map_dbl
 #' @importFrom stats dnorm
+#' @importFrom grDevices rgb
 #'
 #' @export
 plot.BchronCalibratedDates <-

@@ -26,6 +26,7 @@
 #' @importFrom ggridges geom_ridgeline
 #' @importFrom scales pretty_breaks
 #' @importFrom stringr str_pad
+#' @importFrom grDevices rgb
 #'
 #' @export
 plot.BchronologyRun <-

@@ -37,7 +37,6 @@
 unCalibrate <- function(calAges,
                         calCurve = "intcal20",
                         type = c("samples", "ages"),
-                        initSd = 30,
                         pathToCalCurves = system.file("data", package = "Bchron"),
                         ...) {
 
