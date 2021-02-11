@@ -42,7 +42,7 @@ unCalibrate <- function(calAges,
 
   # Get the type
   type <- match.arg(type, several.ok = FALSE)
-  
+
   # First get the calibration curve
   calCurveFile <- paste(pathToCalCurves, "/", calCurve, ".rda", sep = "")
   if (!file.exists(calCurveFile)) stop(paste("Calibration curve file", calCurveFile, "not found"))
