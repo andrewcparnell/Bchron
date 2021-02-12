@@ -69,7 +69,6 @@ test_that("sedimentation and accumulation rates", {
 })
 
 test_that("choosePositions", {
-  skip_on_cran()
   # Check choosing new positions
   newPositions <- choosePositions(GlenOut, N = 3)
   newPositions2 <- choosePositions(GlenOut,

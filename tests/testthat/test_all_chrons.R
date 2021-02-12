@@ -9,8 +9,6 @@ library(Bchron)
 
 
 test_that("Sluggan", {
-  skip_on_cran()
-  skip_on_ci()
   data(Sluggan)
   expect_output(print(Sluggan))
   run <- with(
@@ -41,8 +39,6 @@ test_that("Sluggan", {
 
 
 test_that("TestChronData", {
-  skip_on_cran()
-  skip_on_ci()
   data(TestChronData)
   expect_output(print(TestChronData))
   run <- with(
@@ -73,8 +69,6 @@ test_that("TestChronData", {
 
 
 test_that("Taphocoenose_Jan20", {
-  skip_on_cran()
-  skip_on_ci()
   chron_df <-
     structure(
       list(
@@ -178,8 +172,6 @@ test_that("Taphocoenose_Jan20", {
 # Kemp Jan 21 -------------------------------------------------------------
 
 test_that("Kemp_Jan21", {
-  skip_on_cran()
-  skip_on_ci()
   RC_input <- structure(list(
     id = c(
       "10373", "10374", "10375", "10376", "10517",
@@ -278,8 +270,6 @@ test_that("Kemp_Jan21", {
 # Kemp Jan 21 part 2 ------------------------------------------------------
 
 test_that("Kemp_Jan21_part2", {
-  skip_on_cran()
-  skip_on_ci()
   RC_input <- structure(list(
     id = c(
       "10373", "10374", "10375", "10376", "10517",

@@ -39,7 +39,12 @@ test_that("BchronDensityFast", {
     ages = Sluggan$ages[-1],
     ageSds = Sluggan$ageSds,
     calCurves = Sluggan$calCurves,
-    updateAges = TRUE,
+    samples = 100
+  ))
+  expect_error(BchronDensityFast(
+    ages = Sluggan$ages,
+    ageSds = Sluggan$ageSds,
+    calCurves = Sluggan$calCurves[-1],
     samples = 100
   ))
 })

@@ -4,7 +4,6 @@ library(Bchron)
 
 
 test_that("dateInfluence", {
-  skip_on_cran()
   data(Glendalough)
   GlenOut <- with(
     Glendalough,
