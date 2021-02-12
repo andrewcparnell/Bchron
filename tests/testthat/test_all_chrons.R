@@ -202,15 +202,15 @@ test_that("Kemp_Jan21", {
       4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
       4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4
     ), calCurves = c(
-      "IntCal20",
-      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20",
-      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20",
-      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20",
-      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20",
-      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20",
-      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20",
-      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20",
-      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20"
+      "intcal20",
+      "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+      "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+      "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+      "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+      "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+      "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+      "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+      "intcal20", "intcal20", "intcal20", "intcal20", "intcal20"
     )
   ), class = c("spec_tbl_df", "tbl_df", "tbl", "data.frame"), row.names = c(NA, -41L), spec = structure(list(cols = list(
     id = structure(list(), class = c("collector_character", "collector")), ages = structure(list(), class = c(
@@ -300,15 +300,15 @@ test_that("Kemp_Jan21_part2", {
       4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
       4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4
     ), calCurves = c(
-      "IntCal20",
-      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20",
-      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20",
-      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20",
-      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20",
-      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20",
-      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20",
-      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20",
-      "IntCal20", "IntCal20", "IntCal20", "IntCal20", "IntCal20"
+      "intcal20",
+      "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+      "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+      "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+      "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+      "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+      "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+      "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+      "intcal20", "intcal20", "intcal20", "intcal20", "intcal20"
     )
   ), class = c("spec_tbl_df", "tbl_df", "tbl", "data.frame"), row.names = c(NA, -41L), spec = structure(list(cols = list(
     id = structure(list(), class = c("collector_character", "collector")), ages = structure(list(), class = c(
