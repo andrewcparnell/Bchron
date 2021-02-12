@@ -37,10 +37,11 @@ Description: Enables quick calibration of radiocarbon dates under various
 License: GPL (>= 2)
 Suggests:
     knitr,
-    testthat,
+    testthat (>= 3.0.0),
     rmarkdown,
     covr
 VignetteBuilder: knitr
 NeedsCompilation: yes
 RoxygenNote: 7.1.1
 Language: en-US
+Config/testthat/edition: 3

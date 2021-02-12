@@ -2,6 +2,7 @@ context("RSL functions")
 
 library(Bchron)
 library(ggplot2)
+set.seed(123)
 data(TestChronData)
 data(TestRSLData)
 

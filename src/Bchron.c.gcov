@@ -1,0 +1,228 @@
+        -:    0:Source:Bchron.c
+        -:    0:Graph:/Users/andrewparnell/GitHub/Bchron/src/Bchron.gcno
+        -:    0:Data:/Users/andrewparnell/GitHub/Bchron/src/Bchron.gcda
+        -:    0:Runs:5
+        -:    0:Programs:1
+        -:    1:// This code has some functions for the main Bchronology R function
+        -:    2:
+        -:    3:#include<R.h>
+        -:    4:#include<Rmath.h>
+        -:    5:#include <Rinternals.h>
+        -:    6:#include <R_ext/Rdynload.h>
+        -:    7:
+    #####:    8:void R_init_markovchain(DllInfo* info) {
+    #####:    9:  R_registerRoutines(info, NULL, NULL, NULL, NULL);
+    #####:   10:  R_useDynamicSymbols(info, TRUE);
+    #####:   11:}
+        -:   12:
+   357155:   13:void rtruncn(double *a, double *b, double *x) {
+        -:   14:  double A, B;
+   357155:   15:  double maxA, maxB, maxR, r2, r, th, u, accept=0.0;
+   357155:   16:  A = atan(*a);
+   357155:   17:  B = atan(*b);
+   357155:   18:  maxA = exp(-pow(*a,2)/4)/cos(A);
+   357155:   19:  maxB = exp(-pow(*b,2)/4)/cos(B);
+   357155:   20:  maxR = fmax2(maxA, maxB);
+   357155:   21:  if((*a<1) && (*b>-1)) maxR = exp(-0.25)*sqrt(2.0);
+   794646:   22:  while (accept==0) {
+   437491:   23:    r2 = runif(0.0,1.0);
+   437491:   24:    r = sqrt(r2)*maxR;
+   437491:   25:    th = runif(A,B);
+   437491:   26:    u = r*cos(th);
+   437491:   27:    *x = tan(th);
+   437491:   28:    accept = ((pow(*x,2)) < (log(u)*-4));
+        -:   29:  }
+   357155:   30:}
+        -:   31:
+   357155:   32:void truncatedWalk(double *old, double *sd, double *low, double *high, double *newvalue) {
+        -:   33:  double lowlimold, upplimold, y;
+   357155:   34:  lowlimold = (*low - *old)/ *sd;
+   357155:   35:  upplimold = (*high - *old)/ *sd;
+        -:   36:  
+   357155:   37:  rtruncn(&lowlimold, &upplimold, &y);
+   357155:   38:  *newvalue = *old + *sd*y;
+   357155:   39:}
+        -:   40:
+   357155:   41:void truncatedRat(double *old, double *sd, double *low, double *high, double *newvalue, double *ratio) {
+        -:   42:  double lowlimold, upplimold, lowlimnew, upplimnew, plowold, puppold, plownew, puppnew;
+   357155:   43:  lowlimold = (*low - *old)/ *sd;
+   357155:   44:  upplimold = (*high - *old)/ *sd;
+   357155:   45:  lowlimnew = (*low - *newvalue)/ *sd;
+   357155:   46:  upplimnew = (*high - *newvalue)/ *sd;
+   357155:   47:  plowold = pnorm(lowlimold,0.0,1.0,1,0);
+   357155:   48:  puppold = pnorm(upplimold,0.0,1.0,1,0);
+   357155:   49:  plownew = pnorm(lowlimnew,0.0,1.0,1,0);
+   357155:   50:  puppnew = pnorm(upplimnew,0.0,1.0,1,0);
+   357155:   51:  *ratio = (puppold - plowold)/(puppnew - plownew);
+   357155:   52:}
+        -:   53:
+  7522518:   54:void dtweedielogwsmallp(double *y, double *phi, double *power, double *logw) {
+  7522518:   55:  double p,a,a1,r,drop=37,logz,jmax,j,cc,wmax,estlogw;
+        -:   56:  int hij,lowj;
+        -:   57:
+  7522518:   58:  if (*power < 1) error("Error - power<1!");
+  7522518:   59:  if (*power > 2) error("Error - power>2!");
+  7522518:   60:  if (*phi <= 0) error("Error - phi<=0!");
+  7522518:   61:  if (*y <= 0) error("Error - y<=0!");
+  7522518:   62:  p = *power;
+  7522518:   63:  a = (2 - p)/(1 - p);
+  7522518:   64:  a1 = 1 - a;
+  7522518:   65:  r = -a * log(*y) + a * log(p - 1) - a1 * log(*phi) - log(2 - p);
+  7522518:   66:  logz = r;
+        -:   67:
+  7522518:   68:  jmax = (pow(*y,(2 - p)))/(*phi * (2 - p));
+  7522518:   69:  j = fmax2(1, jmax);
+  7522518:   70:  cc = logz + a1 + a * log(-a);
+  7522518:   71:  wmax = a1 * jmax;
+  7522518:   72:  estlogw = wmax;
+ 44337473:   73:  while (estlogw > (wmax - drop)) {
+ 36814955:   74:    j = j + 2;
+ 36814955:   75:    estlogw = j * (cc - a1 * log(j));
+        -:   76:  }
+        -:   77:
+  7522518:   78:  hij = (int)ceil(j);
+  7522518:   79:  logz = r;
+  7522518:   80:  jmax = pow(*y,(2 - *power))/(*phi * (2 - *power));
+  7522518:   81:  j = fmax2(1, jmax);
+  7522518:   82:  wmax = a1 * jmax;
+  7522518:   83:  estlogw = wmax;
+ 21347043:   84:  while ((estlogw > (wmax - drop)) && (j >= 2)) {
+ 13824525:   85:    j = fmax2(1, j - 2);
+ 13824525:   86:    estlogw = j * (cc - a1 * log(j));
+        -:   87:  }
+  7522518:   88:  lowj = (int)fmax2(1, floor(j));
+        -:   89:
+  7522518:   90:  double newj[hij-lowj+1];
+        -:   91:  int k;
+119055061:   92:  for(k=0;k<(hij-lowj+1);k++) newj[k] = lowj+k;
+        -:   93:
+  7522518:   94:  double g[hij-lowj+1];
+119055061:   95:  for(k=0;k<hij-lowj+1;k++) g[k] = lgamma(newj[k]+1)+lgamma(-a*newj[k]);
+        -:   96:
+  7522518:   97:  double A[hij-lowj+1];
+119055061:   98:  for(k=0;k<hij-lowj+1;k++) A[k] = r*(double)newj[k]-g[k];
+        -:   99:
+  7522518:  100:  double m=fmax2(A[0],hij-lowj+1);
+119055061:  101:  for(k=0;k<(hij-lowj+1);k++) m = fmax2(A[k],hij-lowj+1);
+        -:  102:
+  7522518:  103:  double we[hij-lowj+1];
+119055061:  104:  for(k=0;k<hij-lowj+1;k++) we[k] = exp(A[k]-m);
+  7522518:  105:  double sumwe=0;
+119055061:  106:  for(k=0;k<hij-lowj+1;k++) sumwe+=we[k];
+  7522518:  107:  *logw=log(sumwe)+m;
+  7522518:  108:}
+        -:  109:
+  7522518:  110:void dtweedieseriessmallp(double *power, double *y, double *mu, double *phi, double *f) {
+        -:  111:  double logw;
+  7522518:  112:  dtweedielogwsmallp(y,phi,power,&logw);
+  7522518:  113:  double tau = *phi*(*power-1)*pow(*mu,*power-1);
+  7522518:  114:  double lambda = pow(*mu,2-*power)/(*phi*(2-*power));
+  7522518:  115:  double logf = -*y/tau-lambda-log(*y)+logw;
+  7522518:  116:  *f = exp(logf);
+  7522518:  117:}
+        -:  118:
+  2507506:  119:void dtweediep1(double *y, double *power, double *mu, double *phi, double *fTplus) {
+        -:  120:  // Calculates the density of a tweedie plus one random variable
+  2507506:  121:  double eps = 0.00000001;
+        -:  122:  //double eps = 0.001;
+  2507506:  123:  double lambda2 = pow(*mu,2-*power)/(*phi*(2-*power))-eps;
+  2507506:  124:  double alpha = (2-*power)/(*power-1);
+  2507506:  125:  double beta = 1/(*phi*(*power-1)*pow(*mu,*power-1));
+        -:  126:
+  2507506:  127:  double mu2 = alpha*lambda2/beta;
+  2507506:  128:  double phi2 = (alpha+1)/(pow(lambda2*alpha,(1/(alpha+1)))*pow(beta,(alpha/(alpha+1))));
+        -:  129:
+        -:  130:  double fTplus1,fTplus2,fTplus3;
+  2507506:  131:  dtweedieseriessmallp(power,y,mu,phi,&fTplus1);
+  2507506:  132:  dtweedieseriessmallp(power,y,mu,phi,&fTplus2);
+  2507506:  133:  dtweedieseriessmallp(power,y,&mu2,&phi2,&fTplus3);
+  2507506:  134:  *fTplus = fTplus1+(1/eps)*(fTplus2-fTplus3);
+  2507506:  135:}
+        -:  136:
+  1186938:  137:void linInterp(int *n, double *newx, double *x, double *y, double *ans) {
+        -:  138:  // Try to predict the value newx from the vectors x and y
+ 63370646:  139:  for(int i=0; i<*n-1; i++) {
+ 62183708:  140:    if(((*newx >= x[i]) & (*newx <= x[i+1])) | ((*newx <= x[i]) & (*newx >= x[i+1]))) {
+  1186938:  141:      *ans = y[i] + ((*newx-x[i])/(x[i+1]-x[i]))*(y[i+1]-y[i]);
+  1186938:  142:      if(*newx==x[i]) *ans = y[i];
+  1186938:  143:    }
+ 62183708:  144:  }
+  1186938:  145:}
+        -:  146:
+   216320:  147:void predictInterp(double *alpha, double *lambda, double *beta, double *predictPositions, int *NpredictPositions, double *diffPositionj, double *currPositionsj, double *currPositionsjp1, double *thetaj, double *thetajp1, double *predvals) {
+        -:  148:  // Runs the prediction code when we are interpolating between two positions
+   216320:  149:  int Nd = rpois((*lambda)*(*diffPositionj));
+        -:  150:  int i;
+        -:  151:  // Watch out if Nd = 0 - just a straight linear interpolations
+   216320:  152:  int Ndmax = fmax2(1,Nd);
+   216320:  153:  double depthEvents[Ndmax];
+   216320:  154:  if(Nd>0) {
+  3242634:  155:    for(i=0;i<Nd;i++) depthEvents[i] = runif(*currPositionsj,*currPositionsjp1);
+   136146:  156:    R_rsort(depthEvents,Nd);
+   136146:  157:  }
+   216320:  158:  double timeEventsUnsc[Nd+1],timeEventsSum=0.0;
+  3539128:  159:  for(i=0;i<Nd+1;i++) timeEventsUnsc[i] = rgamma(*alpha,1/(*beta));
+  3539128:  160:  for(i=0;i<Nd+1;i++) timeEventsSum += timeEventsUnsc[i];
+   216320:  161:  double timeEvents[Nd+1];
+  3539128:  162:  for(i=0;i<Nd+1;i++) timeEvents[i] = (*thetajp1-*thetaj)*timeEventsUnsc[i]/timeEventsSum;
+   216320:  163:  double timeEventsCumsum[Nd+1],allTimeEvents[Nd+2];
+   216320:  164:  timeEventsCumsum[0] = 0.0;
+  3322808:  165:  for(i=1;i<Nd+1;i++) timeEventsCumsum[i] = timeEventsCumsum[i-1] + timeEvents[i];
+  3539128:  166:  for(i=0;i<Nd+1;i++) allTimeEvents[i] = timeEventsCumsum[i]+*thetaj;
+   216320:  167:  allTimeEvents[Nd+1] = *thetajp1;
+   216320:  168:  int Ndp2 = Nd+2;
+   216320:  169:  double allDepthEvents[Ndp2];
+   216320:  170:  allDepthEvents[0] = *currPositionsj;
+   216320:  171:  allDepthEvents[Nd+1] = *currPositionsjp1;
+   216320:  172:  if(Nd>0) {
+  3242634:  173:    for(i=1;i<Nd+1;i++) allDepthEvents[i] = depthEvents[i-1];
+   136146:  174:  }
+  1365106:  175:  for(i=0;i<*NpredictPositions;i++) {
+  1148786:  176:    linInterp(&Ndp2,&predictPositions[i],allDepthEvents,allTimeEvents,&predvals[i]);
+  1148786:  177:  }
+   216320:  178:}
+        -:  179:
+        -:  180:
+     4041:  181:void predictExtrapUp(double *alpha, double *lambda, double *beta, double *predictPositions, int *NpredictPositions, double *currPositions1, double *theta1, int *maxExtrap, double *extractDate, double *predvals) {
+        -:  182:  // Runs the prediction code when we are extrapolating up beyond the first date
+     4041:  183:  int bad=1,count=0,i;
+     4041:  184:  double depthEvents[*maxExtrap],timeEvents[*maxExtrap];
+     4041:  185:  depthEvents[0] = *currPositions1;
+     4041:  186:  timeEvents[0] = *theta1;
+    14776:  187:  while(bad==1) {
+ 10452000:  188:    for(i=1;i<*maxExtrap;i++) {
+ 10441265:  189:      depthEvents[i] =  depthEvents[i-1]-rexp(1/(*lambda));
+ 10441265:  190:      timeEvents[i] =  timeEvents[i-1]-rgamma(*alpha,1/(*beta));
+ 10441265:  191:    }
+    28808:  192:    for(i=0;i<*NpredictPositions;i++) {
+    18073:  193:      linInterp(maxExtrap,&predictPositions[i],depthEvents,timeEvents,&predvals[i]);
+    18073:  194:    }
+    10735:  195:    count+=1;
+    10735:  196:    bad=0;
+    28808:  197:    for(i=0;i<*NpredictPositions;i++) {
+    18073:  198:      if(predvals[i]<*extractDate) bad=1;
+    18073:  199:    }
+    10735:  200:    if(count==50) {
+      152:  201:      for(i=0;i<*NpredictPositions;i++) {
+       76:  202:        if(predvals[i]<*extractDate) predvals[i] = *extractDate;
+       76:  203:      }
+       76:  204:      bad=0;
+       76:  205:      warning("Unable to find suitable chronologies for top of core - truncated to date of extraction");
+       76:  206:    }
+        -:  207:  }
+     4041:  208:}
+        -:  209:
+     6359:  210:void predictExtrapDown(double *alpha, double *lambda, double *beta, double *predictPositions, int *NpredictPositions, double *currPositionsn, double *thetan, int *maxExtrap, double *predvals) {
+        -:  211:  // Runs the prediction code when we are extrapolating down below the bottom date
+     6359:  212:  double depthEvents[*maxExtrap],timeEvents[*maxExtrap];
+        -:  213:  int i;
+     6359:  214:  depthEvents[0] = *currPositionsn;
+     6359:  215:  timeEvents[0] = *thetan;
+  6119000:  216:  for(i=1;i<*maxExtrap;i++) {
+  6112641:  217:    depthEvents[i] =  depthEvents[i-1]+rexp(1/(*lambda));
+  6112641:  218:    timeEvents[i] =  timeEvents[i-1]+rgamma(*alpha,1/(*beta));
+  6112641:  219:  }
+    26438:  220:  for(i=0;i<*NpredictPositions;i++) {
+    20079:  221:    linInterp(maxExtrap,&predictPositions[i],depthEvents,timeEvents,&predvals[i]);
+    20079:  222:  }
+     6359:  223:}

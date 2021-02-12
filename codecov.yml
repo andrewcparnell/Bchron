@@ -1,10 +1,4 @@
 comment: false
-codecov:
-  token: d2cf08e5-ea73-4aba-ba40-80d3ede0f160 
-
-language: R
-sudo: false
-cache: packages
 
 coverage:
   status:
@@ -12,7 +6,9 @@ coverage:
       default:
         target: auto
         threshold: 1%
+        informational: true
     patch:
       default:
         target: auto
         threshold: 1%
+        informational: true
