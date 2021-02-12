@@ -70,13 +70,13 @@
 
       
 
-      </header><script src="Bchron_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="Bchron_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using Bayesian radiocarbon chronology package Bchron</h1>
                         <h4 class="author">Andrew Parnell</h4>
             
-            <h4 class="date">2021-02-01</h4>
+            <h4 class="date">2021-02-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/andrewcparnell/Bchron/blob/master/vignettes/Bchron.Rmd"><code>vignettes/Bchron.Rmd</code></a></small>
       <div class="hidden name"><code>Bchron.Rmd</code></div>
@@ -194,15 +194,15 @@
 <span class="va">age_samples</span> <span class="op">=</span> <span class="fu"><a href="../reference/sampleAges.html">sampleAges</a></span><span class="op">(</span><span class="va">ages3</span><span class="op">)</span>
 <span class="co"># Now summarise them with quantile - this gives a 95% credible interval</span>
 <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">age_samples</span>, <span class="fl">2</span>, <span class="va">quantile</span>, prob<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.025</span>,<span class="fl">0.975</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>##       Date1 Date2
-## 2.5%   3573 10601
-## 97.5%  3835 11390</code></pre>
+<pre><code>##       Date1    Date2
+## 2.5%   3572 10607.98
+## 97.5%  3837 11403.02</code></pre>
 <p>The <code>sampleAges</code> function introduces some uncertainty as it is a simple random sample. This means that repeatedly running it will give you slightly different results. If you require precision at a yearly level, you might want to increase the <code>n_samp</code> argument though will slow the function down a little.</p>
 <p>If you wanted to find each date’s median age (though this is often an inappropriate summary and should be treated with caution), use:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">age_samples</span>, <span class="fl">2</span>, <span class="va">quantile</span>, prob<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## Date1 Date2 
-##  3705 10999</code></pre>
+##  3705 11001</code></pre>
 <p>The calibration code is very fast. On a standard PC you should have no trouble calibrating thousands of dates simultaneously without a noticeably long wait.</p>
 </div>
 <div id="comparing-ages" class="section level2">
@@ -250,29 +250,30 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">GlenOut</span>, type<span class="op">=</span><span class="st">'convergence'</span><span class="op">)</span></code></pre></div>
 <pre><code>## Convergence check (watch for too many small p-values): 
 ##             p-value
-## Beta-100899 0.01684
-## Outlier 4   0.03239
-## RateVar     0.07136
-## Beta-122061 0.12449
-## Outlier 6   0.13302
-## RateMean    0.16720
-## Outlier 2   0.30235
-## Beta-100897 0.34620
-## Outlier 3   0.35450
-## Beta-100901 0.38927
-## Beta-100900 0.41984
-## Outlier 1   0.42872
-## Top-1       0.46512</code></pre>
+## Outlier 2   0.00691
+## Top-1       0.03675
+## Outlier 4   0.07844
+## Outlier 5   0.08932
+## RateVar     0.14766
+## RateMean    0.15625
+## Beta-100901 0.17009
+## Outlier 3   0.18845
+## Beta-100897 0.21366
+## Beta-100900 0.28434
+## Beta-100899 0.28465
+## Outlier 1   0.30235
+## Outlier 6   0.35838
+## Beta-122061 0.46059</code></pre>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">GlenOut</span>, type<span class="op">=</span><span class="st">'outliers'</span><span class="op">)</span></code></pre></div>
 <pre><code>## Posterior outlier probability by date: 
 ##         Date OutlierProb
-##        Top-1       0.008
-##  Beta-122061       0.010
-##  Beta-100901       0.006
-##  Beta-100900       0.009
-##  Beta-100899       0.002
-##  Beta-100897       0.006</code></pre>
+##        Top-1       0.015
+##  Beta-122061       0.011
+##  Beta-100901       0.013
+##  Beta-100900       0.005
+##  Beta-100899       0.011
+##  Beta-100897       0.007</code></pre>
 <p>The first summary command produces ages for each position supplied in the <code>predictPositions</code> argument above (output not shown as it’s too long). The second provides convergence diagnostics. The third gives outlier probabilities. The <code>plot</code> command will produce an age-position plot:</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">GlenOut</span><span class="op">)</span></code></pre></div>
@@ -341,12 +342,12 @@ run = Bchronology(ages=mydata[,1],ageSds=mydata[,2], ...</code></pre>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">GlenOut</span>, type <span class="op">=</span> <span class="st">'max_var'</span><span class="op">)</span></code></pre></div>
 <pre><code>## Top 3 positions with maximum age variance are: 
-## 740 750 760</code></pre>
+## 840 870 860</code></pre>
 <p>You can control the number of positions reported with <code>numPos</code>. For example you could now add a line to mark the most variably layer to the plot with:</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">max_var</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">GlenOut</span>, type <span class="op">=</span> <span class="st">'max_var'</span>, numPos <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <pre><code>## Position with maximum age variance is: 
-## 740</code></pre>
+## 840</code></pre>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">GlenOut</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Glendalough"</span>,
@@ -476,8 +477,8 @@ run = Bchronology(ages=mydata[,1],ageSds=mydata[,2], ...</code></pre>
 <p>The above un-calibrates the age 2350 BP to the age 2346 14C years BP on the intcal20 calibration curve. A more advanced version would be:</p>
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">unCal2</span> <span class="op">=</span> <span class="fu"><a href="../reference/unCalibrate.html">unCalibrate</a></span><span class="op">(</span>calAge <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2350</span>, <span class="fl">4750</span>, <span class="fl">11440</span><span class="op">)</span>,
-                     calCurve <span class="op">=</span> <span class="st">'intcal20'</span>,
-                     type <span class="op">=</span> <span class="st">'ages'</span><span class="op">)</span></code></pre></div>
+                     type <span class="op">=</span> <span class="st">'ages'</span>,
+                     calCurve <span class="op">=</span> <span class="st">'intcal20'</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">unCal2</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1]  2352  4176 10021</code></pre>
@@ -512,7 +513,7 @@ run = Bchronology(ages=mydata[,1],ageSds=mydata[,2], ...</code></pre>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">unCal</span><span class="op">)</span></code></pre></div>
 <pre><code>## $mean
-## [1] 11251
+## [1] 11241
 ## 
 ## $sd
 ## [1] 28</code></pre>

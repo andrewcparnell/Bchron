@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Check data for input into BchronCalibrate or Bchronology — BchronCheck" />
-<meta property="og:description" content="Function to be used for checking the data formats in BchronoCalibrate and Bchronology. Mostly to be used internally to avoid Bchron running into problems with bad data specifications, but might also be useful for" />
+<meta property="og:description" content="Function to be used for checking the data formats in BchronCalibrate and Bchronology. Mostly to be used internally to avoid Bchron running into problems with bad data specifications, but might also be useful for" />
 
 
 
@@ -120,7 +120,7 @@
     </div>
 
     <div class="ref-description">
-    <p>Function to be used for checking the data formats in <code>BchronoCalibrate</code> and <code><a href='Bchronology.html'>Bchronology</a></code>. Mostly to be used internally to avoid Bchron running into problems with bad data specifications, but might also be useful for</p>
+    <p>Function to be used for checking the data formats in <code><a href='BchronCalibrate.html'>BchronCalibrate</a></code> and <code><a href='Bchronology.html'>Bchronology</a></code>. Mostly to be used internally to avoid Bchron running into problems with bad data specifications, but might also be useful for</p>
     </div>
 
     <pre class="usage"><span class='fu'>BchronCheck</span><span class='op'>(</span>
@@ -155,7 +155,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>ages</th>
-      <td><p>A vector of ages (most likely 14C)</p></td>
+      <td><p>A vector of ages provided in years before 1950.</p></td>
     </tr>
     <tr>
       <th>ageSds</th>
@@ -259,13 +259,16 @@
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>Glendalough</span><span class='op'>)</span>
 
 <span class='co'># Check the Glendalough data are in the right format</span>
-<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>Glendalough</span>, 
-     <span class='fu'>BchronCheck</span><span class='op'>(</span><span class='va'>ages</span>,
-                 <span class='va'>ageSds</span>,
-                 <span class='va'>position</span>,
-                 pathToCalCurves <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"data"</span>, package <span class='op'>=</span> <span class='st'>"Bchron"</span><span class='op'>)</span>,
-                 <span class='va'>calCurves</span>,
-                 type <span class='op'>=</span> <span class='st'>'BchronCalibrate'</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span>
+  <span class='va'>Glendalough</span>,
+  <span class='fu'>BchronCheck</span><span class='op'>(</span><span class='va'>ages</span>,
+    <span class='va'>ageSds</span>,
+    <span class='va'>position</span>,
+    pathToCalCurves <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"data"</span>, package <span class='op'>=</span> <span class='st'>"Bchron"</span><span class='op'>)</span>,
+    <span class='va'>calCurves</span>,
+    type <span class='op'>=</span> <span class='st'>"BchronCalibrate"</span>
+  <span class='op'>)</span>
+<span class='op'>)</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
