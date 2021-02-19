@@ -1,5 +1,3 @@
-context("BchronCalibrate and related functions")
-
 library(Bchron)
 
 ages1 <- BchronCalibrate(

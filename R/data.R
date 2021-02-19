@@ -21,7 +21,7 @@
 
 #' Northern hemisphere 2013 calibration curve
 #'
-#' Northern hemisphere 2013 calibration curve
+#' Northern hemisphere 2013 calibration curve. The first 3 columns are the calibrated age (in years BP), the radiocarbon age (in 14C years BP), and the 1 sigma standard error (also in 14C years BP).
 #'
 #' @format A data frame with 5141 observations on 5 variables.
 #' @usage data(intcal13)
@@ -31,7 +31,7 @@
 
 #' Northern hemisphere 2020 calibration curve
 #'
-#' Northern hemisphere 2020 calibration curve
+#' Northern hemisphere 2020 calibration curve. The first 3 columns are the calibrated age (in years BP), the radiocarbon age (in 14C years BP), and the 1 sigma standard error (also in 14C years BP).
 #'
 #' @format A data frame with 9501 observations on 5 variables.
 #' @usage data(intcal20)
@@ -42,7 +42,7 @@
 
 #' Marine 2013 calibration curve
 #'
-#' Marine 2013 calibration curve
+#' Marine 2013 calibration curve. The first 3 columns are the calibrated age (in years BP), the radiocarbon age (in 14C years BP), and the 1 sigma standard error (also in 14C years BP).
 #'
 #' @format A data frame with 4801 observations on 5 variables
 #' @usage data(marine13)
@@ -52,7 +52,7 @@
 
 #' Marine 2020 calibration curve
 #'
-#' Marine 2020 calibration curve
+#' Marine 2020 calibration curve. The first 3 columns are the calibrated age (in years BP), the radiocarbon age (in 14C years BP), and the 1 sigma standard error (also in 14C years BP).
 #'
 #' @format A data frame with 5501 observations on 5 variables
 #' @usage data(marine20)
@@ -73,7 +73,7 @@
 
 #' Southern hemisphere 2013 calibration curve
 #'
-#' Southern hemisphere 2013 calibration curve
+#' Southern hemisphere 2013 calibration curve. The first 3 columns are the calibrated age (in years BP), the radiocarbon age (in 14C years BP), and the 1 sigma standard error (also in 14C years BP).
 #'
 #' @format A data frame with 5141 observations on 5 variables.
 #' @usage data(shcal13)
@@ -83,7 +83,7 @@
 
 #' Southern hemisphere 2020 calibration curve
 #'
-#' Southern hemisphere 2020 calibration curve
+#' Southern hemisphere 2020 calibration curve. The first 3 columns are the calibrated age (in years BP), the radiocarbon age (in 14C years BP), and the 1 sigma standard error (also in 14C years BP).
 #'
 #' @format A data frame with 9501 observations on 5 variables.
 #' @usage data(shcal20)

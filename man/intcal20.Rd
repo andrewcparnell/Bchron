@@ -11,7 +11,7 @@ A data frame with 9501 observations on 5 variables.
 data(intcal20)
 }
 \description{
-Northern hemisphere 2020 calibration curve
+Northern hemisphere 2020 calibration curve. The first 3 columns are the calibrated age (in years BP), the radiocarbon age (in 14C years BP), and the 1 sigma standard error (also in 14C years BP).
 }
 \details{
 For full details and reference see http://intcal.org/blurb.html. For usage details see \code{\link{BchronCalibrate}}

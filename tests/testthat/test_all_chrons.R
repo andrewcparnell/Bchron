@@ -1,5 +1,3 @@
-context("Previously troublesome Bchronology runs")
-
 library(Bchron)
 
 # data(Glendalough) # Glendalough already tested in main functions

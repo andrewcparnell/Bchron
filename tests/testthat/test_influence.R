@@ -1,5 +1,3 @@
-context("Core and date influence metrics")
-
 library(Bchron)
 
 

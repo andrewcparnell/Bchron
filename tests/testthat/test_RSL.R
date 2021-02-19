@@ -1,5 +1,3 @@
-context("RSL functions")
-
 library(Bchron)
 library(ggplot2)
 set.seed(123) # Added in to avoid weird bug on GitHub Actions

@@ -1,5 +1,3 @@
-context("Other Bchron functions")
-
 library(Bchron)
 
 

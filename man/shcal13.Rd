@@ -11,7 +11,7 @@ A data frame with 5141 observations on 5 variables.
 data(shcal13)
 }
 \description{
-Southern hemisphere 2013 calibration curve
+Southern hemisphere 2013 calibration curve. The first 3 columns are the calibrated age (in years BP), the radiocarbon age (in 14C years BP), and the 1 sigma standard error (also in 14C years BP).
 }
 \details{
 For full details and reference see http://intcal.org/blurb.html. For usage details see \code{\link{BchronCalibrate}}

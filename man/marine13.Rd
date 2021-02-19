@@ -11,7 +11,7 @@ A data frame with 4801 observations on 5 variables
 data(marine13)
 }
 \description{
-Marine 2013 calibration curve
+Marine 2013 calibration curve. The first 3 columns are the calibrated age (in years BP), the radiocarbon age (in 14C years BP), and the 1 sigma standard error (also in 14C years BP).
 }
 \details{
 For full details and reference see http://intcal.org/blurb.html. For usage details see \code{\link{BchronCalibrate}}

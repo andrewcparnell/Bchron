@@ -1,5 +1,3 @@
-context("Bchronology and related functions")
-
 library(Bchron)
 
 data(Glendalough)

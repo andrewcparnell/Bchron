@@ -1,6 +1,3 @@
-
-context("BchronDensity and related functions")
-
 library(Bchron)
 
 data(Sluggan)
