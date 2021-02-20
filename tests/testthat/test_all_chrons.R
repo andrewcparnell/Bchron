@@ -1,7 +1,7 @@
 library(Bchron)
 
 # data(Glendalough) # Glendalough already tested in main functions
-
+# Test all the chronologies, including some which cause problems (and so are skipped on CI and CRAN)
 
 # Sluggan -----------------------------------------------------------------
 
@@ -67,6 +67,8 @@ test_that("TestChronData", {
 
 
 test_that("Taphocoenose_Jan20", {
+  skip_on_ci()
+  skip_on_cran()
   chron_df <-
     structure(
       list(
@@ -170,6 +172,8 @@ test_that("Taphocoenose_Jan20", {
 # Kemp Jan 21 -------------------------------------------------------------
 
 test_that("Kemp_Jan21", {
+  skip_on_ci()
+  skip_on_cran()
   RC_input <- structure(list(
     id = c(
       "10373", "10374", "10375", "10376", "10517",
@@ -268,6 +272,8 @@ test_that("Kemp_Jan21", {
 # Kemp Jan 21 part 2 ------------------------------------------------------
 
 test_that("Kemp_Jan21_part2", {
+  skip_on_ci()
+  skip_on_cran()
   RC_input <- structure(list(
     id = c(
       "10373", "10374", "10375", "10376", "10517",

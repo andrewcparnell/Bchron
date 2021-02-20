@@ -202,7 +202,8 @@ void predictExtrapUp(double *alpha, double *lambda, double *beta, double *predic
         if(predvals[i]<*extractDate) predvals[i] = *extractDate;
       }
       bad=0;
-      warning("Unable to find suitable chronologies for top of core - truncated to date of extraction");
+      //warning("Unable to find suitable chronologies for top of core - truncated to date of extraction");
+      Rprintf("Unable to find suitable chronologies for top of core - truncated to date of extraction");
     }
   }
 }

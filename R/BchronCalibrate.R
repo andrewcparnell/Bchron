@@ -94,18 +94,10 @@ BchronCalibrate <- function(ages,
 
   # Insert ids if NULL
   if (is.null(ids)) ids <- paste("Date", 1:length(ages), sep = "")
-
-  # Check that ages and ageSds are whole numbers (i.e. years)
-  if (!all(as.integer(ages) == ages)) {
-    ages <- round(ages, 0)
-    warning("ages not given as whole numbers - rounding occurred")
-  }
-  if (!all(as.integer(ageSds) == ageSds)) {
-    # Smallest sd is 1
-    ageSds <- pmax(round(ageSds, 0), 1)
-    warning("ageSds not given as whole numbers - rounding occurred")
-  }
-
+  # Round ages to ensure whole numbers - these will be notified in BchronCheck
+  ages <- round(ages, 0)
+  ageSds <- pmax(round(ageSds, 0), 1)
+  
   # Load in all calibration curves specified
   allCalCurves <- unique(calCurves)
   calCurve <- calBP <- c14BP <- calSd <- ageGrid <- mu <- tau1 <- list()

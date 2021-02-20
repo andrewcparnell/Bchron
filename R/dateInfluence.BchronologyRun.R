@@ -8,7 +8,7 @@
 #'
 #' @details The \code{KL} measure is preferred as it takes account of the full probability distributions but it lacks a simple interpretation. The best way to use it is with \code{whichDate = 'all'}: the largest value corresponds to the most influential date in the chronology. For simpler interpretation use \code{measure = 'absMeanDiff'} or \code{measure = 'absMedianDiff'} as for these the influence is measured in years.
 #'
-#' When the predictPositions from the original \code{Bchronology} run do not include those of the date(s) being left out then the function uses the closest position and reports a warning.
+#' When the predictPositions from the original \code{Bchronology} run do not include those of the date(s) being left out then the function uses the closest position and reports the change.
 #'
 #' @seealso \code{\link{Bchronology}}, \code{\link{summary.BchronologyRun}}, \code{\link{coreInfluence}}, \code{\link{choosePositions}}
 #'
@@ -93,7 +93,7 @@ dateInfluence.BchronologyRun <- function(bchrRun,
     # Find the closest predictPosition to this date
     closestPositionIndex <- which.min(abs(bchrRun$inputVals$predictPositions - bchrRun$inputVals$positions[whichDate]))
     closestPosition <- bchrRun$inputVals$predictPositions[closestPositionIndex]
-    if (abs(closestPosition - bchrRun$inputVals$positions[whichDate]) < .Machine$double.eps) warning(paste("The Bchron run provided does not have position", bchrRun$inputVals$positions[whichDate], "included in the predictPositions argument. Using closest predictPosition ", closestPosition, "instead."))
+    if (abs(closestPosition - bchrRun$inputVals$positions[whichDate]) < .Machine$double.eps) message(paste("The Bchron run provided does not have position", bchrRun$inputVals$positions[whichDate], "included in the predictPositions argument. Using closest predictPosition", closestPosition, "instead."))
 
     # Leave that date out and re-run
     newRun <- with(
@@ -131,7 +131,7 @@ dateInfluence.BchronologyRun <- function(bchrRun,
 
     # Remove missing values if required
     if (any(is.na(newRunAgePredict)) && whichDate == 1) {
-      warning("Some missing values in predicted ages, likely as a result of a top date being removed. These missing values will be removed.")
+      message("Some missing values in predicted ages, likely as a result of a top date being removed. These missing values will be removed.")
       newRunAgePredict <- newRunAgePredict[!is.na(newRunAgePredict)]
     }
 
@@ -157,14 +157,14 @@ dateInfluence.BchronologyRun <- function(bchrRun,
   } else if (whichDate %in% names(bchrRun$calAges)) {
     # If whichDate is one of the named dates
     dateNames <- bchrRun$inputVals$ids
-    if (!(whichDate %in% dateNames)) stop(paste("whichDate not found in date names. Must be one of: ", paste(dateNames, collapse = " ")))
+    if (!(whichDate %in% dateNames)) stop(paste("whichDate not found in date names. Must be one of:", paste(dateNames, collapse = " ")))
 
     whichDate <- match(whichDate, dateNames)
     # The predictPositions must include this date
     # Find the closest predictPosition to this date
     closestPositionIndex <- which.min(abs(bchrRun$inputVals$predictPositions - bchrRun$inputVals$positions[whichDate]))
     closestPosition <- bchrRun$inputVals$predictPositions[closestPositionIndex]
-    if (abs(closestPosition - bchrRun$inputVals$positions[whichDate]) < .Machine$double.eps) warning(paste("The Bchron run provided does not have position", bchrRun$inputVals$positions[whichDate], "included in the predictPositions argument. Using closest predictPosition ", closestPosition, "instead."))
+    if (abs(closestPosition - bchrRun$inputVals$positions[whichDate]) < .Machine$double.eps) message(paste("The Bchron run provided does not have position", bchrRun$inputVals$positions[whichDate], "included in the predictPositions argument. Using closest predictPosition", closestPosition, "instead."))
 
     # Leave that date out and re-run
     newRun <- with(
@@ -202,7 +202,7 @@ dateInfluence.BchronologyRun <- function(bchrRun,
 
     # Remove missing values if required
     if (any(is.na(newRunAgePredict)) && whichDate == 1) {
-      warning("Some missing values in predicted ages, likely as a result of a top date being removed. These missing values will be removed.")
+      message("Some missing values in predicted ages, likely as a result of a top date being removed. These missing values will be removed.")
       newRunAgePredict <- newRunAgePredict[!is.na(newRunAgePredict)]
     }
 
@@ -241,7 +241,7 @@ dateInfluence.BchronologyRun <- function(bchrRun,
       # Find the closest predictPosition to this date
       closestPositionIndex <- which.min(abs(bchrRun$inputVals$predictPositions - bchrRun$inputVals$positions[whichDate]))
       closestPosition <- bchrRun$inputVals$predictPositions[closestPositionIndex]
-      if (abs(closestPosition - bchrRun$inputVals$positions[whichDate]) < .Machine$double.eps) warning(paste("The Bchron run provided does not have position", bchrRun$inputVals$positions[whichDate], "included in the predictPositions argument. Using closest predictPosition ", closestPosition, "instead."))
+      if (abs(closestPosition - bchrRun$inputVals$positions[whichDate]) < .Machine$double.eps) message(paste("The Bchron run provided does not have position", bchrRun$inputVals$positions[whichDate], "included in the predictPositions argument. Using closest predictPosition", closestPosition, "instead."))
 
       # Leave that date out and re-run
       newRun <- with(
@@ -279,7 +279,7 @@ dateInfluence.BchronologyRun <- function(bchrRun,
 
       # Remove missing values in the case of top ages being removed
       if (any(is.na(newRunAgePredict)) && i == 1) {
-        warning("Some missing values in predicted ages, likely as a result of a top date being removed. These missing values will be removed.")
+        message("Some missing values in predicted ages, likely as a result of a top date being removed. These missing values will be removed.")
         newRunAgePredict <- newRunAgePredict[!is.na(newRunAgePredict)]
       }
 
@@ -319,7 +319,7 @@ dateInfluence.BchronologyRun <- function(bchrRun,
       # Find the closest predictPosition to this date
       closestPositionIndex <- which.min(abs(bchrRun$inputVals$predictPositions - bchrRun$inputVals$positions[whichDate]))
       closestPosition <- bchrRun$inputVals$predictPositions[closestPositionIndex]
-      if (abs(closestPosition - bchrRun$inputVals$positions[whichDate]) < .Machine$double.eps) warning(paste("The Bchron run provided does not have position", bchrRun$inputVals$positions[whichDate], "included in the predictPositions argument. Using closest predictPosition ", closestPosition, "instead."))
+      if (abs(closestPosition - bchrRun$inputVals$positions[whichDate]) < .Machine$double.eps) message(paste("The Bchron run provided does not have position", bchrRun$inputVals$positions[whichDate], "included in the predictPositions argument. Using closest predictPosition", closestPosition, "instead."))
 
       # Leave that date out and re-run
       newRun <- with(
@@ -357,7 +357,7 @@ dateInfluence.BchronologyRun <- function(bchrRun,
 
       # Remove missing values in the case of top ages being removed
       if (any(is.na(newRunAgePredict)) && i == 1) {
-        warning("Some missing values in predicted ages, likely as a result of a top date being removed. These missing values will be removed.")
+        message("Some missing values in predicted ages, likely as a result of a top date being removed. These missing values will be removed.")
         newRunAgePredict <- newRunAgePredict[!is.na(newRunAgePredict)]
       }
 

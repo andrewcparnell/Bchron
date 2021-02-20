@@ -56,6 +56,15 @@ BchronCheck <- function(ages,
     any.missing = FALSE, len = nObs,
     lower = 0
   )
+  
+  # Check that ages and ageSds are whole numbers (i.e. years)
+  if (!all(as.integer(ages) == ages)) {
+    message("ages not given as whole numbers - rounding occurred")
+  }
+  if (!all(as.integer(ageSds) == ageSds)) {
+    # Smallest sd is 1
+    message("ageSds not given as whole numbers - rounding occurred")
+  }
 
   # path to calCurves should be a valid file path
   assertDirectoryExists(pathToCalCurves)
@@ -93,8 +102,10 @@ BchronCheck <- function(ages,
     assertNumber(ageScaleVal, finite = TRUE, null.ok = TRUE)
     assertNumber(positionEps, finite = TRUE, null.ok = TRUE)
   } else {
+    
     # Do some of the checks for BchronCalibrate
     assertNumber(eps, finite = TRUE, null.ok = TRUE)
     assertNumeric(dfs, finite = TRUE, null.ok = TRUE, len = nObs)
+    
   }
 }
