@@ -8,6 +8,7 @@
 #' @param ids ID names for each age
 #' @param positions Position values (e.g. depths) for each age
 #' @param pathToCalCurves File path to where the calibration curves are located. Defaults to the system directory where the 3 standard calibration curves are stored.
+#' @param allowOutside Whether to allow calibrations to run outside the range of the calibration curve. By default this is turned off as calibrations outside of the range of the calibration curve can cause severe issues with probability ranges of calibrated dates
 #' @param eps Cut-off point for density calculation. A value of eps>0 removes ages from the output which have negligible probability density
 #' @param dfs Degrees-of-freedom values for the t-distribution associated with the calibration calculation. A large value indicates Gaussian distributions assumed for the 14C ages
 #'
@@ -73,6 +74,7 @@ BchronCalibrate <- function(ages,
                             pathToCalCurves = system.file("data",
                               package = "Bchron"
                             ),
+                            allowOutside = FALSE,
                             eps = 1e-5,
                             dfs = rep(100, length(ages))) {
 
@@ -92,12 +94,15 @@ BchronCalibrate <- function(ages,
     type = "BchronCalibrate"
   )
 
+  # If the calCurves argument was not provided print it out
+  if (missing(calCurves)) cat(paste("Calibrating curve not provided. Using:", unique(calCurves), "\n"))
+
   # Insert ids if NULL
   if (is.null(ids)) ids <- paste("Date", 1:length(ages), sep = "")
   # Round ages to ensure whole numbers - these will be notified in BchronCheck
   ages <- round(ages, 0)
   ageSds <- pmax(round(ageSds, 0), 1)
-  
+
   # Load in all calibration curves specified
   allCalCurves <- unique(calCurves)
   calCurve <- calBP <- c14BP <- calSd <- ageGrid <- mu <- tau1 <- list()
@@ -129,9 +134,11 @@ BchronCalibrate <- function(ages,
   for (i in 1:length(ages)) {
 
     # Get rid of ages outside the range of the uncalibrated dates
-    if (ages[i] > max(mu[[matchCalCurves[i]]]) | ages[i] < min(mu[[matchCalCurves[i]]])) {
-      cal_range <- range(mu[[matchCalCurves[i]]])
-      stop(paste("Date", ids[i], "outside of calibration range. Range of", calCurves[i], "is", cal_range[1], "to", cal_range[2]))
+    if (!allowOutside) {
+      if (ages[i] > max(mu[[matchCalCurves[i]]]) | ages[i] < min(mu[[matchCalCurves[i]]])) {
+        cal_range <- range(mu[[matchCalCurves[i]]])
+        stop(paste0("Date ID ", ids[i], " outside of calibration range. Range of ", calCurves[i], " is ", cal_range[1], " to ", cal_range[2], ". Set allowOutside = TRUE if you want to calibrate ages outside of the calibration curve range"))
+      }
     }
 
     tau <- ageSds[i]^2 + tau1[[matchCalCurves[i]]]^2

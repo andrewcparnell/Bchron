@@ -34,6 +34,7 @@ BchronCheck <- function(ages,
                         outlierProbs = NULL,
                         predictPositions = NULL,
                         jitterPositions = NULL,
+                        allowOutside = NULL,
                         iterations = NULL,
                         burn = NULL,
                         thin = NULL,
@@ -56,7 +57,7 @@ BchronCheck <- function(ages,
     any.missing = FALSE, len = nObs,
     lower = 0
   )
-  
+
   # Check that ages and ageSds are whole numbers (i.e. years)
   if (!all(as.integer(ages) == ages)) {
     message("ages not given as whole numbers - rounding occurred")
@@ -91,6 +92,7 @@ BchronCheck <- function(ages,
     # Now some of the other arguments
     assertLogical(positionNormalise, null.ok = TRUE)
     assertLogical(jitterPositions, null.ok = TRUE)
+    assertLogical(allowOutside, null.ok = TRUE)
     assertNumber(iterations, lower = 1, null.ok = TRUE)
     assertNumber(burn, lower = 1, null.ok = TRUE)
     assertNumber(thin, lower = 1, null.ok = TRUE)
@@ -102,10 +104,9 @@ BchronCheck <- function(ages,
     assertNumber(ageScaleVal, finite = TRUE, null.ok = TRUE)
     assertNumber(positionEps, finite = TRUE, null.ok = TRUE)
   } else {
-    
+
     # Do some of the checks for BchronCalibrate
     assertNumber(eps, finite = TRUE, null.ok = TRUE)
     assertNumeric(dfs, finite = TRUE, null.ok = TRUE, len = nObs)
-    
   }
 }

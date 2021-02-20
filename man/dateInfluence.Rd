@@ -26,7 +26,7 @@ This function takes as input a \code{\link{Bchronology}} run and allows the user
 \details{
 The \code{KL} measure is preferred as it takes account of the full probability distributions but it lacks a simple interpretation. The best way to use it is with \code{whichDate = 'all'}: the largest value corresponds to the most influential date in the chronology. For simpler interpretation use \code{measure = 'absMeanDiff'} or \code{measure = 'absMedianDiff'} as for these the influence is measured in years.
 
-When the predictPositions from the original \code{Bchronology} run do not include those of the date(s) being left out then the function uses the closest position and reports a warning.
+When the predictPositions from the original \code{Bchronology} run do not include those of the date(s) being left out then the function uses the closest position and reports the change.
 }
 \examples{
 \donttest{

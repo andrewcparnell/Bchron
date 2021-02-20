@@ -38,10 +38,31 @@ test_that("BchronCalibrate works", {
   expect_s3_class(ages3, "BchronCalibratedDates")
 })
 
-test_that("Out of range dates produce a warning", {
+test_that("Out of range dates produce an error unless turned off", {
   expect_error(BchronCalibrate(
     ages = 85,
     ageSds = 30,
+    calCurve = "intcal20"
+  ))
+  expect_s3_class(
+    BchronCalibrate(
+      ages = 85,
+      ageSds = 30,
+      calCurve = "intcal20",
+      allowOutside = TRUE
+    ), "BchronCalibratedDates"
+  )
+})
+
+test_that("Ages converted to integers gives a message", {
+  expect_message(BchronCalibrate(
+    ages = 1500.3,
+    ageSds = 30,
+    calCurve = "intcal20"
+  ))
+  expect_message(BchronCalibrate(
+    ages = 1500,
+    ageSds = 30.3,
     calCurve = "intcal20"
   ))
 })

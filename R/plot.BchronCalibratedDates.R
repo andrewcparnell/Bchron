@@ -5,7 +5,7 @@
 #' @param x Output from \code{\link{BchronCalibrate}}
 #' @param date Either numbers or date names to plot (only used if multiple dates have been calibrated)
 #' @param withPositions Whether to plot with positions (i.e. using the position values as the y axis). By default TRUE if \code{x} has more than one date and contains positions
-#' @param includeCal Whether to plot the date alongside the calibration curve and the normally distributed uncalibrated date.
+#' @param includeCal Whether to plot the date alongside the calibration curve (with 95\% uncertainty bands) and the normally distributed uncalibrated date.
 #' @param dateHeight The height of the dates in the plot in the same units as the position values. Only relevant if \code{withPositions=TRUE}.
 #' @param dateLabels Whether to add the names of the dates to the left of them. Default TRUE
 #' @param dateLabelSize Size of the date labels
@@ -120,7 +120,8 @@ plot.BchronCalibratedDates <-
           calCurve$V1 > min(x[[1]]$ageGrid) &
             calCurve$V1 < max(x[[1]]$ageGrid)
         )
-        df$Density2 <- df$Density / max(df$Density) * dateHeight + min(calCurveUse$V2)
+        calCurveUse$low <- calCurveUse$V2 - 2 * calCurveUse$V3
+        calCurveUse$high <- calCurveUse$V2 + 2 * calCurveUse$V3
 
         c14ageGrid <- seq(x[[1]]$ages - 3 * x[[1]]$ageSds,
           x[[1]]$ages + 3 * x[[1]]$ageSds,
@@ -139,8 +140,12 @@ plot.BchronCalibratedDates <-
           dens = mult_val * c14density / max(c14density) *
             dateHeight + edge_val
         )
-
+        myYlim <- range(c(df_14C$age, calCurveUse$low, calCurveUse$high))
+        df$Density2 <- df$Density / max(df$Density) * dateHeight + min(myYlim)
         p <- ggplot(calCurveUse, aes_string(x = "V1", y = "V2")) +
+          geom_line() +
+          geom_line(aes_string(y = "low"), linetype = "dotted") +
+          geom_line(aes_string(y = "high"), linetype = "dotted") +
           geom_line() +
           theme_bw() +
           scale_x_continuous(
@@ -151,6 +156,7 @@ plot.BchronCalibratedDates <-
               "identity"
             )
           ) +
+          ylim(myYlim) +
           ggtitle(names(x)[1]) +
           geom_polygon(
             data = df, aes_string(x = "Age", y = "Density2"),

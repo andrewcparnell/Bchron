@@ -15,6 +15,7 @@ Bchronology(
   predictPositions = seq(min(positions), max(positions), length = 100),
   pathToCalCurves = system.file("data", package = "Bchron"),
   jitterPositions = FALSE,
+  allowOutside = FALSE,
   iterations = 10000,
   burn = 2000,
   thin = 8,
@@ -37,7 +38,7 @@ Bchronology(
 
 \item{positionThicknesses}{Thickness values for each of the positions. The thickness value should be the full thickness value of the slice. By default set to zero.}
 
-\item{calCurves}{A vector of values containing either 'intcal20', 'shcal20', 'marine20', or 'normal' (older calibration curves are also supported, e.g. intcal13). Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory, or created via \code{\link{createCalCurve}}. Normal indicates a normally-distributed (non-14C) age.}
+\item{calCurves}{A vector of values containing either \code{intcal20}, \code{shcal20}, \code{marine20}, or \code{normal} (older calibration curves are supposed such as intcal13). Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.}
 
 \item{ids}{ID names for each age}
 
@@ -49,15 +50,17 @@ Bchronology(
 
 \item{jitterPositions}{Whether to jigger the positions at startup or not. Default is FALSE but if there are lots of dates at similar depths this may resolve some initialisation problems}
 
+\item{allowOutside}{Whether to allow calibrations to run outside the range of the calibration curve. By default this is turned off as calibrations outside of the range of the calibration curve can cause severe issues with probability ranges of calibrated dates}
+
 \item{iterations}{The number of iterations to run the procedure for}
 
 \item{burn}{The number of starting iterations to discard}
 
-\item{thin}{The step size for every iteration to keep beyond the burnin}
+\item{thin}{The step size for every iteration to keep beyond the burn-in}
 
 \item{extractDate}{The top age of the core. Used for extrapolation purposes so that no extrapolated ages go beyond the top age of the core. Defaults to the current year}
 
-\item{maxExtrap}{The maximum number of extrapolations to perform before giving up and setting the predicted ages to NA. Useful for when large amounts of extrapolation are required, i.e. some of the predictPositions are a long way from the dated positions}
+\item{maxExtrap}{The maximum number of extrapolations to perform before giving up and setting the predicted ages to NA. Useful for when large amounts of extrapolation are required, i.e. some of the \code{predictPositions} are a long way from the dated positions}
 
 \item{thetaMhSd}{The Metropolis-Hastings standard deviation for the age parameters}
 

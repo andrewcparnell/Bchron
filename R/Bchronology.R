@@ -2,21 +2,17 @@
 #'
 #' Fits a non-parametric chronology model to age/position data according to the Compound Poisson-Gamma model defined by Haslett and Parnell (2008) <DOI:10.1111/j.1467-9876.2008.00623.x>. This version uses a slightly modified Markov chain Monte Carlo fitting algorithm which aims to converge quicker and requires fewer iterations. It also a slightly modified procedure for identifying outliers
 #'
-#' @param ages A vector of ages provided in years before 1950.
-#' @param ageSds A vector of 1-sigma values for the ages given above
-#' @param positions Position values (e.g. depths) for each age
+#' @inheritParams BchronCalibrate
+#'
 #' @param positionThicknesses Thickness values for each of the positions. The thickness value should be the full thickness value of the slice. By default set to zero.
-#' @param calCurves A vector of values containing either 'intcal20', 'shcal20', 'marine20', or 'normal' (older calibration curves are also supported, e.g. intcal13). Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory, or created via \code{\link{createCalCurve}}. Normal indicates a normally-distributed (non-14C) age.
-#' @param ids ID names for each age
 #' @param outlierProbs A vector of prior outlier probabilities, one for each age. Defaults to 0.01
 #' @param predictPositions A vector of positions (e.g. depths) at which predicted age values are required. Defaults to a sequence of length 100 from the top position to the bottom position
-#' @param pathToCalCurves File path to where the calibration curves are located. Defaults to the system directory where the 3 standard calibration curves are stored.
 #' @param jitterPositions Whether to jigger the positions at startup or not. Default is FALSE but if there are lots of dates at similar depths this may resolve some initialisation problems
 #' @param iterations The number of iterations to run the procedure for
 #' @param burn The number of starting iterations to discard
-#' @param thin The step size for every iteration to keep beyond the burnin
+#' @param thin The step size for every iteration to keep beyond the burn-in
 #' @param extractDate The top age of the core. Used for extrapolation purposes so that no extrapolated ages go beyond the top age of the core. Defaults to the current year
-#' @param maxExtrap The maximum number of extrapolations to perform before giving up and setting the predicted ages to NA. Useful for when large amounts of extrapolation are required, i.e. some of the predictPositions are a long way from the dated positions
+#' @param maxExtrap The maximum number of extrapolations to perform before giving up and setting the predicted ages to NA. Useful for when large amounts of extrapolation are required, i.e. some of the \code{predictPositions} are a long way from the dated positions
 #' @param thetaMhSd The Metropolis-Hastings standard deviation for the age parameters
 #' @param muMhSd The Metropolis-Hastings standard deviation for the Compound Poisson-Gamma mean
 #' @param psiMhSd The Metropolis-Hastings standard deviation for the Compound Poisson-Gamma scale
@@ -99,6 +95,7 @@ Bchronology <- function(ages,
                         ),
                         pathToCalCurves = system.file("data", package = "Bchron"),
                         jitterPositions = FALSE,
+                        allowOutside = FALSE,
                         iterations = 10000,
                         burn = 2000,
                         thin = 8,
@@ -130,6 +127,7 @@ Bchronology <- function(ages,
     predictPositions = predictPositions,
     pathToCalCurves = pathToCalCurves,
     jitterPositions = jitterPositions,
+    allowOutside = allowOutside,
     iterations = iterations,
     burn = burn,
     thin = thin,
@@ -197,6 +195,7 @@ Bchronology <- function(ages,
     positions = originalPositions,
     ids = ids,
     pathToCalCurves = pathToCalCurves,
+    allowOutside = allowOutside,
     eps = 0,
     dfs = rep(dfs[1], length(ages))
   )
@@ -207,6 +206,7 @@ Bchronology <- function(ages,
     positions = originalPositions,
     ids = ids,
     pathToCalCurves = pathToCalCurves,
+    allowOutside = allowOutside,
     eps = 0,
     dfs = rep(dfs[2], length(ages))
   )

@@ -4,6 +4,7 @@
   - Added in positionEps argument to Bchronology to avoid positions being simulated too close to each other and leading to numerical underflow errors
   - Changed default colours of dates in plot.CalibratedDates and plot.BchronologyRun
   - Added an extra check that all ageSds are bigger than zero
+  - Allowed the option for calibrating dates out of calibration curve range
 
 # Bchron 4.7.4
 

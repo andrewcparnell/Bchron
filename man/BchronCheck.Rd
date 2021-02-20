@@ -15,6 +15,7 @@ BchronCheck(
   outlierProbs = NULL,
   predictPositions = NULL,
   jitterPositions = NULL,
+  allowOutside = NULL,
   iterations = NULL,
   burn = NULL,
   thin = NULL,
@@ -52,15 +53,17 @@ BchronCheck(
 
 \item{jitterPositions}{Whether to jigger the positions at startup or not. Default is FALSE but if there are lots of dates at similar depths this may resolve some initialisation problems}
 
+\item{allowOutside}{Whether to allow calibrations to run outside the range of the calibration curve. By default this is turned off as calibrations outside of the range of the calibration curve can cause severe issues with probability ranges of calibrated dates}
+
 \item{iterations}{The number of iterations to run the procedure for}
 
 \item{burn}{The number of starting iterations to discard}
 
-\item{thin}{The step size for every iteration to keep beyond the burnin}
+\item{thin}{The step size for every iteration to keep beyond the burn-in}
 
 \item{extractDate}{The top age of the core. Used for extrapolation purposes so that no extrapolated ages go beyond the top age of the core. Defaults to the current year}
 
-\item{maxExtrap}{The maximum number of extrapolations to perform before giving up and setting the predicted ages to NA. Useful for when large amounts of extrapolation are required, i.e. some of the predictPositions are a long way from the dated positions}
+\item{maxExtrap}{The maximum number of extrapolations to perform before giving up and setting the predicted ages to NA. Useful for when large amounts of extrapolation are required, i.e. some of the \code{predictPositions} are a long way from the dated positions}
 
 \item{thetaMhSd}{The Metropolis-Hastings standard deviation for the age parameters}
 

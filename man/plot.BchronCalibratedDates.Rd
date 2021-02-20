@@ -30,7 +30,7 @@
 
 \item{withPositions}{Whether to plot with positions (i.e. using the position values as the y axis). By default TRUE if \code{x} has more than one date and contains positions}
 
-\item{includeCal}{Whether to plot the date alongside the calibration curve and the normally distributed uncalibrated date.}
+\item{includeCal}{Whether to plot the date alongside the calibration curve (with 95\% uncertainty bands) and the normally distributed uncalibrated date.}
 
 \item{dateHeight}{The height of the dates in the plot in the same units as the position values. Only relevant if \code{withPositions=TRUE}.}
 
