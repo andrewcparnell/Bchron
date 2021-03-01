@@ -1,21 +1,24 @@
+set.seed(123)
 library(Bchron)
+library(vdiffr)
+co <- function(expr) capture.output(expr, file = "NUL")
 
 data(Sluggan)
-SlugDens <- BchronDensity(
+co(SlugDens <- BchronDensity(
   ages = Sluggan$ages,
   ageSds = Sluggan$ageSds,
   calCurves = Sluggan$calCurves,
   iterations = 100,
   burn = 20,
   thin = 1
-)
-SlugDensFast <- BchronDensityFast(
+))
+co(SlugDensFast <- BchronDensityFast(
   ages = Sluggan$ages,
   ageSds = Sluggan$ageSds,
   calCurves = Sluggan$calCurves,
   samples = 100
-)
-SlugDens2 <- BchronDensity(
+))
+co(SlugDens2 <- BchronDensity(
   ages = Sluggan$ages,
   ageSds = Sluggan$ageSds,
   calCurves = Sluggan$calCurves,
@@ -23,7 +26,7 @@ SlugDens2 <- BchronDensity(
   iterations = 100,
   burn = 20,
   thin = 1
-)
+))
 
 test_that("BchronDensity", {
   expect_s3_class(SlugDens, "BchronDensityRun")
@@ -52,13 +55,19 @@ test_that("summary.BchronDensity", {
 })
 
 test_that("plot.BchronDensityRun", {
-  expect_null(plot(SlugDens, plotRawSum = TRUE))
-  expect_null(plot(SlugDens, dateTransparency = 0.2))
-  expect_null(plot(SlugDens2, plotRawSum = TRUE))
-  expect_null(plot(SlugDens2, dateTransparency = 0.2))
+  p <- function() plot(SlugDens, plotRawSum = TRUE)
+  expect_doppelganger("SlugDens_default", p)
+  p <- function() plot(SlugDens, dateTransparency = 0.2)
+  expect_doppelganger("SlugDens_transparent", p)
+  p <- function() plot(SlugDens2, plotRawSum = TRUE)
+  expect_doppelganger("SlugDens_rawsum", p)
+  p <- function() plot(SlugDens2, dateTransparency = 0.2)
+  expect_doppelganger("SlugDens2_transparent", p)
 })
 
 test_that("plot.BchronDensityRunFast", {
-  expect_null(plot(SlugDensFast, plotSum = TRUE))
-  expect_null(plot(SlugDensFast, dateTransparency = 0.2))
+  p <- function() plot(SlugDensFast, plotSum = TRUE)
+  expect_doppelganger("slugdensfast", p)
+  p <- function() plot(SlugDensFast, dateTransparency = 0.2)
+  expect_doppelganger("slugdensfast_transparent", p)
 })

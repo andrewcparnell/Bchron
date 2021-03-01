@@ -5,6 +5,7 @@
   - Changed default colours of dates in plot.CalibratedDates and plot.BchronologyRun
   - Added an extra check that all ageSds are bigger than zero
   - Allowed the option for calibrating dates out of calibration curve range
+  - Included vdiffr tests for plots
 
 # Bchron 4.7.4
 

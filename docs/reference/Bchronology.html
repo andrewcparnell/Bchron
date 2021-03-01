@@ -134,6 +134,7 @@
   predictPositions <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span><span class='op'>(</span><span class='va'>positions</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>positions</span><span class='op'>)</span>, length <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>,
   pathToCalCurves <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"data"</span>, package <span class='op'>=</span> <span class='st'>"Bchron"</span><span class='op'>)</span>,
   jitterPositions <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  allowOutside <span class='op'>=</span> <span class='cn'>FALSE</span>,
   iterations <span class='op'>=</span> <span class='fl'>10000</span>,
   burn <span class='op'>=</span> <span class='fl'>2000</span>,
   thin <span class='op'>=</span> <span class='fl'>8</span>,
@@ -168,7 +169,7 @@
     </tr>
     <tr>
       <th>calCurves</th>
-      <td><p>A vector of values containing either 'intcal20', 'shcal20', 'marine20', or 'normal' (older calibration curves are also supported, e.g. intcal13). Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory, or created via <code><a href='createCalCurve.html'>createCalCurve</a></code>. Normal indicates a normally-distributed (non-14C) age.</p></td>
+      <td><p>A vector of values containing either <code>intcal20</code>, <code>shcal20</code>, <code>marine20</code>, or <code>normal</code> (older calibration curves are supposed such as intcal13). Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.</p></td>
     </tr>
     <tr>
       <th>ids</th>
@@ -191,6 +192,10 @@
       <td><p>Whether to jigger the positions at startup or not. Default is FALSE but if there are lots of dates at similar depths this may resolve some initialisation problems</p></td>
     </tr>
     <tr>
+      <th>allowOutside</th>
+      <td><p>Whether to allow calibrations to run outside the range of the calibration curve. By default this is turned off as calibrations outside of the range of the calibration curve can cause severe issues with probability ranges of calibrated dates</p></td>
+    </tr>
+    <tr>
       <th>iterations</th>
       <td><p>The number of iterations to run the procedure for</p></td>
     </tr>
@@ -200,7 +205,7 @@
     </tr>
     <tr>
       <th>thin</th>
-      <td><p>The step size for every iteration to keep beyond the burnin</p></td>
+      <td><p>The step size for every iteration to keep beyond the burn-in</p></td>
     </tr>
     <tr>
       <th>extractDate</th>
@@ -208,7 +213,7 @@
     </tr>
     <tr>
       <th>maxExtrap</th>
-      <td><p>The maximum number of extrapolations to perform before giving up and setting the predicted ages to NA. Useful for when large amounts of extrapolation are required, i.e. some of the predictPositions are a long way from the dated positions</p></td>
+      <td><p>The maximum number of extrapolations to perform before giving up and setting the predicted ages to NA. Useful for when large amounts of extrapolation are required, i.e. some of the <code>predictPositions</code> are a long way from the dated positions</p></td>
     </tr>
     <tr>
       <th>thetaMhSd</th>

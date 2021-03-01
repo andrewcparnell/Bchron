@@ -39,7 +39,8 @@ Suggests:
     knitr,
     testthat (>= 3.0.0),
     rmarkdown,
-    covr
+    covr,
+    vdiffr
 VignetteBuilder: knitr
 NeedsCompilation: yes
 RoxygenNote: 7.1.1

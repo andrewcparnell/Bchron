@@ -130,6 +130,7 @@
   ids <span class='op'>=</span> <span class='cn'>NULL</span>,
   positions <span class='op'>=</span> <span class='cn'>NULL</span>,
   pathToCalCurves <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span><span class='op'>(</span><span class='st'>"data"</span>, package <span class='op'>=</span> <span class='st'>"Bchron"</span><span class='op'>)</span>,
+  allowOutside <span class='op'>=</span> <span class='cn'>FALSE</span>,
   eps <span class='op'>=</span> <span class='fl'>1e-05</span>,
   dfs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>100</span>, <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>ages</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
@@ -160,6 +161,10 @@
     <tr>
       <th>pathToCalCurves</th>
       <td><p>File path to where the calibration curves are located. Defaults to the system directory where the 3 standard calibration curves are stored.</p></td>
+    </tr>
+    <tr>
+      <th>allowOutside</th>
+      <td><p>Whether to allow calibrations to run outside the range of the calibration curve. By default this is turned off as calibrations outside of the range of the calibration curve can cause severe issues with probability ranges of calibrated dates</p></td>
     </tr>
     <tr>
       <th>eps</th>

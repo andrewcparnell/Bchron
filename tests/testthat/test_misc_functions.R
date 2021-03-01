@@ -1,22 +1,25 @@
+set.seed(123)
 library(Bchron)
+library(vdiffr)
+co <- function(expr) capture.output(expr, file = "NUL")
 
 
 test_that("unCalibrate", {
-  unCal1 <- unCalibrate(2350, type = "ages")
-  unCal2 <- unCalibrate(
+  co(unCal1 <- unCalibrate(2350, type = "ages"))
+  co(unCal2 <- unCalibrate(
     calAge = c(2350, 4750, 11440),
     calCurve = "shcal20",
     type = "ages"
-  )
+  ))
   calAge <- BchronCalibrate(
     ages = 11255,
     ageSds = 25,
     calCurves = "intcal20"
   )
   calSampleAges <- sampleAges(calAge)
-  unCalSamples <- unCalibrate(calSampleAges,
+  co(unCalSamples <- unCalibrate(calSampleAges,
     type = "samples"
-  )
+  ))
   expect_type(unCal1, "double")
   expect_type(unCal2, "double")
   expect_output(print(unCal1))

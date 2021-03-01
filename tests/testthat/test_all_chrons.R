@@ -1,6 +1,8 @@
+set.seed(123)
 library(Bchron)
+library(vdiffr)
+co <- function(expr) capture.output(expr, file = "NUL")
 
-# data(Glendalough) # Glendalough already tested in main functions
 # Test all the chronologies, including some which cause problems (and so are skipped on CI and CRAN)
 
 # Sluggan -----------------------------------------------------------------
@@ -9,7 +11,7 @@ library(Bchron)
 test_that("Sluggan", {
   data(Sluggan)
   expect_output(print(Sluggan))
-  run <- with(
+  co(run <- with(
     Sluggan,
     Bchronology(
       ages = ages,
@@ -23,13 +25,14 @@ test_that("Sluggan", {
       burn = 200,
       thin = 1
     )
-  )
+  ))
   expect_s3_class(run, "BchronologyRun")
   expect_output(summary(run, type = "quantiles"))
   expect_output(summary(run, type = "convergence"))
   expect_output(summary(run, type = "outliers"))
   expect_output(summary(run, type = "max_var"))
-  expect_s3_class(plot(run), "ggplot")
+  p <- plot(run)
+  expect_doppelganger("all_chrons_1", p)
 })
 
 
@@ -39,7 +42,7 @@ test_that("Sluggan", {
 test_that("TestChronData", {
   data(TestChronData)
   expect_output(print(TestChronData))
-  run <- with(
+  co(run <- with(
     TestChronData,
     Bchronology(
       ages = ages,
@@ -53,13 +56,14 @@ test_that("TestChronData", {
       burn = 200,
       thin = 1
     )
-  )
+  ))
   expect_s3_class(run, "BchronologyRun")
   expect_output(summary(run, type = "quantiles"))
   expect_output(summary(run, type = "convergence"))
   expect_output(summary(run, type = "outliers"))
   expect_output(summary(run, type = "max_var"))
-  expect_s3_class(plot(run), "ggplot")
+  p <- plot(run)
+  expect_doppelganger("all_chrons_2", p)
 })
 
 
@@ -147,7 +151,7 @@ test_that("Taphocoenose_Jan20", {
         "tbl", "data.frame"
       )
     )
-  run <- with(
+  co(run <- with(
     chron_df,
     Bchronology(
       ages = sim_age_round,
@@ -159,13 +163,14 @@ test_that("Taphocoenose_Jan20", {
       burn = 200,
       thin = 1
     )
-  )
+  ))
   expect_s3_class(run, "BchronologyRun")
   expect_output(summary(run, type = "quantiles"))
   expect_output(summary(run, type = "convergence"))
   expect_output(summary(run, type = "outliers"))
   expect_output(summary(run, type = "max_var"))
-  expect_s3_class(plot(run), "ggplot")
+  p <- plot(run)
+  expect_doppelganger("all_chrons_3", p)
 })
 
 
@@ -243,7 +248,7 @@ test_that("Kemp_Jan21", {
   )
 
   set.seed(344)
-  run <- with(
+  co(run <- with(
     RC_input,
     Bchronology(
       ages = ages,
@@ -258,14 +263,16 @@ test_that("Kemp_Jan21", {
       burn = 200,
       thin = 1
     )
-  )
+  ))
 
   expect_s3_class(run, "BchronologyRun")
   expect_output(summary(run, type = "quantiles"))
   expect_output(summary(run, type = "convergence"))
   expect_output(summary(run, type = "outliers"))
   expect_output(summary(run, type = "max_var"))
-  expect_s3_class(plot(run), "ggplot")
+  p <- plot(run)
+  expect_doppelganger("all_chrons_4", p)
+  
 })
 
 
@@ -335,7 +342,7 @@ test_that("Kemp_Jan21_part2", {
     "collector_guess",
     "collector"
   )), skip = 1L), class = "col_spec"))
-  run <- with(
+  co(run <- with(
     RC_input,
     Bchronology(
       ages = ages,
@@ -350,12 +357,14 @@ test_that("Kemp_Jan21_part2", {
       burn = 200,
       thin = 1
     )
-  )
+  ))
 
   expect_s3_class(run, "BchronologyRun")
   expect_output(summary(run, type = "quantiles"))
   expect_output(summary(run, type = "convergence"))
   expect_output(summary(run, type = "outliers"))
   expect_output(summary(run, type = "max_var"))
-  expect_s3_class(plot(run), "ggplot")
+  p <- plot(run)
+  expect_doppelganger("all_chrons_5", p)
+  
 })

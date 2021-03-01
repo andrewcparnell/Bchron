@@ -30,3 +30,5 @@ revdep/library.noindex
 revdep/data.sqlite
 doc
 Meta
+NUL
+tests/testthat/Rplots.pdf

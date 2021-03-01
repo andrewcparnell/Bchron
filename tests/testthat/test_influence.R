@@ -1,9 +1,11 @@
+set.seed(123)
 library(Bchron)
-
+library(vdiffr)
+co <- function(expr) capture.output(expr, file = "NUL")
 
 test_that("dateInfluence", {
   data(Glendalough)
-  GlenOut <- with(
+  co(GlenOut <- with(
     Glendalough,
     Bchronology(
       ages = ages,
@@ -17,10 +19,10 @@ test_that("dateInfluence", {
       burn = 20,
       thin = 1
     )
-  )
+  ))
 
   # Remove two dates
-  GlenOut_m2 <- Bchronology(
+  co(GlenOut_m2 <- Bchronology(
     ages = Glendalough$ages[-c(3:4)],
     ageSds = Glendalough$ageSds[-c(3:4)],
     calCurves = Glendalough$calCurves[-c(3:4)],
@@ -31,45 +33,51 @@ test_that("dateInfluence", {
     iterations = 100,
     burn = 20,
     thin = 1
-  )
+  ))
 
+  co(di1 <- dateInfluence(GlenOut,
+    whichDate = "Beta-100901",
+    measure = "absMedianDiff"
+  ))
   expect_type(
-    dateInfluence(GlenOut,
-      whichDate = "Beta-100901",
-      measure = "absMedianDiff"
-    ),
+    di1,
     "list"
   )
+  co(di2 <- dateInfluence(GlenOut,
+    whichDate = "Beta-100901",
+    measure = "KL"
+  ))
   expect_type(
-    dateInfluence(GlenOut,
-      whichDate = "Beta-100901",
-      measure = "KL"
-    ),
+    di2,
     "list"
   )
+  co(di3 <- dateInfluence(GlenOut,
+    whichDate = "Beta-100901",
+    measure = "absMeanDiff"
+  ))
   expect_type(
-    dateInfluence(GlenOut,
-      whichDate = "Beta-100901",
-      measure = "absMeanDiff"
-    ),
+    di3,
     "list"
   )
+  co(di4 <- dateInfluence(GlenOut,
+    whichDate = 4, measure = "absMeanDiff"
+  ))
   expect_type(
-    dateInfluence(GlenOut,
-      whichDate = 4, measure = "absMeanDiff"
-    ),
+    di4,
     "list"
   )
+  co(di5 <- dateInfluence(GlenOut,
+    whichDate = "all", measure = "KL"
+  ))
   expect_type(
-    dateInfluence(GlenOut,
-      whichDate = "all", measure = "KL"
-    ),
+    di5,
     "list"
   )
+  co(di6 <- dateInfluence(GlenOut,
+    whichDate = "internal", measure = "KL"
+  ))
   expect_type(
-    dateInfluence(GlenOut,
-      whichDate = "internal", measure = "KL"
-    ),
+    di6,
     "list"
   )
   expect_output(coreInfluence(GlenOut_m2,

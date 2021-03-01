@@ -1,10 +1,12 @@
 library(Bchron)
+library(vdiffr)
+co <- function(expr) capture.output(expr, file = "NUL")
 
 data(Glendalough)
 
 set.seed(100)
 
-GlenOut <- with(
+co(GlenOut <- with(
   Glendalough,
   Bchronology(
     ages = ages,
@@ -18,7 +20,7 @@ GlenOut <- with(
     burn = 20,
     thin = 1
   )
-)
+))
 
 test_that("Data sets", {
   expect_output(print(Glendalough))
@@ -36,17 +38,18 @@ test_that("summary.BchronologyRun", {
 })
 
 test_that("plot.BchronologyRun", {
-  expect_s3_class(plot(GlenOut), "ggplot")
+  p <- plot(GlenOut)
+  expect_doppelganger("Bchronology_plot", p)
 })
 
 test_that("predict.BchronologyRun", {
-  predictAges1 <- predict(GlenOut,
+  co(predictAges1 <- predict(GlenOut,
     newPositions = c(150, 725, 1500),
     newPositionThicknesses = c(5, 0, 20)
-  )
-  predictAges2 <- predict(GlenOut,
+  ))
+  co(predictAges2 <- predict(GlenOut,
     newPositions = seq(0, 1500, by = 10)
-  )
+  ))
   expect_type(predictAges1, "double")
   expect_type(predictAges2, "double")
   expect_false(any(is.na(predictAges1)))
@@ -54,25 +57,25 @@ test_that("predict.BchronologyRun", {
 })
 
 test_that("sedimentation and accumulation rates", {
-  acc_rate <- summary(GlenOut,
+  co(acc_rate <- summary(GlenOut,
     type = "acc_rate",
     probs = c(0.25, 0.5, 0.75)
-  )
-  sed_rate <- summary(GlenOut,
+  ))
+  co(sed_rate <- summary(GlenOut,
     type = "sed_rate", useExisting = FALSE,
     probs = c(0.25, 0.5, 0.75)
-  )
+  ))
   expect_type(acc_rate, "list")
   expect_type(sed_rate, "list")
 })
 
 test_that("choosePositions", {
   # Check choosing new positions
-  newPositions <- choosePositions(GlenOut, N = 3)
-  newPositions2 <- choosePositions(GlenOut,
+  co(newPositions <- choosePositions(GlenOut, N = 3))
+  co(newPositions2 <- choosePositions(GlenOut,
     N = 2,
     positions = seq(500, 700, by = 10)
-  )
+  ))
   expect_type(newPositions, "double")
   expect_type(newPositions2, "double")
   expect_false(any(is.na(newPositions)))
@@ -91,7 +94,7 @@ test_that("Bchronology prediction bug", {
   row.names = c(NA, -3L),
   class = c("tbl_df", "tbl", "data.frame")
   )
-  test_chron <- with(
+  co(test_chron <- with(
     df,
     Bchronology(
       ages = age,
@@ -103,6 +106,7 @@ test_that("Bchronology prediction bug", {
       burn = 20,
       thin = 1
     )
-  )
-  expect_true(all(summary(test_chron, type = "quantiles") < 6000))
+  ))
+  co(summ <- summary(test_chron, type = "quantiles"))
+  expect_true(all(summ < 6000))
 })
