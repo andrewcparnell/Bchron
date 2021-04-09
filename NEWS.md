@@ -6,6 +6,7 @@
   - Added an extra check that all ageSds are bigger than zero
   - Allowed the option for calibrating dates out of calibration curve range
   - Included vdiffr tests for plots
+  - Fixed bug that occurred with large 14C values close to upper range of calibration curve
 
 # Bchron 4.7.4
 

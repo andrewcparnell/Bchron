@@ -368,3 +368,68 @@ test_that("Kemp_Jan21_part2", {
   expect_doppelganger("all_chrons_5", p)
   
 })
+
+
+# New Bchron problem - #17 issue ------------------------------------------
+
+test_that("Gregor_Github17_20210408", {
+  skip_on_ci()
+  skip_on_cran()
+  
+  set.seed(210308)
+  Bchron_Frame <- structure(list(id = c(
+    "Co1412 0", "Co1412 51.5", "Co1412 98.5",
+    "Co1412 168.6", "Co1412 253.5", "Co1412 253.5", "Co1412 258.5",
+    "Co1412 258.5", "Co1412 279.5", "Co1412 286.5", "Co1412 306",
+    "Co1412 345.5", "Co1412 386.5", "Co1412 416", "Co1412 465", "Co1412 465",
+    "Co1412 502.5"
+  ), ages = c(
+    -67L, 4695L, 9269L, 14592L, 19804L,
+    27720L, 45423L, 25750L, 31375L, 44198L, 45769L, 32400L, 39299L,
+    48128L, 49559L, 39810L, 46886L
+  ), ageSds = c(
+    5L, 167L, 285L, 540L,
+    1026L, 140L, 1480L, 180L, 238L, 442L, 363L, 220L, 321L, 2304L,
+    2402L, 410L, 1762L
+  ), position = c(
+    0, 51.5, 98.5, 168.6, 253.5,
+    253.5, 258.5, 258.5, 279.5, 286.5, 306, 345.5, 386.5, 416, 465,
+    465, 502.5
+  ), thickness = c(
+    0L, 1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L,
+    1L, 1L, 1L, 1L, 1L, 1L, 1L, 1L
+  ), calCurves = c(
+    "normal", "intcal20",
+    "intcal20", "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+    "intcal20", "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+    "intcal20", "intcal20", "intcal20"
+  )), class = "data.frame", row.names = c(
+    NA,
+    -17L
+  ))
+  
+  # test <- BchronCalibrate(ages = 46886L, ageSds = 1762L)
+  # plot(test, includeCal = TRUE, dateHeight = 500)
+    
+  co(run <- Bchronology(ages = Bchron_Frame$ages,
+                    ageSds = Bchron_Frame$ageSds,
+                    calCurves = Bchron_Frame$calCurves,
+                    positions = Bchron_Frame$position,
+                    positionThickness = Bchron_Frame$thickness,
+                    ids = Bchron_Frame$id,
+                    jitterPositions = TRUE,
+                    iterations = 15000,
+                    burn = 5000,
+                    thin = 1,
+                    predictPositions = seq(min(Bchron_Frame$position),max(Bchron_Frame$position), by = 1)))
+  expect_s3_class(run, "BchronologyRun")
+  expect_output(summary(run, type = "quantiles"))
+  expect_output(summary(run, type = "convergence"))
+  expect_output(summary(run, type = "outliers"))
+  expect_output(summary(run, type = "max_var"))
+  p <- plot(run)
+  expect_doppelganger("all_chrons_6", p)
+  
+  
+  
+})

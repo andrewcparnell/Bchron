@@ -395,7 +395,8 @@ Bchronology <- function(ages,
           sd = ageSds[j] / ageScaleVal,
           # low = extractDate / ageScaleVal,
           low = min(x.df2[[j]]$ageGrid) / ageScaleVal,
-          high = 1e9
+          #high = 1e9
+          high = max(x.df2[[j]]$ageGrid) / ageScaleVal
         )$new,
         digits = 3
       )
@@ -560,11 +561,15 @@ Bchronology <- function(ages,
         j == 1,
         ifelse(x.df1[[j]]$calCurve == "normal",
           extractDate / ageScaleVal,
-          min(x.df1[[j]]$ageGrid)
+          min(x.df1[[j]]$ageGrid) / ageScaleVal
         ),
         theta[do[j - 1]] + 0.001
       )
-      upperLimit <- ifelse(j == n, 100000, theta[do[j + 1]] - 0.001)
+      #upperLimit <- ifelse(j == n, 100000, theta[do[j + 1]] - 0.001)
+      upperLimit <- ifelse(j == n, 
+                           max(x.df1[[j]]$ageGrid) / ageScaleVal, 
+                           theta[do[j + 1]] - 0.001)
+      
       thetaNewAll <- truncatedWalk(
         theta[do[j]],
         thetaMhSd,
