@@ -1,5 +1,5 @@
 ## Test environments
-* local OS X install, R 4.0.3
+* local OS X install, R 4.0.5
 * GitHub Actions
 * rhub
 * win-builder (devel and release)

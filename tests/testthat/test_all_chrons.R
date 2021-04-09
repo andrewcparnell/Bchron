@@ -272,7 +272,6 @@ test_that("Kemp_Jan21", {
   expect_output(summary(run, type = "max_var"))
   p <- plot(run)
   expect_doppelganger("all_chrons_4", p)
-  
 })
 
 
@@ -366,7 +365,6 @@ test_that("Kemp_Jan21_part2", {
   expect_output(summary(run, type = "max_var"))
   p <- plot(run)
   expect_doppelganger("all_chrons_5", p)
-  
 })
 
 
@@ -375,7 +373,7 @@ test_that("Kemp_Jan21_part2", {
 test_that("Gregor_Github17_20210408", {
   skip_on_ci()
   skip_on_cran()
-  
+
   set.seed(210308)
   Bchron_Frame <- structure(list(id = c(
     "Co1412 0", "Co1412 51.5", "Co1412 98.5",
@@ -407,21 +405,23 @@ test_that("Gregor_Github17_20210408", {
     NA,
     -17L
   ))
-  
+
   # test <- BchronCalibrate(ages = 46886L, ageSds = 1762L)
   # plot(test, includeCal = TRUE, dateHeight = 500)
-    
-  co(run <- Bchronology(ages = Bchron_Frame$ages,
-                    ageSds = Bchron_Frame$ageSds,
-                    calCurves = Bchron_Frame$calCurves,
-                    positions = Bchron_Frame$position,
-                    positionThickness = Bchron_Frame$thickness,
-                    ids = Bchron_Frame$id,
-                    jitterPositions = TRUE,
-                    iterations = 15000,
-                    burn = 5000,
-                    thin = 1,
-                    predictPositions = seq(min(Bchron_Frame$position),max(Bchron_Frame$position), by = 1)))
+
+  co(run <- Bchronology(
+    ages = Bchron_Frame$ages,
+    ageSds = Bchron_Frame$ageSds,
+    calCurves = Bchron_Frame$calCurves,
+    positions = Bchron_Frame$position,
+    positionThickness = Bchron_Frame$thickness,
+    ids = Bchron_Frame$id,
+    jitterPositions = TRUE,
+    iterations = 15000,
+    burn = 5000,
+    thin = 1,
+    predictPositions = seq(min(Bchron_Frame$position), max(Bchron_Frame$position), by = 1)
+  ))
   expect_s3_class(run, "BchronologyRun")
   expect_output(summary(run, type = "quantiles"))
   expect_output(summary(run, type = "convergence"))
@@ -429,7 +429,56 @@ test_that("Gregor_Github17_20210408", {
   expect_output(summary(run, type = "max_var"))
   p <- plot(run)
   expect_doppelganger("all_chrons_6", p)
-  
-  
-  
+})
+
+# New Bchron problem - #17 issue - part 2 ------------------------------------------
+
+test_that("Gregor_Github17_20210408_b", {
+  skip_on_ci()
+  skip_on_cran()
+
+  set.seed(210308)
+  Bchron_Frame <- structure(list(id = c(
+    "PG1975 0", "PG1975 0.25", "PG1975 0.25",
+    "PG1975 44.75", "PG1975 44.75", "PG1975 90.25", "PG1975 90.25",
+    "PG1975 134.5", "PG1975 134.5"
+  ), ages = c(
+    -59L, 2980L, 2980L,
+    7090L, 6190L, 6240L, 5740L, 9580L, 6790L
+  ), ageSds = c(
+    5L, 35L,
+    35L, 50L, 40L, 50L, 40L, 35L, 30L
+  ), position = c(
+    0, 0.25, 0.25,
+    44.75, 44.75, 90.25, 90.25, 134.5, 134.5
+  ), thickness = c(
+    0, 0.5,
+    0.5, 0.5, 0.5, 0.5, 0.5, 1, 1
+  ), calCurves = c(
+    "normal", "intcal20",
+    "intcal20", "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+    "intcal20"
+  )), class = "data.frame", row.names = c(NA, -9L))
+
+  # test <- BchronCalibrate(ages = 46886L, ageSds = 1762L)
+  # plot(test, includeCal = TRUE, dateHeight = 500)
+
+  co(run <- Bchronology(
+    ages = Bchron_Frame$ages,
+    ageSds = Bchron_Frame$ageSds,
+    calCurves = Bchron_Frame$calCurves,
+    positions = Bchron_Frame$position,
+    positionThickness = Bchron_Frame$thickness,
+    ids = Bchron_Frame$id,
+    jitterPositions = TRUE,
+    iterations = 15000,
+    burn = 5000,
+    thin = 1,
+    predictPositions = seq(min(Bchron_Frame$position), max(Bchron_Frame$position), by = 1)
+  ))
+  expect_s3_class(run, "BchronologyRun")
+  expect_output(summary(run, type = "quantiles"))
+  expect_output(summary(run, type = "convergence"))
+  expect_output(summary(run, type = "outliers"))
+  expect_output(summary(run, type = "max_var"))
 })
