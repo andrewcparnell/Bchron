@@ -381,39 +381,67 @@ Bchronology <- function(ages,
 
   # Starting values ---------------------------------------------------------
 
-  # Starting values
-  theta <- vector(length = n)
-  # Make sure no theta values are identical
-  badThetas <- TRUE
-
-  while (badThetas) {
-    for (j in 1:n) {
-      # Use truncatedWalk to get new values to avoid going outside range of extractDate
-      theta[j] <- round(
-        truncatedWalk(
-          old = x.df2[[j]]$ageGrid[match(max(x.df2[[j]]$densities), x.df2[[j]]$densities)] / ageScaleVal,
-          sd = ageSds[j] / ageScaleVal,
-          # low = extractDate / ageScaleVal,
-          low = min(x.df2[[j]]$ageGrid) / ageScaleVal,
-          #high = 1e9
-          high = max(x.df2[[j]]$ageGrid) / ageScaleVal
-        )$new,
-        digits = 3
-      )
-      # OLD VERSION USING RNORM
-      # theta[j] <- round(
-      #   stats::rnorm(n = 1,
-      #                mean = x.df2[[j]]$ageGrid[match(max(x.df2[[j]]$densities), x.df2[[j]]$densities)] /ageScaleVal,
-      #     sd = ageSds[j] / ageScaleVal),
-      #   digits = 3
-      # )
-    }
-    theta <- sort(theta)
-    if (all(diff(theta) != 0)) {
-      badThetas <- FALSE
-    }
+  thetaStart <- vector(length = 2)
+  val <- 1
+  for(j in c(1, n)) {
+    thetaStart[val] <- round(
+      truncatedWalk(
+        old = x.df2[[j]]$ageGrid[match(max(x.df2[[j]]$densities), x.df2[[j]]$densities)] / ageScaleVal,
+        sd = ageSds[j] / ageScaleVal,
+        # low = extractDate / ageScaleVal,
+        low = min(x.df2[[j]]$ageGrid) / ageScaleVal,
+        #high = 1e9
+        high = max(x.df2[[j]]$ageGrid) / ageScaleVal
+      )$new,
+      digits = 3
+    )
+    val <- val + 1
   }
-
+  theta <- seq(thetaStart[1], thetaStart[2], length = n)
+  #theta <- sort(runif(n, thetaStart[1], thetaStart[2]))
+  
+  # # Starting values
+  # theta <- vector(length = n)
+  # # Make sure no theta values are identical
+  # badThetas <- TRUE
+  # 
+  # while (badThetas) {
+  #   for (j in 1:n) {
+  #     # Use truncatedWalk to get new values to avoid going outside range of extractDate
+  #     theta[j] <- round(
+  #       truncatedWalk(
+  #         old = x.df2[[j]]$ageGrid[match(max(x.df2[[j]]$densities), x.df2[[j]]$densities)] / ageScaleVal,
+  #         sd = ageSds[j] / ageScaleVal,
+  #         # low = extractDate / ageScaleVal,
+  #         low = min(x.df2[[j]]$ageGrid) / ageScaleVal,
+  #         #high = 1e9
+  #         high = max(x.df2[[j]]$ageGrid) / ageScaleVal
+  #       )$new,
+  #       digits = 3
+  #     )
+  #     # OLD VERSION USING RNORM
+  #     # theta[j] <- round(
+  #     #   stats::rnorm(n = 1,
+  #     #                mean = x.df2[[j]]$ageGrid[match(max(x.df2[[j]]$densities), x.df2[[j]]$densities)] /ageScaleVal,
+  #     #     sd = ageSds[j] / ageScaleVal),
+  #     #   digits = 3
+  #     # )
+  #   }
+  #   theta <- sort(theta)
+  #   # Check that these thetas have a valid set of density values
+  #   for (j in 1:n) {
+  #     # x.df2[[do[j]]]$densities
+  #     currDens <- x.df2[[do[j]]]$densities
+  #     thetaMatch <- as.integer(theta[do[j]] * ageScaleVal + offset[do[j]]) +
+  #       1
+  #     thetaLogDens <- log(currDens[thetaMatch])
+  #     if(is.na(thetaLogDens)) stop("Bad initial values. Try setting new values with thetaStart")
+  #   }
+  #   if (all(diff(theta) != 0)) {
+  #     badThetas <- FALSE
+  #   }
+  # }
+  
   phi <- rep(0, length(theta))
   p <- 1.2
   mu <- abs(stats::rnorm(

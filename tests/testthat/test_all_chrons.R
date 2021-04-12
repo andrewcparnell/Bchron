@@ -417,8 +417,8 @@ test_that("Gregor_Github17_20210408", {
     positionThickness = Bchron_Frame$thickness,
     ids = Bchron_Frame$id,
     jitterPositions = TRUE,
-    iterations = 15000,
-    burn = 5000,
+    iterations = 1500,
+    burn = 500,
     thin = 1,
     predictPositions = seq(min(Bchron_Frame$position), max(Bchron_Frame$position), by = 1)
   ))
@@ -471,11 +471,78 @@ test_that("Gregor_Github17_20210408_b", {
     positionThickness = Bchron_Frame$thickness,
     ids = Bchron_Frame$id,
     jitterPositions = TRUE,
-    iterations = 15000,
-    burn = 5000,
+    iterations = 1500,
+    burn = 500,
     thin = 1,
     predictPositions = seq(min(Bchron_Frame$position), max(Bchron_Frame$position), by = 1)
   ))
+  expect_s3_class(run, "BchronologyRun")
+  expect_output(summary(run, type = "quantiles"))
+  expect_output(summary(run, type = "convergence"))
+  expect_output(summary(run, type = "outliers"))
+  expect_output(summary(run, type = "max_var"))
+})
+
+# New Bchron problem - #17 issue - part 3 ------------------------------------------
+
+test_that("Gregor_Github17_20210408_b", {
+  skip_on_ci()
+  skip_on_cran()
+
+  set.seed(-1673826857L)
+  Bchron_Frame <- structure(list(id = c(
+    "PG1755 0", "PG1755 37.5", "PG1755 57.5",
+    "PG1755 78.75", "PG1755 108.5", "PG1755 128.5", "PG1755 133",
+    "PG1755 151", "PG1755 155", "PG1755 168.5", "PG1755 181", "PG1755 194.5",
+    "PG1755 197", "PG1755 199.5", "PG1755 214", "PG1755 214.5", "PG1755 249.25",
+    "PG1755 287", "PG1755 291", "PG1755 424", "PG1755 532", "PG1755 599",
+    "PG1755 707", "PG1755 725", "PG1755 750", "PG1755 770", "PG1755 811",
+    "PG1755 842", "PG1755 854", "PG1755 899.5", "PG1755 915", "PG1755 934"
+  ), ages = c(
+    -55L, 3500L, 4429L, 5698L, 8296L, 10150L, 9450L,
+    18150L, 14339L, 16627L, 33688L, 17999L, 18680L, 18172L, 21490L,
+    18954L, 19267L, 22960L, 20969L, 25207L, 27220L, 30610L, 30400L,
+    42400L, 43000L, 41632L, 42121L, 52300L, 41436L, 37949L, 47300L,
+    36140L
+  ), ageSds = c(
+    5L, 47L, 47L, 48L, 49L, 50L, 40L, 120L, 54L,
+    57L, 150L, 59L, 120L, 59L, 110L, 63L, 62L, 230L, 68L, 82L, 200L,
+    119L, 500L, 375L, 900L, 344L, 359L, 3100L, 335L, 236L, 1700L,
+    197L
+  ), position = c(
+    0, 37.5, 57.5, 78.75, 108.5, 128.5, 133,
+    151, 155, 168.5, 181, 194.5, 197, 199.5, 214, 214.5, 249.25,
+    287, 291, 424, 532, 599, 707, 725, 750, 770, 811, 842, 854, 899.5,
+    915, 934
+  ), thickness = c(
+    0, 0.5, 0.5, 0.5, 0.5, 0.5, 1, 1, 0.5,
+    0.5, 0.5, 0.5, 1, 0.5, 1, 0.5, 0.5, 1, 0.5, 0.5, 1, 0.5, 1, 0.5,
+    1, 0.5, 0.5, 1, 0.5, 0.5, 1, 0.5
+  ), calCurves = c(
+    "normal", "intcal20",
+    "intcal20", "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+    "intcal20", "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+    "intcal20", "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+    "intcal20", "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+    "intcal20", "normal", "intcal20", "intcal20", "intcal20", "intcal20"
+  )), class = "data.frame", row.names = c(NA, -32L))
+  # Bchron_Frame = Bchron_Frame %>% arrange(desc(position))
+  # test <- BchronCalibrate(ages = 46886L, ageSds = 1762L)
+  # plot(test, includeCal = TRUE, dateHeight = 500)
+
+  run <- Bchronology(
+    ages = Bchron_Frame$ages,
+    ageSds = Bchron_Frame$ageSds,
+    calCurves = Bchron_Frame$calCurves,
+    positions = Bchron_Frame$position,
+    positionThickness = Bchron_Frame$thickness,
+    ids = Bchron_Frame$id,
+    jitterPositions = TRUE,
+    iterations = 1500,
+    burn = 500,
+    thin = 1,
+    predictPositions = seq(min(Bchron_Frame$position), max(Bchron_Frame$position), by = 1)
+  )
   expect_s3_class(run, "BchronologyRun")
   expect_output(summary(run, type = "quantiles"))
   expect_output(summary(run, type = "convergence"))

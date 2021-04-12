@@ -3,7 +3,7 @@ Type: Package
 Title: Radiocarbon Dating, Age-Depth Modelling, Relative Sea Level Rate
     Estimation, and Non-Parametric Phase Modelling
 Version: 4.7.5
-Date: 2021-04-09
+Date: 2021-04-11
 URL: https://andrewcparnell.github.io/Bchron/
 BugReports: https://github.com/andrewcparnell/Bchron/issues
 Depends:
