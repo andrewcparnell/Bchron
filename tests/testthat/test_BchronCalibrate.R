@@ -78,11 +78,11 @@ test_that("summary.BchronologyRun works", {
 
 test_that("plot.BchronCalibrate works", {
   p <- plot(ages1)
-  expect_doppelganger('calibration_basic', p)
+  expect_doppelganger("calibration_basic", p)
   expect_type(plot(ages2), "list")
   p <- plot(ages2, date = 1)
-  expect_doppelganger('calibration_multiple_by_num', p)
-  p <- plot(ages2,  date = "Date1")
+  expect_doppelganger("calibration_multiple_by_num", p)
+  p <- plot(ages2, date = "Date1")
   expect_doppelganger("calibration_multiple_by_name", p)
   expect_type(plot(ages2, date = c("Date1", "Date2")), "list")
   expect_error(plot(ages2, date = "5"))

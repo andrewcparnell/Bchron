@@ -21,6 +21,7 @@ Bchronology(
   thin = 8,
   extractDate = 1950 - as.numeric(format(Sys.time(), "\%Y")),
   maxExtrap = 1000,
+  thetaStart = NULL,
   thetaMhSd = 0.5,
   muMhSd = 0.1,
   psiMhSd = 0.1,
@@ -61,6 +62,8 @@ Bchronology(
 \item{extractDate}{The top age of the core. Used for extrapolation purposes so that no extrapolated ages go beyond the top age of the core. Defaults to the current year}
 
 \item{maxExtrap}{The maximum number of extrapolations to perform before giving up and setting the predicted ages to NA. Useful for when large amounts of extrapolation are required, i.e. some of the \code{predictPositions} are a long way from the dated positions}
+
+\item{thetaStart}{Starting values for the calibrated dates. Only required if Bchron is struggling to choose a stratigraphically aligned set of starting values that satisfies the ranges of the chosen calibration curves}
 
 \item{thetaMhSd}{The Metropolis-Hastings standard deviation for the age parameters}
 

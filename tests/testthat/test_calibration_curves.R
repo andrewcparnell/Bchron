@@ -26,7 +26,6 @@ test_that("marine13 data correct", {
   expect_true(ncol(marine13) == 5)
   p <- function() plot(marine13[, 1], marine13[, 2])
   expect_doppelganger("calcurve_marine13_data_correct", p)
-  
 })
 
 test_that("marine20 data correct", {
