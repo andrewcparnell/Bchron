@@ -63,7 +63,7 @@ Bchronology(
 
 \item{maxExtrap}{The maximum number of extrapolations to perform before giving up and setting the predicted ages to NA. Useful for when large amounts of extrapolation are required, i.e. some of the \code{predictPositions} are a long way from the dated positions}
 
-\item{thetaStart}{Starting values for the calibrated dates. Only required if Bchron is struggling to choose a stratigraphically aligned set of starting values that satisfies the ranges of the chosen calibration curves}
+\item{thetaStart}{A set of starting values for the calendar ages estimated by Bchron. If NULL uses a function to estimate the ages}
 
 \item{thetaMhSd}{The Metropolis-Hastings standard deviation for the age parameters}
 

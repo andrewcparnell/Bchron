@@ -23,8 +23,15 @@ Imports:
     stringr,
     checkmate
 Encoding: UTF-8
-Author: Andrew Parnell
-Maintainer: Andrew Parnell <Andrew.Parnell@mu.ie>
+Authors@R: c(
+    person("Andrew", "Parnell", email = "andrew.parnell@mu.ie", role = c("cre", "aut")),
+    person("Nathan", "McJames", role = "ctb"),
+    person("Bruna", "Wundervald", role = "ctb"),
+    person("Keefe", "Murphy", role = "ctb"),
+    person("Mateus", "Maia", role = "ctb"),
+    person("Amin", "Shoari Nejad", role = "ctb"),
+    person("Yong Chen", "Goh", role = "ctb")
+    )
 Description: Enables quick calibration of radiocarbon dates under various 
   calibration curves (including user generated ones); age-depth modelling 
   as per the algorithm of Haslett and Parnell (2008) <DOI:10.1111/j.1467-9876.2008.00623.x>; Relative sea level 

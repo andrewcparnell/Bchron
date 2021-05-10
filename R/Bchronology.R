@@ -13,7 +13,7 @@
 #' @param thin The step size for every iteration to keep beyond the burn-in
 #' @param extractDate The top age of the core. Used for extrapolation purposes so that no extrapolated ages go beyond the top age of the core. Defaults to the current year
 #' @param maxExtrap The maximum number of extrapolations to perform before giving up and setting the predicted ages to NA. Useful for when large amounts of extrapolation are required, i.e. some of the \code{predictPositions} are a long way from the dated positions
-#' @param thetaStart Starting values for the calibrated dates. Only required if Bchron is struggling to choose a stratigraphically aligned set of starting values that satisfies the ranges of the chosen calibration curves
+#' @param thetaStart A set of starting values for the calendar ages estimated by Bchron. If NULL uses a function to estimate the ages
 #' @param thetaMhSd The Metropolis-Hastings standard deviation for the age parameters
 #' @param muMhSd The Metropolis-Hastings standard deviation for the Compound Poisson-Gamma mean
 #' @param psiMhSd The Metropolis-Hastings standard deviation for the Compound Poisson-Gamma scale
@@ -213,6 +213,31 @@ Bchronology <- function(ages,
     dfs = rep(dfs[2], length(ages))
   )
 
+  # Finally - need to make sure that all calibrated dates have the same ageGrids
+  # This is to avoid the situation where the depth order swaps and you end up
+  # with ages that run outside their calibration curve ranges
+  # The densities outside this range are set to zero
+  range1 <- range(lapply(x.df1, "[", "ageGrid"))
+  range2 <- range(lapply(x.df2, "[", "ageGrid"))
+  masterAgeGrid1 <- seq(min(range1), max(range1), by = 1)
+  masterAgeGrid2 <- seq(min(range2), max(range2), by = 1)
+  for (j in 1:length(x.df1)) {
+    if (!setequal(x.df1[[j]]$ageGrid, masterAgeGrid1)) {
+      currAgeGrid <- x.df1[[j]]$ageGrid
+      currDensities <- x.df1[[j]]$densities
+      x.df1[[j]]$densities <- rep(0, length(masterAgeGrid1))
+      x.df1[[j]]$densities[match(x.df1[[j]]$ageGrid, masterAgeGrid1)] <- currDensities
+      x.df1[[j]]$ageGrid <- masterAgeGrid1
+    }
+    if (!setequal(x.df2[[j]]$ageGrid, masterAgeGrid2)) {
+      currAgeGrid <- x.df2[[j]]$ageGrid
+      currDensities <- x.df2[[j]]$densities
+      x.df2[[j]]$densities <- rep(0, length(masterAgeGrid2))
+      x.df2[[j]]$densities[match(x.df2[[j]]$ageGrid, masterAgeGrid2)] <- currDensities
+      x.df2[[j]]$ageGrid <- masterAgeGrid2
+    }
+  }
+
   # Function to find decimal places of positions
   decimalplaces <- Vectorize(function(x) {
     if ((x %% 1) != 0) {
@@ -221,6 +246,8 @@ Bchronology <- function(ages,
       return(0)
     }
   })
+
+
 
 
   # Jitter positions --------------------------------------------------------
@@ -244,11 +271,9 @@ Bchronology <- function(ages,
   diffPosition <- diff(currPositions)
   do <- order(currPositions)
 
-  # For any calibration curves that don't start at 0, we need an offset to enable fast lookup - only supported one so far is normal
-  offset <- rep(0, length = n)
-  for (i in 1:n) {
-    offset[i] <- ifelse(x.df1[[i]]$calCurve == "normal", 100, 0)
-  }
+  # For all dates we need an offset to enable fast lookup
+  # The offset will be the same for all if we're using a master ageGrid
+  offset <- rep(-min(x.df1[[1]]$ageGrid), length = n)
 
   # Useful C functions ------------------------------------------------------
 
@@ -383,80 +408,35 @@ Bchronology <- function(ages,
 
   # Starting values ---------------------------------------------------------
 
-  if(is.null(thetaStart)) {
-    ageGrids <- lapply(x.df2, "[", "ageGrid")
-    ranges <- do.call(rbind, lapply(ageGrids, range)) / ageScaleVal
-    # Now need to find a sequence of sampled values that satisfies each of these ranges
-    thetaStart <- vector(length = n)
-    badTheta <- TRUE
-    badCount <- 1
-    while (badTheta) {
-      thetaStart[1] <- round(
-        truncatedWalk(
-          old = x.df2[[1]]$ageGrid[match(max(x.df2[[1]]$densities), 
-                                         x.df2[[1]]$densities)] / ageScaleVal,
-          sd = ageSds[1] / ageScaleVal,
-          low = min(x.df2[[1]]$ageGrid) / ageScaleVal,
-          high = max(x.df2[[1]]$ageGrid) / ageScaleVal    
-        )$new,
-        digits = 3
-      )
-      browser()
-      for (j in 2:n) {
-        mid <- 
-        low <- max(thetaStart[j-1], min(x.df2[[j]]$ageGrid) / ageScaleVal)
-        high <- max(x.df2[[j]]$ageGrid) / ageScaleVal    
-        if(high < low) stop()
-        thetaStart[j] <- round(
-          truncatedWalk(
-            old = x.df2[[j]]$ageGrid[match(max(x.df2[[j]]$densities), 
-                                           x.df2[[j]]$densities)] / ageScaleVal,
-            sd = ageSds[j] / ageScaleVal,
-            low = low,
-            high = high
-          )$new,
-          digits = 3
-        )
-      }
-        
-        
-      
-      for (j in 1:n) {
-        browser()
-        thetaStart[j] <- round(
-          truncatedWalk(
-            old = x.df2[[j]]$ageGrid[match(max(x.df2[[j]]$densities), x.df2[[j]]$densities)] / ageScaleVal,
-            sd = ageSds[j] / ageScaleVal,
-            low = max(min(x.df2[[j]]$ageGrid) / ageScaleVal,
-                      ifelse(j==1, extractDate / ageScaleVal, 
-                             thetaStart[j-1])),
-            high = max(x.df2[[j]]$ageGrid) / ageScaleVal    
-          )$new,
-          digits = 3
-        )
-      }
-      
-      thetaStart <- sort(thetaStart)
-      
-      # Check this satisfies the ranges
-      if (all(pmax(ranges[, 1], thetaStart) == thetaStart) &
-          all(pmin(ranges[, 2], thetaStart) == thetaStart)) {
-        badThetas <- FALSE
+  # Written by Nathan McJames - calculate starting values
+  if (is.null(thetaStart)) {
+    thetaStart <- function(a, b, ageGrids, ageDensities) {
+      minbs <- rev(cummin(rev(b)))
+      maxas <- cummax(a)
+      if (any(minbs < maxas)) {
+        stop("Invalid starting values. Use the thetaStart argument to specify valid starting calendar ages")
       } else {
-        cat("Problem starting dates are:\n")
-        if(any(pmax(ranges[, 1], thetaStart) != thetaStart)) {
-          print(names(which(pmax(ranges[, 1], thetaStart) != thetaStart)))  
+        raw_soln <- rep(NA, length(b))
+        for (u in 1:length(b)) {
+          currAgeGrid <- ageGrids[[u]]$ageGrid / ageScaleVal
+          currDensities <- ageDensities[[u]]$densities
+          raw_soln[u] <- sample(
+            x = currAgeGrid[currAgeGrid > maxas[u] & currAgeGrid < minbs[u]],
+            size = 1,
+            prob = currDensities[currAgeGrid > maxas[u] & currAgeGrid < minbs[u]]
+          )
         }
-        if(any(pmin(ranges[, 2], thetaStart) != thetaStart)) {
-          print(names(which(pmin(ranges[, 2], thetaStart) != thetaStart)))
-        }
-        cat("Trying new starting values...\n\n")
+        soln <- sort(raw_soln)
+        if (any(diff(soln) < 1e-4)) stop("Invalid starting values. Use the thetaStart argument to specify valid starting calendar ages")
+        return(sort(soln))
       }
-      badCount <- badCount + 1
-      if(badCount == 200) stop("Initial values cannot be found for these data. Please specify initial values using the thetaStart argument that are in stratigraphic order and satisfy the calibration curve ranges.")
     }
+    ageGrids <- lapply(x.df2, "[", "ageGrid")
+    ageDensities <- lapply(x.df2, "[", "densities")
+    ranges <- do.call(rbind, lapply(ageGrids, range)) / ageScaleVal
+    theta <- thetaStart(ranges[, 1], ranges[, 2], ageGrids, ageDensities)
   }
-  
+
   # Other starting values
   phi <- rep(0, length(theta))
   p <- 1.2
@@ -659,7 +639,6 @@ Bchronology <- function(ages,
         mu * (diffPosition[j]),
         psi / (diffPosition[j])^(p - 1)
       )))
-
       logRtheta <- thetaNewLogDens - thetaLogDens + priorNewLogDens - priorLogDens + log(thetaNewAll$rat)
       if (stats::runif(1) < exp(logRtheta)) {
         theta[do[j]] <- thetaNew

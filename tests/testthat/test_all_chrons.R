@@ -530,7 +530,7 @@ test_that("Gregor_Github17_20210408_b", {
   # test <- BchronCalibrate(ages = 46886L, ageSds = 1762L)
   # plot(test, includeCal = TRUE, dateHeight = 500)
 
-  run <- Bchronology(
+  co(run <- Bchronology(
     ages = Bchron_Frame$ages,
     ageSds = Bchron_Frame$ageSds,
     calCurves = Bchron_Frame$calCurves,
@@ -542,7 +542,69 @@ test_that("Gregor_Github17_20210408_b", {
     burn = 500,
     thin = 1,
     predictPositions = seq(min(Bchron_Frame$position), max(Bchron_Frame$position), by = 1)
-  )
+  ))        
+  expect_s3_class(run, "BchronologyRun")
+  expect_output(summary(run, type = "quantiles"))
+  expect_output(summary(run, type = "convergence"))
+  expect_output(summary(run, type = "outliers"))
+  expect_output(summary(run, type = "max_var"))
+})
+
+# New Bchron problem - #17 issue - part 3 ------------------------------------------
+
+test_that("Gregor_Github17_20210408_c", {
+  skip_on_ci()
+  skip_on_cran()
+
+  set.seed(10407L)
+  Bchron_Frame <- structure(list(id = c(
+    "PG1238 0", "PG1238 14", "PG1238 20.8",
+    "PG1238 200.8", "PG1238 261", "PG1238 307.8", "PG1238 361", "PG1238 613",
+    "PG1238 714.8", "PG1238 773", "PG1238 773", "PG1238 811.8", "PG1238 841.8",
+    "PG1238 863", "PG1238 885", "PG1238 926", "PG1238 962.8", "PG1238 965",
+    "PG1238 994.75", "PG1238 996.8", "PG1238 1005.75"
+  ), ages = c(
+    -46L,
+    10922L, 4400L, 4030L, 8189L, 5120L, 9253L, 6020L, 12110L, 11377L,
+    18434L, 19200L, 20500L, 24170L, 22953L, 27400L, 33400L, 25570L,
+    34000L, 5300L, 84000L
+  ), ageSds = c(
+    5L, 153L, 380L, 420L, 354L,
+    680L, 71L, 100L, 680L, 85L, 118L, 1300L, 910L, 160L, 161L, 220L,
+    2100L, 220L, 4000L, 3000L, 6000L
+  ), position = c(
+    0, 14, 20.8,
+    200.8, 261, 307.8, 361, 613, 714.8, 773, 773, 811.8, 841.8, 863,
+    885, 926, 962.8, 965, 994.75, 996.8, 1005.75
+  ), thickness = c(
+    0,
+    6, 1, 1, 6, 1, 2, 6, 1, 6, 6, 1, 1, 2, 6, 4, 1, 6, 9.5, 1, 10.5
+  ), calCurves = c(
+    "normal", "intcal20", "normal", "normal", "intcal20",
+    "normal", "intcal20", "intcal20", "normal", "intcal20", "intcal20",
+    "normal", "normal", "marine20", "intcal20", "marine20", "normal",
+    "marine20", "normal", "normal", "normal"
+  )), class = "data.frame", row.names = c(
+    NA,
+    -21L
+  ))
+  # Bchron_Frame = Bchron_Frame %>% arrange(desc(position))
+  # test <- BchronCalibrate(ages = 46886L, ageSds = 1762L)
+  # plot(test, includeCal = TRUE, dateHeight = 500)
+
+  co(run <- Bchronology(
+    ages = Bchron_Frame$ages,
+    ageSds = Bchron_Frame$ageSds,
+    calCurves = Bchron_Frame$calCurves,
+    positions = Bchron_Frame$position,
+    positionThickness = Bchron_Frame$thickness,
+    ids = Bchron_Frame$id,
+    jitterPositions = TRUE,
+    iterations = 1500,
+    burn = 500,
+    thin = 1,
+    predictPositions = seq(min(Bchron_Frame$position), max(Bchron_Frame$position), by = 1)
+  ))
   expect_s3_class(run, "BchronologyRun")
   expect_output(summary(run, type = "quantiles"))
   expect_output(summary(run, type = "convergence"))

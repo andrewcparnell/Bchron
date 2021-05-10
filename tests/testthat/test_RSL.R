@@ -7,22 +7,24 @@ co <- function(expr) capture.output(expr, file = "NUL")
 data(TestChronData)
 data(TestRSLData)
 
-co(RSLchron <- with(
-  TestChronData,
-  Bchronology(
-    ages = ages,
-    ageSds = ageSds,
-    positions = position,
-    positionThicknesses = thickness,
-    ids = id,
-    calCurves = calCurves,
-    jitterPositions = TRUE,
-    predictPositions = TestRSLData$Depth,
-    iterations = 100,
-    burn = 20,
-    thin = 1
+co(
+  RSLchron <- with(
+    TestChronData,
+    Bchronology(
+      ages = ages,
+      ageSds = ageSds,
+      positions = position,
+      positionThicknesses = thickness,
+      ids = id,
+      calCurves = calCurves,
+      jitterPositions = TRUE,
+      predictPositions = TestRSLData$Depth,
+      iterations = 100,
+      burn = 20,
+      thin = 1
+    )
   )
-))
+)
 co(RSLrun <- with(
   TestRSLData,
   BchronRSL(RSLchron,
