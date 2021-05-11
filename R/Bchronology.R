@@ -13,7 +13,7 @@
 #' @param thin The step size for every iteration to keep beyond the burn-in
 #' @param extractDate The top age of the core. Used for extrapolation purposes so that no extrapolated ages go beyond the top age of the core. Defaults to the current year
 #' @param maxExtrap The maximum number of extrapolations to perform before giving up and setting the predicted ages to NA. Useful for when large amounts of extrapolation are required, i.e. some of the \code{predictPositions} are a long way from the dated positions
-#' @param thetaStart A set of starting values for the calendar ages estimated by Bchron. If NULL uses a function to estimate the ages
+#' @param thetaStart A set of starting values for the calendar ages estimated by Bchron. If NULL uses a function to estimate the ages. These should be in the same units as the posterior ages required. See example below for usage.
 #' @param thetaMhSd The Metropolis-Hastings standard deviation for the age parameters
 #' @param muMhSd The Metropolis-Hastings standard deviation for the Compound Poisson-Gamma mean
 #' @param psiMhSd The Metropolis-Hastings standard deviation for the Compound Poisson-Gamma scale
@@ -76,6 +76,23 @@
 #' plot(GlenOut, main = "Glendalough", xlab = "Age (cal years BP)", ylab = "Depth (cm)", las = 1)
 #' }
 #'
+#'# If you need to specify your own starting values
+#'startingAges <- c(0, 2000, 10000, 11000, 13000, 13500)
+#'GlenOut <- with(
+#'   Glendalough,
+#'   Bchronology(
+#'     ages = ages,
+#'     ageSds = ageSds,
+#'     calCurves = calCurves,
+#'     positions = position,
+#'     positionThicknesses = thickness,
+#'     ids = id,
+#'     predictPositions = seq(0, 1500, by = 10),
+#'     thetaStart = startingAges
+#'   )
+#' )
+#'
+#'
 #' @export
 Bchronology <- function(ages,
                         ageSds,
@@ -107,7 +124,7 @@ Bchronology <- function(ages,
                         muMhSd = 0.1,
                         psiMhSd = 0.1,
                         ageScaleVal = 1000,
-                        positionEps = 1e-6,
+                        positionEps = 1e-5,
                         positionNormalise = TRUE) {
 
   # Notation:
@@ -131,6 +148,7 @@ Bchronology <- function(ages,
     jitterPositions = jitterPositions,
     allowOutside = allowOutside,
     iterations = iterations,
+    thetaStart = thetaStart,
     burn = burn,
     thin = thin,
     extractDate = extractDate,
@@ -420,14 +438,18 @@ Bchronology <- function(ages,
         for (u in 1:length(b)) {
           currAgeGrid <- ageGrids[[u]]$ageGrid / ageScaleVal
           currDensities <- ageDensities[[u]]$densities
+          # Remove previous values from ageGrid
+          currAgeGrid <- currAgeGrid[which(!currAgeGrid %in% raw_soln[1:(u-1)])]
+          currDensities <- currDensities[which(!currAgeGrid %in% raw_soln[1:(u-1)])]
+          # Now derive raw (unsorted solutions)
           raw_soln[u] <- sample(
-            x = currAgeGrid[currAgeGrid > maxas[u] & currAgeGrid < minbs[u]],
+            x = currAgeGrid[currAgeGrid >= maxas[u] & currAgeGrid <= minbs[u]],
             size = 1,
-            prob = currDensities[currAgeGrid > maxas[u] & currAgeGrid < minbs[u]]
+            prob = currDensities[currAgeGrid >= maxas[u] & currAgeGrid <= minbs[u]]
           )
         }
         soln <- sort(raw_soln)
-        if (any(diff(soln) < 1e-4)) stop("Invalid starting values. Use the thetaStart argument to specify valid starting calendar ages")
+        if (any(diff(soln) < 1e-4)) stop(paste0("Invalid starting values. Use the thetaStart argument to specify valid starting calendar ages. Bchron's initial guess was c(",paste(soln, collapse = ', '), ")"))
         return(sort(soln))
       }
     }
@@ -435,6 +457,8 @@ Bchronology <- function(ages,
     ageDensities <- lapply(x.df2, "[", "densities")
     ranges <- do.call(rbind, lapply(ageGrids, range)) / ageScaleVal
     theta <- thetaStart(ranges[, 1], ranges[, 2], ageGrids, ageDensities)
+  } else {
+    theta <- thetaStart / ageScaleVal
   }
 
   # Other starting values
@@ -681,7 +705,7 @@ Bchronology <- function(ages,
     }
 
     # Update mu
-    muNewAll <- truncatedWalk(mu, muMhSd, 1e-4, 1e3)
+    muNewAll <- truncatedWalk(mu, muMhSd, 1e-3, 1e3)
     muNew <- muNewAll$new
 
     logRmu <- sum(log(dtweediep1(

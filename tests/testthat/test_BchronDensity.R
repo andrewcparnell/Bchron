@@ -1,6 +1,5 @@
 set.seed(123)
 library(Bchron)
-library(vdiffr)
 co <- function(expr) capture.output(expr, file = "NUL")
 
 data(Sluggan)
@@ -54,20 +53,13 @@ test_that("summary.BchronDensity", {
   expect_output(summary(SlugDens2, prob = 0.95))
 })
 
-test_that("plot.BchronDensityRun", {
-  p <- function() plot(SlugDens, plotRawSum = TRUE)
-  expect_doppelganger("SlugDens_default", p)
-  p <- function() plot(SlugDens, dateTransparency = 0.2)
-  expect_doppelganger("SlugDens_transparent", p)
-  p <- function() plot(SlugDens2, plotRawSum = TRUE)
-  expect_doppelganger("SlugDens_rawsum", p)
-  p <- function() plot(SlugDens2, dateTransparency = 0.2)
-  expect_doppelganger("SlugDens2_transparent", p)
-})
-
-test_that("plot.BchronDensityRunFast", {
-  p <- function() plot(SlugDensFast, plotSum = TRUE)
-  expect_doppelganger("slugdensfast", p)
-  p <- function() plot(SlugDensFast, dateTransparency = 0.2)
-  expect_doppelganger("slugdensfast_transparent", p)
-})
+# test_that("plot.BchronDensityRun", {
+#   p <- function() plot(SlugDens, plotRawSum = TRUE)
+#   expect_s3_class(p, 'ggplot')
+#   p <- function() plot(SlugDens, dateTransparency = 0.2)
+#   expect_s3_class(p, 'ggplot')
+#   p <- function() plot(SlugDens2, plotRawSum = TRUE)
+#   expect_s3_class(p, 'ggplot')
+#   p <- function() plot(SlugDens2, dateTransparency = 0.2)
+#   expect_s3_class(p, 'ggplot')
+# })

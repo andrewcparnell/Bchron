@@ -9,6 +9,8 @@
   - Fixed bug that occurred with large 14C values close to upper range of calibration curve
   - Changed the means by which starting values are created. They are now a regular sequence from the top date to the bottom date. This was to fix a bug (issue #17 on GitHub) where a middle extreme date (e.g. non-14C) could cause the starting values of the stratigraphically ordered dates to fall beyond the range of the calibration curve. There's a more general issue here that the starting values are a bit too regular for some cores but no other cores I've tested so far have been broken by this assumption
   - Included option to allow bespoke starting values for complex cores
+  - Changed some of the algorithm details to avoid certain bugs with numerical underflow problems (tested in test_all_chrons)
+  - Removed vdiffr as it's a PITA
 
 # Bchron 4.7.4
 

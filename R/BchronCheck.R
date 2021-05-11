@@ -36,6 +36,7 @@ BchronCheck <- function(ages,
                         jitterPositions = NULL,
                         allowOutside = NULL,
                         iterations = NULL,
+                        thetaStart = NULL,
                         burn = NULL,
                         thin = NULL,
                         extractDate = NULL,
@@ -85,6 +86,7 @@ BchronCheck <- function(ages,
     assertVector(calCurves, any.missing = FALSE, len = nObs, null.ok = TRUE)
     assertVector(ids, any.missing = FALSE, len = nObs, null.ok = TRUE)
     assertNumeric(outlierProbs, any.missing = FALSE, len = nObs, null.ok = TRUE, lower = 0, upper = 1)
+    assertNumeric(thetaStart, any.missing = FALSE, len = nObs, null.ok = TRUE)
 
     # predictPositions can be any length
     assertNumeric(predictPositions, any.missing = FALSE, null.ok = TRUE)

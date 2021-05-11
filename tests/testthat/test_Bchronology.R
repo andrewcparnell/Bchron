@@ -1,5 +1,4 @@
 library(Bchron)
-library(vdiffr)
 co <- function(expr) capture.output(expr, file = "NUL")
 
 data(Glendalough)
@@ -39,7 +38,7 @@ test_that("summary.BchronologyRun", {
 
 test_that("plot.BchronologyRun", {
   p <- plot(GlenOut)
-  expect_doppelganger("Bchronology_plot", p)
+  expect_s3_class(p, 'ggplot')
 })
 
 test_that("predict.BchronologyRun", {
@@ -110,3 +109,24 @@ test_that("Bchronology prediction bug", {
   co(summ <- summary(test_chron, type = "quantiles"))
   expect_true(all(summ < 6000))
 })
+
+test_that("Test with starting values", {
+  co(GlenOut <- with(
+    Glendalough,
+    Bchronology(
+      ages = ages,
+      ageSds = ageSds,
+      calCurves = calCurves,
+      positions = position,
+      positionThicknesses = thickness,
+      ids = id,
+      predictPositions = seq(-10, 1500, by = 10),
+      thetaStart = ages,
+      iterations = 100,
+      burn = 20,
+      thin = 1
+    )))
+  expect_s3_class(GlenOut, "BchronologyRun")
+})
+
+

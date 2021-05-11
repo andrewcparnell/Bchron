@@ -1,6 +1,5 @@
 set.seed(123)
 library(Bchron)
-library(vdiffr)
 co <- function(expr) capture.output(expr, file = "NUL")
 
 
