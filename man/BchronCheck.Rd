@@ -17,6 +17,7 @@ BchronCheck(
   jitterPositions = NULL,
   allowOutside = NULL,
   iterations = NULL,
+  thetaStart = NULL,
   burn = NULL,
   thin = NULL,
   extractDate = NULL,
@@ -56,6 +57,8 @@ BchronCheck(
 \item{allowOutside}{Whether to allow calibrations to run outside the range of the calibration curve. By default this is turned off as calibrations outside of the range of the calibration curve can cause severe issues with probability ranges of calibrated dates}
 
 \item{iterations}{The number of iterations to run the procedure for}
+
+\item{thetaStart}{A set of starting values for the calendar ages estimated by Bchron. If NULL uses a function to estimate the ages. These should be in the same units as the posterior ages required. See example below for usage.}
 
 \item{burn}{The number of starting iterations to discard}
 

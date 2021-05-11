@@ -26,7 +26,7 @@ Bchronology(
   muMhSd = 0.1,
   psiMhSd = 0.1,
   ageScaleVal = 1000,
-  positionEps = 1e-06,
+  positionEps = 1e-05,
   positionNormalise = TRUE
 )
 }
@@ -63,7 +63,7 @@ Bchronology(
 
 \item{maxExtrap}{The maximum number of extrapolations to perform before giving up and setting the predicted ages to NA. Useful for when large amounts of extrapolation are required, i.e. some of the \code{predictPositions} are a long way from the dated positions}
 
-\item{thetaStart}{A set of starting values for the calendar ages estimated by Bchron. If NULL uses a function to estimate the ages}
+\item{thetaStart}{A set of starting values for the calendar ages estimated by Bchron. If NULL uses a function to estimate the ages. These should be in the same units as the posterior ages required. See example below for usage.}
 
 \item{thetaMhSd}{The Metropolis-Hastings standard deviation for the age parameters}
 
@@ -127,6 +127,23 @@ predictAges <- predict(GlenOut,
 # Plot the output
 plot(GlenOut, main = "Glendalough", xlab = "Age (cal years BP)", ylab = "Depth (cm)", las = 1)
 }
+
+# If you need to specify your own starting values
+startingAges <- c(0, 2000, 10000, 11000, 13000, 13500)
+GlenOut <- with(
+  Glendalough,
+  Bchronology(
+    ages = ages,
+    ageSds = ageSds,
+    calCurves = calCurves,
+    positions = position,
+    positionThicknesses = thickness,
+    ids = id,
+    predictPositions = seq(0, 1500, by = 10),
+    thetaStart = startingAges
+  )
+)
+
 
 }
 \references{
