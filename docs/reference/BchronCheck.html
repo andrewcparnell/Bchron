@@ -136,6 +136,7 @@
   jitterPositions <span class='op'>=</span> <span class='cn'>NULL</span>,
   allowOutside <span class='op'>=</span> <span class='cn'>NULL</span>,
   iterations <span class='op'>=</span> <span class='cn'>NULL</span>,
+  thetaStart <span class='op'>=</span> <span class='cn'>NULL</span>,
   burn <span class='op'>=</span> <span class='cn'>NULL</span>,
   thin <span class='op'>=</span> <span class='cn'>NULL</span>,
   extractDate <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -201,6 +202,10 @@
     <tr>
       <th>iterations</th>
       <td><p>The number of iterations to run the procedure for</p></td>
+    </tr>
+    <tr>
+      <th>thetaStart</th>
+      <td><p>A set of starting values for the calendar ages estimated by Bchron. If NULL uses a function to estimate the ages. These should be in the same units as the posterior ages required. See example below for usage.</p></td>
     </tr>
     <tr>
       <th>burn</th>

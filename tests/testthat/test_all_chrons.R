@@ -31,7 +31,7 @@ test_that("Sluggan", {
   expect_output(summary(run, type = "outliers"))
   expect_output(summary(run, type = "max_var"))
   p <- plot(run)
-  expect_s3_class(p, 'ggplot')
+  expect_s3_class(p, "ggplot")
 })
 
 
@@ -62,7 +62,7 @@ test_that("TestChronData", {
   expect_output(summary(run, type = "outliers"))
   expect_output(summary(run, type = "max_var"))
   p <- plot(run)
-  expect_s3_class(p, 'ggplot')
+  expect_s3_class(p, "ggplot")
 })
 
 
@@ -169,7 +169,7 @@ test_that("Taphocoenose_Jan20", {
   expect_output(summary(run, type = "outliers"))
   expect_output(summary(run, type = "max_var"))
   p <- plot(run)
-  expect_s3_class(p, 'ggplot')
+  expect_s3_class(p, "ggplot")
 })
 
 
@@ -270,7 +270,7 @@ test_that("Kemp_Jan21", {
   expect_output(summary(run, type = "outliers"))
   expect_output(summary(run, type = "max_var"))
   p <- plot(run)
-  expect_s3_class(p, 'ggplot')
+  expect_s3_class(p, "ggplot")
 })
 
 
@@ -363,7 +363,7 @@ test_that("Kemp_Jan21_part2", {
   expect_output(summary(run, type = "outliers"))
   expect_output(summary(run, type = "max_var"))
   p <- plot(run)
-  expect_s3_class(p, 'ggplot')
+  expect_s3_class(p, "ggplot")
 })
 
 
@@ -427,7 +427,7 @@ test_that("Gregor_Github17_20210408", {
   expect_output(summary(run, type = "outliers"))
   expect_output(summary(run, type = "max_var"))
   p <- plot(run)
-  expect_s3_class(p, 'ggplot')
+  expect_s3_class(p, "ggplot")
 })
 
 # New Bchron problem - #17 issue - part 2 ------------------------------------------
@@ -541,7 +541,7 @@ test_that("Gregor_Github17_20210408_b", {
     burn = 500,
     thin = 1,
     predictPositions = seq(min(Bchron_Frame$position), max(Bchron_Frame$position), by = 1)
-  ))        
+  ))
   expect_s3_class(run, "BchronologyRun")
   expect_output(summary(run, type = "quantiles"))
   expect_output(summary(run, type = "convergence"))
@@ -616,24 +616,35 @@ test_that("Gregor_Github17_20210408_c", {
 test_that("Gregor_Github17_20210510_a", {
   skip_on_ci()
   skip_on_cran()
-  
+
   set.seed(-1673826857L)
-  Bchron_Frame <- structure(list(id = c("ESM-1 0", "ESM-1 27.75", "ESM-1 51.75", 
-                                        "ESM-1 83.75", "ESM-1 114.5", "ESM-1 149.5", "ESM-1 184.5", "ESM-1 209.5", 
-                                        "ESM-1 244.5", "ESM-1 279.5", "ESM-1 304.5", "ESM-1 329.5", "ESM-1 359.5", 
-                                        "ESM-1 370.5"), ages = c(-56L, 520L, 620L, 905L, 1720L, 2145L, 
-                                                                 2500L, 2720L, 3380L, 3755L, 4700L, 6810L, 8810L, 9990L), ageSds = c(5L, 
-                                                                                                                                     30L, 30L, 30L, 35L, 35L, 35L, 35L, 40L, 35L, 40L, 50L, 60L, 60L
-                                                                 ), position = c(0, 27.75, 51.75, 83.75, 114.5, 149.5, 184.5, 
-                                                                                 209.5, 244.5, 279.5, 304.5, 329.5, 359.5, 370.5), thickness = c(0, 
-                                                                                                                                                 0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), calCurves = c("normal", 
-                                                                                                                                                                                                             "intcal20", "intcal20", "intcal20", "intcal20", "intcal20", "intcal20", 
-                                                                                                                                                                                                             "intcal20", "intcal20", "intcal20", "intcal20", "intcal20", "intcal20", 
-                                                                                                                                                                                                             "intcal20")), class = "data.frame", row.names = c(NA, -14L))
+  Bchron_Frame <- structure(list(id = c(
+    "ESM-1 0", "ESM-1 27.75", "ESM-1 51.75",
+    "ESM-1 83.75", "ESM-1 114.5", "ESM-1 149.5", "ESM-1 184.5", "ESM-1 209.5",
+    "ESM-1 244.5", "ESM-1 279.5", "ESM-1 304.5", "ESM-1 329.5", "ESM-1 359.5",
+    "ESM-1 370.5"
+  ), ages = c(
+    -56L, 520L, 620L, 905L, 1720L, 2145L,
+    2500L, 2720L, 3380L, 3755L, 4700L, 6810L, 8810L, 9990L
+  ), ageSds = c(
+    5L,
+    30L, 30L, 30L, 35L, 35L, 35L, 35L, 40L, 35L, 40L, 50L, 60L, 60L
+  ), position = c(
+    0, 27.75, 51.75, 83.75, 114.5, 149.5, 184.5,
+    209.5, 244.5, 279.5, 304.5, 329.5, 359.5, 370.5
+  ), thickness = c(
+    0,
+    0.5, 0.5, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+  ), calCurves = c(
+    "normal",
+    "intcal20", "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+    "intcal20", "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+    "intcal20"
+  )), class = "data.frame", row.names = c(NA, -14L))
   # Bchron_Frame = Bchron_Frame %>% arrange(desc(position))
   # test <- with(Bchron_Frame, BchronCalibrate(ages = ages, ageSds = ageSds, calCurves = calCurves, positions = position))
   # plot(test, withPositions = TRUE)
-  
+
   co(run <- Bchronology(
     ages = Bchron_Frame$ages,
     ageSds = Bchron_Frame$ageSds,
@@ -659,20 +670,32 @@ test_that("Gregor_Github17_20210510_a", {
 test_that("Gregor_Github17_20210510_b", {
   skip_on_ci()
   skip_on_cran()
-  
+
   set.seed(10407L)
-  Bchron_Frame <- structure(list(id = c("PG1975 0", "PG1975 0.25", "PG1975 0.25", 
-                                        "PG1975 44.75", "PG1975 44.75", "PG1975 90.25", "PG1975 90.25", 
-                                        "PG1975 134.5", "PG1975 134.5"), ages = c(-59L, 2980L, 2980L, 
-                                                                                  7090L, 6190L, 6240L, 5740L, 9580L, 6790L), ageSds = c(5L, 35L, 
-                                                                                                                                        35L, 50L, 40L, 50L, 40L, 35L, 30L), position = c(0, 0.25, 0.25, 
-                                                                                                                                                                                         44.75, 44.75, 90.25, 90.25, 134.5, 134.5), thickness = c(0, 0.5, 
-                                                                                                                                                                                                                                                  0.5, 0.5, 0.5, 0.5, 0.5, 1, 1), calCurves = c("normal", "intcal20", 
-                                                                                                                                                                                                                                                                                                "intcal20", "intcal20", "intcal20", "intcal20", "intcal20", "intcal20", 
-                                                                                                                                                                                                                                                                                                "intcal20")), class = "data.frame", row.names = c(NA, -9L))
+  Bchron_Frame <- structure(list(id = c(
+    "PG1975 0", "PG1975 0.25", "PG1975 0.25",
+    "PG1975 44.75", "PG1975 44.75", "PG1975 90.25", "PG1975 90.25",
+    "PG1975 134.5", "PG1975 134.5"
+  ), ages = c(
+    -59L, 2980L, 2980L,
+    7090L, 6190L, 6240L, 5740L, 9580L, 6790L
+  ), ageSds = c(
+    5L, 35L,
+    35L, 50L, 40L, 50L, 40L, 35L, 30L
+  ), position = c(
+    0, 0.25, 0.25,
+    44.75, 44.75, 90.25, 90.25, 134.5, 134.5
+  ), thickness = c(
+    0, 0.5,
+    0.5, 0.5, 0.5, 0.5, 0.5, 1, 1
+  ), calCurves = c(
+    "normal", "intcal20",
+    "intcal20", "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+    "intcal20"
+  )), class = "data.frame", row.names = c(NA, -9L))
   # test <- with(Bchron_Frame, BchronCalibrate(ages = ages, ageSds = ageSds, calCurves = calCurves, positions = position))
   # plot(test, withPositions = TRUE)
-  
+
   co(run <- Bchronology(
     ages = Bchron_Frame$ages,
     ageSds = Bchron_Frame$ageSds,
@@ -691,7 +714,7 @@ test_that("Gregor_Github17_20210510_b", {
   expect_output(summary(run, type = "convergence"))
   expect_output(summary(run, type = "outliers"))
   expect_output(summary(run, type = "max_var"))
-  
+
   # And again with a different seed
   set.seed(-769196902L)
   co(run <- Bchronology(
@@ -712,6 +735,4 @@ test_that("Gregor_Github17_20210510_b", {
   expect_output(summary(run, type = "convergence"))
   expect_output(summary(run, type = "outliers"))
   expect_output(summary(run, type = "max_var"))
-  
 })
-

@@ -38,7 +38,7 @@ test_that("summary.BchronologyRun", {
 
 test_that("plot.BchronologyRun", {
   p <- plot(GlenOut)
-  expect_s3_class(p, 'ggplot')
+  expect_s3_class(p, "ggplot")
 })
 
 test_that("predict.BchronologyRun", {
@@ -125,8 +125,7 @@ test_that("Test with starting values", {
       iterations = 100,
       burn = 20,
       thin = 1
-    )))
+    )
+  ))
   expect_s3_class(GlenOut, "BchronologyRun")
 })
-
-

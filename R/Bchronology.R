@@ -75,9 +75,9 @@
 #' # Plot the output
 #' plot(GlenOut, main = "Glendalough", xlab = "Age (cal years BP)", ylab = "Depth (cm)", las = 1)
 #'
-#'# If you need to specify your own starting values
-#'startingAges <- c(0, 2000, 10000, 11000, 13000, 13500)
-#'GlenOut <- with(
+#' # If you need to specify your own starting values
+#' startingAges <- c(0, 2000, 10000, 11000, 13000, 13500)
+#' GlenOut <- with(
 #'   Glendalough,
 #'   Bchronology(
 #'     ages = ages,
@@ -90,7 +90,7 @@
 #'     thetaStart = startingAges
 #'   )
 #' )
-#'}
+#' }
 #'
 #' @export
 Bchronology <- function(ages,
@@ -438,8 +438,8 @@ Bchronology <- function(ages,
           currAgeGrid <- ageGrids[[u]]$ageGrid / ageScaleVal
           currDensities <- ageDensities[[u]]$densities
           # Remove previous values from ageGrid
-          currAgeGrid <- currAgeGrid[which(!currAgeGrid %in% raw_soln[1:(u-1)])]
-          currDensities <- currDensities[which(!currAgeGrid %in% raw_soln[1:(u-1)])]
+          currAgeGrid <- currAgeGrid[which(!currAgeGrid %in% raw_soln[1:(u - 1)])]
+          currDensities <- currDensities[which(!currAgeGrid %in% raw_soln[1:(u - 1)])]
           # Now derive raw (unsorted solutions)
           raw_soln[u] <- sample(
             x = currAgeGrid[currAgeGrid >= maxas[u] & currAgeGrid <= minbs[u]],
@@ -448,7 +448,7 @@ Bchronology <- function(ages,
           )
         }
         soln <- sort(raw_soln)
-        if (any(diff(soln) < 1e-4)) stop(paste0("Invalid starting values. Use the thetaStart argument to specify valid starting calendar ages. Bchron's initial guess was c(",paste(soln, collapse = ', '), ")"))
+        if (any(diff(soln) < 1e-4)) stop(paste0("Invalid starting values. Use the thetaStart argument to specify valid starting calendar ages. Bchron's initial guess was c(", paste(soln, collapse = ", "), ")"))
         return(sort(soln))
       }
     }
