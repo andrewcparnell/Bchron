@@ -8,7 +8,7 @@
 There were no ERRORs or WARNINGs or NOTEs. 
 
 ## Downstream dependencies
-I have also run revdepcheck on the downstream dependencies of Bchron which reported no errors. 
+I ran into problems installing revdepcheck on my latest machine but have run it previously and never had any issues with the two downstream dependencies
 
 Many thanks for your continuing important work with R,
 
