@@ -1,3 +1,8 @@
+# Bchron 4.7.5.9000
+
+  - Fixed an example in Bchronology that was adding titles/labels incorrectly
+  - Updated vignette to show how to customise plots
+
 # Bchron 4.7.5
 
   - Added in a BchronCheck function to allow for checking of all argument types using checkmate

@@ -497,9 +497,9 @@ This will provide a single best estimate of the mean and standard deviation of t
 
 # Miscellaneous other queries
 
-## I would like to plot some extra dates on my chronology
+## Customising plots
 
-Suppose we created the standard Glendalough chronology
+We can use standard `ggplot2` commands to customise some of the plots. For example, suppose we created the standard Glendalough chronology:
 
 ```{r, results = 'hide'}
 data(Glendalough)
@@ -513,6 +513,16 @@ GlenOut = with(Glendalough,
                            predictPositions=seq(0,1500,by=10)))
 ```
 
+And suppose we want to plot the data with customised axis labels and a title:
+
+```{r}
+library(ggplot2)
+plot(GlenOut) +
+labs(title = "Glendalough",
+     xlab = "Age (cal years BP)",
+     ylab = "Depth (cm)")
+```
+
 Now suppose we want to plot the chronology but add in the 14C date $7000 \pm 40$ at depth 600cm. First we calibrated that date
 ```{r}
 new_cal = BchronCalibrate(ages = 7000, 
@@ -523,7 +533,6 @@ new_cal = BchronCalibrate(ages = 7000,
 Finally we create the plot and add the date as a new layer (with a new colour too):
 
 ```{r}
-library(ggplot2)
 library(ggridges)
 plot(GlenOut) +
   geom_ridgeline(data = as.data.frame(new_cal$Date1), 
