@@ -19,7 +19,6 @@ test_that("Sluggan", {
       positions = position,
       positionThicknesses = thickness,
       ids = id,
-      jitterPositions = TRUE,
       iterations = 1000,
       burn = 200,
       thin = 1
@@ -50,7 +49,6 @@ test_that("TestChronData", {
       positions = position,
       positionThicknesses = thickness,
       ids = id,
-      jitterPositions = TRUE,
       iterations = 1000,
       burn = 200,
       thin = 1
@@ -257,7 +255,6 @@ test_that("Kemp_Jan21", {
       positionThicknesses = thickness,
       ids = id,
       extractDate = -49,
-      jitterPositions = TRUE,
       iterations = 1000,
       burn = 200,
       thin = 1
@@ -350,7 +347,6 @@ test_that("Kemp_Jan21_part2", {
       positionThicknesses = thickness,
       ids = id,
       extractDate = -49,
-      jitterPositions = TRUE,
       iterations = 1000,
       burn = 200,
       thin = 1
@@ -415,7 +411,6 @@ test_that("Gregor_Github17_20210408", {
     positions = Bchron_Frame$position,
     positionThickness = Bchron_Frame$thickness,
     ids = Bchron_Frame$id,
-    jitterPositions = TRUE,
     iterations = 1500,
     burn = 500,
     thin = 1,
@@ -469,7 +464,6 @@ test_that("Gregor_Github17_20210408_b", {
     positions = Bchron_Frame$position,
     positionThickness = Bchron_Frame$thickness,
     ids = Bchron_Frame$id,
-    jitterPositions = TRUE,
     iterations = 1500,
     burn = 500,
     thin = 1,
@@ -536,7 +530,6 @@ test_that("Gregor_Github17_20210408_b", {
     positions = Bchron_Frame$position,
     positionThickness = Bchron_Frame$thickness,
     ids = Bchron_Frame$id,
-    jitterPositions = TRUE,
     iterations = 1500,
     burn = 500,
     thin = 1,
@@ -598,12 +591,12 @@ test_that("Gregor_Github17_20210408_c", {
     positions = Bchron_Frame$position,
     positionThickness = Bchron_Frame$thickness,
     ids = Bchron_Frame$id,
-    jitterPositions = TRUE,
     iterations = 1500,
     burn = 500,
     thin = 1,
     predictPositions = seq(min(Bchron_Frame$position), max(Bchron_Frame$position), by = 1)
   ))
+  # plot(run, dateHeight = 10)
   expect_s3_class(run, "BchronologyRun")
   expect_output(summary(run, type = "quantiles"))
   expect_output(summary(run, type = "convergence"))
@@ -652,7 +645,6 @@ test_that("Gregor_Github17_20210510_a", {
     positions = Bchron_Frame$position,
     positionThickness = Bchron_Frame$thickness,
     ids = Bchron_Frame$id,
-    jitterPositions = TRUE,
     iterations = 1500,
     burn = 500,
     thin = 1,
@@ -703,7 +695,6 @@ test_that("Gregor_Github17_20210510_b", {
     positions = Bchron_Frame$position,
     positionThickness = Bchron_Frame$thickness,
     ids = Bchron_Frame$id,
-    jitterPositions = TRUE,
     iterations = 1500,
     burn = 500,
     thin = 1,
@@ -724,7 +715,6 @@ test_that("Gregor_Github17_20210510_b", {
     positions = Bchron_Frame$position,
     positionThickness = Bchron_Frame$thickness,
     ids = Bchron_Frame$id,
-    jitterPositions = TRUE,
     iterations = 1500,
     burn = 500,
     thin = 1,
@@ -735,4 +725,129 @@ test_that("Gregor_Github17_20210510_b", {
   expect_output(summary(run, type = "convergence"))
   expect_output(summary(run, type = "outliers"))
   expect_output(summary(run, type = "max_var"))
+})
+
+
+# Michael Barton Bug May 21 -----------------------------------------------
+
+
+test_that("Barton_Github_20210521", {
+  skip_on_ci()
+  skip_on_cran()
+
+  set.seed(123)
+  Bchron_Frame <- structure(list(
+    X = 2:22, id = c(
+      "TY-7-5", "TY-1-4", "TY-7-8",
+      "TY-5/6-3", "TY-7-10", "TY-1-5", "TY-7-11", "TY-1-6", "TY-7-12a",
+      "TY-7-12b", "TY-7-13", "TY-5/6-6a", "TY-5/6-11", "TY-5/6-6b",
+      "TY-5/6-12", "TY-7-14", "TY-1-7", "TY-5/6-13", "TY-5/6-14", "TY-7-18a",
+      "TY-7-18b"
+    ), ages = c(
+      1885L, 1745L, 2020L, 2010L, 1120L, 1170L,
+      7910L, 9560L, 8960L, 10060L, 8765L, 10359L, 10250L, 8507L, 10215L,
+      10375L, 10412L, 10255L, 10355L, 13660L, 13845L
+    ), ageSds = c(
+      20L,
+      15L, 20L, 20L, 15L, 20L, 20L, 35L, 30L, 25L, 25L, 41L, 30L, 35L,
+      30L, 25L, 42L, 35L, 35L, 70L, 35L
+    ), position..cmbd. = c(
+      85L,
+      92L, 96L, 105L, 107L, 108L, 111L, 116L, 119L, 119L, 120L, 122L,
+      123L, 123L, 128L, 130L, 133L, 134L, 143L, 151L, 151L
+    ), position = c(
+      14L,
+      21L, 25L, 34L, 36L, 37L, 40L, 45L, 48L, 48L, 49L, 51L, 52L, 52L,
+      57L, 59L, 62L, 63L, 72L, 80L, 80L
+    ), thicknesses = c(
+      0L, 0L, 0L,
+      0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L,
+      0L, 0L
+    ), calCurves = c(
+      "intcal13", "intcal13", "intcal13", "intcal13",
+      "intcal13", "intcal13", "intcal13", "intcal13", "intcal13", "intcal13",
+      "intcal13", "intcal13", "intcal13", "intcal13", "intcal13", "intcal13",
+      "intcal13", "intcal13", "intcal13", "intcal13", "intcal13"
+    ),
+    calCurves20 = c(
+      "intcal20", "intcal20", "intcal20", "intcal20",
+      "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+      "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+      "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+      "intcal20", "intcal20"
+    ), Date = c(
+      "TY-7-5", "TY-1-4", "TY-7-8",
+      "TY-5/6-3", "TY-7-10", "TY-1-5", "TY-7-11", "TY-1-6", "TY-7-12a",
+      "TY-7-12b", "TY-7-13", "TY-5/6-6a", "TY-5/6-11", "TY-5/6-6b",
+      "TY-5/6-12", "TY-7-14", "TY-1-7", "TY-5/6-13", "TY-5/6-14",
+      "TY-7-18a", "TY-7-18b"
+    ), OutlierProb = c(
+      1, 0.013, 0.031,
+      0.487, 1, 1, 0.008, 1, 0.871, 1, 0.154, 1, 0.677, 1, 0.007,
+      0.014, 0.009, 0.9, 0.945, 0.073, 0.273
+    )
+  ), class = "data.frame", row.names = c(
+    NA,
+    -21L
+  ))
+
+
+  # test <- with(Bchron_Frame, BchronCalibrate(ages = ages, ageSds = ageSds, calCurves = calCurves, positions = position))
+  # plot(test, withPositions = TRUE, dateHeight = 10)
+
+  co(run <- Bchronology(
+    ages = Bchron_Frame$ages,
+    ageSds = Bchron_Frame$ageSds,
+    calCurves = Bchron_Frame$calCurves,
+    positions = Bchron_Frame$position,
+    positionThickness = Bchron_Frame$thickness, # rep(0.001, nrow(Bchron_Frame)), #
+    ids = Bchron_Frame$id,
+    jitterPositionsAmount = 0.01,
+    positionNormalise = FALSE,
+    iterations = 1500,
+    burn = 500,
+    thin = 1,
+    predictPositions = seq(min(Bchron_Frame$position), max(Bchron_Frame$position), by = 1)
+  ))
+  # plot(run, dateHeight = 10)
+  expect_s3_class(run, "BchronologyRun")
+  expect_output(summary(run, type = "quantiles"))
+  expect_output(summary(run, type = "convergence"))
+  expect_output(summary(run, type = "outliers"))
+  expect_output(summary(run, type = "max_var"))
+
+  co(run2 <- Bchronology(
+    ages = Bchron_Frame$ages,
+    ageSds = Bchron_Frame$ageSds,
+    calCurves = Bchron_Frame$calCurves,
+    positions = Bchron_Frame$position,
+    positionThickness = Bchron_Frame$thickness, # rep(0.001, nrow(Bchron_Frame)), #
+    ids = Bchron_Frame$id,
+    jitterPositionsAmount = 0.01,
+    positionNormalise = TRUE,
+    iterations = 1500,
+    burn = 500,
+    thin = 1,
+    predictPositions = seq(min(Bchron_Frame$position), max(Bchron_Frame$position), by = 1)
+  ))
+  # plot(run2, dateHeight = 10)
+  expect_s3_class(run2, "BchronologyRun")
+  expect_output(summary(run2, type = "quantiles"))
+  expect_output(summary(run2, type = "convergence"))
+  expect_output(summary(run2, type = "outliers"))
+  expect_output(summary(run2, type = "max_var"))
+
+  expect_warning(co(Bchronology(
+    ages = Bchron_Frame$ages,
+    ageSds = Bchron_Frame$ageSds,
+    calCurves = Bchron_Frame$calCurves,
+    positions = Bchron_Frame$position,
+    positionThickness = Bchron_Frame$thickness, # rep(0.001, nrow(Bchron_Frame)), #
+    ids = Bchron_Frame$id,
+    positionNormalise = TRUE,
+    iterations = 100,
+    burn = 10,
+    thin = 1,
+    predictPositions = seq(min(Bchron_Frame$position), max(Bchron_Frame$position), by = 1)
+  )))
 })

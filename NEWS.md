@@ -2,6 +2,8 @@
 
   - Fixed an example in Bchronology that was adding titles/labels incorrectly
   - Updated vignette to show how to customise plots
+  - Fixed a bug where an error for identical positions (with no thickness errors) was not being shown
+  - Fixed an issue with positionNormalise
 
 # Bchron 4.7.5
 

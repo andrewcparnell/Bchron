@@ -60,8 +60,7 @@ RSLrun <- with(TestChronData, Bchronology(
   positionThicknesses = thickness,
   ids = id,
   calCurves = calCurves,
-  predictPositions = TestRSLData$Depth,
-  jitterPositions = TRUE
+  predictPositions = TestRSLData$Depth
 ))
 
 # Now run through BchronRSL

@@ -41,8 +41,7 @@
 #'   positionThicknesses = thickness,
 #'   ids = id,
 #'   calCurves = calCurves,
-#'   predictPositions = TestRSLData$Depth,
-#'   jitterPositions = TRUE
+#'   predictPositions = TestRSLData$Depth
 #' ))
 #'
 #' # Now run through BchronRSL

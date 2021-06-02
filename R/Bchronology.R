@@ -7,7 +7,7 @@
 #' @param positionThicknesses Thickness values for each of the positions. The thickness value should be the full thickness value of the slice. By default set to zero.
 #' @param outlierProbs A vector of prior outlier probabilities, one for each age. Defaults to 0.01
 #' @param predictPositions A vector of positions (e.g. depths) at which predicted age values are required. Defaults to a sequence of length 100 from the top position to the bottom position
-#' @param jitterPositions Whether to jigger the positions at startup or not. Default is FALSE but if there are lots of dates at similar depths this may resolve some initialisation problems
+#' @param jitterPositionsAmount Amount to jitter the positions. Bchron will not run if \code{positionThicknesses} are zero and some positions are repeated. The default value is zero but if there are lots of dates at similar positions you might like to try a small positive value such as \code{max(positions)/1000}. If set too large this will produce poor chronologies
 #' @param iterations The number of iterations to run the procedure for
 #' @param burn The number of starting iterations to discard
 #' @param thin The step size for every iteration to keep beyond the burn-in
@@ -19,7 +19,7 @@
 #' @param psiMhSd The Metropolis-Hastings standard deviation for the Compound Poisson-Gamma scale
 #' @param ageScaleVal A scale value for the ages. \code{Bchronology} works best when the ages are scaled to be approximately between 0 and 100. The default value is thus 1000 for ages given in years.
 #' @param positionEps A small value used to check whether simulated positions are far enough apart to avoid numerical underflow errors. If errors occur in model runs (e.g. \code{missing value where TRUE/FALSE needed} increase this value)
-#' @param positionNormalise Whether to normalise the position values. \code{Bchronology} works best when the positions are normalise to be between 0 and 1 The default value is \code{TRUE}
+#' @param positionNormalise Whether to normalise the position values. \code{Bchronology} works best when the positions are normalised to be between 0 and 1 The default value is \code{TRUE}
 #'
 #' @details
 #' The \code{Bchronology} function fits a compound Poisson-Gamma distribution to the increments between the dated levels. This involves a stochastic linear interpolation step where the age gaps are Gamma distributed, and the position gaps are Exponential. Radiocarbon and non-radiocarbon dates (including outliers) are updated within the function also by MCMC.
@@ -73,10 +73,12 @@
 #' )
 #'
 #' # Plot the output
-#' plot(GlenOut) + 
-#' labs(title = "Glendalough", 
-#'      xlab = "Age (cal years BP)", 
-#'      ylab = "Depth (cm)")
+#' plot(GlenOut) +
+#'   labs(
+#'     title = "Glendalough",
+#'     xlab = "Age (cal years BP)",
+#'     ylab = "Depth (cm)"
+#'   )
 #'
 #' # If you need to specify your own starting values
 #' startingAges <- c(0, 2000, 10000, 11000, 13000, 13500)
@@ -114,7 +116,7 @@ Bchronology <- function(ages,
                           length  = 100
                         ),
                         pathToCalCurves = system.file("data", package = "Bchron"),
-                        jitterPositions = FALSE,
+                        jitterPositionsAmount = 0,
                         allowOutside = FALSE,
                         iterations = 10000,
                         burn = 2000,
@@ -147,7 +149,7 @@ Bchronology <- function(ages,
     outlierProbs = outlierProbs,
     predictPositions = predictPositions,
     pathToCalCurves = pathToCalCurves,
-    jitterPositions = jitterPositions,
+    jitterPositionsAmount = jitterPositionsAmount,
     allowOutside = allowOutside,
     iterations = iterations,
     thetaStart = thetaStart,
@@ -174,21 +176,41 @@ Bchronology <- function(ages,
     positions <- (positions - min(originalPositions)) / positionRange
     positionThicknesses <- positionThicknesses / positionRange
     predictPositionsRescaled <- (predictPositions - min(originalPositions)) / positionRange
+  } else {
+    predictPositionsRescaled <- predictPositions
   }
 
   # Check positions don't overlap
   n <- length(ages)
   depthLow <- positions - 0.5 * positionThicknesses
   depthHigh <- positions + 0.5 * positionThicknesses
-  for (i in 2:n) {
-    if (depthLow[i] - depthHigh[i - 1] < 0 &
-      all(positionThicknesses == 0)) {
-      stop(
-        "Depth layers identical with no thickness errors - not supported in Bchron. Check thickness errors"
-      )
-    }
-  }
+  # if(jitterPositionsAmount == 0) {
+  #   for (i in 2:n) {
+  #     if (depthLow[i] - depthHigh[i - 1] <= 0 &
+  #         positionThicknesses[i] == 0) {
+  #       stop(
+  #         "Positions identical with no positionThickness values - not supported in Bchron. Check positionThickness values or set jitterPositionsAmount to be a positive small value"
+  #       )
+  #     }
+  #   }
+  # }
 
+  # Function to create decent starting positions
+  getCurrPositions <- function(pos, posThick, posEps) {
+    n <- length(pos)
+    badPositions <- TRUE
+    while (badPositions) {
+      currPositions <- stats::runif(
+        n,
+        pos - 0.5 * posThick,
+        pos + 0.5 * posThick
+      )
+      do <- order(currPositions)
+      diffPosition <- diff(currPositions[do])
+      if (all(diffPosition > posEps)) badPositions <- FALSE
+    }
+    return(currPositions)
+  }
 
   # Check order of positions ------------------------------------------------
 
@@ -258,38 +280,36 @@ Bchronology <- function(ages,
     }
   }
 
-  # Function to find decimal places of positions
-  decimalplaces <- Vectorize(function(x) {
-    if ((x %% 1) != 0) {
-      nchar(strsplit(sub("0+$", "", as.character(x)), ".", fixed = TRUE)[[1]][[2]])
-    } else {
-      return(0)
-    }
-  })
 
+  # Get starting positions --------------------------------------------------
 
-
-
-  # Jitter positions --------------------------------------------------------
-
-  # Get current positions and their order
-  if (jitterPositions) {
-    num_decimals <- max(decimalplaces(positions))
-    currPositions <- sort(jitter(
-      positions,
-      amount = max(num_decimals / 10, .Machine$double.eps)
-    )) # Removed the above due to errors with cores at different age/position scales
+  # If it has position thicknesses for all then use these to create some current positions
+  if (all(positionThicknesses > 0)) {
+    currPositions <- getCurrPositions(positions, positionThicknesses, positionEps)
   } else {
-    currPositions <- sort(positions)
-    if (any(diff(currPositions) == 0)) {
-      warning(
-        "jitterPositions is set to FALSE which means calibration will fail if repeated positions are given"
+    # If there are some zeros then jitter by jitterPositionsAmount
+    # If all the positions are different then thickness values don't matter
+    if (!any(duplicated(positions))) {
+      currPositions <- positions
+    } else if (jitterPositionsAmount > 0) {
+      # If there are repeated positions then use jitterPositionsAmount if given
+      currPositions <- sort(jitter(
+        positions,
+        amount = jitterPositionsAmount
+      ))
+    } else {
+      # Finally if the jitter positions amount isn't given set it to a value and warn
+      warning("Some positionsThickness values are zero with no jitterPositionAmount. Bchron cannot run with identical positions and zero thickness values. jitterPositionsAmount has been set to 0.01 so that the model can attempt to run. If the model still fails then increase the value of jitterPositionsAmount further.")
+      jitterPositionsAmount <- 0.01
+      currPositions <- getCurrPositions(
+        jitter(positions, amount = jitterPositionsAmount),
+        positionThicknesses, positionEps
       )
     }
   }
 
-  diffPosition <- diff(currPositions)
   do <- order(currPositions)
+  diffPosition <- diff(currPositions[do])
 
   # For all dates we need an offset to enable fast lookup
   # The offset will be the same for all if we're using a master ageGrid
@@ -462,6 +482,8 @@ Bchronology <- function(ages,
   } else {
     theta <- thetaStart / ageScaleVal
   }
+  # Make sure that the thetas are in the same order as the current positions
+  theta[do] <- theta
 
   # Other starting values
   phi <- rep(0, length(theta))
@@ -488,12 +510,12 @@ Bchronology <- function(ages,
 
   # Main iteration loop -----------------------------------------------------
 
+  cat("Running Bchronology...\n")
   pb <- utils::txtProgressBar(
     min = 1,
     max = iterations,
     style = 3,
     width = 60,
-    title = "Running Bchronology..."
   )
   for (i in 1:iterations) {
     utils::setTxtProgressBar(pb, i)
@@ -503,20 +525,11 @@ Bchronology <- function(ages,
     if (any(positionThicknesses > 0) &
       i > 0.5 * burn & i %% thin == 0) {
       # Get date order so I can preserve things if they change around
-      badPositions <- TRUE
-      while (badPositions) {
-        currPositions <- stats::runif(
-          n,
-          positions - 0.5 * positionThicknesses,
-          positions + 0.5 * positionThicknesses
-        )
-        do <- order(currPositions)
-        diffPosition <- diff(currPositions[do])
-        theta[do] <- sort(theta)
-        if (all(diffPosition > positionEps)) badPositions <- FALSE
-      }
+      currPositions <- getCurrPositions(positions, positionThicknesses, positionEps)
+      do <- order(currPositions)
+      diffPosition <- diff(currPositions[do])
+      theta[do] <- sort(theta)
     }
-
 
     # Put things in storage ---------------------------------------------------
 
@@ -531,7 +544,6 @@ Bchronology <- function(ages,
       # Run interpolation/extrapolation stage
       lambda <- (mu^(2 - p)) / (psi * (2 - p))
       beta <- 1 / (psi * (p - 1) * (mu^(p - 1)))
-
 
       # Interpolation and extrapolation -----------------------------------------
 
@@ -605,19 +617,18 @@ Bchronology <- function(ages,
 
     # Update theta ------------------------------------------------------------
 
-    # Update theta
     for (j in 1:n) {
       lowerLimit <- ifelse(
         j == 1,
-        ifelse(x.df1[[j]]$calCurve == "normal",
+        ifelse(x.df1[[do[j]]]$calCurve == "normal",
           extractDate / ageScaleVal,
-          min(x.df1[[j]]$ageGrid) / ageScaleVal
+          min(x.df1[[do[j]]]$ageGrid) / ageScaleVal
         ),
         theta[do[j - 1]] + 0.001
       )
       # upperLimit <- ifelse(j == n, 100000, theta[do[j + 1]] - 0.001)
       upperLimit <- ifelse(j == n,
-        max(x.df1[[j]]$ageGrid) / ageScaleVal,
+        max(x.df1[[do[j]]]$ageGrid) / ageScaleVal,
         theta[do[j + 1]] - 0.001
       )
 
@@ -670,7 +681,6 @@ Bchronology <- function(ages,
         theta[do[j]] <- thetaNew
       }
     }
-
 
     # Update other parameters -------------------------------------------------
 
@@ -761,7 +771,7 @@ Bchronology <- function(ages,
     outlierProbs = outlierProbs,
     predictPositions = predictPositions,
     pathToCalCurves = pathToCalCurves,
-    jitterPositions = jitterPositions,
+    jitterPositionsAmount = jitterPositionsAmount,
     iterations = iterations,
     burn = burn,
     thin = thin,
@@ -790,5 +800,6 @@ Bchronology <- function(ages,
     inputVals = inputVals
   )
   class(out) <- "BchronologyRun"
+  cat("\nRun completed!\n")
   return(out)
 }

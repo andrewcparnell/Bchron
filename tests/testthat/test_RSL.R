@@ -16,7 +16,6 @@ co(
       positionThicknesses = thickness,
       ids = id,
       calCurves = calCurves,
-      jitterPositions = TRUE,
       predictPositions = TestRSLData$Depth,
       iterations = 100,
       burn = 20,

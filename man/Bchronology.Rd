@@ -14,7 +14,7 @@ Bchronology(
   outlierProbs = rep(0.01, length(ages)),
   predictPositions = seq(min(positions), max(positions), length = 100),
   pathToCalCurves = system.file("data", package = "Bchron"),
-  jitterPositions = FALSE,
+  jitterPositionsAmount = 0,
   allowOutside = FALSE,
   iterations = 10000,
   burn = 2000,
@@ -49,7 +49,7 @@ Bchronology(
 
 \item{pathToCalCurves}{File path to where the calibration curves are located. Defaults to the system directory where the 3 standard calibration curves are stored.}
 
-\item{jitterPositions}{Whether to jigger the positions at startup or not. Default is FALSE but if there are lots of dates at similar depths this may resolve some initialisation problems}
+\item{jitterPositionsAmount}{Amount to jitter the positions. Bchron will not run if \code{positionThicknesses} are zero and some positions are repeated. The default value is zero but if there are lots of dates at similar positions you might like to try a small positive value such as \code{max(positions)/1000}. If set too large this will produce poor chronologies}
 
 \item{allowOutside}{Whether to allow calibrations to run outside the range of the calibration curve. By default this is turned off as calibrations outside of the range of the calibration curve can cause severe issues with probability ranges of calibrated dates}
 
@@ -75,7 +75,7 @@ Bchronology(
 
 \item{positionEps}{A small value used to check whether simulated positions are far enough apart to avoid numerical underflow errors. If errors occur in model runs (e.g. \code{missing value where TRUE/FALSE needed} increase this value)}
 
-\item{positionNormalise}{Whether to normalise the position values. \code{Bchronology} works best when the positions are normalise to be between 0 and 1 The default value is \code{TRUE}}
+\item{positionNormalise}{Whether to normalise the position values. \code{Bchronology} works best when the positions are normalised to be between 0 and 1 The default value is \code{TRUE}}
 }
 \value{
 A list of class \code{BchronologyRun} which include elements:
@@ -125,7 +125,10 @@ predictAges <- predict(GlenOut,
 )
 
 # Plot the output
-plot(GlenOut, main = "Glendalough", xlab = "Age (cal years BP)", ylab = "Depth (cm)", las = 1)
+plot(GlenOut) + 
+labs(title = "Glendalough", 
+     xlab = "Age (cal years BP)", 
+     ylab = "Depth (cm)")
 
 # If you need to specify your own starting values
 startingAges <- c(0, 2000, 10000, 11000, 13000, 13500)

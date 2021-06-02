@@ -332,7 +332,6 @@ RSLchron = with(TestChronData,
                             positionThicknesses = thickness,
                             ids = id,
                             calCurves = calCurves,
-                            jitterPositions = TRUE,
                             predictPositions = TestRSLData$Depth))
 RSLrun = with(TestRSLData, 
               BchronRSL(RSLchron,
