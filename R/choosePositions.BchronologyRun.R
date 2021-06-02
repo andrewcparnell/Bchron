@@ -208,7 +208,7 @@ choosePositions.BchronologyRun <- function(bchrRun,
       iterations = bchrRun$inputVals$iterations,
       burn = bchrRun$inputVals$burn,
       thin = bchrRun$inputVals$thin,
-      jitterPositionsAmount = bchrRun$inputVals$jitterPositionsAmount
+      artificialThickness = bchrRun$inputVals$artificialThickness
     )
     cat("\n")
 

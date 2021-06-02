@@ -125,10 +125,12 @@ predictAges <- predict(GlenOut,
 )
 
 # Plot the output
-plot(GlenOut) + 
-labs(title = "Glendalough", 
-     xlab = "Age (cal years BP)", 
-     ylab = "Depth (cm)")
+plot(GlenOut) +
+  labs(
+    title = "Glendalough",
+    xlab = "Age (cal years BP)",
+    ylab = "Depth (cm)"
+  )
 
 # If you need to specify your own starting values
 startingAges <- c(0, 2000, 10000, 11000, 13000, 13500)

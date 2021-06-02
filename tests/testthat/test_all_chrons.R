@@ -802,7 +802,6 @@ test_that("Barton_Github_20210521", {
     positions = Bchron_Frame$position,
     positionThickness = Bchron_Frame$thickness, # rep(0.001, nrow(Bchron_Frame)), #
     ids = Bchron_Frame$id,
-    jitterPositionsAmount = 0.01,
     positionNormalise = FALSE,
     iterations = 1500,
     burn = 500,
@@ -823,7 +822,6 @@ test_that("Barton_Github_20210521", {
     positions = Bchron_Frame$position,
     positionThickness = Bchron_Frame$thickness, # rep(0.001, nrow(Bchron_Frame)), #
     ids = Bchron_Frame$id,
-    jitterPositionsAmount = 0.01,
     positionNormalise = TRUE,
     iterations = 1500,
     burn = 500,
@@ -837,7 +835,7 @@ test_that("Barton_Github_20210521", {
   expect_output(summary(run2, type = "outliers"))
   expect_output(summary(run2, type = "max_var"))
 
-  expect_warning(co(Bchronology(
+  co(run3 <- Bchronology(
     ages = Bchron_Frame$ages,
     ageSds = Bchron_Frame$ageSds,
     calCurves = Bchron_Frame$calCurves,
@@ -848,6 +846,12 @@ test_that("Barton_Github_20210521", {
     iterations = 100,
     burn = 10,
     thin = 1,
-    predictPositions = seq(min(Bchron_Frame$position), max(Bchron_Frame$position), by = 1)
-  )))
+    predictPositions = seq(min(Bchron_Frame$position), max(Bchron_Frame$position), by = 1)))
+  # plot(run2, dateHeight = 10)
+  expect_s3_class(run3, "BchronologyRun")
+  expect_output(summary(run3, type = "quantiles"))
+  expect_output(summary(run3, type = "convergence"))
+  expect_output(summary(run3, type = "outliers"))
+  expect_output(summary(run3, type = "max_var"))
+  
 })

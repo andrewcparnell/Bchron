@@ -4,6 +4,7 @@
   - Updated vignette to show how to customise plots
   - Fixed a bug where an error for identical positions (with no thickness errors) was not being shown
   - Fixed an issue with positionNormalise
+  - Fixed an issue with jitterPositions by replacing it with artificialThickness that enables customised amounts of jittering when there are identical positions and no thicknesses
 
 # Bchron 4.7.5
 

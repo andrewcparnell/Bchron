@@ -33,7 +33,7 @@ BchronCheck <- function(ages,
                         ids = NULL,
                         outlierProbs = NULL,
                         predictPositions = NULL,
-                        jitterPositionsAmount = NULL,
+                        artificialThickness = NULL,
                         allowOutside = NULL,
                         iterations = NULL,
                         thetaStart = NULL,
@@ -93,7 +93,7 @@ BchronCheck <- function(ages,
 
     # Now some of the other arguments
     assertLogical(positionNormalise, null.ok = TRUE)
-    assertNumber(jitterPositionsAmount, null.ok = FALSE, lower = 0)
+    assertNumber(artificialThickness, null.ok = FALSE, lower = 0)
     assertLogical(allowOutside, null.ok = TRUE)
     assertNumber(iterations, lower = 1, null.ok = TRUE)
     assertNumber(burn, lower = 1, null.ok = TRUE)

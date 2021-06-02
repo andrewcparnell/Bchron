@@ -83,6 +83,7 @@ test_that("choosePositions", {
 
 test_that("Bchronology prediction bug", {
   # New test due to weird bug in Bchronology prediction - 13/4/20
+  set.seed(123)
   df <- structure(list(
     age = c(2975, 4270, 4480),
     error = c(60, 70, 60),

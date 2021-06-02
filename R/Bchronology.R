@@ -7,7 +7,7 @@
 #' @param positionThicknesses Thickness values for each of the positions. The thickness value should be the full thickness value of the slice. By default set to zero.
 #' @param outlierProbs A vector of prior outlier probabilities, one for each age. Defaults to 0.01
 #' @param predictPositions A vector of positions (e.g. depths) at which predicted age values are required. Defaults to a sequence of length 100 from the top position to the bottom position
-#' @param jitterPositionsAmount Amount to jitter the positions. Bchron will not run if \code{positionThicknesses} are zero and some positions are repeated. The default value is zero but if there are lots of dates at similar positions you might like to try a small positive value such as \code{max(positions)/1000}. If set too large this will produce poor chronologies
+#' @param artificialThickness Amount to add to the thickness values in the case of equal positions with no \code{positionThicknesses}. Bchron may fail if \code{positionThicknesses} are zero and some positions are repeated. This value is added on to the zero thicknesses (only in the case of repeated positions) to stop this failure.
 #' @param iterations The number of iterations to run the procedure for
 #' @param burn The number of starting iterations to discard
 #' @param thin The step size for every iteration to keep beyond the burn-in
@@ -116,7 +116,7 @@ Bchronology <- function(ages,
                           length  = 100
                         ),
                         pathToCalCurves = system.file("data", package = "Bchron"),
-                        jitterPositionsAmount = 0,
+                        artificialThickness = 0.01,
                         allowOutside = FALSE,
                         iterations = 10000,
                         burn = 2000,
@@ -149,7 +149,7 @@ Bchronology <- function(ages,
     outlierProbs = outlierProbs,
     predictPositions = predictPositions,
     pathToCalCurves = pathToCalCurves,
-    jitterPositionsAmount = jitterPositionsAmount,
+    artificialThickness = artificialThickness,
     allowOutside = allowOutside,
     iterations = iterations,
     thetaStart = thetaStart,
@@ -184,16 +184,6 @@ Bchronology <- function(ages,
   n <- length(ages)
   depthLow <- positions - 0.5 * positionThicknesses
   depthHigh <- positions + 0.5 * positionThicknesses
-  # if(jitterPositionsAmount == 0) {
-  #   for (i in 2:n) {
-  #     if (depthLow[i] - depthHigh[i - 1] <= 0 &
-  #         positionThicknesses[i] == 0) {
-  #       stop(
-  #         "Positions identical with no positionThickness values - not supported in Bchron. Check positionThickness values or set jitterPositionsAmount to be a positive small value"
-  #       )
-  #     }
-  #   }
-  # }
 
   # Function to create decent starting positions
   getCurrPositions <- function(pos, posThick, posEps) {
@@ -284,30 +274,27 @@ Bchronology <- function(ages,
   # Get starting positions --------------------------------------------------
 
   # If it has position thicknesses for all then use these to create some current positions
-  if (all(positionThicknesses > 0)) {
-    currPositions <- getCurrPositions(positions, positionThicknesses, positionEps)
-  } else {
-    # If there are some zeros then jitter by jitterPositionsAmount
-    # If all the positions are different then thickness values don't matter
-    if (!any(duplicated(positions))) {
-      currPositions <- positions
-    } else if (jitterPositionsAmount > 0) {
-      # If there are repeated positions then use jitterPositionsAmount if given
-      currPositions <- sort(jitter(
-        positions,
-        amount = jitterPositionsAmount
-      ))
-    } else {
-      # Finally if the jitter positions amount isn't given set it to a value and warn
-      warning("Some positionsThickness values are zero with no jitterPositionAmount. Bchron cannot run with identical positions and zero thickness values. jitterPositionsAmount has been set to 0.01 so that the model can attempt to run. If the model still fails then increase the value of jitterPositionsAmount further.")
-      jitterPositionsAmount <- 0.01
+
+  if (any(positionThicknesses == 0)) {
+    if (length(positionThicknesses[duplicated(positions)]) > 0) {
+      message("Some positionThicknesses are zero for identical positions.  artificialThickness has been added so that the model can attempt to run. If the model still fails then increase the value of artificialThickness further.")
+      positionThicknesses[duplicated(positions)] <- positionThicknesses[duplicated(positions)] + artificialThickness
       currPositions <- getCurrPositions(
-        jitter(positions, amount = jitterPositionsAmount),
+        positions,
+        positionThicknesses, positionEps
+      )
+    } else {
+      currPositions <- getCurrPositions(
+        positions,
         positionThicknesses, positionEps
       )
     }
+  } else {
+    currPositions <- getCurrPositions(
+      positions,
+      positionThicknesses, positionEps
+    )
   }
-
   do <- order(currPositions)
   diffPosition <- diff(currPositions[do])
 
@@ -771,7 +758,7 @@ Bchronology <- function(ages,
     outlierProbs = outlierProbs,
     predictPositions = predictPositions,
     pathToCalCurves = pathToCalCurves,
-    jitterPositionsAmount = jitterPositionsAmount,
+    artificialThickness = artificialThickness,
     iterations = iterations,
     burn = burn,
     thin = thin,
