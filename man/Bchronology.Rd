@@ -14,7 +14,7 @@ Bchronology(
   outlierProbs = rep(0.01, length(ages)),
   predictPositions = seq(min(positions), max(positions), length = 100),
   pathToCalCurves = system.file("data", package = "Bchron"),
-  jitterPositionsAmount = 0,
+  artificialThickness = 0.01,
   allowOutside = FALSE,
   iterations = 10000,
   burn = 2000,
@@ -49,7 +49,7 @@ Bchronology(
 
 \item{pathToCalCurves}{File path to where the calibration curves are located. Defaults to the system directory where the 3 standard calibration curves are stored.}
 
-\item{jitterPositionsAmount}{Amount to jitter the positions. Bchron will not run if \code{positionThicknesses} are zero and some positions are repeated. The default value is zero but if there are lots of dates at similar positions you might like to try a small positive value such as \code{max(positions)/1000}. If set too large this will produce poor chronologies}
+\item{artificialThickness}{Amount to add to the thickness values in the case of equal positions with no \code{positionThicknesses}. Bchron may fail if \code{positionThicknesses} are zero and some positions are repeated. This value is added on to the zero thicknesses (only in the case of repeated positions) to stop this failure.}
 
 \item{allowOutside}{Whether to allow calibrations to run outside the range of the calibration curve. By default this is turned off as calibrations outside of the range of the calibration curve can cause severe issues with probability ranges of calibrated dates}
 

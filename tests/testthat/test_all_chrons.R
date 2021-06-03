@@ -847,7 +847,7 @@ test_that("Barton_Github_20210521", {
     burn = 10,
     thin = 1,
     predictPositions = seq(min(Bchron_Frame$position), max(Bchron_Frame$position), by = 1)))
-  # plot(run2, dateHeight = 10)
+  # plot(run3, dateHeight = 10)
   expect_s3_class(run3, "BchronologyRun")
   expect_output(summary(run3, type = "quantiles"))
   expect_output(summary(run3, type = "convergence"))
