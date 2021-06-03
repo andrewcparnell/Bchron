@@ -62,8 +62,8 @@ plot.BchronRSLRun <-
       xgrid <- seq(max(ageAll), min(ageAll), length = 100) / 1000
 
       predLines <- matrix(NA, ncol = length(xgrid), nrow = nrow(x$samples))
-      degmat <- matrix(rep(0:(x$degree), length(xgrid) * (x$degree + 1)),
-        nrow = length(xgrid), ncol = x$degree + 1, byrow = TRUE
+      degmat <- matrix(rep(0:(x$degree), each = length(xgrid)),
+        nrow = length(xgrid), ncol = x$degree + 1
       )
       X.pred <- matrix(rep(xgrid - x$const, x$degree + 1), ncol = x$degree + 1)
       X.pred <- (X.pred^degmat)
