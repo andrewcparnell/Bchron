@@ -67,7 +67,7 @@ BchronRSL.BchronologyRun <- function(BchronologyRun, RSLmean, RSLsd, degree = 1,
   N <- nrow(y)
   chrons <- BchronologyRun$thetaPredict / 1000
   whichrows <- sample(1:nrow(chrons), iterations, replace = TRUE)
-  degmat <- matrix(rep(0:(degree), ncol(chrons) * N), nrow = N, ncol = degree + 1, byrow = TRUE)
+  degmat <- matrix(rep(0:(degree), each = N), nrow = N, ncol = degree + 1)
   const <- mean(as.matrix(chrons))
   pb <- utils::txtProgressBar(min = 1, max = iterations, style = 3, width = 60, title = "Running BchronRSL")
   for (i in 1:iterations) {
