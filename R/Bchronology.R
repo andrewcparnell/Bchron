@@ -74,7 +74,7 @@
 #'
 #' # Plot the output
 #' plot(GlenOut) +
-#'   labs(
+#'   ggplot2::labs(
 #'     title = "Glendalough",
 #'     xlab = "Age (cal years BP)",
 #'     ylab = "Depth (cm)"
