@@ -95,7 +95,7 @@ BchronCheck <- function(ages,
 
     # Now some of the other arguments
     assertLogical(positionNormalise, null.ok = TRUE)
-    assertNumber(artificialThickness, null.ok = FALSE, lower = 0)
+    assertNumber(artificialThickness, null.ok = FALSE, lower = .Machine$double.eps)
     assertLogical(allowOutside, null.ok = TRUE)
     assertNumber(iterations, lower = 1, null.ok = TRUE)
     assertNumber(burn, lower = 1, null.ok = TRUE)

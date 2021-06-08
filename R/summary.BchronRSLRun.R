@@ -37,7 +37,7 @@ summary.BchronRSLRun <-
 
     if ("RSL" %in% type) {
       degmat <- matrix(rep(0:(object$degree), each = length(age_grid_use)),
-                       nrow = length(age_grid_use), ncol = object$degree + 1
+        nrow = length(age_grid_use), ncol = object$degree + 1
       )
       # degmat <- matrix(rep(0:(object$degree), length(age_grid_use) * (object$degree + 1)), nrow = length(age_grid_use), ncol = object$degree + 1, byrow = TRUE)
       X.pred <- matrix(rep(age_grid_use - object$const, object$degree + 1), ncol = object$degree + 1)
@@ -61,10 +61,10 @@ summary.BchronRSLRun <-
 
     if ("rate" %in% type) {
       degmat <- matrix(rep(0:(object$degree), each = length(age_grid_use)),
-                       nrow = length(age_grid_use), ncol = object$degree + 1
+        nrow = length(age_grid_use), ncol = object$degree + 1
       )
       degmat_rate <- matrix(rep(0:(object$degree), each = length(age_grid_use)),
-                       nrow = length(age_grid_use), ncol = object$degree + 1
+        nrow = length(age_grid_use), ncol = object$degree + 1
       ) - 1
       # degmat <- matrix(rep(0:(object$degree), length(age_grid_use) * (object$degree + 1)), nrow = length(age_grid_use), ncol = object$degree + 1, byrow = TRUE)
       # degmat_rate <- matrix(rep(0:(object$degree), length(age_grid_use) * (object$degree + 1)), nrow = length(age_grid_use), ncol = object$degree + 1, byrow = TRUE) - 1
@@ -90,13 +90,13 @@ summary.BchronRSLRun <-
 
     if ("accel" %in% type) {
       degmat <- matrix(rep(0:(object$degree), each = length(age_grid_use)),
-                       nrow = length(age_grid_use), ncol = object$degree + 1
+        nrow = length(age_grid_use), ncol = object$degree + 1
       )
       degmat_rate <- matrix(rep(0:(object$degree), each = length(age_grid_use)),
-                            nrow = length(age_grid_use), ncol = object$degree + 1
+        nrow = length(age_grid_use), ncol = object$degree + 1
       ) - 1
       degmat_accel <- matrix(rep(0:(object$degree), each = length(age_grid_use)),
-                            nrow = length(age_grid_use), ncol = object$degree + 1
+        nrow = length(age_grid_use), ncol = object$degree + 1
       ) - 2
       # degmat <- matrix(rep(0:(object$degree), length(age_grid_use) * (object$degree + 1)), nrow = length(age_grid_use), ncol = object$degree + 1, byrow = TRUE)
       # degmat_rate <- matrix(rep(0:(object$degree), length(age_grid_use) * (object$degree + 1)), nrow = length(age_grid_use), ncol = object$degree + 1, byrow = TRUE) - 1

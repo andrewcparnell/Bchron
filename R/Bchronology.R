@@ -277,7 +277,7 @@ Bchronology <- function(ages,
 
   if (any(positionThicknesses == 0)) {
     if (length(positionThicknesses[duplicated(positions)]) > 0) {
-      message("Some positionThicknesses are zero for identical positions.  artificialThickness has been added so that the model can attempt to run. If the model still fails then increase the value of artificialThickness further.")
+      message("Some positionThicknesses are zero for identical positions. artificialThickness has been added so that the model can attempt to run. If the model still fails then increase the value of artificialThickness further.")
       positionThicknesses[duplicated(positions)] <- positionThicknesses[duplicated(positions)] + artificialThickness
       currPositions <- getCurrPositions(
         positions,
@@ -297,7 +297,7 @@ Bchronology <- function(ages,
   }
   do <- order(currPositions)
   diffPosition <- diff(currPositions[do])
-
+  
   # For all dates we need an offset to enable fast lookup
   # The offset will be the same for all if we're using a master ageGrid
   offset <- rep(-min(x.df1[[1]]$ageGrid), length = n)
