@@ -130,3 +130,23 @@ test_that("Test with starting values", {
   ))
   expect_s3_class(GlenOut, "BchronologyRun")
 })
+  
+test_that("Non-unique IDs fail", {
+  expect_error(with(
+    Glendalough,
+    Bchronology(
+      ages = ages,
+      ageSds = ageSds,
+      calCurves = calCurves,
+      positions = position,
+      positionThicknesses = thickness,
+      ids = rep('a', nrow(Glendalough)),
+      predictPositions = seq(-10, 1500, by = 10),
+      thetaStart = ages,
+      iterations = 100,
+      burn = 20,
+      thin = 1
+    )
+  ))
+  
+})
