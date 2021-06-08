@@ -35,7 +35,7 @@ Bchronology(
 
 \item{ageSds}{A vector of 1-sigma values for the ages given above}
 
-\item{positions}{Position values (e.g. depths) for each age}
+\item{positions}{Position values (e.g. depths) for each age. In the case of layers of non-zero thickness, this should be the middle value of the slice}
 
 \item{positionThicknesses}{Thickness values for each of the positions. The thickness value should be the full thickness value of the slice. By default set to zero.}
 

@@ -25,7 +25,7 @@ BchronCalibrate(
 
 \item{ids}{ID names for each age}
 
-\item{positions}{Position values (e.g. depths) for each age}
+\item{positions}{Position values (e.g. depths) for each age. In the case of layers of non-zero thickness, this should be the middle value of the slice}
 
 \item{pathToCalCurves}{File path to where the calibration curves are located. Defaults to the system directory where the 3 standard calibration curves are stored.}
 

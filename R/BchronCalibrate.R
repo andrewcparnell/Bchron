@@ -6,7 +6,7 @@
 #' @param ageSds A vector of 1-sigma values for the ages given above
 #' @param calCurves A vector of values containing either \code{intcal20}, \code{shcal20}, \code{marine20}, or \code{normal} (older calibration curves are supposed such as intcal13). Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.
 #' @param ids ID names for each age
-#' @param positions Position values (e.g. depths) for each age
+#' @param positions Position values (e.g. depths) for each age. In the case of layers of non-zero thickness, this should be the middle value of the slice
 #' @param pathToCalCurves File path to where the calibration curves are located. Defaults to the system directory where the 3 standard calibration curves are stored.
 #' @param allowOutside Whether to allow calibrations to run outside the range of the calibration curve. By default this is turned off as calibrations outside of the range of the calibration curve can cause severe issues with probability ranges of calibrated dates
 #' @param eps Cut-off point for density calculation. A value of eps>0 removes ages from the output which have negligible probability density

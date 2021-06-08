@@ -76,7 +76,7 @@ BchronCheck <- function(ages,
     calCurveFile <- paste(pathToCalCurves, "/", allCalCurves[i], ".rda", sep = "")
     assertFileExists(calCurveFile)
   }
-  
+
   # Check the ids are unique and correct if there
   assertVector(ids, any.missing = FALSE, len = nObs, null.ok = TRUE, unique = TRUE)
 
