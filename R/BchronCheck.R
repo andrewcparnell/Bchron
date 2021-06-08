@@ -76,6 +76,9 @@ BchronCheck <- function(ages,
     calCurveFile <- paste(pathToCalCurves, "/", allCalCurves[i], ".rda", sep = "")
     assertFileExists(calCurveFile)
   }
+  
+  # Check the ids are unique and correct if there
+  assertVector(ids, any.missing = FALSE, len = nObs, null.ok = TRUE, unique = TRUE)
 
   if (type == "Bchronology") {
     # Checks for a full chronology run
@@ -84,7 +87,6 @@ BchronCheck <- function(ages,
     assertNumeric(positions, any.missing = FALSE, len = nObs, null.ok = TRUE)
     assertNumeric(positionThicknesses, any.missing = FALSE, len = nObs, null.ok = TRUE)
     assertVector(calCurves, any.missing = FALSE, len = nObs, null.ok = TRUE)
-    assertVector(ids, any.missing = FALSE, len = nObs, null.ok = TRUE)
     assertNumeric(outlierProbs, any.missing = FALSE, len = nObs, null.ok = TRUE, lower = 0, upper = 1)
     assertNumeric(thetaStart, any.missing = FALSE, len = nObs, null.ok = TRUE)
 

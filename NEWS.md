@@ -5,6 +5,7 @@
   - Fixed a bug where an error for identical positions (with no thickness errors) was not being shown
   - Fixed an issue with positionNormalise
   - Fixed an issue with jitterPositions by replacing it with artificialThickness that enables customised amounts of jittering when there are identical positions and no thicknesses
+  - Forced ids argument in BchronCalibrate and Bchronology to be unique otherwise causes problems with plots
 
 # Bchron 4.7.5
 

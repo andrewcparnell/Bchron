@@ -329,6 +329,7 @@ plot.BchronCalibratedDates <-
           height = .data$densities * dateHeight,
           Age = ageScaleFun(.data$Age)
         )
+        
       expand_x <- if (dateLabels) {
         c(0.2, 0)
       } else {
