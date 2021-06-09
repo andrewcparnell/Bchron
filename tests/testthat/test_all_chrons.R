@@ -710,7 +710,6 @@ test_that("Gregor_Github17_20210510_b", {
     calCurves = Bchron_Frame$calCurves,
     positions = Bchron_Frame$position,
     positionThickness = Bchron_Frame$thickness,
-    ids = Bchron_Frame$id,
     iterations = 1500,
     burn = 500,
     thin = 1,
@@ -852,7 +851,7 @@ test_that("Barton_Github_20210521", {
   expect_output(summary(run3, type = "max_var"))
   
   # Check that it reports an error when artificialThickness is zero and positions are equal
-  co(run4 <- Bchronology(
+  expect_error(Bchronology(
     ages = Bchron_Frame$ages,
     ageSds = Bchron_Frame$ageSds,
     calCurves = Bchron_Frame$calCurves,
@@ -919,16 +918,16 @@ test_that("Barton_Github_202100604", {
   # plot(test, withPositions = TRUE, dateHeight = 1)
 
   co(run <- Bchronology(
-    ages = Bchron_Frame$ages,
-    ageSds = Bchron_Frame$ageSds,
-    calCurves = Bchron_Frame$calCurves,
-    positions = Bchron_Frame$position,
+    ages = Bchron_Frame$C14mean,
+    ageSds = Bchron_Frame$C14SD,
+    calCurves = Bchron_Frame$calib.curve,
+    positions = Bchron_Frame$depth,
     positionThickness = Bchron_Frame$thickness, # rep(0.001, nrow(Bchron_Frame)), #
     positionNormalise = FALSE,
     iterations = 1500,
     burn = 500,
     thin = 1,
-    predictPositions = seq(min(Bchron_Frame$position), max(Bchron_Frame$position), by = 1)
+    predictPositions = seq(min(Bchron_Frame$depth), max(Bchron_Frame$depth), length.out = 100)
   ))
   # plot(run, dateHeight = 1)
   expect_s3_class(run, "BchronologyRun")

@@ -91,7 +91,7 @@ BchronCheck <- function(ages,
     assertNumeric(thetaStart, any.missing = FALSE, len = nObs, null.ok = TRUE)
 
     # predictPositions can be any length
-    assertNumeric(predictPositions, any.missing = FALSE, null.ok = TRUE)
+    assertNumeric(predictPositions, any.missing = FALSE, null.ok = FALSE)
 
     # Now some of the other arguments
     assertLogical(positionNormalise, null.ok = TRUE)
