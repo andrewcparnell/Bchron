@@ -1,4 +1,4 @@
-# Bchron 4.7.5.9000
+# Bchron 4.7.6
 
   - Fixed an example in Bchronology that was adding titles/labels incorrectly
   - Updated vignette to show how to customise plots
