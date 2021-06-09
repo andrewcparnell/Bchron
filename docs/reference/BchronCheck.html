@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Bchron</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.5.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.6</span>
       </span>
     </div>
 
@@ -133,7 +133,7 @@
   ids <span class='op'>=</span> <span class='cn'>NULL</span>,
   outlierProbs <span class='op'>=</span> <span class='cn'>NULL</span>,
   predictPositions <span class='op'>=</span> <span class='cn'>NULL</span>,
-  jitterPositions <span class='op'>=</span> <span class='cn'>NULL</span>,
+  artificialThickness <span class='op'>=</span> <span class='cn'>NULL</span>,
   allowOutside <span class='op'>=</span> <span class='cn'>NULL</span>,
   iterations <span class='op'>=</span> <span class='cn'>NULL</span>,
   thetaStart <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -165,7 +165,7 @@
     </tr>
     <tr>
       <th>positions</th>
-      <td><p>Position values (e.g. depths) for each age</p></td>
+      <td><p>Position values (e.g. depths) for each age. In the case of layers of non-zero thickness, this should be the middle value of the slice</p></td>
     </tr>
     <tr>
       <th>pathToCalCurves</th>
@@ -192,8 +192,8 @@
       <td><p>A vector of positions (e.g. depths) at which predicted age values are required. Defaults to a sequence of length 100 from the top position to the bottom position</p></td>
     </tr>
     <tr>
-      <th>jitterPositions</th>
-      <td><p>Whether to jigger the positions at startup or not. Default is FALSE but if there are lots of dates at similar depths this may resolve some initialisation problems</p></td>
+      <th>artificialThickness</th>
+      <td><p>Amount to add to the thickness values in the case of equal positions with no <code>positionThicknesses</code>. Bchron may fail if <code>positionThicknesses</code> are zero and some positions are repeated. This value is added on to the zero thicknesses (only in the case of repeated positions) to stop this failure.</p></td>
     </tr>
     <tr>
       <th>allowOutside</th>
@@ -245,7 +245,7 @@
     </tr>
     <tr>
       <th>positionNormalise</th>
-      <td><p>Whether to normalise the position values. <code>Bchronology</code> works best when the positions are normalise to be between 0 and 1 The default value is <code>TRUE</code></p></td>
+      <td><p>Whether to normalise the position values. <code>Bchronology</code> works best when the positions are normalised to be between 0 and 1 The default value is <code>TRUE</code></p></td>
     </tr>
     <tr>
       <th>eps</th>

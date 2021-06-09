@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Bchron</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.5.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">4.7.6</span>
       </span>
     </div>
 
@@ -117,13 +117,17 @@
       <small>Source: <a href='https://github.com/andrewcparnell/Bchron/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="bchron-4759000" class="section level1">
-<h1 class="page-header" data-toc-text="4.7.5.9000">
-<a href="#bchron-4759000" class="anchor"></a>Bchron 4.7.5.9000<small> Unreleased </small>
+    <div id="bchron-476" class="section level1">
+<h1 class="page-header" data-toc-text="4.7.6">
+<a href="#bchron-476" class="anchor"></a>Bchron 4.7.6<small> Unreleased </small>
 </h1>
 <ul>
 <li>Fixed an example in Bchronology that was adding titles/labels incorrectly</li>
 <li>Updated vignette to show how to customise plots</li>
+<li>Fixed a bug where an error for identical positions (with no thickness errors) was not being shown</li>
+<li>Fixed an issue with positionNormalise</li>
+<li>Fixed an issue with jitterPositions by replacing it with artificialThickness that enables customised amounts of jittering when there are identical positions and no thicknesses</li>
+<li>Forced ids argument in BchronCalibrate and Bchronology to be unique otherwise causes problems with plots</li>
 </ul>
 </div>
     <div id="bchron-475" class="section level1">
