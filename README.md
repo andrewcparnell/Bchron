@@ -34,5 +34,5 @@ To install the stable version of the package go to R and type:
 install.packages('Bchron')
 ```
 
-Now start <a href = "http://andrewcparnell.github.io/Bchron/">using Bchron</a>!
+Now start <a href = "http://andrewcparnell.github.io/Bchron/articles/Bchron.html">using Bchron</a>!
 
