@@ -849,7 +849,7 @@ test_that("Barton_Github_20210521", {
   expect_output(summary(run3, type = "convergence"))
   expect_output(summary(run3, type = "outliers"))
   expect_output(summary(run3, type = "max_var"))
-  
+
   # Check that it reports an error when artificialThickness is zero and positions are equal
   expect_error(Bchronology(
     ages = Bchron_Frame$ages,

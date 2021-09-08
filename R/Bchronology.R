@@ -297,7 +297,7 @@ Bchronology <- function(ages,
   }
   do <- order(currPositions)
   diffPosition <- diff(currPositions[do])
-  
+
   # For all dates we need an offset to enable fast lookup
   # The offset will be the same for all if we're using a master ageGrid
   offset <- rep(-min(x.df1[[1]]$ageGrid), length = n)

@@ -1,5 +1,7 @@
 # Bchron 4.7.6.9000
 
+  - Added an example for reservoir correction in the vignette
+
 # Bchron 4.7.6
 
   - Fixed an example in Bchronology that was adding titles/labels incorrectly

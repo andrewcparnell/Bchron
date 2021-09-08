@@ -14,8 +14,10 @@ editor_options:
 ---
 
 ```{r global_options, include=FALSE}
-knitr::opts_chunk$set(fig.width=7, fig.height = 5, fig.align = 'center',
-                      warning=FALSE, message=FALSE)
+knitr::opts_chunk$set(
+  fig.width = 7, fig.height = 5, fig.align = "center",
+  warning = FALSE, message = FALSE
+)
 ```
 
 ## Introduction
@@ -31,7 +33,7 @@ If you find bugs or want to suggest new features please visit the Bchron [GitHub
 Bchron will run in Windows, Mac OS X or Linux. To install Bchron you first need to install [R](https://www.r-project.org). I would also recommend installing [Rstudio](https://www.rstudio.com) as a nice desktop environment for using R. Once in R you can type:
 
 ```{r,eval=FALSE}
-install.packages('Bchron')
+install.packages("Bchron")
 ```
 
 at the R command prompt to install Bchron. If you then type:
@@ -49,10 +51,12 @@ If you want to install the development version of Bchron please visit the Bchron
 Bchron will calibrate single or multiple dates under multiple (even user defined) calibration curves. By default, the intcal20, shcal20 and marine20 calibration curves are included (as are older calibration curves such as intcal13). You can calibrate a single radiocarbon date with, e.g.
 
 ```{r,fig.align='center',fig.width=6,fig.height=5}
-ages1 = BchronCalibrate(ages=11553,
-                        ageSds=230,
-                        calCurves='intcal20',
-                        ids='Ox-123456')
+ages1 <- BchronCalibrate(
+  ages = 11553,
+  ageSds = 230,
+  calCurves = "intcal20",
+  ids = "Ox-123456"
+)
 summary(ages1)
 plot(ages1)
 ```
@@ -62,9 +66,11 @@ This will calibrate the radiocarbon age of 11,553 14C years BP with standard err
 Bchron can calibrate multiple dates simultaneously by inputting the dates as vectors:
 
 ```{r,results='hide'}
-ages2 = BchronCalibrate(ages=c(3445,11553,7456), 
-                        ageSds=c(50,230,110), 
-                        calCurves=c('intcal20','intcal20','shcal20'))
+ages2 <- BchronCalibrate(
+  ages = c(3445, 11553, 7456),
+  ageSds = c(50, 230, 110),
+  calCurves = c("intcal20", "intcal20", "shcal20")
+)
 summary(ages2)
 plot(ages2)
 ```
@@ -74,7 +80,7 @@ This will calibrate three different 14C ages with the calibration curves as spec
 You can plot individual dates from a calibration of multiple dates by name or number, e.g.
 
 ```{r, eval=FALSE}
-plot(ages2, date = 'Date3')
+plot(ages2, date = "Date3")
 plot(ages2, date = 1:2)
 ```
 
@@ -82,10 +88,12 @@ plot(ages2, date = 1:2)
 If you provide position information (e.g. depths) to the BchronCalibrate function it will create a plot with position on the y-axis, e.g.:
 
 ```{r,fig.align='center',fig.width=6,fig.height=5}
-ages3 = BchronCalibrate(ages=c(3445,11000), 
-                        ageSds=c(50,200), 
-                        positions=c(100,150), 
-                        calCurves=c('intcal20','normal'))
+ages3 <- BchronCalibrate(
+  ages = c(3445, 11000),
+  ageSds = c(50, 200),
+  positions = c(100, 150),
+  calCurves = c("intcal20", "normal")
+)
 summary(ages3)
 plot(ages3)
 ```
@@ -94,17 +102,21 @@ plot(ages3)
 ```{r}
 library(ggplot2)
 plot(ages3) +
-  labs(x = 'Age (years BP)',
-       y = 'Depth (cm)',
-       title = 'Two dates at different depths')
+  labs(
+    x = "Age (years BP)",
+    y = "Depth (cm)",
+    title = "Two dates at different depths"
+  )
 ```
 
 ... or change to BC/AD
 ```{r}
-plot(ages3, ageScale = 'bc', scaleReverse = FALSE) +
-  labs(x = 'Age (years BC/AD)',
-       y = 'Depth (cm)',
-       title = 'Two dates at different depths')
+plot(ages3, ageScale = "bc", scaleReverse = FALSE) +
+  labs(
+    x = "Age (years BC/AD)",
+    y = "Depth (cm)",
+    title = "Two dates at different depths"
+  )
 ```
 
 ... or add the calibration curve into the plot
@@ -114,10 +126,12 @@ plot(ages1, includeCal = TRUE)
 
 ... or add multiple dates into the calibration curve plots
 ```{r}
-ages4 = BchronCalibrate(ages=c(3445,11553,7456), 
-                        ageSds=c(50,230,110), 
-                        calCurves=rep('intcal20',3))
-plot(ages4, includeCal = TRUE, fillCol = 'orange')
+ages4 <- BchronCalibrate(
+  ages = c(3445, 11553, 7456),
+  ageSds = c(50, 230, 110),
+  calCurves = rep("intcal20", 3)
+)
+plot(ages4, includeCal = TRUE, fillCol = "orange")
 ```
 
 
@@ -127,16 +141,16 @@ If, alternatively, you want a _credible interval_ (i.e. a single contiguous rang
 
 ```{r}
 # First create age samples for each date
-age_samples = sampleAges(ages3)
+age_samples <- sampleAges(ages3)
 # Now summarise them with quantile - this gives a 95% credible interval
-apply(age_samples, 2, quantile, prob=c(0.025,0.975))
+apply(age_samples, 2, quantile, prob = c(0.025, 0.975))
 ```
 
 The `sampleAges` function introduces some uncertainty as it is a simple random sample. This means that repeatedly running it will give you slightly different results. If you require precision at a yearly level, you might want to increase the `n_samp` argument though will slow the function down a little.
 
 If you wanted to find each date's median age (though this is often an inappropriate summary and should be treated with caution), use:
 ```{r}
-apply(age_samples, 2, quantile, prob=c(0.5))
+apply(age_samples, 2, quantile, prob = c(0.5))
 ```
 
 The calibration code is very fast. On a standard PC you should have no trouble calibrating thousands of dates simultaneously without a noticeably long wait.
@@ -146,10 +160,12 @@ The calibration code is very fast. On a standard PC you should have no trouble c
 If you want to compare two dates, a good method is to look at the posterior difference between them. Because Bchron provides all the information about the dates through the `sample_ages` function, this difference can be calculated in just a few lines of code.  
 
 ```{r}
-age_diff = age_samples[,2] - age_samples[,1]
-qplot(age_diff, geom = 'histogram', bins = 30,
-     main = 'Age difference between 3445+/-50 and 11553+/-230',
-     ylab = 'Frequency', xlab = 'Age difference')
+age_diff <- age_samples[, 2] - age_samples[, 1]
+qplot(age_diff,
+  geom = "histogram", bins = 30,
+  main = "Age difference between 3445+/-50 and 11553+/-230",
+  ylab = "Frequency", xlab = "Age difference"
+)
 ```
 
 ## Running the Bchronology age-depth model
@@ -164,14 +180,18 @@ print(Glendalough)
 The top date is from the present and has the calibration curve 'normal' as it is not a 14C date. This core can be run through Bchron via:
 
 ```{r,results='hide'}
-GlenOut = with(Glendalough, 
-               Bchronology(ages=ages,
-                           ageSds=ageSds, 
-                           calCurves=calCurves,
-                           positions=position, 
-                           positionThicknesses=thickness,
-                           ids=id, 
-                           predictPositions=seq(0,1500,by=10)))
+GlenOut <- with(
+  Glendalough,
+  Bchronology(
+    ages = ages,
+    ageSds = ageSds,
+    calCurves = calCurves,
+    positions = position,
+    positionThicknesses = thickness,
+    ids = id,
+    predictPositions = seq(0, 1500, by = 10)
+  )
+)
 ```
 
 There are other arguments you can supply to Bchronology, including the date the core was extracted, the outlier probabilities for each individual date, and the number of iterations for which to run the algorithm. For more details see:
@@ -185,8 +205,8 @@ Once run, the summary commands will show various output:
 summary(GlenOut)
 ```
 ```{r}
-summary(GlenOut, type='convergence')
-summary(GlenOut, type='outliers')
+summary(GlenOut, type = "convergence")
+summary(GlenOut, type = "outliers")
 ```
 
 The first summary command produces ages for each position supplied in the `predictPositions` argument above (output not shown as it's too long). The second provides convergence diagnostics. The third gives outlier probabilities. The `plot` command will produce an age-position plot:
@@ -198,11 +218,13 @@ plot(GlenOut)
 Finally, the `predict` command will produce predicted ages for a newly specified set of positions with optional thicknesses:
 
 ```{r,results='hide'}
-predictAges = predict(GlenOut, 
-                      newPositions = c(150,725,1500), 
-                      newPositionThicknesses=c(5,0,20))
-predictAges = predict(GlenOut, 
-                      newPositions = seq(0,1500,by=10))
+predictAges <- predict(GlenOut,
+  newPositions = c(150, 725, 1500),
+  newPositionThicknesses = c(5, 0, 20)
+)
+predictAges <- predict(GlenOut,
+  newPositions = seq(0, 1500, by = 10)
+)
 ```
 
 To run this model on a data set of your own, you will need to load in your data set via, e.g.
@@ -217,23 +239,32 @@ run = Bchronology(ages=mydata[,1],ageSds=mydata[,2], ...
 The summary function used above also allows for calculation of sedimentation and accumulation rates. Here is an example of calculating and plotting the accumulation rate for the `GlenOut` object created above:
 
 ```{r, results ='hide'}
-acc_rate = summary(GlenOut, type = 'acc_rate',
-                   probs=c(0.25, 0.5, 0.75))
+acc_rate <- summary(GlenOut,
+  type = "acc_rate",
+  probs = c(0.25, 0.5, 0.75)
+)
 ```
 
 ```{r, eval=FALSE}
-acc_rate_2 = acc_rate %>% 
-  gather(key = Percentile,
-         value = value, 
-         -age_grid)
-ggplot(acc_rate_2, aes(x = age_grid,
-                     y = value,
-                     colour = Percentile)) +
-  scale_colour_brewer(palette = 1) + 
-  geom_line() + theme_bw() + 
-  scale_x_reverse() + 
-  labs(y = 'cm per year',
-       x = 'Age (cal years BP)')
+acc_rate_2 <- acc_rate %>%
+  gather(
+    key = Percentile,
+    value = value,
+    -age_grid
+  )
+ggplot(acc_rate_2, aes(
+  x = age_grid,
+  y = value,
+  colour = Percentile
+)) +
+  scale_colour_brewer(palette = 1) +
+  geom_line() +
+  theme_bw() +
+  scale_x_reverse() +
+  labs(
+    y = "cm per year",
+    x = "Age (cal years BP)"
+  )
 ```
 
 Clearly these accumulation rates are very uncertain, which is unsurprising given the paucity of dates.
@@ -241,25 +272,34 @@ Clearly these accumulation rates are very uncertain, which is unsurprising given
 To calculate sedimentation rates, you need to either make sure that the `predictPositions` argument in the `Bchronology` call above is given with unit differences (e.g. `predictPositions=seq(0,1500,by=1)`) or set the argument `useExisting=FALSE` in the command below:
 
 ```{r, eval=FALSE}
-sed_rate = summary(GlenOut, type = 'sed_rate', useExisting = FALSE,
-                   probs=c(0.25, 0.5, 0.75))
+sed_rate <- summary(GlenOut,
+  type = "sed_rate", useExisting = FALSE,
+  probs = c(0.25, 0.5, 0.75)
+)
 ```
 
 This will be quite slow as it needs to predict ages on a regular unit depth grid. However, the plots can be created in the same way:
 
 ```{r, eval=FALSE}
-sed_rate_2 = sed_rate %>% 
-  gather(key = Percentile,
-         value = value, 
-         -position_grid)
-ggplot(sed_rate_2, aes(x = position_grid,
-                     y = value,
-                     colour = Percentile)) +
-  scale_colour_brewer(palette = 1) + 
-  geom_line() + theme_bw() + 
-  scale_x_reverse() + 
-  labs(y = 'Years per cm',
-       x = 'Depth (cm)')
+sed_rate_2 <- sed_rate %>%
+  gather(
+    key = Percentile,
+    value = value,
+    -position_grid
+  )
+ggplot(sed_rate_2, aes(
+  x = position_grid,
+  y = value,
+  colour = Percentile
+)) +
+  scale_colour_brewer(palette = 1) +
+  geom_line() +
+  theme_bw() +
+  scale_x_reverse() +
+  labs(
+    y = "Years per cm",
+    x = "Depth (cm)"
+  )
 ```
 
 You could then for example save this to a csv file with, e.g. `write.csv(sed_rate, file = 'Glendalough_sed_rates.csv', quote=FALSE, row.names = FALSE)`
@@ -273,16 +313,18 @@ Bchron contains two functions which can help with future dating strategies. They
 
 Identifying the position of maximum age variance can be created with the `summary` command:
 ```{r}
-summary(GlenOut, type = 'max_var')
+summary(GlenOut, type = "max_var")
 ```
 
 You can control the number of positions reported with `numPos`. For example you could now add a line to mark the most variably layer to the plot with:
 ```{r}
-max_var = summary(GlenOut, type = 'max_var', numPos = 1)
-plot(GlenOut) + 
-  labs(title = "Glendalough",
-       x = 'Age (cal years BP)',
-       y = 'Depth (cm)') + 
+max_var <- summary(GlenOut, type = "max_var", numPos = 1)
+plot(GlenOut) +
+  labs(
+    title = "Glendalough",
+    x = "Age (cal years BP)",
+    y = "Depth (cm)"
+  ) +
   geom_hline(yintercept = max_var)
 ```
 
@@ -290,24 +332,27 @@ Finding the date which has maximum influence in the core is a more computational
 
 To find the influence, say, of date `Beta-100901` as the median date shift in years when is removed, we would run:
 ```{r, eval=FALSE}
-dateInfluence(GlenOut, 
-              whichDate = 'Beta-100901',
-              measure = 'absMedianDiff')
+dateInfluence(GlenOut,
+  whichDate = "Beta-100901",
+  measure = "absMedianDiff"
+)
 ```
 
 Alternatively, to find the influence of all the dates in terms of the median shift we could use:
 ```{r, eval=FALSE}
-dateInfluence(GlenOut, 
-              whichDate = 'all',
-              measure = 'absMedianDiff')
+dateInfluence(GlenOut,
+  whichDate = "all",
+  measure = "absMedianDiff"
+)
 ```
 
 A more complete measure of influence is the Kullback-Leibler (KL) divergence which takes account of the change in the full probability distribution rather than just looking at mean or median age differences when that particular date is left out. The KL divergence version could then be run using:
 
 ```{r, eval=FALSE}
-dateInfluence(GlenOut, 
-              whichDate = 'all',
-              measure = 'KL')
+dateInfluence(GlenOut,
+  whichDate = "all",
+  measure = "KL"
+)
 ```
 
 The interpretation here is relative. The dates with the largest KL divergence values have the most influence on the chronology in the core.
@@ -325,28 +370,35 @@ data(TestRSLData)
 These can be run through Bchronology and BchronRSL via:
 
 ```{r,messages=FALSE, results='hide', eval=FALSE}
-RSLchron = with(TestChronData, 
-                Bchronology(ages = ages,
-                            ageSds = ageSds,
-                            positions = position,
-                            positionThicknesses = thickness,
-                            ids = id,
-                            calCurves = calCurves,
-                            predictPositions = TestRSLData$Depth))
-RSLrun = with(TestRSLData, 
-              BchronRSL(RSLchron,
-                        RSLmean = RSL,
-                        RSLsd = Sigma,
-                        degree = 3))
+RSLchron <- with(
+  TestChronData,
+  Bchronology(
+    ages = ages,
+    ageSds = ageSds,
+    positions = position,
+    positionThicknesses = thickness,
+    ids = id,
+    calCurves = calCurves,
+    predictPositions = TestRSLData$Depth
+  )
+)
+RSLrun <- with(
+  TestRSLData,
+  BchronRSL(RSLchron,
+    RSLmean = RSL,
+    RSLsd = Sigma,
+    degree = 3
+  )
+)
 ```
 
 The `Bchronology` run is as described in the section above. The `BChronRSL` run takes this object, an estimate of the RSL means and standard deviations, and a value of degree (here 3 indicating cubic regression). They can then be summarised and plotted via:
 
 ```{r, eval=FALSE}
-summary(RSLrun, type = 'RSL', age_grid = seq(0, 2000, by  = 250))
-plot(RSLrun, type = 'RSL') + ggtitle('Relative sea level plot')
-plot(RSLrun, type = 'rate') + ggtitle('Rate of RSL change') + 
-  ylab('Rate (mm per year)')
+summary(RSLrun, type = "RSL", age_grid = seq(0, 2000, by = 250))
+plot(RSLrun, type = "RSL") + ggtitle("Relative sea level plot")
+plot(RSLrun, type = "rate") + ggtitle("Rate of RSL change") +
+  ylab("Rate (mm per year)")
 ```
 
 See the help files for more options, including outputting parameter values, and plots of acceleration of RSL itself.
@@ -357,9 +409,11 @@ Bchron contains two functions for running non-parametric phase models for estima
 
 ```{r,results='hide', eval=FALSE}
 data(Sluggan)
-SlugDens = BchronDensity(ages=Sluggan$ages,
-                         ageSds=Sluggan$ageSds,
-                         calCurves=Sluggan$calCurves)
+SlugDens <- BchronDensity(
+  ages = Sluggan$ages,
+  ageSds = Sluggan$ageSds,
+  calCurves = Sluggan$calCurves
+)
 ```
 
 You can then output the possible start/end dates of phases:
@@ -373,7 +427,7 @@ The probability argument will specify the sensitivity of the algorithm to findin
 You can plot the density with:
 
 ```{r, eval=FALSE}
-plot(SlugDens,xlab='Age (cal years BP)', xaxp=c(0, 16000, 16))
+plot(SlugDens, xlab = "Age (cal years BP)", xaxp = c(0, 16000, 16))
 ```
 
 Phases will be shown with a thick black red line. These can be turned off by setting the argument `plotPhase=FALSE` whilst the sensitivity can be changed with `phaseProb`.
@@ -381,9 +435,11 @@ Phases will be shown with a thick black red line. These can be turned off by set
 `BchronDensityFast` is identical except for the function call:
 
 ```{r,eval=FALSE}
-SlugDensFast = BchronDensityFast(ages=Sluggan$ages,
-                                 ageSds=Sluggan$ageSds, 
-                                 calCurves=Sluggan$calCurves)
+SlugDensFast <- BchronDensityFast(
+  ages = Sluggan$ages,
+  ageSds = Sluggan$ageSds,
+  calCurves = Sluggan$calCurves
+)
 ```
 The `BchronDensityFast` function outputs the age grid and density by default so requires no extra arguments to store it.
 
@@ -403,31 +459,72 @@ We now consider an example of loading in and creating the IntCal09 calibration c
 
 ```{r, eval = FALSE}
 # Load in the calibration curve with:
-intcal09 = read.table(system.file('extdata/intcal09.14c', 
-                                  package = 'Bchron'), sep=',')
-  
+intcal09 <- read.table(system.file("extdata/intcal09.14c",
+  package = "Bchron"
+), sep = ",")
+
 # Run createCalCurve
-createCalCurve(name='intcal09',calAges=intcal09[,1],
-               uncalAges=intcal09[,2],oneSigma=intcal09[,3])
+createCalCurve(
+  name = "intcal09", calAges = intcal09[, 1],
+  uncalAges = intcal09[, 2], oneSigma = intcal09[, 3]
+)
 ```
 
 The new calibration curve now needs to be moved to the Bchron package directory. You can do this with the following code:
 ```{r, eval = FALSE}
-file.copy('intcal09.rda', system.file('data',package='Bchron'))
+file.copy("intcal09.rda", system.file("data", package = "Bchron"))
 ```
 
 It can then be used via its name. For example, we can now compare the calibration of a date under the intcal09 curve with that of intcal20:
 ```{r, eval = FALSE}
-age_09 = BchronCalibrate(age=15500,ageSds=150,calCurves = 'intcal09',
-                         ids='IntCal09')
-age_20 = BchronCalibrate(age=15500,ageSds=150,calCurves = 'intcal20',
-                         ids = 'Intcal20')
+age_09 <- BchronCalibrate(
+  age = 15500, ageSds = 150, calCurves = "intcal09",
+  ids = "IntCal09"
+)
+age_20 <- BchronCalibrate(
+  age = 15500, ageSds = 150, calCurves = "intcal20",
+  ids = "Intcal20"
+)
 library(ggplot2)
-plot(age_09) + 
-  geom_line(data = as.data.frame(age_20$Intcal20), 
-            aes(x = ageGrid, y = densities), col = 'red') + 
-  ggtitle('Intcal09 vs Intcal20')
+plot(age_09) +
+  geom_line(
+    data = as.data.frame(age_20$Intcal20),
+    aes(x = ageGrid, y = densities), col = "red"
+  ) +
+  ggtitle("Intcal09 vs Intcal20")
 ```
+
+## Calibrating marine and other offset age ranges
+
+Periodically people want to calibrate dates which have an age offset and an offset error. This is very simple in Bchron and requires no additional Bchron commands. So for example, if you had a date of 3000 14C years with 1-sigma error of 50 14C years, but you want to incorporate a reservoir correction with 80 14C years and a 1-sigma error of 30 14C years, then you can just calibrate 3080 years with a radiocarbon error of sqrt(50^2+30^2) = 58.3 years. In Bchron this becomes:
+
+```{r, message=FALSE}
+age_rc <- BchronCalibrate(
+  age = 3000 + 80,
+  ageSds = sqrt(50^2 + 30^2),
+  calCurves = "marine20",
+  ids = "Res_corr"
+)
+summary(age_rc)
+```
+
+These offset adjustments can be used in a `Bchronology` type run by storing the offsets and their standard deviations in a vector. So a call to `Bchronology` might become:
+
+```{r, eval = FALSE}
+myChron <- with(
+  myDataSet,
+  Bchronology(
+    ages = ages + offsets,
+    ageSds = sqrt(ageSds + offsetSds),
+    calCurves = calCurves,
+    positions = positions,
+    positionThicknesses = thicknesses,
+    ids = ids
+  )
+)
+```
+
+
 
 ## Uncalibrating dates
 
@@ -436,7 +533,7 @@ Sometimes it is useful to turn a calendar age estimate into an uncalibrated age.
 The simple version can be run with, e.g.:
 
 ```{r, results = 'hide'}
-unCal1 = unCalibrate(2350, type = 'ages')
+unCal1 <- unCalibrate(2350, type = "ages")
 ```
 ```{r}
 print(unCal1)
@@ -445,9 +542,11 @@ print(unCal1)
 The above un-calibrates the age 2350 BP to the age 2346 14C years BP on the intcal20 calibration curve. A more advanced version would be:
 
 ```{r, results = 'hide'}
-unCal2 = unCalibrate(calAge = c(2350, 4750, 11440),
-                     type = 'ages',
-                     calCurve = 'intcal20')
+unCal2 <- unCalibrate(
+  calAge = c(2350, 4750, 11440),
+  type = "ages",
+  calCurve = "intcal20"
+)
 ```
 ```{r}
 print(unCal2)
@@ -456,37 +555,45 @@ print(unCal2)
 A fun experiment can then be run to see what the distribution of 14C ages would look like for an even distribution of calendar ages:
 
 ```{r, results = 'hide'}
-ageRange = seq(8000, 9000, by = 5)
-c14Ages = unCalibrate(ageRange,
-                      type = 'ages')
-load(system.file('data/intcal20.rda', package = 'Bchron'))
-ggplot(intcal20, aes(x = V1, y = V2)) + 
-  geom_line() + 
-  theme_bw() + 
-  scale_x_continuous(limits = range(ageRange)) + 
-  scale_y_continuous(limits = range(c14Ages)) + 
-  geom_rug(data = data.frame(c14Ages), aes(y = c14Ages), 
-           sides = 'l', inherit.aes = F) + 
-  geom_rug(data = data.frame(ageRange), aes(x = ageRange), 
-           sides = 'b', inherit.aes = F) + 
-  labs(x = 'Calendar years BP', y = '14C years BP')
+ageRange <- seq(8000, 9000, by = 5)
+c14Ages <- unCalibrate(ageRange,
+  type = "ages"
+)
+load(system.file("data/intcal20.rda", package = "Bchron"))
+ggplot(intcal20, aes(x = V1, y = V2)) +
+  geom_line() +
+  theme_bw() +
+  scale_x_continuous(limits = range(ageRange)) +
+  scale_y_continuous(limits = range(c14Ages)) +
+  geom_rug(
+    data = data.frame(c14Ages), aes(y = c14Ages),
+    sides = "l", inherit.aes = F
+  ) +
+  geom_rug(
+    data = data.frame(ageRange), aes(x = ageRange),
+    sides = "b", inherit.aes = F
+  ) +
+  labs(x = "Calendar years BP", y = "14C years BP")
 ```
 
 Unsurprisingly the places where the calibration curve is flat (or reverses) leads to 'clumps' of calendar ages. 
 
 The more complicated version is run by providing it with a (preferably large) sample of ages which form a calibrated date. Such a set is created with Bchron via `sampleAges`, e.g.:
 ```{r}
-calAge = BchronCalibrate(ages = 11255,
-                         ageSds = 25,
-                         calCurves = 'intcal20')
-calSampleAges = sampleAges(calAge)
+calAge <- BchronCalibrate(
+  ages = 11255,
+  ageSds = 25,
+  calCurves = "intcal20"
+)
+calSampleAges <- sampleAges(calAge)
 ```
 
 We can now uncalibrate such a set of samples
 
 ```{r, results = 'hide'}
-unCal = unCalibrate(calSampleAges,
-            type = 'samples')
+unCal <- unCalibrate(calSampleAges,
+  type = "samples"
+)
 ```
 ```{r}
 print(unCal)
@@ -502,14 +609,18 @@ We can use standard `ggplot2` commands to customise some of the plots. For examp
 
 ```{r, results = 'hide'}
 data(Glendalough)
-GlenOut = with(Glendalough, 
-               Bchronology(ages=ages,
-                           ageSds=ageSds, 
-                           calCurves=calCurves,
-                           positions=position, 
-                           positionThicknesses=thickness,
-                           ids=id, 
-                           predictPositions=seq(0,1500,by=10)))
+GlenOut <- with(
+  Glendalough,
+  Bchronology(
+    ages = ages,
+    ageSds = ageSds,
+    calCurves = calCurves,
+    positions = position,
+    positionThicknesses = thickness,
+    ids = id,
+    predictPositions = seq(0, 1500, by = 10)
+  )
+)
 ```
 
 And suppose we want to plot the data with customised axis labels and a title:
@@ -517,16 +628,20 @@ And suppose we want to plot the data with customised axis labels and a title:
 ```{r}
 library(ggplot2)
 plot(GlenOut) +
-labs(title = "Glendalough",
-     xlab = "Age (cal years BP)",
-     ylab = "Depth (cm)")
+  labs(
+    title = "Glendalough",
+    xlab = "Age (cal years BP)",
+    ylab = "Depth (cm)"
+  )
 ```
 
 Now suppose we want to plot the chronology but add in the 14C date $7000 \pm 40$ at depth 600cm. First we calibrated that date
 ```{r}
-new_cal = BchronCalibrate(ages = 7000, 
-                          ageSds = 40, 
-                          calCurve = 'intcal20')
+new_cal <- BchronCalibrate(
+  ages = 7000,
+  ageSds = 40,
+  calCurve = "intcal20"
+)
 ```
 
 Finally we create the plot and add the date as a new layer (with a new colour too):
@@ -534,14 +649,17 @@ Finally we create the plot and add the date as a new layer (with a new colour to
 ```{r}
 library(ggridges)
 plot(GlenOut) +
-  geom_ridgeline(data = as.data.frame(new_cal$Date1), 
-                 aes(x = ageGrid, 
-                     y = 600,
-                     height = densities*10000, # Note the 10000 came from trial and error
-                     group = 'New date',
-                     ),
-                 fill = 'grey',
-                 colour = 'black') +
+  geom_ridgeline(
+    data = as.data.frame(new_cal$Date1),
+    aes(
+      x = ageGrid,
+      y = 600,
+      height = densities * 10000, # Note the 10000 came from trial and error
+      group = "New date",
+    ),
+    fill = "grey",
+    colour = "black"
+  ) +
   annotate("text", x = 9000, y = 570, label = "New date")
 ```
 
@@ -558,4 +676,3 @@ Parnell, A. C., Buck, C. E., & Doan, T. K. (2011). A review of statistical chron
 
 For relative sea level rate estimation:  
 Parnell, A. C., & Gehrels, W. R. (2015). Using chronological models in late Holocene sea level reconstructions from salt marsh sediments. In: I. Shennan, B.P. Horton, and A.J. Long (eds). Handbook of Sea Level Research. Chichester: Wiley.
-

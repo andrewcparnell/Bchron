@@ -305,8 +305,7 @@ plot.BchronCalibratedDates <-
           height = 1, col = fillCol
         ) +
         labs(x = "Cal Age", y = "14C Age")
-    }
-    else if (length(x) > 1 &
+    } else if (length(x) > 1 &
       withPositions == TRUE &
       includeCal == FALSE) {
       # Finally for multiple dates with depths
