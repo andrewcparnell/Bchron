@@ -174,5 +174,5 @@ plot.BchronologyRun <-
         size = dateLabelSize
       )
     }
-    p
+    return(p)
   }
