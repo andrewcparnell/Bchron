@@ -630,8 +630,8 @@ library(ggplot2)
 plot(GlenOut) +
   labs(
     title = "Glendalough",
-    xlab = "Age (cal years BP)",
-    ylab = "Depth (cm)"
+    x = "Age (cal years BP)",
+    y = "Depth (cm)"
   )
 ```
 
