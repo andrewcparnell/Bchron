@@ -4,7 +4,7 @@
 #'
 #' @param object Output from a run of \code{\link{Bchronology}}
 #' @param newPositions A vector of new positions at which to find ages
-#' @param newPositionThicknesses A vector of thicknesses for the above positions. Must be the same length as \code{newPositions}
+#' @param newPositionThicknesses A vector of thicknesses for the above positions. Must be the same length as \code{newPositions}. If \code{NULL} then assumed zero
 #' @param maxExtrap The maximum new of extrapolation attempts. It might be worth increasing this if you are extrapolating a long way from the other dated positions
 #' @param ... Other arguments to predict (not currently supported)
 #'
