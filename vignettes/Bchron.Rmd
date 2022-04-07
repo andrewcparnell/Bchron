@@ -663,6 +663,81 @@ plot(GlenOut) +
   annotate("text", x = 9000, y = 570, label = "New date")
 ```
 
+### Adding a second chronology
+
+Suppose we want to over-plot a second chronology where we had removed one of the dates. First create the second chronology you want to produce:
+
+```{r, results = 'hide'}
+GlenOut2 <- with(
+  Glendalough[-2,],
+  Bchronology(
+    ages = ages,
+    ageSds = ageSds,
+    calCurves = calCurves,
+    positions = position,
+    positionThicknesses = thickness,
+    ids = id,
+    predictPositions = seq(0, 1500, by = 10)
+  )
+)
+```
+
+Now create a new data frame with the ranges of the new chronology
+
+```{r}
+alpha <- 0.95
+chronRange <- data.frame(
+      chronLow = apply(GlenOut2$thetaPredict, 2, "quantile", probs = (1 - alpha) / 2),
+      chronMed = apply(GlenOut2$thetaPredict, 2, "quantile", probs = 0.5),
+      chronHigh = apply(GlenOut2$thetaPredict, 2, "quantile", probs = 1 - (1 - alpha) / 2),
+      positions = GlenOut2$predictPositions
+    )
+```
+
+Next create a data frame that Bchron can use to plot the chronology. The clever trick here is to put the ages on a grid and approximate the uncertainty in the position (or depth) direction using linear interpolation. 
+
+```{r}
+ageGrid <- with(chronRange, seq(min(chronLow), max(chronHigh),
+      length = nrow(chronRange)
+    ))
+chronRangeSwap <- data.frame(
+      Age = ageGrid,
+      positionLow = with(chronRange, approx(chronLow, positions,
+        xout = ageGrid,
+        rule = 2
+      )$y),
+      Position = with(chronRange, approx(chronMed, positions,
+        xout = ageGrid,
+        rule = 2
+      )$y),
+      positionHigh = with(chronRange, approx(chronHigh, positions,
+        xout = ageGrid,
+        rule = 2
+      )$y),
+      Date = "Bchron",
+      densities = NA,
+      height = NA
+    )
+```
+
+And finally add into the plot: 
+
+```{r}
+plot(GlenOut, dateLabels = FALSE, chronTransparency = 0.3) + 
+  geom_ribbon(
+        data = chronRangeSwap,
+        aes_string(
+          x = "Age",
+          ymin = "positionLow",
+          ymax = "positionHigh"
+        ),
+        colour = "red",
+        fill = "red",
+        alpha = 0.3
+      )
+```
+
+
 ## References
 
 For a description of the kind of things that Bchron can do:  
