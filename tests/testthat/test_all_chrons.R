@@ -936,3 +936,96 @@ test_that("Barton_Github_202100604", {
   expect_output(summary(run, type = "outliers"))
   expect_output(summary(run, type = "max_var"))
 })
+
+
+# Kemp January 2023 -------------------------------------------------------
+
+input <- structure(list(ID = c("TRY301C-334", "TRY301C-372", "TRY301C-407"), 
+                        ages = c(1640, 1980, 2260), 
+                        ageSds = c(15, 15, 15), 
+                        position = c(332,370, 405), 
+                        thickness = c(4, 4, 4), 
+                        calCurves = c("intcal20", "intcal20", "intcal20"), 
+                        Graphite = c("Traditional", "Traditional", "Traditional")), 
+                   class = c("tbl_df", "tbl", "data.frame"))
+
+cal <- 
+  BchronCalibrate(ages=input$ages,
+              ageSds=input$ageSds,
+              calCurves=input$calCurves,
+              positions=input$position,
+              ids=input$ID)
+
+run<-Bchronology(ages=input$ages,
+                    ageSds=input$ageSds,
+                    calCurves=input$calCurves,
+                    positions=input$position,
+                    positionThicknesses=input$thickness,
+                    ids=input$ID,
+                    predictPositions=seq(0,410,by=1),
+                    extractDate=-72,
+                    maxExtrap = 10000)
+
+expect_s3_class(cal, "BchronCalibratedDates")
+expect_s3_class(run, "BchronologyRun")
+expect_output(summary(run, type = "quantiles"))
+expect_output(summary(run, type = "convergence"))
+expect_output(summary(run, type = "outliers"))
+expect_output(summary(run, type = "max_var"))
+
+
+# Shimada Feb 23 ----------------------------------------------------------
+
+input <- structure(list(X = 1:21, id = c(
+  "top-1", "OnsetofCs137", "TKA-23298",
+  "TKA-21913", "Beta-545282", "TKA-24604", "TKA-21914", "Beta-528350",
+  "Beta-545283", "TKA-24607", "TKA-21911", "Beta-528349", "Beta-528351",
+  "Beta-545279", "Beta-528352", "Beta-528353", "Beta-528354", "Beta-545280",
+  "TKA-24606", "Beta-545281", "TKA-23299"
+), ages = c(
+  -69L, 0L,
+  209L, 303L, 260L, 653L, 901L, 820L, 660L, 1371L, 1292L, 1300L,
+  1490L, 1540L, 1480L, 1650L, 1500L, 1980L, 2040L, 2420L, 2598L
+), ageSds = c(
+  1L, 5L, 37L, 32L, 30L, 38L, 45L, 30L, 30L, 27L,
+  39L, 30L, 30L, 30L, 30L, 30L, 30L, 30L, 27L, 30L, 40L
+), position = c(
+  0,
+  69.3, 104, 122.2, 145.7, 158.6, 171.5, 189.3, 200.4, 207, 226.9,
+  235.7, 253.7, 269.8, 278.5, 291.2, 291.9, 308.9, 319.2, 329.4,
+  339
+), thickness = c(
+  0, 17, 7.2, 4.5, 1, 3.9, 3.6, 1.6, 3.6, 4,
+  4.9, 1, 2, 6, 1.7, 0.7, 0.7, 6.3, 4.5, 3.1, 5.5
+), calCurves = c(
+  "normal",
+  "normal", "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+  "intcal20", "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+  "intcal20", "intcal20", "intcal20", "intcal20", "intcal20", "intcal20",
+  "intcal20", "intcal20"
+)), class = "data.frame", row.names = c(
+  NA,
+  -21L
+))
+
+test <- 
+  BchronCalibrate(ages=input$ages,
+                  ageSds=input$ageSds,
+                  calCurves=input$calCurves,
+                  positions=input$position,
+                  ids=input$ID)
+# plot(test)
+
+run<-Bchronology(ages=input$ages,
+                 ageSds=input$ageSds,
+                 calCurves=input$calCurves,
+                 positions=input$position,
+                 positionThicknesses=input$thickness,
+                 ids=input$ID)
+
+expect_s3_class(run, "BchronologyRun")
+expect_output(summary(run, type = "quantiles"))
+expect_output(summary(run, type = "convergence"))
+expect_output(summary(run, type = "outliers"))
+expect_output(summary(run, type = "max_var"))
+

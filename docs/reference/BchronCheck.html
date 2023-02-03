@@ -56,111 +56,164 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">BchronCheck</span><span class="op">(</span>
-  <span class="va">ages</span>,
-  <span class="va">ageSds</span>,
-  positions <span class="op">=</span> <span class="cn">NULL</span>,
-  pathToCalCurves <span class="op">=</span> <span class="cn">NULL</span>,
-  calCurves <span class="op">=</span> <span class="cn">NULL</span>,
-  positionThicknesses <span class="op">=</span> <span class="cn">NULL</span>,
-  ids <span class="op">=</span> <span class="cn">NULL</span>,
-  outlierProbs <span class="op">=</span> <span class="cn">NULL</span>,
-  predictPositions <span class="op">=</span> <span class="cn">NULL</span>,
-  artificialThickness <span class="op">=</span> <span class="cn">NULL</span>,
-  allowOutside <span class="op">=</span> <span class="cn">NULL</span>,
-  iterations <span class="op">=</span> <span class="cn">NULL</span>,
-  thetaStart <span class="op">=</span> <span class="cn">NULL</span>,
-  burn <span class="op">=</span> <span class="cn">NULL</span>,
-  thin <span class="op">=</span> <span class="cn">NULL</span>,
-  extractDate <span class="op">=</span> <span class="cn">NULL</span>,
-  maxExtrap <span class="op">=</span> <span class="cn">NULL</span>,
-  thetaMhSd <span class="op">=</span> <span class="cn">NULL</span>,
-  muMhSd <span class="op">=</span> <span class="cn">NULL</span>,
-  psiMhSd <span class="op">=</span> <span class="cn">NULL</span>,
-  ageScaleVal <span class="op">=</span> <span class="cn">NULL</span>,
-  positionEps <span class="op">=</span> <span class="cn">NULL</span>,
-  positionNormalise <span class="op">=</span> <span class="cn">NULL</span>,
-  eps <span class="op">=</span> <span class="cn">NULL</span>,
-  dfs <span class="op">=</span> <span class="cn">NULL</span>,
-  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BchronCalibrate"</span>, <span class="st">"Bchronology"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">BchronCheck</span><span class="op">(</span></span>
+<span>  <span class="va">ages</span>,</span>
+<span>  <span class="va">ageSds</span>,</span>
+<span>  positions <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pathToCalCurves <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  calCurves <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  positionThicknesses <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ids <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  outlierProbs <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  predictPositions <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  artificialThickness <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  allowOutside <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  iterations <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  thetaStart <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  burn <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  thin <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  extractDate <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  maxExtrap <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  thetaMhSd <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  muMhSd <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  psiMhSd <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ageScaleVal <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  positionEps <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  positionNormalise <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  eps <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  dfs <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BchronCalibrate"</span>, <span class="st">"Bchronology"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>ages</dt>
 <dd><p>A vector of ages provided in years before 1950.</p></dd>
+
+
 <dt>ageSds</dt>
 <dd><p>A vector of 1-sigma values for the ages given above</p></dd>
+
+
 <dt>positions</dt>
 <dd><p>Position values (e.g. depths) for each age. In the case of layers of non-zero thickness, this should be the middle value of the slice</p></dd>
+
+
 <dt>pathToCalCurves</dt>
 <dd><p>File path to where the calibration curves are located. Defaults to the system directory where the 3 standard calibration curves are stored.</p></dd>
+
+
 <dt>calCurves</dt>
 <dd><p>A vector of values containing either <code>intcal20</code>, <code>shcal20</code>, <code>marine20</code>, or <code>normal</code> (older calibration curves are supposed such as intcal13). Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.</p></dd>
+
+
 <dt>positionThicknesses</dt>
 <dd><p>Thickness values for each of the positions. The thickness value should be the full thickness value of the slice. By default set to zero.</p></dd>
+
+
 <dt>ids</dt>
 <dd><p>ID names for each age</p></dd>
+
+
 <dt>outlierProbs</dt>
 <dd><p>A vector of prior outlier probabilities, one for each age. Defaults to 0.01</p></dd>
+
+
 <dt>predictPositions</dt>
 <dd><p>A vector of positions (e.g. depths) at which predicted age values are required. Defaults to a sequence of length 100 from the top position to the bottom position</p></dd>
+
+
 <dt>artificialThickness</dt>
 <dd><p>Amount to add to the thickness values in the case of equal positions with no <code>positionThicknesses</code>. Bchron may fail if <code>positionThicknesses</code> are zero and some positions are repeated. This value is added on to the zero thicknesses (only in the case of repeated positions) to stop this failure.</p></dd>
+
+
 <dt>allowOutside</dt>
 <dd><p>Whether to allow calibrations to run outside the range of the calibration curve. By default this is turned off as calibrations outside of the range of the calibration curve can cause severe issues with probability ranges of calibrated dates</p></dd>
+
+
 <dt>iterations</dt>
 <dd><p>The number of iterations to run the procedure for</p></dd>
+
+
 <dt>thetaStart</dt>
 <dd><p>A set of starting values for the calendar ages estimated by Bchron. If NULL uses a function to estimate the ages. These should be in the same units as the posterior ages required. See example below for usage.</p></dd>
+
+
 <dt>burn</dt>
 <dd><p>The number of starting iterations to discard</p></dd>
+
+
 <dt>thin</dt>
 <dd><p>The step size for every iteration to keep beyond the burn-in</p></dd>
+
+
 <dt>extractDate</dt>
 <dd><p>The top age of the core. Used for extrapolation purposes so that no extrapolated ages go beyond the top age of the core. Defaults to the current year</p></dd>
+
+
 <dt>maxExtrap</dt>
 <dd><p>The maximum number of extrapolations to perform before giving up and setting the predicted ages to NA. Useful for when large amounts of extrapolation are required, i.e. some of the <code>predictPositions</code> are a long way from the dated positions</p></dd>
+
+
 <dt>thetaMhSd</dt>
 <dd><p>The Metropolis-Hastings standard deviation for the age parameters</p></dd>
+
+
 <dt>muMhSd</dt>
 <dd><p>The Metropolis-Hastings standard deviation for the Compound Poisson-Gamma mean</p></dd>
+
+
 <dt>psiMhSd</dt>
 <dd><p>The Metropolis-Hastings standard deviation for the Compound Poisson-Gamma scale</p></dd>
+
+
 <dt>ageScaleVal</dt>
 <dd><p>A scale value for the ages. <code>Bchronology</code> works best when the ages are scaled to be approximately between 0 and 100. The default value is thus 1000 for ages given in years.</p></dd>
+
+
 <dt>positionEps</dt>
 <dd><p>A small value used to check whether simulated positions are far enough apart to avoid numerical underflow errors. If errors occur in model runs (e.g. <code>missing value where TRUE/FALSE needed</code> increase this value)</p></dd>
+
+
 <dt>positionNormalise</dt>
 <dd><p>Whether to normalise the position values. <code>Bchronology</code> works best when the positions are normalised to be between 0 and 1 The default value is <code>TRUE</code></p></dd>
+
+
 <dt>eps</dt>
 <dd><p>Cut-off point for density calculation. A value of eps&gt;0 removes ages from the output which have negligible probability density</p></dd>
+
+
 <dt>dfs</dt>
 <dd><p>Degrees-of-freedom values for the t-distribution associated with the calibration calculation. A large value indicates Gaussian distributions assumed for the 14C ages</p></dd>
+
+
 <dt>type</dt>
 <dd><p>Whether this function has been called to check parameters for calibration purposes (<code>BchronCalibrate</code>) or chronology purposes (<code>Bchronology</code>)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>This function returns nothing other than a message.</p>
+    
+
+<p>This function returns nothing other than a message.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Glendalough</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Check the Glendalough data are in the right format</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">Glendalough</span>,</span>
-<span class="r-in">  <span class="fu">BchronCheck</span><span class="op">(</span><span class="va">ages</span>,</span>
-<span class="r-in">    <span class="va">ageSds</span>,</span>
-<span class="r-in">    <span class="va">position</span>,</span>
-<span class="r-in">    pathToCalCurves <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data"</span>, package <span class="op">=</span> <span class="st">"Bchron"</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="va">calCurves</span>,</span>
-<span class="r-in">    type <span class="op">=</span> <span class="st">"BchronCalibrate"</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Glendalough</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Check the Glendalough data are in the right format</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">Glendalough</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">BchronCheck</span><span class="op">(</span><span class="va">ages</span>,</span></span>
+<span class="r-in"><span>    <span class="va">ageSds</span>,</span></span>
+<span class="r-in"><span>    <span class="va">position</span>,</span></span>
+<span class="r-in"><span>    pathToCalCurves <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data"</span>, package <span class="op">=</span> <span class="st">"Bchron"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="va">calCurves</span>,</span></span>
+<span class="r-in"><span>    type <span class="op">=</span> <span class="st">"BchronCalibrate"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -175,8 +228,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

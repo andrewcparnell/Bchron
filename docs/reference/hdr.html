@@ -56,19 +56,24 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">hdr</span><span class="op">(</span><span class="va">date</span>, prob <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">hdr</span><span class="op">(</span><span class="va">date</span>, prob <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>date</dt>
 <dd><p>A calibrated Bchron date, via e.g. <code><a href="BchronCalibrate.html">BchronCalibrate</a></code></p></dd>
+
+
 <dt>prob</dt>
 <dd><p>The desired probability interval, in the range(0, 1)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list where each element is one of the contiguous sets making up the HDR</p>
+    
+
+<p>A list where each element is one of the contiguous sets making up the HDR</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -81,13 +86,13 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Calibrate multiple ages and summarise them</span></span>
-<span class="r-in"><span class="va">ages</span> <span class="op">&lt;-</span> <span class="fu"><a href="BchronCalibrate.html">BchronCalibrate</a></span><span class="op">(</span></span>
-<span class="r-in">  ages <span class="op">=</span> <span class="fl">11553</span>, ageSds <span class="op">=</span> <span class="fl">230</span>,</span>
-<span class="r-in">  calCurves <span class="op">=</span> <span class="st">"intcal20"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="co"># Get samples</span></span>
-<span class="r-in"><span class="fu">hdr</span><span class="op">(</span><span class="va">ages</span><span class="op">$</span><span class="va">Date1</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Calibrate multiple ages and summarise them</span></span></span>
+<span class="r-in"><span><span class="va">ages</span> <span class="op">&lt;-</span> <span class="fu"><a href="BchronCalibrate.html">BchronCalibrate</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  ages <span class="op">=</span> <span class="fl">11553</span>, ageSds <span class="op">=</span> <span class="fl">230</span>,</span></span>
+<span class="r-in"><span>  calCurves <span class="op">=</span> <span class="st">"intcal20"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Get samples</span></span></span>
+<span class="r-in"><span><span class="fu">hdr</span><span class="op">(</span><span class="va">ages</span><span class="op">$</span><span class="va">Date1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`0.4%`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 13004 13025</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -111,8 +116,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

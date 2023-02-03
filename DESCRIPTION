@@ -49,6 +49,6 @@ Suggests:
     covr
 VignetteBuilder: knitr
 NeedsCompilation: yes
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
 Language: en-US
 Config/testthat/edition: 3

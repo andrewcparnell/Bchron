@@ -15,7 +15,11 @@
   alpha = 0.95,
   nudgeX = 0,
   nudgeY = 0,
-  expandX = if (dateLabels) {     c(0.1, 0) } else {     c(0, 0) },
+  expandX = if (dateLabels) {
+     c(0.1, 0)
+ } else {
+     c(0, 0)
+ },
   expandY = c(0.05, 0),
   ageScale = c("bp", "bc", "b2k"),
   scaleReverse = TRUE,

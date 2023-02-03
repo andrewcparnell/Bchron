@@ -56,34 +56,47 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for BchronologyRun</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span>
-  <span class="va">object</span>,
-  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"quantiles"</span>, <span class="st">"outliers"</span>, <span class="st">"convergence"</span>, <span class="st">"sed_rate"</span>, <span class="st">"acc_rate"</span>, <span class="st">"max_var"</span><span class="op">)</span>,
-  probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.025</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.975</span><span class="op">)</span>,
-  useExisting <span class="op">=</span> <span class="cn">TRUE</span>,
-  numPos <span class="op">=</span> <span class="fl">3</span>,
-  <span class="va">...</span>,
-  digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"digits"</span><span class="op">)</span> <span class="op">-</span> <span class="fl">3</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for BchronologyRun</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span></span>
+<span>  <span class="va">object</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"quantiles"</span>, <span class="st">"outliers"</span>, <span class="st">"convergence"</span>, <span class="st">"sed_rate"</span>, <span class="st">"acc_rate"</span>, <span class="st">"max_var"</span><span class="op">)</span>,</span>
+<span>  probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.025</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.975</span><span class="op">)</span>,</span>
+<span>  useExisting <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  numPos <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"digits"</span><span class="op">)</span> <span class="op">-</span> <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>object</dt>
 <dd><p>Output from a run of <code><a href="Bchronology.html">Bchronology</a></code></p></dd>
+
+
 <dt>type</dt>
 <dd><p>Type of output required. The default (quantiles) gives the quantiles of the ages for each position in <code>predictPositions</code> from <code><a href="Bchronology.html">Bchronology</a></code>. The other options provide outlier probabilities, convergence diagnostics, accumulation rates, sedimentation rate, and positions of maximum age variance</p></dd>
+
+
 <dt>probs</dt>
 <dd><p>Probabilities (between 0 and 1) at which to summarise the predicted chronologies</p></dd>
+
+
 <dt>useExisting</dt>
 <dd><p>Whether to use the predicted chronologies/positions to calculate the sedimentation rate (if TRUE - default) or to re-create them based on a unit-scaled position grid (if FALSE). The latter will be a little bit slower but will provide better sedimentation rate estimates if the original positions are not on a unit scale (e.g. each cm)</p></dd>
+
+
 <dt>numPos</dt>
 <dd><p>The number of positions at which to provide the maximum variance</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Other arguments (not currently supported)</p></dd>
+
+
 <dt>digits</dt>
 <dd><p>Number of digits to report values</p></dd>
+
 </dl></div>
     <div id="see-also">
     <h2>See also</h2>
@@ -102,8 +115,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

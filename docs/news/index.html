@@ -56,62 +56,38 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="4.7.6" id="bchron-476">Bchron 4.7.6<small>2021-06-10</small><a class="anchor" aria-label="anchor" href="#bchron-476"></a></h2>
-<ul><li>Fixed an example in Bchronology that was adding titles/labels
-incorrectly</li>
+<ul><li>Fixed an example in Bchronology that was adding titles/labels incorrectly</li>
 <li>Updated vignette to show how to customise plots</li>
-<li>Fixed a bug where an error for identical positions (with no
-thickness errors) was not being shown</li>
+<li>Fixed a bug where an error for identical positions (with no thickness errors) was not being shown</li>
 <li>Fixed an issue with positionNormalise</li>
-<li>Fixed an issue with jitterPositions by replacing it with
-artificialThickness that enables customised amounts of jittering when
-there are identical positions and no thicknesses</li>
-<li>Forced ids argument in BchronCalibrate and Bchronology to be unique
-otherwise causes problems with plots</li>
+<li>Fixed an issue with jitterPositions by replacing it with artificialThickness that enables customised amounts of jittering when there are identical positions and no thicknesses</li>
+<li>Forced ids argument in BchronCalibrate and Bchronology to be unique otherwise causes problems with plots</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="4.7.5" id="bchron-475">Bchron 4.7.5<small>2021-05-12</small><a class="anchor" aria-label="anchor" href="#bchron-475"></a></h2>
-<ul><li>Added in a BchronCheck function to allow for checking of all
-argument types using checkmate</li>
-<li>Added in positionEps argument to Bchronology to avoid positions
-being simulated too close to each other and leading to numerical
-underflow errors</li>
-<li>Changed default colours of dates in plot.CalibratedDates and
-plot.BchronologyRun</li>
+<ul><li>Added in a BchronCheck function to allow for checking of all argument types using checkmate</li>
+<li>Added in positionEps argument to Bchronology to avoid positions being simulated too close to each other and leading to numerical underflow errors</li>
+<li>Changed default colours of dates in plot.CalibratedDates and plot.BchronologyRun</li>
 <li>Added an extra check that all ageSds are bigger than zero</li>
-<li>Allowed the option for calibrating dates out of calibration curve
-range</li>
-<li>Fixed bug that occurred with large 14C values close to upper range
-of calibration curve</li>
-<li>Changed the means by which starting values are created. This was to
-fix a bug (issue <a href="https://github.com/andrewcparnell/Bchron/issues/17" class="external-link">#17</a> on GitHub) where a middle extreme date
-(e.g. non-14C) could cause the starting values of the stratigraphically
-ordered dates to fall beyond the range of the calibration curve.</li>
-<li>Included option to allow bespoke starting values for complex
-cores</li>
-<li>Changed some of the algorithm details to avoid certain bugs with
-numerical underflow problems (tested in test_all_chrons)</li>
+<li>Allowed the option for calibrating dates out of calibration curve range</li>
+<li>Fixed bug that occurred with large 14C values close to upper range of calibration curve</li>
+<li>Changed the means by which starting values are created. This was to fix a bug (issue <a href="https://github.com/andrewcparnell/Bchron/issues/17" class="external-link">#17</a> on GitHub) where a middle extreme date (e.g. non-14C) could cause the starting values of the stratigraphically ordered dates to fall beyond the range of the calibration curve.</li>
+<li>Included option to allow bespoke starting values for complex cores</li>
+<li>Changed some of the algorithm details to avoid certain bugs with numerical underflow problems (tested in test_all_chrons)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="4.7.4" id="bchron-474">Bchron 4.7.4<small>2021-01-28</small><a class="anchor" aria-label="anchor" href="#bchron-474"></a></h2>
-<ul><li>Updated the BchronDensity and BchronDensityFast functions to show
-lines on top of dates</li>
-<li>Included ability in above functions to change amount of date
-transparency</li>
-<li>Used styler to make the syntax follow tidyverse style
-guidelines</li>
-<li>Fixed bug in starting values which occasionally produced values
-before the extractDate</li>
-<li>Fixed bug in choosePositions where position chosen was at the edge
-of the domain</li>
+<ul><li>Updated the BchronDensity and BchronDensityFast functions to show lines on top of dates</li>
+<li>Included ability in above functions to change amount of date transparency</li>
+<li>Used styler to make the syntax follow tidyverse style guidelines</li>
+<li>Fixed bug in starting values which occasionally produced values before the extractDate</li>
+<li>Fixed bug in choosePositions where position chosen was at the edge of the domain</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="4.7.3" id="bchron-473">Bchron 4.7.3<small>2020-11-21</small><a class="anchor" aria-label="anchor" href="#bchron-473"></a></h2>
-<ul><li>Fixed a weird bug where some hdrs were coming out the wrong way in
-plot.Bchronology</li>
-<li>Add the ability to create OxCal style plots with the calibration
-curve</li>
-<li>Added a feature to plot individual dates in
-plot.BchronCalibratedDates</li>
+<ul><li>Fixed a weird bug where some hdrs were coming out the wrong way in plot.Bchronology</li>
+<li>Add the ability to create OxCal style plots with the calibration curve</li>
+<li>Added a feature to plot individual dates in plot.BchronCalibratedDates</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="4.7.2" id="bchron-472">Bchron 4.7.2<small>2020-09-01</small><a class="anchor" aria-label="anchor" href="#bchron-472"></a></h2>
@@ -133,10 +109,8 @@ plot.BchronCalibratedDates</li>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="4.6" id="bchron-46">Bchron 4.6<a class="anchor" aria-label="anchor" href="#bchron-46"></a></h2>
 <p>Fixed two important bugs:</p>
-<ul><li>Fixed a mistake in BchronCalibrate that will cause calibrated to
-have incorrect error ranges compared to OxCal</li>
-<li>Fixed a problem that occurred in very straight chronologies where a
-certain parameter would go to zero and cause numerical underflow</li>
+<ul><li>Fixed a mistake in BchronCalibrate that will cause calibrated to have incorrect error ranges compared to OxCal</li>
+<li>Fixed a problem that occurred in very straight chronologies where a certain parameter would go to zero and cause numerical underflow</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="4.5" id="bchron-45">Bchron 4.5<a class="anchor" aria-label="anchor" href="#bchron-45"></a></h2>
@@ -150,12 +124,9 @@ certain parameter would go to zero and cause numerical underflow</li>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="4.3" id="bchron-43">Bchron 4.3<a class="anchor" aria-label="anchor" href="#bchron-43"></a></h2>
 <p>Added some new functions:</p>
-<ul><li>dateInfluence, which works out how influential a single date is in a
-core</li>
-<li>coreInfluence, which tries to estimate the total uncertainty
-reduction/increase between two Bchronology runs</li>
-<li>choosePositions, which suggest new positions/depths to date to
-maximally reduce uncertainty</li>
+<ul><li>dateInfluence, which works out how influential a single date is in a core</li>
+<li>coreInfluence, which tries to estimate the total uncertainty reduction/increase between two Bchronology runs</li>
+<li>choosePositions, which suggest new positions/depths to date to maximally reduce uncertainty</li>
 </ul></div>
   </div>
 
@@ -171,8 +142,7 @@ maximally reduce uncertainty</li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

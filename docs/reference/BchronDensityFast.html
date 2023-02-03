@@ -56,41 +56,58 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">BchronDensityFast</span><span class="op">(</span>
-  <span class="va">ages</span>,
-  <span class="va">ageSds</span>,
-  <span class="va">calCurves</span>,
-  pathToCalCurves <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data"</span>, package <span class="op">=</span> <span class="st">"Bchron"</span><span class="op">)</span>,
-  dfs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">ages</span><span class="op">)</span><span class="op">)</span>,
-  samples <span class="op">=</span> <span class="fl">2000</span>,
-  G <span class="op">=</span> <span class="fl">30</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">BchronDensityFast</span><span class="op">(</span></span>
+<span>  <span class="va">ages</span>,</span>
+<span>  <span class="va">ageSds</span>,</span>
+<span>  <span class="va">calCurves</span>,</span>
+<span>  pathToCalCurves <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data"</span>, package <span class="op">=</span> <span class="st">"Bchron"</span><span class="op">)</span>,</span>
+<span>  dfs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">ages</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  samples <span class="op">=</span> <span class="fl">2000</span>,</span>
+<span>  G <span class="op">=</span> <span class="fl">30</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>ages</dt>
 <dd><p>A vector of ages (most likely 14C)</p></dd>
+
+
 <dt>ageSds</dt>
 <dd><p>A vector of 1-sigma values for the ages given above</p></dd>
+
+
 <dt>calCurves</dt>
 <dd><p>A vector of values containing either <code>intcal20</code>, <code>shcal20</code>, <code>marine20</code>, or <code>normal</code> (older calibration curves such as intcal13 are also supported). Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.</p></dd>
+
+
 <dt>pathToCalCurves</dt>
 <dd><p>File path to where the calibration curves are located. Defaults to the system directory where the 3 standard calibration curves are stored.</p></dd>
+
+
 <dt>dfs</dt>
 <dd><p>Degrees-of-freedom values for the t-distribution associated with the calibration calculation. A large value indicates Gaussian distributions assumed for the 14C ages</p></dd>
+
+
 <dt>samples</dt>
 <dd><p>Number of samples of calibrated dates required</p></dd>
+
+
 <dt>G</dt>
 <dd><p>Number of Gaussian mixture components</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An object of class <code>BchronDensityRunFast</code> with the following components:</p>
+    
+
+<p>An object of class <code>BchronDensityRunFast</code> with the following components:</p>
 <dl><dt>out</dt>
 <dd><p>The output from the run of <code>densityMclust</code> with the given number of mixture components</p></dd>
+
 <dt>calAges</dt>
 <dd><p>The calibrated ages from the <code><a href="BchronDensity.html">BchronDensity</a></code> function</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -103,25 +120,25 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="co"># Read in some data from Sluggan Moss</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Sluggan</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Run the model</span></span>
-<span class="r-in"><span class="va">SlugDensFast</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">Sluggan</span>,</span>
-<span class="r-in">  <span class="fu">BchronDensityFast</span><span class="op">(</span></span>
-<span class="r-in">    ages <span class="op">=</span> <span class="va">ages</span>,</span>
-<span class="r-in">    ageSds <span class="op">=</span> <span class="va">ageSds</span>,</span>
-<span class="r-in">    calCurves <span class="op">=</span> <span class="va">calCurves</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co"># Read in some data from Sluggan Moss</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Sluggan</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Run the model</span></span></span>
+<span class="r-in"><span><span class="va">SlugDensFast</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">Sluggan</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">BchronDensityFast</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    ages <span class="op">=</span> <span class="va">ages</span>,</span></span>
+<span class="r-in"><span>    ageSds <span class="op">=</span> <span class="va">ageSds</span>,</span></span>
+<span class="r-in"><span>    calCurves <span class="op">=</span> <span class="va">calCurves</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="BchronDensityFast-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># plot it</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">SlugDensFast</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># plot it</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">SlugDensFast</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="BchronDensityFast-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="co"># }</span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -136,8 +153,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

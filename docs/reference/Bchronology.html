@@ -56,101 +56,156 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">Bchronology</span><span class="op">(</span>
-  <span class="va">ages</span>,
-  <span class="va">ageSds</span>,
-  <span class="va">positions</span>,
-  positionThicknesses <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">ages</span><span class="op">)</span><span class="op">)</span>,
-  calCurves <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"intcal20"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">ages</span><span class="op">)</span><span class="op">)</span>,
-  ids <span class="op">=</span> <span class="cn">NULL</span>,
-  outlierProbs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.01</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">ages</span><span class="op">)</span><span class="op">)</span>,
-  predictPositions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">positions</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">positions</span><span class="op">)</span>, length <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,
-  pathToCalCurves <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data"</span>, package <span class="op">=</span> <span class="st">"Bchron"</span><span class="op">)</span>,
-  artificialThickness <span class="op">=</span> <span class="fl">0.01</span>,
-  allowOutside <span class="op">=</span> <span class="cn">FALSE</span>,
-  iterations <span class="op">=</span> <span class="fl">10000</span>,
-  burn <span class="op">=</span> <span class="fl">2000</span>,
-  thin <span class="op">=</span> <span class="fl">8</span>,
-  extractDate <span class="op">=</span> <span class="fl">1950</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"%Y"</span><span class="op">)</span><span class="op">)</span>,
-  maxExtrap <span class="op">=</span> <span class="fl">1000</span>,
-  thetaStart <span class="op">=</span> <span class="cn">NULL</span>,
-  thetaMhSd <span class="op">=</span> <span class="fl">0.5</span>,
-  muMhSd <span class="op">=</span> <span class="fl">0.1</span>,
-  psiMhSd <span class="op">=</span> <span class="fl">0.1</span>,
-  ageScaleVal <span class="op">=</span> <span class="fl">1000</span>,
-  positionEps <span class="op">=</span> <span class="fl">1e-05</span>,
-  positionNormalise <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">Bchronology</span><span class="op">(</span></span>
+<span>  <span class="va">ages</span>,</span>
+<span>  <span class="va">ageSds</span>,</span>
+<span>  <span class="va">positions</span>,</span>
+<span>  positionThicknesses <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">ages</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  calCurves <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"intcal20"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">ages</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  ids <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  outlierProbs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0.01</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">ages</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  predictPositions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">positions</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">positions</span><span class="op">)</span>, length <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span>
+<span>  pathToCalCurves <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data"</span>, package <span class="op">=</span> <span class="st">"Bchron"</span><span class="op">)</span>,</span>
+<span>  artificialThickness <span class="op">=</span> <span class="fl">0.01</span>,</span>
+<span>  allowOutside <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  iterations <span class="op">=</span> <span class="fl">10000</span>,</span>
+<span>  burn <span class="op">=</span> <span class="fl">2000</span>,</span>
+<span>  thin <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>  extractDate <span class="op">=</span> <span class="fl">1950</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"%Y"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  maxExtrap <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  thetaStart <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  thetaMhSd <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  muMhSd <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  psiMhSd <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  ageScaleVal <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  positionEps <span class="op">=</span> <span class="fl">1e-05</span>,</span>
+<span>  positionNormalise <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>ages</dt>
 <dd><p>A vector of ages provided in years before 1950.</p></dd>
+
+
 <dt>ageSds</dt>
 <dd><p>A vector of 1-sigma values for the ages given above</p></dd>
+
+
 <dt>positions</dt>
 <dd><p>Position values (e.g. depths) for each age. In the case of layers of non-zero thickness, this should be the middle value of the slice</p></dd>
+
+
 <dt>positionThicknesses</dt>
 <dd><p>Thickness values for each of the positions. The thickness value should be the full thickness value of the slice. By default set to zero.</p></dd>
+
+
 <dt>calCurves</dt>
 <dd><p>A vector of values containing either <code>intcal20</code>, <code>shcal20</code>, <code>marine20</code>, or <code>normal</code> (older calibration curves are supposed such as intcal13). Should be the same length the number of ages supplied. Non-standard calibration curves can be used provided they are supplied in the same format as those previously mentioned and are placed in the same directory. Normal indicates a normally-distributed (non-14C) age.</p></dd>
+
+
 <dt>ids</dt>
 <dd><p>ID names for each age</p></dd>
+
+
 <dt>outlierProbs</dt>
 <dd><p>A vector of prior outlier probabilities, one for each age. Defaults to 0.01</p></dd>
+
+
 <dt>predictPositions</dt>
 <dd><p>A vector of positions (e.g. depths) at which predicted age values are required. Defaults to a sequence of length 100 from the top position to the bottom position</p></dd>
+
+
 <dt>pathToCalCurves</dt>
 <dd><p>File path to where the calibration curves are located. Defaults to the system directory where the 3 standard calibration curves are stored.</p></dd>
+
+
 <dt>artificialThickness</dt>
 <dd><p>Amount to add to the thickness values in the case of equal positions with no <code>positionThicknesses</code>. Bchron may fail if <code>positionThicknesses</code> are zero and some positions are repeated. This value is added on to the zero thicknesses (only in the case of repeated positions) to stop this failure.</p></dd>
+
+
 <dt>allowOutside</dt>
 <dd><p>Whether to allow calibrations to run outside the range of the calibration curve. By default this is turned off as calibrations outside of the range of the calibration curve can cause severe issues with probability ranges of calibrated dates</p></dd>
+
+
 <dt>iterations</dt>
 <dd><p>The number of iterations to run the procedure for</p></dd>
+
+
 <dt>burn</dt>
 <dd><p>The number of starting iterations to discard</p></dd>
+
+
 <dt>thin</dt>
 <dd><p>The step size for every iteration to keep beyond the burn-in</p></dd>
+
+
 <dt>extractDate</dt>
 <dd><p>The top age of the core. Used for extrapolation purposes so that no extrapolated ages go beyond the top age of the core. Defaults to the current year</p></dd>
+
+
 <dt>maxExtrap</dt>
 <dd><p>The maximum number of extrapolations to perform before giving up and setting the predicted ages to NA. Useful for when large amounts of extrapolation are required, i.e. some of the <code>predictPositions</code> are a long way from the dated positions</p></dd>
+
+
 <dt>thetaStart</dt>
 <dd><p>A set of starting values for the calendar ages estimated by Bchron. If NULL uses a function to estimate the ages. These should be in the same units as the posterior ages required. See example below for usage.</p></dd>
+
+
 <dt>thetaMhSd</dt>
 <dd><p>The Metropolis-Hastings standard deviation for the age parameters</p></dd>
+
+
 <dt>muMhSd</dt>
 <dd><p>The Metropolis-Hastings standard deviation for the Compound Poisson-Gamma mean</p></dd>
+
+
 <dt>psiMhSd</dt>
 <dd><p>The Metropolis-Hastings standard deviation for the Compound Poisson-Gamma scale</p></dd>
+
+
 <dt>ageScaleVal</dt>
 <dd><p>A scale value for the ages. <code>Bchronology</code> works best when the ages are scaled to be approximately between 0 and 100. The default value is thus 1000 for ages given in years.</p></dd>
+
+
 <dt>positionEps</dt>
 <dd><p>A small value used to check whether simulated positions are far enough apart to avoid numerical underflow errors. If errors occur in model runs (e.g. <code>missing value where TRUE/FALSE needed</code> increase this value)</p></dd>
+
+
 <dt>positionNormalise</dt>
 <dd><p>Whether to normalise the position values. <code>Bchronology</code> works best when the positions are normalised to be between 0 and 1 The default value is <code>TRUE</code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list of class <code>BchronologyRun</code> which include elements:</p>
+    
+
+<p>A list of class <code>BchronologyRun</code> which include elements:</p>
 <dl><dt>theta</dt>
 <dd><p>The posterior estimated values of the ages</p></dd>
-<dt>phi</dt>
+
+ <dt>phi</dt>
 <dd><p>The posterior estimated outlier values (1=outlier, 2=not outlier). The means of this parameter give the posterior estimated outlier probabilities</p></dd>
-<dt>mu</dt>
+
+ <dt>mu</dt>
 <dd><p>The posterior values of the Compound Poisson-Gamma mean</p></dd>
-<dt>psi</dt>
+
+ <dt>psi</dt>
 <dd><p>The posterior values of the Compound Poisson-Gamma scale</p></dd>
-<dt>thetaPredict</dt>
+
+ <dt>thetaPredict</dt>
 <dd><p>The posterior estimated ages for each of the values in predictPosition</p></dd>
-<dt>predictPositions</dt>
+
+ <dt>predictPositions</dt>
 <dd><p>The positions at which estimated ages were required</p></dd>
-<dt>calAges</dt>
+
+ <dt>calAges</dt>
 <dd><p>The calibrated ages as output from <code><a href="BchronCalibrate.html">BchronCalibrate</a></code></p></dd>
-<dt>inputVals</dt>
+
+ <dt>inputVals</dt>
 <dd><p>All of the input values to the <code>Bchronology</code> run</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -168,245 +223,245 @@ Parnell, A. C., Haslett, J., Allen, J. R. M., Buck, C. E., and Huntley, B. (2008
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="co"># Data from Glendalough</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Glendalough</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Run in Bchronology - all but first age uses intcal20</span></span>
-<span class="r-in"><span class="va">GlenOut</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">Glendalough</span>,</span>
-<span class="r-in">  <span class="fu">Bchronology</span><span class="op">(</span></span>
-<span class="r-in">    ages <span class="op">=</span> <span class="va">ages</span>,</span>
-<span class="r-in">    ageSds <span class="op">=</span> <span class="va">ageSds</span>,</span>
-<span class="r-in">    calCurves <span class="op">=</span> <span class="va">calCurves</span>,</span>
-<span class="r-in">    positions <span class="op">=</span> <span class="va">position</span>,</span>
-<span class="r-in">    positionThicknesses <span class="op">=</span> <span class="va">thickness</span>,</span>
-<span class="r-in">    ids <span class="op">=</span> <span class="va">id</span>,</span>
-<span class="r-in">    predictPositions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1500</span>, by <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co"># Data from Glendalough</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Glendalough</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Run in Bchronology - all but first age uses intcal20</span></span></span>
+<span class="r-in"><span><span class="va">GlenOut</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">Glendalough</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">Bchronology</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    ages <span class="op">=</span> <span class="va">ages</span>,</span></span>
+<span class="r-in"><span>    ageSds <span class="op">=</span> <span class="va">ageSds</span>,</span></span>
+<span class="r-in"><span>    calCurves <span class="op">=</span> <span class="va">calCurves</span>,</span></span>
+<span class="r-in"><span>    positions <span class="op">=</span> <span class="va">position</span>,</span></span>
+<span class="r-in"><span>    positionThicknesses <span class="op">=</span> <span class="va">thickness</span>,</span></span>
+<span class="r-in"><span>    ids <span class="op">=</span> <span class="va">id</span>,</span></span>
+<span class="r-in"><span>    predictPositions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1500</span>, by <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Running Bchronology...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                    |                                                            |   0%  |                                                                    |                                                            |   1%  |                                                                    |=                                                           |   1%  |                                                                    |=                                                           |   2%  |                                                                    |==                                                          |   3%  |                                                                    |==                                                          |   4%  |                                                                    |===                                                         |   4%  |                                                                    |===                                                         |   5%  |                                                                    |===                                                         |   6%  |                                                                    |====                                                        |   6%  |                                                                    |====                                                        |   7%  |                                                                    |=====                                                       |   8%  |                                                                    |=====                                                       |   9%  |                                                                    |======                                                      |   9%  |                                                                    |======                                                      |  10%  |                                                                    |======                                                      |  11%  |                                                                    |=======                                                     |  11%  |                                                                    |=======                                                     |  12%  |                                                                    |========                                                    |  13%  |                                                                    |========                                                    |  14%  |                                                                    |=========                                                   |  14%  |                                                                    |=========                                                   |  15%  |                                                                    |=========                                                   |  16%  |                                                                    |==========                                                  |  16%  |                                                                    |==========                                                  |  17%  |                                                                    |===========                                                 |  18%  |                                                                    |===========                                                 |  19%  |                                                                    |============                                                |  19%  |                                                                    |============                                                |  20%  |                                                                    |============                                                |  21%  |                                                                    |=============                                               |  21%  |                                                                    |=============                                               |  22%  |                                                                    |==============                                              |  23%  |                                                                    |==============                                              |  24%  |                                                                    |===============                                             |  24%  |                                                                    |===============                                             |  25%  |                                                                    |===============                                             |  26%  |                                                                    |================                                            |  26%  |                                                                    |================                                            |  27%  |                                                                    |=================                                           |  28%  |                                                                    |=================                                           |  29%  |                                                                    |==================                                          |  29%  |                                                                    |==================                                          |  30%  |                                                                    |==================                                          |  31%  |                                                                    |===================                                         |  31%  |                                                                    |===================                                         |  32%  |                                                                    |====================                                        |  33%  |                                                                    |====================                                        |  34%  |                                                                    |=====================                                       |  34%  |                                                                    |=====================                                       |  35%  |                                                                    |=====================                                       |  36%  |                                                                    |======================                                      |  36%  |                                                                    |======================                                      |  37%  |                                                                    |=======================                                     |  38%  |                                                                    |=======================                                     |  39%  |                                                                    |========================                                    |  39%  |                                                                    |========================                                    |  40%  |                                                                    |========================                                    |  41%  |                                                                    |=========================                                   |  41%  |                                                                    |=========================                                   |  42%  |                                                                    |==========================                                  |  43%  |                                                                    |==========================                                  |  44%  |                                                                    |===========================                                 |  44%  |                                                                    |===========================                                 |  45%  |                                                                    |===========================                                 |  46%  |                                                                    |============================                                |  46%  |                                                                    |============================                                |  47%  |                                                                    |=============================                               |  48%  |                                                                    |=============================                               |  49%  |                                                                    |==============================                              |  49%  |                                                                    |==============================                              |  50%  |                                                                    |==============================                              |  51%  |                                                                    |===============================                             |  51%  |                                                                    |===============================                             |  52%  |                                                                    |================================                            |  53%  |                                                                    |================================                            |  54%  |                                                                    |=================================                           |  54%  |                                                                    |=================================                           |  55%  |                                                                    |=================================                           |  56%  |                                                                    |==================================                          |  56%  |                                                                    |==================================                          |  57%  |                                                                    |===================================                         |  58%  |                                                                    |===================================                         |  59%  |                                                                    |====================================                        |  59%  |                                                                    |====================================                        |  60%  |                                                                    |====================================                        |  61%  |                                                                    |=====================================                       |  61%  |                                                                    |=====================================                       |  62%  |                                                                    |======================================                      |  63%  |                                                                    |======================================                      |  64%  |                                                                    |=======================================                     |  64%  |                                                                    |=======================================                     |  65%  |                                                                    |=======================================                     |  66%  |                                                                    |========================================                    |  66%  |                                                                    |========================================                    |  67%  |                                                                    |=========================================                   |  68%  |                                                                    |=========================================                   |  69%  |                                                                    |==========================================                  |  69%  |                                                                    |==========================================                  |  70%  |                                                                    |==========================================                  |  71%  |                                                                    |===========================================                 |  71%  |                                                                    |===========================================                 |  72%  |                                                                    |============================================                |  73%  |                                                                    |============================================                |  74%  |                                                                    |=============================================               |  74%  |                                                                    |=============================================               |  75%  |                                                                    |=============================================               |  76%  |                                                                    |==============================================              |  76%  |                                                                    |==============================================              |  77%  |                                                                    |===============================================             |  78%  |                                                                    |===============================================             |  79%  |                                                                    |================================================            |  79%  |                                                                    |================================================            |  80%  |                                                                    |================================================            |  81%  |                                                                    |=================================================           |  81%  |                                                                    |=================================================           |  82%  |                                                                    |==================================================          |  83%  |                                                                    |==================================================          |  84%  |                                                                    |===================================================         |  84%  |                                                                    |===================================================         |  85%  |                                                                    |===================================================         |  86%  |                                                                    |====================================================        |  86%  |                                                                    |====================================================        |  87%  |                                                                    |=====================================================       |  88%  |                                                                    |=====================================================       |  89%  |                                                                    |======================================================      |  89%  |                                                                    |======================================================      |  90%  |                                                                    |======================================================      |  91%  |                                                                    |=======================================================     |  91%  |                                                                    |=======================================================     |  92%  |                                                                    |========================================================    |  93%  |                                                                    |========================================================    |  94%  |                                                                    |=========================================================   |  94%  |                                                                    |=========================================================   |  95%  |                                                                    |=========================================================   |  96%  |                                                                    |==========================================================  |  96%  |                                                                    |==========================================================  |  97%  |                                                                    |=========================================================== |  98%  |                                                                    |=========================================================== |  99%  |                                                                    |============================================================|  99%  |                                                                    |============================================================| 100%</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Run completed!</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Summarise it a few different ways</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">GlenOut</span><span class="op">)</span> <span class="co"># Default is for quantiles of ages at predictPosition values</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Summarise it a few different ways</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">GlenOut</span><span class="op">)</span> <span class="co"># Default is for quantiles of ages at predictPosition values</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Quantiles of predicted ages by depth: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Depth      2.5%      25%     50%      75%     97.5%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      0    -2.000    -1.00     0.0     1.00     2.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     10    10.000    34.00    62.0   141.25   464.075</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     20    19.000    68.00   125.5   243.00   743.175</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     30    29.000   103.00   186.5   328.25   890.725</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     40    39.950   139.75   234.0   409.25  1012.500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     50    51.950   173.75   291.5   488.00  1125.500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     60    64.975   212.00   355.0   554.00  1246.275</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     70    75.975   248.75   406.0   620.25  1308.050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     80    86.975   291.75   458.0   690.25  1378.100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     90   102.925   331.75   514.0   765.50  1435.100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    100   114.925   369.75   562.5   827.00  1466.450</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    110   134.000   412.75   620.0   888.00  1499.075</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    120   148.925   458.75   673.5   931.25  1554.450</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    130   160.950   492.75   731.5   991.00  1610.675</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    140   180.875   529.00   790.5  1044.00  1670.250</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    150   201.875   576.50   833.5  1090.25  1720.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    160   232.625   616.75   879.5  1156.00  1741.075</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    170   252.950   665.00   944.0  1207.50  1776.025</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    180   280.775   709.00   990.5  1269.25  1804.325</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    190   304.875   749.75  1040.0  1322.50  1859.100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    200   337.825   800.75  1089.0  1367.00  1884.475</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    210   350.800   852.25  1142.0  1427.25  1922.075</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    220   406.975   903.00  1204.0  1479.25  1990.300</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    230   435.950   961.25  1250.5  1528.25  2027.050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    240   467.500  1010.00  1300.0  1563.00  2044.025</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    250   493.800  1070.00  1356.5  1614.50  2077.075</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    260   531.825  1127.00  1408.5  1654.00  2102.075</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    270   601.925  1186.75  1461.0  1690.00  2121.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    280   644.825  1240.75  1522.0  1737.25  2140.050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    290   688.650  1301.00  1574.5  1781.25  2152.275</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    300   712.950  1363.25  1620.5  1825.00  2189.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    310   760.900  1427.75  1675.0  1876.25  2204.075</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    320   832.625  1489.25  1721.0  1918.50  2220.125</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    330   896.975  1550.75  1775.0  1978.00  2246.025</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    340   972.675  1609.50  1822.5  2023.00  2263.075</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    350  1039.425  1679.75  1880.0  2058.00  2288.050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    360  1118.750  1731.75  1927.0  2096.00  2314.150</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    370  1193.725  1798.75  1978.0  2130.50  2348.075</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    380  1231.975  1867.75  2031.5  2170.25  2372.075</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    390  1350.275  1923.75  2088.0  2210.25  2406.075</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    400  1474.850  2000.00  2141.0  2246.00  2442.025</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    410  1547.800  2087.75  2198.0  2287.25  2499.050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    420  1840.875  2175.75  2274.0  2329.00  2578.050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    430  2199.000  2332.00  2403.0  2519.25  3104.550</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    440  2250.975  2406.75  2537.5  2746.75  3822.200</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    450  2285.950  2479.00  2648.5  2935.25  4209.200</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    460  2315.950  2556.50  2763.0  3096.00  4437.050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    470  2345.975  2625.75  2875.5  3282.00  4692.675</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    480  2378.975  2700.00  2993.5  3440.00  4918.050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    490  2407.000  2776.50  3113.5  3578.25  5114.150</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    500  2431.975  2852.75  3218.0  3715.00  5312.825</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    510  2469.775  2932.00  3320.0  3859.00  5509.200</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    520  2492.975  3004.75  3427.0  4006.75  5629.150</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    530  2527.775  3084.50  3528.5  4150.25  5770.200</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    540  2555.975  3171.25  3653.0  4257.25  5915.100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    550  2604.975  3258.50  3770.5  4382.50  6144.200</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    560  2632.825  3347.50  3874.5  4490.50  6308.150</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    570  2662.775  3447.25  3986.5  4617.25  6368.350</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    580  2713.700  3513.25  4083.0  4742.50  6439.700</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    590  2736.000  3584.00  4205.5  4855.25  6592.675</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    600  2788.200  3671.75  4296.5  4966.00  6793.825</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    610  2853.725  3762.50  4377.5  5093.25  7016.975</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    620  2882.625  3848.75  4481.5  5199.25  7058.775</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    630  2912.975  3930.00  4573.0  5329.25  7099.625</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    640  2952.925  4036.00  4658.5  5439.50  7284.975</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    650  3034.600  4127.50  4750.5  5520.25  7386.700</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    660  3089.850  4231.50  4867.5  5618.00  7448.900</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    670  3139.300  4306.25  4985.5  5754.75  7555.350</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    680  3208.675  4400.75  5086.5  5857.50  7627.525</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    690  3304.775  4508.50  5219.5  5949.00  7727.050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    700  3387.000  4611.50  5316.0  6053.25  7782.075</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    710  3452.725  4715.75  5443.5  6152.00  7839.050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    720  3500.500  4852.50  5557.0  6257.25  7926.525</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    730  3575.000  4938.75  5669.5  6341.50  8025.050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    740  3635.925  5045.50  5796.0  6470.25  8102.125</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    750  3757.025  5162.75  5919.5  6561.00  8191.650</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    760  3829.975  5289.50  6038.0  6660.50  8251.250</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    770  3908.350  5372.00  6108.5  6781.25  8348.475</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    780  3982.475  5455.25  6220.5  6863.00  8400.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    790  4065.850  5580.00  6320.0  6966.50  8468.850</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    800  4137.925  5696.00  6409.0  7078.00  8541.225</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    810  4193.775  5793.25  6495.0  7191.50  8645.500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    820  4245.950  5898.25  6613.0  7296.25  8748.075</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    830  4305.950  6023.75  6712.0  7400.00  8870.550</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    840  4390.275  6125.00  6807.0  7500.75  8940.150</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    850  4490.975  6198.00  6905.5  7623.00  9047.925</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    860  4552.975  6303.75  6990.0  7717.25  9133.450</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    870  4610.975  6406.50  7089.5  7818.50  9195.200</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    880  4832.775  6545.75  7213.0  7928.50  9247.175</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    890  4897.925  6649.00  7333.0  8027.75  9297.075</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    900  4945.950  6747.50  7430.5  8099.50  9344.375</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    910  5096.325  6827.50  7546.0  8188.00  9383.300</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    920  5205.575  6906.50  7662.0  8289.00  9426.125</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    930  5368.375  7000.50  7768.0  8379.25  9469.500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    940  5457.650  7126.25  7864.5  8460.25  9535.425</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    950  5534.350  7224.75  7985.5  8574.25  9573.150</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    960  5626.350  7341.50  8095.0  8658.75  9604.175</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    970  5712.525  7468.00  8184.0  8768.25  9643.150</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    980  5866.925  7563.25  8289.0  8856.75  9721.100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    990  5979.200  7686.50  8391.5  8943.25  9765.850</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1000  6055.425  7829.75  8500.0  9030.25  9841.050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1010  6125.750  7954.25  8593.5  9114.00  9882.125</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1020  6354.875  8065.75  8709.5  9226.25  9932.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1030  6560.075  8197.00  8805.5  9309.75  9972.075</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1040  6716.850  8317.25  8910.5  9400.00 10004.325</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1050  6928.000  8425.75  9019.5  9476.00 10041.075</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1060  7122.825  8543.25  9098.5  9561.75 10075.050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1070  7256.400  8714.75  9206.5  9646.00 10104.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1080  7442.375  8798.00  9319.5  9726.25 10139.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1090  7611.725  8930.00  9417.0  9807.00 10173.100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1100  7758.375  9063.50  9529.0  9879.00 10206.025</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1110  7884.975  9216.25  9645.0  9956.50 10234.025</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1120  8120.150  9374.50  9749.5 10022.00 10265.025</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1130  8314.925  9519.00  9863.0 10087.25 10301.100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1140  8580.450  9682.75  9990.5 10155.25 10335.025</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1150  8806.775  9893.75 10116.0 10226.00 10376.025</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1160  9347.650 10129.00 10230.5 10302.25 10431.075</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1170 10295.000 10375.00 10432.0 10505.25 10791.100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1180 10409.000 10607.00 10661.0 10738.00 11019.100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1190 10536.800 10837.75 10893.0 10954.00 11129.150</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1200 10733.950 11075.00 11129.5 11166.00 11280.025</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1210 11119.800 11254.00 11291.0 11366.00 11741.450</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1220 11186.875 11319.75 11383.0 11515.50 12065.225</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1230 11230.950 11383.00 11472.0 11639.25 12173.150</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1240 11275.925 11445.00 11558.0 11762.00 12286.225</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1250 11302.925 11510.00 11646.0 11851.25 12403.100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1260 11338.875 11574.00 11739.0 11950.25 12463.025</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1270 11380.975 11648.00 11828.0 12044.75 12509.375</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1280 11412.975 11715.75 11918.0 12144.25 12577.025</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1290 11455.875 11801.50 12005.5 12222.25 12601.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1300 11495.850 11884.00 12091.0 12295.50 12659.025</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1310 11536.000 11968.75 12175.5 12361.25 12701.175</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1320 11585.950 12053.00 12265.5 12436.00 12749.025</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1330 11637.950 12147.75 12356.5 12514.00 12783.075</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1340 11710.675 12243.75 12442.5 12586.25 12812.050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1350 11788.925 12337.75 12525.0 12649.00 12837.150</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1360 12002.875 12453.75 12611.0 12708.00 12881.075</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1370 12115.800 12588.75 12702.0 12773.25 12937.025</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1380 12474.975 12747.00 12797.0 12858.00 13009.050</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1390 12816.975 12886.00 12940.0 13008.25 13184.025</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1400 12873.975 12993.00 13047.0 13118.00 13277.100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1410 12930.000 13097.00 13153.0 13218.00 13347.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1420 12987.925 13201.00 13263.0 13314.00 13408.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1430 13144.975 13314.75 13367.0 13413.00 13519.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1440 13346.000 13447.75 13512.0 13633.00 14418.425</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1450 13378.000 13513.00 13632.0 13857.25 14819.100</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1460 13394.000 13571.75 13739.5 14067.00 15212.250</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1470 13418.975 13633.00 13857.5 14231.25 15521.200</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1480 13442.925 13706.00 13957.5 14414.75 15907.125</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1490 13461.000 13771.75 14049.0 14575.25 16204.300</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1500 13489.000 13829.75 14153.0 14709.75 16425.925</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">GlenOut</span>, type <span class="op">=</span> <span class="st">"convergence"</span><span class="op">)</span> <span class="co"># Check model convergence</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      0    -1.000    -1.00     0.0     1.00     2.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     10    11.000    35.75    55.0   118.00   516.500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     20    23.975    71.00   110.0   210.50   803.025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     30    35.000   109.00   165.0   292.25   921.025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     40    47.000   146.75   220.0   377.25  1087.350</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     50    60.975   184.00   274.5   443.25  1163.175</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     60    72.975   223.75   329.0   513.50  1233.350</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     70    86.000   267.75   385.0   574.00  1285.725</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     80   101.975   314.00   439.0   628.25  1338.875</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     90   116.950   356.75   493.0   682.75  1431.025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    100   133.850   397.00   546.0   743.00  1465.050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    110   158.975   437.75   600.0   802.25  1503.200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    120   174.000   488.75   653.0   865.50  1595.175</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    130   187.000   536.75   705.0   924.50  1643.075</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    140   202.975   582.00   761.5   985.25  1663.850</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    150   223.850   618.25   817.0  1041.25  1738.400</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    160   237.850   657.75   871.0  1104.25  1786.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    170   254.950   698.75   921.0  1162.25  1822.025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    180   274.975   743.75   975.0  1212.00  1847.600</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    190   287.975   786.75  1030.0  1257.50  1876.525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    200   312.875   836.00  1085.0  1321.25  1911.075</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    210   350.600   882.50  1138.0  1361.00  1973.025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    220   371.900   941.50  1183.0  1417.50  1991.200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    230   414.725   993.00  1238.0  1464.00  2008.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    240   442.775  1055.75  1298.5  1511.00  2031.100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    250   492.800  1124.50  1347.5  1551.50  2064.050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    260   541.750  1171.00  1403.5  1604.25  2099.075</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    270   586.650  1218.00  1453.0  1655.25  2135.025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    280   634.400  1269.75  1508.5  1698.25  2153.175</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    290   668.975  1320.75  1563.5  1745.25  2181.025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    300   718.575  1372.50  1610.5  1792.75  2193.050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    310   747.000  1415.75  1665.5  1836.00  2210.050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    320   786.900  1485.00  1717.0  1877.25  2228.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    330   848.750  1547.50  1765.5  1934.25  2239.075</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    340   931.000  1603.00  1821.5  1971.00  2270.100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    350  1002.950  1669.75  1879.0  2016.00  2304.600</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    360  1104.650  1729.75  1932.5  2056.25  2341.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    370  1168.950  1798.00  1982.5  2102.50  2355.100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    380  1212.000  1857.75  2029.0  2144.00  2378.150</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    390  1331.775  1935.00  2084.5  2187.25  2418.125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    400  1437.000  2010.00  2135.0  2233.00  2452.150</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    410  1568.925  2089.00  2191.0  2278.00  2534.100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    420  1860.900  2166.50  2264.0  2325.50  2610.100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    430  2180.975  2311.50  2389.0  2494.50  3159.450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    440  2239.950  2396.00  2513.5  2725.25  4052.550</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    450  2293.950  2480.00  2625.5  2940.50  4609.200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    460  2340.000  2560.00  2731.5  3125.25  4837.525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    470  2377.000  2639.00  2846.5  3316.00  5084.775</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    480  2414.950  2720.75  2955.0  3454.25  5324.350</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    490  2451.925  2803.50  3071.5  3575.00  5428.175</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    500  2480.950  2891.75  3160.5  3706.00  5726.825</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    510  2512.900  2971.75  3286.5  3868.50  5844.525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    520  2551.550  3047.75  3389.0  4001.50  6030.450</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    530  2592.925  3123.75  3499.0  4126.25  6228.475</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    540  2634.975  3212.00  3600.5  4237.25  6464.725</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    550  2671.850  3283.50  3707.0  4391.50  6626.125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    560  2705.875  3367.00  3813.0  4525.50  6759.475</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    570  2754.950  3461.00  3923.5  4642.25  6927.750</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    580  2797.900  3536.25  4033.0  4787.25  7017.575</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    590  2835.850  3636.50  4128.0  4899.00  7085.750</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    600  2867.775  3705.00  4227.0  4995.25  7222.475</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    610  2904.975  3804.00  4331.5  5093.25  7309.250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    620  2943.000  3913.00  4442.5  5216.00  7454.050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    630  2996.800  4026.00  4547.5  5317.50  7484.750</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    640  3067.975  4106.50  4655.0  5416.75  7514.175</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    650  3108.925  4181.75  4762.5  5521.50  7734.925</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    660  3173.400  4284.00  4876.5  5649.75  7870.125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    670  3209.525  4374.00  4979.0  5785.25  7931.150</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    680  3279.325  4472.50  5083.0  5906.75  7994.125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    690  3320.850  4555.00  5179.5  6011.75  8063.600</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    700  3370.850  4644.25  5285.5  6089.75  8209.025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    710  3433.850  4740.50  5393.5  6208.25  8235.925</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    720  3500.625  4827.75  5501.0  6300.75  8426.300</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    730  3547.500  4932.25  5600.0  6364.00  8456.650</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    740  3580.425  5030.25  5707.0  6484.75  8523.700</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    750  3641.050  5119.75  5810.0  6607.00  8565.275</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    760  3666.300  5213.75  5922.5  6714.25  8602.100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    770  3729.025  5286.25  6026.5  6814.25  8633.325</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    780  3812.525  5369.50  6129.0  6929.25  8769.250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    790  3863.850  5472.00  6230.0  7057.00  8795.875</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    800  3944.875  5565.50  6335.0  7136.25  8868.325</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    810  3993.875  5665.50  6435.5  7233.50  8905.250</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    820  4037.850  5754.00  6548.0  7325.25  8949.175</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    830  4074.650  5880.00  6667.0  7428.75  9058.275</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    840  4117.975  5995.50  6774.5  7518.75  9147.125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    850  4174.800  6096.50  6883.0  7624.00  9187.300</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    860  4248.650  6214.00  6990.0  7718.25  9225.150</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    870  4321.750  6320.75  7102.5  7804.00  9263.025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    880  4375.000  6452.75  7210.0  7895.25  9312.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    890  4439.950  6558.75  7317.0  8000.00  9348.100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    900  4486.950  6652.25  7427.0  8075.25  9386.650</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    910  4568.100  6758.75  7535.0  8184.25  9469.750</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    920  4680.650  6878.75  7643.5  8273.50  9534.125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    930  4760.375  6989.00  7751.0  8357.00  9563.200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    940  4863.850  7098.50  7864.0  8446.00  9592.325</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    950  4972.950  7210.25  7971.0  8542.75  9624.325</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    960  5068.225  7345.75  8078.0  8634.00  9662.150</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    970  5130.725  7453.25  8190.0  8730.75  9701.050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    980  5174.925  7585.75  8296.5  8817.25  9741.800</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    990  5283.450  7702.75  8407.5  8898.25  9807.100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1000  5336.400  7829.75  8514.0  8995.00  9841.125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1010  5389.425  7977.25  8619.5  9092.75  9880.275</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1020  5570.800  8107.75  8719.0  9179.25  9913.075</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1030  5646.900  8218.75  8826.0  9233.25  9954.125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1040  5775.050  8323.50  8928.0  9329.25  9984.175</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1050  5956.225  8458.50  9040.0  9408.75 10016.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1060  6087.400  8590.75  9140.0  9492.25 10048.175</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1070  6217.225  8721.75  9248.0  9570.00 10074.200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1080  6419.750  8836.75  9356.5  9651.50 10124.050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1090  6636.650  8964.00  9462.5  9733.50 10155.150</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1100  6820.550  9100.75  9563.5  9813.00 10186.150</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1110  7053.875  9253.25  9668.0  9891.25 10217.025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1120  7400.275  9407.75  9778.5  9974.25 10259.075</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1130  7815.350  9564.25  9887.0 10063.25 10296.050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1140  8161.575  9744.00 10001.0 10141.25 10330.050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1150  8652.900  9935.75 10113.0 10214.00 10374.125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1160  9227.700 10142.50 10231.5 10296.00 10430.025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1170 10306.000 10376.00 10426.0 10494.25 10758.025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1180 10460.775 10607.00 10656.5 10714.00 11014.150</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1190 10570.925 10843.75 10890.5 10936.00 11111.050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1200 10801.925 11085.75 11128.0 11162.00 11250.075</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1210 11146.975 11250.00 11283.0 11345.25 11656.150</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1220 11213.975 11323.75 11371.5 11470.00 11963.325</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1230 11240.975 11393.75 11459.5 11595.00 12146.150</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1240 11271.975 11462.50 11549.0 11697.00 12220.200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1250 11301.975 11524.50 11638.0 11793.25 12338.225</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1260 11327.925 11601.75 11726.0 11881.00 12424.200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1270 11353.800 11675.75 11816.0 11976.25 12491.175</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1280 11371.950 11760.00 11904.0 12068.00 12556.150</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1290 11414.825 11849.75 11991.5 12146.50 12611.125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1300 11448.975 11936.75 12083.0 12220.00 12662.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1310 11482.000 12029.50 12175.5 12306.50 12692.025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1320 11545.725 12117.75 12264.0 12389.25 12714.350</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1330 11646.000 12218.00 12354.0 12463.25 12756.150</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1340 11703.000 12316.75 12443.0 12548.25 12793.050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1350 11817.950 12414.50 12531.0 12623.25 12829.025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1360 11945.650 12530.75 12622.0 12698.00 12873.050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1370 12157.875 12643.75 12709.0 12773.50 12924.100</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1380 12441.525 12757.75 12806.0 12860.25 13000.050</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1390 12829.975 12887.00 12933.0 12996.00 13177.150</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1400 12899.000 12998.00 13044.0 13109.00 13295.075</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1410 12957.975 13110.00 13158.0 13211.00 13351.025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1420 12998.950 13215.75 13265.0 13311.25 13413.025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1430 13186.000 13324.00 13372.0 13416.00 13523.025</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1440 13348.975 13433.00 13491.5 13603.00 14259.400</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1450 13371.950 13483.50 13580.0 13780.50 14706.350</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1460 13388.000 13517.50 13656.0 13937.00 15123.125</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1470 13399.950 13557.75 13739.5 14083.25 15303.925</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1480 13407.950 13598.00 13826.5 14239.25 15495.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1490 13417.900 13647.00 13907.0 14348.00 15753.325</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1500 13423.000 13689.75 13989.0 14458.25 16011.125</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">GlenOut</span>, type <span class="op">=</span> <span class="st">"convergence"</span><span class="op">)</span> <span class="co"># Check model convergence</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Convergence check (watch for too many small p-values): </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             p-value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier 1   0.01238</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> RateVar     0.02137</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier 2   0.04132</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier 3   0.07844</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier 4   0.08855</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Beta-100899 0.16367</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Beta-100897 0.28297</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Beta-100901 0.31895</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier 6   0.35450</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Beta-100900 0.39770</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Top-1       0.42635</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier 5   0.42695</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> RateMean    0.48491</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Beta-122061 0.49984</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">GlenOut</span>, type <span class="op">=</span> <span class="st">"outliers"</span><span class="op">)</span> <span class="co"># Look at outlier probabilities</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> RateVar     0.00300</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Beta-100899 0.01327</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier 5   0.02243</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> RateMean    0.03645</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier 2   0.04093</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier 4   0.04602</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Beta-100900 0.06419</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier 1   0.07844</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Beta-122061 0.09278</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier 3   0.10291</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Beta-100901 0.11095</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Top-1       0.22592</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Beta-100897 0.34461</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Outlier 6   0.35838</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">GlenOut</span>, type <span class="op">=</span> <span class="st">"outliers"</span><span class="op">)</span> <span class="co"># Look at outlier probabilities</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Posterior outlier probability by date: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         Date OutlierProb</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        Top-1       0.010</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Beta-122061       0.009</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Beta-100901       0.010</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        Top-1       0.005</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Beta-122061       0.008</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Beta-100901       0.005</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Beta-100900       0.013</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Beta-100899       0.013</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Beta-100897       0.010</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Predict for some new positions</span></span>
-<span class="r-in"><span class="va">predictAges</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">GlenOut</span>,</span>
-<span class="r-in">  newPositions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">150</span>, <span class="fl">725</span>, <span class="fl">1500</span><span class="op">)</span>,</span>
-<span class="r-in">  newPositionThicknesses <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">0</span>, <span class="fl">20</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Beta-100899       0.008</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Beta-100897       0.005</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Predict for some new positions</span></span></span>
+<span class="r-in"><span><span class="va">predictAges</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">GlenOut</span>,</span></span>
+<span class="r-in"><span>  newPositions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">150</span>, <span class="fl">725</span>, <span class="fl">1500</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  newPositionThicknesses <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">0</span>, <span class="fl">20</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                    |                                                            |   0%  |                                                                    |                                                            |   1%  |                                                                    |=                                                           |   1%  |                                                                    |=                                                           |   2%  |                                                                    |==                                                          |   3%  |                                                                    |==                                                          |   4%  |                                                                    |===                                                         |   4%  |                                                                    |===                                                         |   5%  |                                                                    |===                                                         |   6%  |                                                                    |====                                                        |   6%  |                                                                    |====                                                        |   7%  |                                                                    |=====                                                       |   8%  |                                                                    |=====                                                       |   9%  |                                                                    |======                                                      |   9%  |                                                                    |======                                                      |  10%  |                                                                    |======                                                      |  11%  |                                                                    |=======                                                     |  11%  |                                                                    |=======                                                     |  12%  |                                                                    |========                                                    |  13%  |                                                                    |========                                                    |  14%  |                                                                    |=========                                                   |  14%  |                                                                    |=========                                                   |  15%  |                                                                    |=========                                                   |  16%  |                                                                    |==========                                                  |  16%  |                                                                    |==========                                                  |  17%  |                                                                    |===========                                                 |  18%  |                                                                    |===========                                                 |  19%  |                                                                    |============                                                |  19%  |                                                                    |============                                                |  20%  |                                                                    |============                                                |  21%  |                                                                    |=============                                               |  21%  |                                                                    |=============                                               |  22%  |                                                                    |==============                                              |  23%  |                                                                    |==============                                              |  24%  |                                                                    |===============                                             |  24%  |                                                                    |===============                                             |  25%  |                                                                    |===============                                             |  26%  |                                                                    |================                                            |  26%  |                                                                    |================                                            |  27%  |                                                                    |=================                                           |  28%  |                                                                    |=================                                           |  29%  |                                                                    |==================                                          |  29%  |                                                                    |==================                                          |  30%  |                                                                    |==================                                          |  31%  |                                                                    |===================                                         |  31%  |                                                                    |===================                                         |  32%  |                                                                    |====================                                        |  33%  |                                                                    |====================                                        |  34%  |                                                                    |=====================                                       |  34%  |                                                                    |=====================                                       |  35%  |                                                                    |=====================                                       |  36%  |                                                                    |======================                                      |  36%  |                                                                    |======================                                      |  37%  |                                                                    |=======================                                     |  38%  |                                                                    |=======================                                     |  39%  |                                                                    |========================                                    |  39%  |                                                                    |========================                                    |  40%  |                                                                    |========================                                    |  41%  |                                                                    |=========================                                   |  41%  |                                                                    |=========================                                   |  42%  |                                                                    |==========================                                  |  43%  |                                                                    |==========================                                  |  44%  |                                                                    |===========================                                 |  44%  |                                                                    |===========================                                 |  45%  |                                                                    |===========================                                 |  46%  |                                                                    |============================                                |  46%  |                                                                    |============================                                |  47%  |                                                                    |=============================                               |  48%  |                                                                    |=============================                               |  49%  |                                                                    |==============================                              |  49%  |                                                                    |==============================                              |  50%  |                                                                    |==============================                              |  51%  |                                                                    |===============================                             |  51%  |                                                                    |===============================                             |  52%  |                                                                    |================================                            |  53%  |                                                                    |================================                            |  54%  |                                                                    |=================================                           |  54%  |                                                                    |=================================                           |  55%  |                                                                    |=================================                           |  56%  |                                                                    |==================================                          |  56%  |                                                                    |==================================                          |  57%  |                                                                    |===================================                         |  58%  |                                                                    |===================================                         |  59%  |                                                                    |====================================                        |  59%  |                                                                    |====================================                        |  60%  |                                                                    |====================================                        |  61%  |                                                                    |=====================================                       |  61%  |                                                                    |=====================================                       |  62%  |                                                                    |======================================                      |  63%  |                                                                    |======================================                      |  64%  |                                                                    |=======================================                     |  64%  |                                                                    |=======================================                     |  65%  |                                                                    |=======================================                     |  66%  |                                                                    |========================================                    |  66%  |                                                                    |========================================                    |  67%  |                                                                    |=========================================                   |  68%  |                                                                    |=========================================                   |  69%  |                                                                    |==========================================                  |  69%  |                                                                    |==========================================                  |  70%  |                                                                    |==========================================                  |  71%  |                                                                    |===========================================                 |  71%  |                                                                    |===========================================                 |  72%  |                                                                    |============================================                |  73%  |                                                                    |============================================                |  74%  |                                                                    |=============================================               |  74%  |                                                                    |=============================================               |  75%  |                                                                    |=============================================               |  76%  |                                                                    |==============================================              |  76%  |                                                                    |==============================================              |  77%  |                                                                    |===============================================             |  78%  |                                                                    |===============================================             |  79%  |                                                                    |================================================            |  79%  |                                                                    |================================================            |  80%  |                                                                    |================================================            |  81%  |                                                                    |=================================================           |  81%  |                                                                    |=================================================           |  82%  |                                                                    |==================================================          |  83%  |                                                                    |==================================================          |  84%  |                                                                    |===================================================         |  84%  |                                                                    |===================================================         |  85%  |                                                                    |===================================================         |  86%  |                                                                    |====================================================        |  86%  |                                                                    |====================================================        |  87%  |                                                                    |=====================================================       |  88%  |                                                                    |=====================================================       |  89%  |                                                                    |======================================================      |  89%  |                                                                    |======================================================      |  90%  |                                                                    |======================================================      |  91%  |                                                                    |=======================================================     |  91%  |                                                                    |=======================================================     |  92%  |                                                                    |========================================================    |  93%  |                                                                    |========================================================    |  94%  |                                                                    |=========================================================   |  94%  |                                                                    |=========================================================   |  95%  |                                                                    |=========================================================   |  96%  |                                                                    |==========================================================  |  96%  |                                                                    |==========================================================  |  97%  |                                                                    |=========================================================== |  98%  |                                                                    |=========================================================== |  99%  |                                                                    |============================================================|  99%  |                                                                    |============================================================| 100%</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Plot the output</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">GlenOut</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
-<span class="r-in">    title <span class="op">=</span> <span class="st">"Glendalough"</span>,</span>
-<span class="r-in">    xlab <span class="op">=</span> <span class="st">"Age (cal years BP)"</span>,</span>
-<span class="r-in">    ylab <span class="op">=</span> <span class="st">"Depth (cm)"</span></span>
-<span class="r-in">  <span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Plot the output</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">GlenOut</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    title <span class="op">=</span> <span class="st">"Glendalough"</span>,</span></span>
+<span class="r-in"><span>    xlab <span class="op">=</span> <span class="st">"Age (cal years BP)"</span>,</span></span>
+<span class="r-in"><span>    ylab <span class="op">=</span> <span class="st">"Depth (cm)"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-plt img"><img src="Bchronology-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># If you need to specify your own starting values</span></span>
-<span class="r-in"><span class="va">startingAges</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2000</span>, <span class="fl">10000</span>, <span class="fl">11000</span>, <span class="fl">13000</span>, <span class="fl">13500</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">GlenOut</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">Glendalough</span>,</span>
-<span class="r-in">  <span class="fu">Bchronology</span><span class="op">(</span></span>
-<span class="r-in">    ages <span class="op">=</span> <span class="va">ages</span>,</span>
-<span class="r-in">    ageSds <span class="op">=</span> <span class="va">ageSds</span>,</span>
-<span class="r-in">    calCurves <span class="op">=</span> <span class="va">calCurves</span>,</span>
-<span class="r-in">    positions <span class="op">=</span> <span class="va">position</span>,</span>
-<span class="r-in">    positionThicknesses <span class="op">=</span> <span class="va">thickness</span>,</span>
-<span class="r-in">    ids <span class="op">=</span> <span class="va">id</span>,</span>
-<span class="r-in">    predictPositions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1500</span>, by <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,</span>
-<span class="r-in">    thetaStart <span class="op">=</span> <span class="va">startingAges</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># If you need to specify your own starting values</span></span></span>
+<span class="r-in"><span><span class="va">startingAges</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">2000</span>, <span class="fl">10000</span>, <span class="fl">11000</span>, <span class="fl">13000</span>, <span class="fl">13500</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">GlenOut</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">Glendalough</span>,</span></span>
+<span class="r-in"><span>  <span class="fu">Bchronology</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    ages <span class="op">=</span> <span class="va">ages</span>,</span></span>
+<span class="r-in"><span>    ageSds <span class="op">=</span> <span class="va">ageSds</span>,</span></span>
+<span class="r-in"><span>    calCurves <span class="op">=</span> <span class="va">calCurves</span>,</span></span>
+<span class="r-in"><span>    positions <span class="op">=</span> <span class="va">position</span>,</span></span>
+<span class="r-in"><span>    positionThicknesses <span class="op">=</span> <span class="va">thickness</span>,</span></span>
+<span class="r-in"><span>    ids <span class="op">=</span> <span class="va">id</span>,</span></span>
+<span class="r-in"><span>    predictPositions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1500</span>, by <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    thetaStart <span class="op">=</span> <span class="va">startingAges</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Running Bchronology...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                    |                                                            |   0%  |                                                                    |                                                            |   1%  |                                                                    |=                                                           |   1%  |                                                                    |=                                                           |   2%  |                                                                    |==                                                          |   3%  |                                                                    |==                                                          |   4%  |                                                                    |===                                                         |   4%  |                                                                    |===                                                         |   5%  |                                                                    |===                                                         |   6%  |                                                                    |====                                                        |   6%  |                                                                    |====                                                        |   7%  |                                                                    |=====                                                       |   8%  |                                                                    |=====                                                       |   9%  |                                                                    |======                                                      |   9%  |                                                                    |======                                                      |  10%  |                                                                    |======                                                      |  11%  |                                                                    |=======                                                     |  11%  |                                                                    |=======                                                     |  12%  |                                                                    |========                                                    |  13%  |                                                                    |========                                                    |  14%  |                                                                    |=========                                                   |  14%  |                                                                    |=========                                                   |  15%  |                                                                    |=========                                                   |  16%  |                                                                    |==========                                                  |  16%  |                                                                    |==========                                                  |  17%  |                                                                    |===========                                                 |  18%  |                                                                    |===========                                                 |  19%  |                                                                    |============                                                |  19%  |                                                                    |============                                                |  20%  |                                                                    |============                                                |  21%  |                                                                    |=============                                               |  21%  |                                                                    |=============                                               |  22%  |                                                                    |==============                                              |  23%  |                                                                    |==============                                              |  24%  |                                                                    |===============                                             |  24%  |                                                                    |===============                                             |  25%  |                                                                    |===============                                             |  26%  |                                                                    |================                                            |  26%  |                                                                    |================                                            |  27%  |                                                                    |=================                                           |  28%  |                                                                    |=================                                           |  29%  |                                                                    |==================                                          |  29%  |                                                                    |==================                                          |  30%  |                                                                    |==================                                          |  31%  |                                                                    |===================                                         |  31%  |                                                                    |===================                                         |  32%  |                                                                    |====================                                        |  33%  |                                                                    |====================                                        |  34%  |                                                                    |=====================                                       |  34%  |                                                                    |=====================                                       |  35%  |                                                                    |=====================                                       |  36%  |                                                                    |======================                                      |  36%  |                                                                    |======================                                      |  37%  |                                                                    |=======================                                     |  38%  |                                                                    |=======================                                     |  39%  |                                                                    |========================                                    |  39%  |                                                                    |========================                                    |  40%  |                                                                    |========================                                    |  41%  |                                                                    |=========================                                   |  41%  |                                                                    |=========================                                   |  42%  |                                                                    |==========================                                  |  43%  |                                                                    |==========================                                  |  44%  |                                                                    |===========================                                 |  44%  |                                                                    |===========================                                 |  45%  |                                                                    |===========================                                 |  46%  |                                                                    |============================                                |  46%  |                                                                    |============================                                |  47%  |                                                                    |=============================                               |  48%  |                                                                    |=============================                               |  49%  |                                                                    |==============================                              |  49%  |                                                                    |==============================                              |  50%  |                                                                    |==============================                              |  51%  |                                                                    |===============================                             |  51%  |                                                                    |===============================                             |  52%  |                                                                    |================================                            |  53%  |                                                                    |================================                            |  54%  |                                                                    |=================================                           |  54%  |                                                                    |=================================                           |  55%  |                                                                    |=================================                           |  56%  |                                                                    |==================================                          |  56%  |                                                                    |==================================                          |  57%  |                                                                    |===================================                         |  58%  |                                                                    |===================================                         |  59%  |                                                                    |====================================                        |  59%  |                                                                    |====================================                        |  60%  |                                                                    |====================================                        |  61%  |                                                                    |=====================================                       |  61%  |                                                                    |=====================================                       |  62%  |                                                                    |======================================                      |  63%  |                                                                    |======================================                      |  64%  |                                                                    |=======================================                     |  64%  |                                                                    |=======================================                     |  65%  |                                                                    |=======================================                     |  66%  |                                                                    |========================================                    |  66%  |                                                                    |========================================                    |  67%  |                                                                    |=========================================                   |  68%  |                                                                    |=========================================                   |  69%  |                                                                    |==========================================                  |  69%  |                                                                    |==========================================                  |  70%  |                                                                    |==========================================                  |  71%  |                                                                    |===========================================                 |  71%  |                                                                    |===========================================                 |  72%  |                                                                    |============================================                |  73%  |                                                                    |============================================                |  74%  |                                                                    |=============================================               |  74%  |                                                                    |=============================================               |  75%  |                                                                    |=============================================               |  76%  |                                                                    |==============================================              |  76%  |                                                                    |==============================================              |  77%  |                                                                    |===============================================             |  78%  |                                                                    |===============================================             |  79%  |                                                                    |================================================            |  79%  |                                                                    |================================================            |  80%  |                                                                    |================================================            |  81%  |                                                                    |=================================================           |  81%  |                                                                    |=================================================           |  82%  |                                                                    |==================================================          |  83%  |                                                                    |==================================================          |  84%  |                                                                    |===================================================         |  84%  |                                                                    |===================================================         |  85%  |                                                                    |===================================================         |  86%  |                                                                    |====================================================        |  86%  |                                                                    |====================================================        |  87%  |                                                                    |=====================================================       |  88%  |                                                                    |=====================================================       |  89%  |                                                                    |======================================================      |  89%  |                                                                    |======================================================      |  90%  |                                                                    |======================================================      |  91%  |                                                                    |=======================================================     |  91%  |                                                                    |=======================================================     |  92%  |                                                                    |========================================================    |  93%  |                                                                    |========================================================    |  94%  |                                                                    |=========================================================   |  94%  |                                                                    |=========================================================   |  95%  |                                                                    |=========================================================   |  96%  |                                                                    |==========================================================  |  96%  |                                                                    |==========================================================  |  97%  |                                                                    |=========================================================== |  98%  |                                                                    |=========================================================== |  99%  |                                                                    |============================================================|  99%  |                                                                    |============================================================| 100%</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Run completed!</span>
-<span class="r-in"><span class="co"># }</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -421,8 +476,7 @@ Parnell, A. C., Haslett, J., Allen, J. R. M., Buck, C. E., and Huntley, B. (2008
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

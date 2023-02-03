@@ -48,10 +48,10 @@ plot.BchronRSLRun <-
         RSL = x$RSLmean,
         rslErr = mult * x$RSLsd
       )
-      p <- ggplot(data = rslDf, aes_string(x = "Age", y = "RSL")) +
-        geom_ellipse(aes_string(
-          x0 = "Age", y0 = "RSL",
-          a = "ageErr", b = "rslErr", angle = 0
+      p <- ggplot(data = rslDf, aes(x = Age, y = RSL)) +
+        geom_ellipse(aes(
+          x0 = Age, y0 = RSL,
+          a = ageErr, b = rslErr, angle = 0
         ),
         colour = ellipseCol
         ) +
@@ -81,11 +81,11 @@ plot.BchronRSLRun <-
 
       p <- p + geom_line(data = predAll, colour = lineCol) +
         geom_line(
-          data = predAll, aes_string(x = "Age", y = "predLow"),
+          data = predAll, aes(x = Age, y = predLow),
           linetype = 2, colour = lineCol
         ) +
         geom_line(
-          data = predAll, aes_string(x = "Age", y = "predHigh"),
+          data = predAll, aes(x = Age, y = predHigh),
           linetype = 2, colour = lineCol
         )
     }
@@ -117,13 +117,13 @@ plot.BchronRSLRun <-
         rateHigh = apply(predLines, 2, "quantile", probs = alpha + (1 - alpha) / 2)
       )
 
-      p <- ggplot(predAll, aes_string(x = "Age", y = "Rate")) +
+      p <- ggplot(predAll, aes(x = Age, y = Rate)) +
         geom_line(colour = lineCol) +
         theme_bw() +
-        geom_line(aes_string(x = "Age", y = "rateLow"),
+        geom_line(aes(x = Age, y = rateLow),
           linetype = 2, colour = lineCol
         ) +
-        geom_line(aes_string(x = "Age", y = "rateHigh"),
+        geom_line(aes(x = Age, y = rateHigh),
           linetype = 2, colour = lineCol
         ) +
         scale_x_reverse()
@@ -163,13 +163,13 @@ plot.BchronRSLRun <-
         accelHigh = apply(predLines, 2, "quantile", probs = alpha + (1 - alpha) / 2)
       )
 
-      p <- ggplot(predAll, aes_string(x = "Age", y = "Acceleration")) +
+      p <- ggplot(predAll, aes(x = Age, y = Acceleration)) +
         geom_line(colour = lineCol) +
         theme_bw() +
-        geom_line(aes_string(x = "Age", y = "accelLow"),
+        geom_line(aes(x = Age, y = accelLow),
           linetype = 2, colour = lineCol
         ) +
-        geom_line(aes_string(x = "Age", y = "accelHigh"),
+        geom_line(aes(x = Age, y = accelHigh),
           linetype = 2, colour = lineCol
         ) +
         scale_x_reverse()

@@ -56,58 +56,91 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="co"># S3 method for BchronologyRun</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span>
-  <span class="va">x</span>,
-  dateHeight <span class="op">=</span> <span class="fl">100</span>,
-  dateLabels <span class="op">=</span> <span class="cn">TRUE</span>,
-  dateLabelSize <span class="op">=</span> <span class="fl">2</span>,
-  dateCol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html" class="external-link">rgb</a></span><span class="op">(</span><span class="fl">47</span><span class="op">/</span><span class="fl">255</span>, <span class="fl">79</span><span class="op">/</span><span class="fl">255</span>, <span class="fl">79</span><span class="op">/</span><span class="fl">255</span>, <span class="fl">0.5</span><span class="op">)</span>,
-  chronCol <span class="op">=</span> <span class="st">"deepskyblue4"</span>,
-  chronTransparency <span class="op">=</span> <span class="fl">0.75</span>,
-  alpha <span class="op">=</span> <span class="fl">0.95</span>,
-  nudgeX <span class="op">=</span> <span class="fl">0</span>,
-  nudgeY <span class="op">=</span> <span class="fl">0</span>,
-  expandX <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">dateLabels</span><span class="op">)</span> <span class="op">{</span>     <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0</span><span class="op">)</span> <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>     <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span> <span class="op">}</span>,
-  expandY <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="fl">0</span><span class="op">)</span>,
-  ageScale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bp"</span>, <span class="st">"bc"</span>, <span class="st">"b2k"</span><span class="op">)</span>,
-  scaleReverse <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for BchronologyRun</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  dateHeight <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  dateLabels <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  dateLabelSize <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  dateCol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/rgb.html" class="external-link">rgb</a></span><span class="op">(</span><span class="fl">47</span><span class="op">/</span><span class="fl">255</span>, <span class="fl">79</span><span class="op">/</span><span class="fl">255</span>, <span class="fl">79</span><span class="op">/</span><span class="fl">255</span>, <span class="fl">0.5</span><span class="op">)</span>,</span>
+<span>  chronCol <span class="op">=</span> <span class="st">"deepskyblue4"</span>,</span>
+<span>  chronTransparency <span class="op">=</span> <span class="fl">0.75</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">0.95</span>,</span>
+<span>  nudgeX <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  nudgeY <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  expandX <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="va">dateLabels</span><span class="op">)</span> <span class="op">{</span></span>
+<span>     <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0</span><span class="op">)</span></span>
+<span> <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>     <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span></span>
+<span> <span class="op">}</span>,</span>
+<span>  expandY <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="fl">0</span><span class="op">)</span>,</span>
+<span>  ageScale <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bp"</span>, <span class="st">"bc"</span>, <span class="st">"b2k"</span><span class="op">)</span>,</span>
+<span>  scaleReverse <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>The object created by <code><a href="Bchronology.html">Bchronology</a></code></p></dd>
+
+
 <dt>dateHeight</dt>
 <dd><p>The height of the dates in the plot (on the same scale as the positions)</p></dd>
+
+
 <dt>dateLabels</dt>
 <dd><p>Whether to label the dates on the vertical axis (default TRUE)</p></dd>
+
+
 <dt>dateLabelSize</dt>
 <dd><p>The size of the date labels</p></dd>
+
+
 <dt>dateCol</dt>
 <dd><p>The colour of the date labels</p></dd>
+
+
 <dt>chronCol</dt>
 <dd><p>The colour of the chronology uncertainty ribbon to be plotted</p></dd>
+
+
 <dt>chronTransparency</dt>
 <dd><p>The amount of transparency for the chronology ribbon</p></dd>
+
+
 <dt>alpha</dt>
 <dd><p>The credible interval of the chronology run to be plotted. Defaults to 95 percent</p></dd>
+
+
 <dt>nudgeX</dt>
 <dd><p>The amount to move the date labels in the x direction. Can be negative. See <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="external-link">geom_text</a></code> for details</p></dd>
+
+
 <dt>nudgeY</dt>
 <dd><p>The amount to move the date labels in the y direction. Can be negative. See <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html" class="external-link">geom_text</a></code> for details</p></dd>
+
+
 <dt>expandX</dt>
 <dd><p>The amount to expand the horizontal axis in case part are missed off the plot. See <code><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html" class="external-link">expand_limits</a></code> for details</p></dd>
+
+
 <dt>expandY</dt>
 <dd><p>The amount to expand the vertical axis in case part are missed off the plot. See <code><a href="https://ggplot2.tidyverse.org/reference/expand_limits.html" class="external-link">expand_limits</a></code> for details</p></dd>
+
+
 <dt>ageScale</dt>
 <dd><p>Either <code>bp</code> for years before present, <code>bc</code> for years BC/AD (BC will be negative), <code>b2k</code> for years before 2000. Others not supported (yet).</p></dd>
+
+
 <dt>scaleReverse</dt>
 <dd><p>Whether to reverse the x-axis scale. Defaults to TRUE which works best for dates presented in e.g. years BP</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Other arguments to plot (currently ignored)</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -130,8 +163,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

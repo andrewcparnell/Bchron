@@ -56,30 +56,41 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">createCalCurve</span><span class="op">(</span>
-  <span class="va">name</span>,
-  <span class="va">calAges</span>,
-  <span class="va">uncalAges</span>,
-  oneSigma <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">calAges</span><span class="op">)</span><span class="op">)</span>,
-  pathToCalCurves <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,
-  createFile <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">createCalCurve</span><span class="op">(</span></span>
+<span>  <span class="va">name</span>,</span>
+<span>  <span class="va">calAges</span>,</span>
+<span>  <span class="va">uncalAges</span>,</span>
+<span>  oneSigma <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">calAges</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  pathToCalCurves <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  createFile <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>name</dt>
 <dd><p>The name of the new calibration curve</p></dd>
+
+
 <dt>calAges</dt>
 <dd><p>A vector of the calendar/calibrated ages in years before present</p></dd>
+
+
 <dt>uncalAges</dt>
 <dd><p>A vector of values of uncalibrated ages in appropriate units (e.g. 14C years BP)</p></dd>
+
+
 <dt>oneSigma</dt>
 <dd><p>The one sigma (one standard deviation) values in uncalibrated units. If left blank it assumes these are all zero</p></dd>
+
+
 <dt>pathToCalCurves</dt>
 <dd><p>The path to the calibration curves. Will write by default to the working directory</p></dd>
+
+
 <dt>createFile</dt>
 <dd><p>whether to write out the new file or not. Only turned off for testing purposes</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -92,39 +103,39 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># Load in the calibration curve with:</span></span>
-<span class="r-in"><span class="va">intcal09</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/intcal09.14c"</span>, package <span class="op">=</span> <span class="st">"Bchron"</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">","</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># Run createCalCurve</span></span>
-<span class="r-in"><span class="fu">createCalCurve</span><span class="op">(</span></span>
-<span class="r-in">  name <span class="op">=</span> <span class="st">"intcal09"</span>, calAges <span class="op">=</span> <span class="va">intcal09</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>,</span>
-<span class="r-in">  uncalAges <span class="op">=</span> <span class="va">intcal09</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, oneSigma <span class="op">=</span> <span class="va">intcal09</span><span class="op">[</span>, <span class="fl">3</span><span class="op">]</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Copy the file to the right place</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy</a></span><span class="op">(</span></span>
-<span class="r-in">  from <span class="op">=</span> <span class="st">"intcal09.rda"</span>,</span>
-<span class="r-in">  to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data"</span>, package <span class="op">=</span> <span class="st">"Bchron"</span><span class="op">)</span>,</span>
-<span class="r-in">  overwrite <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span class="r-in"><span class="op">)</span> <span class="co"># Only need this if you've run it more than once</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Calibrate the ages under two calibration curves</span></span>
-<span class="r-in"><span class="va">age_09</span> <span class="op">&lt;-</span> <span class="fu"><a href="BchronCalibrate.html">BchronCalibrate</a></span><span class="op">(</span></span>
-<span class="r-in">  ages <span class="op">=</span> <span class="fl">15500</span>, ageSds <span class="op">=</span> <span class="fl">150</span>,</span>
-<span class="r-in">  calCurves <span class="op">=</span> <span class="st">"intcal09"</span>, ids <span class="op">=</span> <span class="st">"My Date"</span>,</span>
-<span class="r-in">  pathToCalCurves <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">age_20</span> <span class="op">&lt;-</span> <span class="fu"><a href="BchronCalibrate.html">BchronCalibrate</a></span><span class="op">(</span>ages <span class="op">=</span> <span class="fl">15500</span>, ageSds <span class="op">=</span> <span class="fl">150</span>, calCurves <span class="op">=</span> <span class="st">"intcal20"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Finally plot the difference</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">age_09</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span></span>
-<span class="r-in">    data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">age_20</span><span class="op">$</span><span class="va">Date1</span><span class="op">)</span>,</span>
-<span class="r-in">    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">ageGrid</span>, y <span class="op">=</span> <span class="va">densities</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span></span>
-<span class="r-in">  <span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Intcal09 vs Intcal20"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># Load in the calibration curve with:</span></span></span>
+<span class="r-in"><span><span class="va">intcal09</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata/intcal09.14c"</span>, package <span class="op">=</span> <span class="st">"Bchron"</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">","</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Run createCalCurve</span></span></span>
+<span class="r-in"><span><span class="fu">createCalCurve</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  name <span class="op">=</span> <span class="st">"intcal09"</span>, calAges <span class="op">=</span> <span class="va">intcal09</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>,</span></span>
+<span class="r-in"><span>  uncalAges <span class="op">=</span> <span class="va">intcal09</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, oneSigma <span class="op">=</span> <span class="va">intcal09</span><span class="op">[</span>, <span class="fl">3</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Copy the file to the right place</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  from <span class="op">=</span> <span class="st">"intcal09.rda"</span>,</span></span>
+<span class="r-in"><span>  to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data"</span>, package <span class="op">=</span> <span class="st">"Bchron"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  overwrite <span class="op">=</span> <span class="cn">TRUE</span></span></span>
+<span class="r-in"><span><span class="op">)</span> <span class="co"># Only need this if you've run it more than once</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Calibrate the ages under two calibration curves</span></span></span>
+<span class="r-in"><span><span class="va">age_09</span> <span class="op">&lt;-</span> <span class="fu"><a href="BchronCalibrate.html">BchronCalibrate</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  ages <span class="op">=</span> <span class="fl">15500</span>, ageSds <span class="op">=</span> <span class="fl">150</span>,</span></span>
+<span class="r-in"><span>  calCurves <span class="op">=</span> <span class="st">"intcal09"</span>, ids <span class="op">=</span> <span class="st">"My Date"</span>,</span></span>
+<span class="r-in"><span>  pathToCalCurves <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">age_20</span> <span class="op">&lt;-</span> <span class="fu"><a href="BchronCalibrate.html">BchronCalibrate</a></span><span class="op">(</span>ages <span class="op">=</span> <span class="fl">15500</span>, ageSds <span class="op">=</span> <span class="fl">150</span>, calCurves <span class="op">=</span> <span class="st">"intcal20"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Finally plot the difference</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">age_09</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">age_20</span><span class="op">$</span><span class="va">Date1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">ageGrid</span>, y <span class="op">=</span> <span class="va">densities</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Intcal09 vs Intcal20"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -139,8 +150,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -56,70 +56,81 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">unCalibrate</span><span class="op">(</span>
-  <span class="va">calAges</span>,
-  calCurve <span class="op">=</span> <span class="st">"intcal20"</span>,
-  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"samples"</span>, <span class="st">"ages"</span><span class="op">)</span>,
-  pathToCalCurves <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data"</span>, package <span class="op">=</span> <span class="st">"Bchron"</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">unCalibrate</span><span class="op">(</span></span>
+<span>  <span class="va">calAges</span>,</span>
+<span>  calCurve <span class="op">=</span> <span class="st">"intcal20"</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"samples"</span>, <span class="st">"ages"</span><span class="op">)</span>,</span>
+<span>  pathToCalCurves <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data"</span>, package <span class="op">=</span> <span class="st">"Bchron"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>calAges</dt>
 <dd><p>Either a vector of calibrated ages (when <code>type = 'ages'</code>), or a vector of calibrated samples (<code>type = 'samples'</code>)</p></dd>
+
+
 <dt>calCurve</dt>
 <dd><p>he calibration curve to use. Only a single calibration curve is currently supported</p></dd>
+
+
 <dt>type</dt>
 <dd><p>Either 'ages' which uncalibrates a calibrated age values without error (i.e. just a lookup on the calibration curve), or a 'samples' which estimates both an uncalibrated mean age and a standard deviation</p></dd>
+
+
 <dt>pathToCalCurves</dt>
 <dd><p>The path to the calibration curve directory. Defaults to the location of the standard calibration curves given in the package</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Other arguments to the <code><a href="https://rdrr.io/r/stats/optim.html" class="external-link">optim</a></code> function used to match the probability distributions under <code>type = 'samples'</code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Either a vector of uncalibrated ages (<code>type = 'ages'</code>) or a list containing the estimated mean age and standard deviation (<code>type = 'samples'</code>)</p>
+    
+
+<p>Either a vector of uncalibrated ages (<code>type = 'ages'</code>) or a list containing the estimated mean age and standard deviation (<code>type = 'samples'</code>)</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="co"># Single version outputting just an uncalibrated age</span></span>
-<span class="r-in"><span class="fu">unCalibrate</span><span class="op">(</span><span class="fl">2350</span>, type <span class="op">=</span> <span class="st">"ages"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co"># Single version outputting just an uncalibrated age</span></span></span>
+<span class="r-in"><span><span class="fu">unCalibrate</span><span class="op">(</span><span class="fl">2350</span>, type <span class="op">=</span> <span class="st">"ages"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                        |================================================================| 100%</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2352</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Vector version giving a vector of uncalibrated ages</span></span>
-<span class="r-in"><span class="fu">unCalibrate</span><span class="op">(</span></span>
-<span class="r-in">  calAge <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2350</span>, <span class="fl">4750</span>, <span class="fl">11440</span><span class="op">)</span>,</span>
-<span class="r-in">  calCurve <span class="op">=</span> <span class="st">"shcal20"</span>,</span>
-<span class="r-in">  type <span class="op">=</span> <span class="st">"ages"</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Vector version giving a vector of uncalibrated ages</span></span></span>
+<span class="r-in"><span><span class="fu">unCalibrate</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  calAge <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2350</span>, <span class="fl">4750</span>, <span class="fl">11440</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  calCurve <span class="op">=</span> <span class="st">"shcal20"</span>,</span></span>
+<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"ages"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                        |=====================                                           |  33%  |                                                                        |===========================================                     |  67%  |                                                                        |================================================================| 100%</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  2393  4212 10070</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># A version where calibrated standard deviations are required too</span></span>
-<span class="r-in"><span class="va">calAge</span> <span class="op">&lt;-</span> <span class="fu"><a href="BchronCalibrate.html">BchronCalibrate</a></span><span class="op">(</span></span>
-<span class="r-in">  ages <span class="op">=</span> <span class="fl">11255</span>,</span>
-<span class="r-in">  ageSds <span class="op">=</span> <span class="fl">25</span>,</span>
-<span class="r-in">  calCurves <span class="op">=</span> <span class="st">"intcal20"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="va">calSampleAges</span> <span class="op">&lt;-</span> <span class="fu"><a href="sampleAges.html">sampleAges</a></span><span class="op">(</span><span class="va">calAge</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Uncalibrate the above</span></span>
-<span class="r-in"><span class="fu">unCalibrate</span><span class="op">(</span><span class="va">calSampleAges</span>,</span>
-<span class="r-in">  type <span class="op">=</span> <span class="st">"samples"</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># A version where calibrated standard deviations are required too</span></span></span>
+<span class="r-in"><span><span class="va">calAge</span> <span class="op">&lt;-</span> <span class="fu"><a href="BchronCalibrate.html">BchronCalibrate</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  ages <span class="op">=</span> <span class="fl">11255</span>,</span></span>
+<span class="r-in"><span>  ageSds <span class="op">=</span> <span class="fl">25</span>,</span></span>
+<span class="r-in"><span>  calCurves <span class="op">=</span> <span class="st">"intcal20"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">calSampleAges</span> <span class="op">&lt;-</span> <span class="fu"><a href="sampleAges.html">sampleAges</a></span><span class="op">(</span><span class="va">calAge</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Uncalibrate the above</span></span></span>
+<span class="r-in"><span><span class="fu">unCalibrate</span><span class="op">(</span><span class="va">calSampleAges</span>,</span></span>
+<span class="r-in"><span>  type <span class="op">=</span> <span class="st">"samples"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   |                                                                        |================================================================| 100%</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $mean</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 11238</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 11240</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sd</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 26</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="co"># }</span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -134,8 +145,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
