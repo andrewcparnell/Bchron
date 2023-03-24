@@ -1029,3 +1029,36 @@ expect_output(summary(run, type = "convergence"))
 expect_output(summary(run, type = "outliers"))
 expect_output(summary(run, type = "max_var"))
 
+
+# Radakovic_20230312 ------------------------------------------------------
+
+input <- structure(list(
+  position = c(
+    47.5, 66.5, 109, 127, 181, 209,
+    227, 245, 263, 281, 309, 327, 345, 363, 409, 529
+  ), Depth_error_.cm. = c(
+    4L,
+    4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L, 4L
+  ),
+  ages = c(
+    7400L, 15600L, 13600L, 18800L, 17100L, 19700L,
+    27800L, 25800L, 31300L, 24600L, 29800L, 34200L, 35800L, 37500L,
+    43600L, 49800L
+  ), ageSds = c(
+    700L, 1200L, 1000L, 1600L,
+    1700L, 1700L, 2100L, 2300L, 2900L, 2600L, 5800L, 2400L, 3700L,
+    2300L, 2600L, 3000L
+  )
+), class = "data.frame", row.names = c(
+  NA,
+  -16L
+))
+
+test <- with(input,
+            BchronCalibrate(ages = 100 * ages,
+                            ageSds = 100 * ageSds,
+                            positions = position,
+                            eps = 1e-10,
+                            calCurves = rep("normal", length(ages))))
+
+plot(test)
