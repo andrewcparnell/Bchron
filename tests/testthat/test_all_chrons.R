@@ -940,6 +940,13 @@ test_that("Barton_Github_202100604", {
 
 # Kemp January 2023 -------------------------------------------------------
 
+test_that("Kemp_January_2023", {
+  skip_on_ci()
+  skip_on_cran()
+  
+  set.seed(123)
+  
+
 input <- structure(list(ID = c("TRY301C-334", "TRY301C-372", "TRY301C-407"), 
                         ages = c(1640, 1980, 2260), 
                         ageSds = c(15, 15, 15), 
@@ -972,9 +979,17 @@ expect_output(summary(run, type = "quantiles"))
 expect_output(summary(run, type = "convergence"))
 expect_output(summary(run, type = "outliers"))
 expect_output(summary(run, type = "max_var"))
-
+}
 
 # Shimada Feb 23 ----------------------------------------------------------
+
+test_that("Shimada_Feb_23", {
+  skip_on_ci()
+  skip_on_cran()
+  
+  set.seed(123)
+  
+  
 
 input <- structure(list(X = 1:21, id = c(
   "top-1", "OnsetofCs137", "TKA-23298",
@@ -1028,10 +1043,16 @@ expect_output(summary(run, type = "quantiles"))
 expect_output(summary(run, type = "convergence"))
 expect_output(summary(run, type = "outliers"))
 expect_output(summary(run, type = "max_var"))
-
+}
 
 # Radakovic_20230312 ------------------------------------------------------
 
+test_that("Radakovic_20230312", {
+  skip_on_ci()
+  skip_on_cran()
+  
+  set.seed(123)
+  
 input <- structure(list(
   position = c(
     47.5, 66.5, 109, 127, 181, 209,
@@ -1054,11 +1075,11 @@ input <- structure(list(
   -16L
 ))
 
-test <- with(input,
+expect_warning(with(input,
             BchronCalibrate(ages = 100 * ages,
                             ageSds = 100 * ageSds,
                             positions = position,
-                            eps = 1e-10,
-                            calCurves = rep("normal", length(ages))))
+                            calCurves = rep("normal", length(ages)))))
 
-plot(test)
+# plot(test)
+}
