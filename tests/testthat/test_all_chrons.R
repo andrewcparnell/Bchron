@@ -1,6 +1,6 @@
 set.seed(123)
 library(Bchron)
-co <- function(expr) capture.output(expr, file = "NUL")
+co <- function(expr) capture.output(expr, file = NULL)
 
 # Test all the chronologies, including some which cause problems (and so are skipped on CI and CRAN)
 
