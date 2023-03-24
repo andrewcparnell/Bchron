@@ -979,7 +979,7 @@ expect_output(summary(run, type = "quantiles"))
 expect_output(summary(run, type = "convergence"))
 expect_output(summary(run, type = "outliers"))
 expect_output(summary(run, type = "max_var"))
-}
+})
 
 # Shimada Feb 23 ----------------------------------------------------------
 
@@ -1043,7 +1043,7 @@ expect_output(summary(run, type = "quantiles"))
 expect_output(summary(run, type = "convergence"))
 expect_output(summary(run, type = "outliers"))
 expect_output(summary(run, type = "max_var"))
-}
+})
 
 # Radakovic_20230312 ------------------------------------------------------
 
@@ -1082,4 +1082,4 @@ expect_warning(with(input,
                             calCurves = rep("normal", length(ages)))))
 
 # plot(test)
-}
+})
