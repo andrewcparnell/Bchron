@@ -21,6 +21,24 @@ co(GlenOut <- with(
   )
 ))
 
+Glendalough_unordered <- Glendalough[c(6,1,5,2,4,3),]
+
+co(GlenOut_unordered <- with(
+  Glendalough_unordered,
+  Bchronology(
+    ages = ages,
+    ageSds = ageSds,
+    calCurves = calCurves,
+    positions = position,
+    positionThicknesses = thickness,
+    ids = id,
+    predictPositions = seq(-10, 1500, by = 10),
+    iterations = 100,
+    burn = 20,
+    thin = 1
+  )
+))
+
 test_that("Data sets", {
   expect_output(print(Glendalough))
 })
@@ -28,6 +46,15 @@ test_that("Data sets", {
 test_that("Bchronology", {
   expect_s3_class(GlenOut, "BchronologyRun")
 })
+
+test_that("Bchronology reorders input correctly", {
+  expect_s3_class(GlenOut_unordered, "BchronologyRun")
+  expect_equal(as.integer(lapply(GlenOut_unordered$calAges, `[[`, 1)), 
+               Glendalough$ages)
+  expect_equal(as.integer(lapply(GlenOut_unordered$calAges, `[[`, 3)), 
+               Glendalough$position)
+})
+
 
 test_that("summary.BchronologyRun", {
   expect_output(summary(GlenOut, type = "quantiles"))
