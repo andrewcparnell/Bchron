@@ -95,7 +95,7 @@ plot.BchronCalibratedDates <-
         Density = x[[1]]$densities
       )
       my_breaks <- pretty(x = df$Age, n = 10)
-      p <- ggplot(df, aes_string(x = "Age", y = "Density")) +
+      p <- ggplot(df, aes(x = Age, y = Density)) +
         geom_line() +
         theme_bw() +
         scale_x_continuous(
@@ -142,10 +142,10 @@ plot.BchronCalibratedDates <-
         )
         myYlim <- range(c(df_14C$age, calCurveUse$low, calCurveUse$high))
         df$Density2 <- df$Density / max(df$Density) * dateHeight + min(myYlim)
-        p <- ggplot(calCurveUse, aes_string(x = "V1", y = "V2")) +
+        p <- ggplot(calCurveUse, aes(x = V1, y = V2)) +
           geom_line() +
-          geom_line(aes_string(y = "low"), linetype = "dotted") +
-          geom_line(aes_string(y = "high"), linetype = "dotted") +
+          geom_line(aes(y = low), linetype = "dotted") +
+          geom_line(aes(y = high), linetype = "dotted") +
           geom_line() +
           theme_bw() +
           scale_x_continuous(
@@ -159,11 +159,11 @@ plot.BchronCalibratedDates <-
           ylim(myYlim) +
           ggtitle(names(x)[1]) +
           geom_polygon(
-            data = df, aes_string(x = "Age", y = "Density2"),
+            data = df, aes(x = Age, y = Density2),
             fill = fillCol
           ) +
           geom_polygon(
-            data = df_14C, aes_string(x = "dens", y = "age"),
+            data = df_14C, aes(x = dens, y = age),
             fill = fillCol
           ) +
           labs(x = "Cal Age", y = "14C Age")
@@ -198,7 +198,7 @@ plot.BchronCalibratedDates <-
           Density = x[[i]]$densities
         )
         my_breaks <- pretty(x = df$Age, n = 10)
-        p[[i]] <- ggplot(df, aes_string(x = "Age", y = "Density")) +
+        p[[i]] <- ggplot(df, aes(x = Age, y = Density)) +
           geom_line() +
           scale_x_continuous(
             breaks = my_breaks,
@@ -277,7 +277,7 @@ plot.BchronCalibratedDates <-
       alldf <- cbind(caldf, c14df)
 
       # my_breaks = pretty(x = df$Age, n = 10)
-      p <- ggplot(calCurveUse, aes_string(x = "V1", y = "V2")) +
+      p <- ggplot(calCurveUse, aes(x = V1, y = V2)) +
         geom_line() +
         theme_bw() +
         scale_x_continuous(trans = ifelse(scaleReverse,
@@ -286,21 +286,21 @@ plot.BchronCalibratedDates <-
         )) +
         geom_errorbar(
           data = alldf,
-          aes_string(
-            x = "calMid",
-            y = "c14Mid",
-            ymin = "c14Low",
-            ymax = "c14High"
+          aes(
+            x = calMid,
+            y = c14Mid,
+            ymin = c14Low,
+            ymax = c14High
           ),
           width = 1, col = fillCol
         ) +
         geom_errorbarh(
           data = alldf,
           inherit.aes = FALSE,
-          aes_string(
-            y = "c14Mid",
-            xmin = "calLow",
-            xmax = "calHigh"
+          aes(
+            y = c14Mid,
+            xmin = calLow,
+            xmax = calHigh
           ),
           height = 1, col = fillCol
         ) +
@@ -310,7 +310,7 @@ plot.BchronCalibratedDates <-
       includeCal == FALSE) {
       # Finally for multiple dates with depths
       allAges <- purrr::map_dfr(x, `[`, c("ageGrid", "densities"), .id = c("Date")) %>%
-        dplyr::rename(Age = .data$ageGrid)
+        dplyr::rename(Age = ageGrid)
       # scale all the densities to have max value 1
       scaleMax <- function(x) {
         return(x / max(x))
@@ -325,7 +325,7 @@ plot.BchronCalibratedDates <-
       )
       allAges3 <- left_join(allAges2, positionLookUp, by = "Date") %>%
         mutate(
-          height = .data$densities * dateHeight,
+          height = densities * dateHeight,
           Age = ageScaleFun(.data$Age)
         )
 
@@ -337,11 +337,11 @@ plot.BchronCalibratedDates <-
       expand_y <- c(0.1, 0)
       my_breaks <- pretty(x = allAges3$Age, n = 10)
       p <- allAges3 %>%
-        ggplot(aes_string(
-          x = "Age",
-          y = "Position",
-          height = "height",
-          group = "Date"
+        ggplot(aes(
+          x = Age,
+          y = Position,
+          height = height,
+          group = Date
         )) +
         ggridges::geom_ridgeline(fill = fillCol, colour = fillCol) +
         scale_y_reverse(
@@ -358,10 +358,10 @@ plot.BchronCalibratedDates <-
       if (dateLabels) {
         p <- p + geom_text(
           data = allAges3 %>%
-            group_by(.data$Date) %>%
+            group_by(Date) %>%
             summarise_all("mean") %>%
             mutate(Position = Position - 0.5 * dateHeight),
-          aes_string(label = "Date"),
+          aes(label = "Date"),
           check_overlap = TRUE,
           vjust = 0.5,
           hjust = "right",

@@ -1,6 +1,6 @@
 set.seed(123)
 library(Bchron)
-co <- function(expr) capture.output(expr, file = "NUL")
+co <- function(expr) capture.output(expr, file = NULL)
 
 test_that("dateInfluence", {
   data(Glendalough)

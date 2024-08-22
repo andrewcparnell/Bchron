@@ -17,7 +17,7 @@
 
 \item{newPositions}{A vector of new positions at which to find ages}
 
-\item{newPositionThicknesses}{A vector of thicknesses for the above positions. Must be the same length as \code{newPositions}}
+\item{newPositionThicknesses}{A vector of thicknesses for the above positions. Must be the same length as \code{newPositions}. If \code{NULL} then assumed zero}
 
 \item{maxExtrap}{The maximum new of extrapolation attempts. It might be worth increasing this if you are extrapolating a long way from the other dated positions}
 

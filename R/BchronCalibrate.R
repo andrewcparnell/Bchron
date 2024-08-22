@@ -149,10 +149,12 @@ BchronCalibrate <- function(ages,
     dens <- dens / sum(dens)
 
     # Create list of output
+    if(length(currAgeGrid[dens > eps]) == 0) warning(cat("Age grid and densities for date", ids[i],"are of length 0. Try reducing the value of argument eps in BchronCalibrate by a factor of 10 \n"))
     if (is.null(positions)) {
       out[[i]] <- list(ages = ages[i], ageSds = ageSds[i], calCurves = calCurves[i], ageGrid = currAgeGrid[dens > eps], densities = dens[dens > eps])
     } else {
       out[[i]] <- list(ages = ages[i], ageSds = ageSds[i], positions = positions[i], calCurves = calCurves[i], ageGrid = currAgeGrid[dens > eps], densities = dens[dens > eps])
+      
     }
   }
 

@@ -99,29 +99,29 @@ plot.BchronologyRun <-
       .id = c("Date")
     ) %>%
       rename(Age = ageGrid) %>%
-      mutate(Age = ageScaleFun(.data$Age))
+      mutate(Age = ageScaleFun(Age))
     # scale all the densities to have max value 1
     scaleMax <- function(x) {
       return(x / max(x))
     }
     allAges2 <- allAges %>%
-      group_by(.data$Date) %>%
-      mutate(densities = scaleMax(.data$densities)) %>%
-      filter(.data$densities > 0.01) %>%
+      group_by(Date) %>%
+      mutate(densities = scaleMax(densities)) %>%
+      filter(densities > 0.01) %>%
       ungroup()
     positionLookUp <- tibble(
       Date = names(x$calAges),
       Position = map_dbl(x$calAges, "positions")
     )
     allAges3 <- left_join(allAges2, positionLookUp, by = "Date") %>%
-      mutate(height = .data$densities * dateHeight)
+      mutate(height = densities * dateHeight)
     my_breaks <- pretty(x = ageGrid, n = 10)
     p <- allAges3 %>%
-      ggplot(aes_string(
-        x = "Age",
-        y = "Position",
-        height = "height",
-        group = "Date"
+      ggplot(aes(
+        x = Age,
+        y = Position,
+        height = height,
+        group = Date
       )) +
       ggridges::geom_ridgeline(fill = dateCol, colour = dateCol) +
       scale_y_reverse(
@@ -137,10 +137,10 @@ plot.BchronologyRun <-
       ) +
       geom_ribbon(
         data = chronRangeSwap,
-        aes_string(
-          x = "Age",
-          ymin = "positionLow",
-          ymax = "positionHigh"
+        aes(
+          x = Age,
+          ymin = positionLow,
+          ymax = positionHigh
         ),
         colour = chronCol,
         fill = chronCol,
@@ -148,24 +148,24 @@ plot.BchronologyRun <-
       ) +
       geom_line(
         data = chronRangeSwap,
-        aes_string(x = "Age", y = "Position"),
+        aes(x = Age, y = Position),
         linetype = 1
       )
 
     if (dateLabels) {
       newData <- allAges3 %>%
-        group_by(.data$Date) %>%
+        group_by(Date) %>%
         summarise_all("mean") %>%
         mutate(
           Position = Position - 0.5 * dateHeight,
-          Date = stringr::str_pad(.data$Date,
-            width = max(nchar(.data$Date)),
+          Date = stringr::str_pad(Date,
+            width = max(nchar(Date)),
             side = "right"
           )
         )
       p <- p + geom_text(
         data = newData,
-        aes_string(label = "Date"),
+        aes(label = "Date"),
         check_overlap = TRUE,
         vjust = 0.5,
         hjust = "right",

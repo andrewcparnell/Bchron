@@ -1,7 +1,7 @@
 set.seed(123)
 library(Bchron)
 library(ggplot2)
-co <- function(expr) capture.output(expr, file = "NUL")
+co <- function(expr) capture.output(expr, file = NULL)
 
 data(TestChronData)
 data(TestRSLData)
