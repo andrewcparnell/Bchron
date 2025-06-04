@@ -43,7 +43,7 @@ BchronDensity(
 }
 \value{
 An object of class \code{BchronDensityRun} with the following elements:
-\itemize{
+\describe{
 \item{theta}{The posterior samples of the restricted ages}
 \item{p}{Posterior samples of the mixture proportions}
 \item{mu}{Values of the means of each Gaussian mixture}

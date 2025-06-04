@@ -31,8 +31,10 @@ BchronDensityFast(
 }
 \value{
 An object of class \code{BchronDensityRunFast} with the following components:
+\describe{
 \item{out}{The output from the run of \code{\link{densityMclust}} with the given number of mixture components}
 \item{calAges}{The calibrated ages from the \code{\link{BchronDensity}} function}
+}
 }
 \description{
 This function runs a non-parametric phase model on 14C and non-14C ages via Gaussian Mixture density estimation through the mclust package

@@ -17,7 +17,7 @@
 #' @details This model places a Gaussian mixture prior distribution on the calibrated ages and so estimates the density of the overall set of radiocarbon ages. It is designed to be a probabilistic version of the Oxcal SUM command which takes calibrated ages and sums the probability distributions with the aim of estimating activity through age as a proxy.
 #'
 #' @return An object of class \code{BchronDensityRun} with the following elements:
-#' \itemize{
+#' \describe{
 #' \item{theta}{The posterior samples of the restricted ages}
 #' \item{p}{Posterior samples of the mixture proportions}
 #' \item{mu}{Values of the means of each Gaussian mixture}

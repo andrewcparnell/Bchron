@@ -21,6 +21,7 @@
 #'
 #'
 #' @return A list of lists where each element corresponds to a single age. Each element contains:
+#' \describe{
 #'  \item{ages}{The original age supplied}
 #'  \item{ageSds}{The original age standard deviation supplied}
 #'  \item{positions}{The position of the age (usually the depth)}
@@ -29,6 +30,7 @@
 #'  \item{densities}{A vector of probability values indicating the probability value for each element in \code{ageGrid}}
 #'  \item{ageLab}{The label given to the age variable}
 #'  \item{positionLab}{The label given to the position variable}
+#' }
 #'
 #' @seealso \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}, \code{\link{createCalCurve}}
 #'

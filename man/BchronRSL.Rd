@@ -31,7 +31,7 @@ BchronRSL(
 }
 \value{
 An object of class BchronRSLRun with elements
-itemize{
+\describe{
 \item{BchronologyRun}{The output from the run of \code{\link{Bchronology}}}
 \item{samples}{The posterior samples of the regression parameters}
 \item{degree}{The degree of the polynomial regression}

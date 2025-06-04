@@ -12,7 +12,7 @@
 #' This function fits an errors-in-variables regression model to relative sea level (RSL) data. An errors-in-variables regression model allows for uncertainty in the explanatory variable, here the age of sea level data point. The algorithm is more fully defined in the reference below
 #'
 #' @return An object of class BchronRSLRun with elements
-#' itemize{
+#' \describe{
 #' \item{BchronologyRun}{The output from the run of \code{\link{Bchronology}}}
 #' \item{samples}{The posterior samples of the regression parameters}
 #' \item{degree}{The degree of the polynomial regression}

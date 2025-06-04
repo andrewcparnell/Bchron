@@ -13,9 +13,10 @@
 #' @details This is a faster approximate version of \code{\link{BchronDensity}} that uses the \code{\link{densityMclust}} function to compute the Gaussian mixtures for a set of calibrated ages. The method is an approximation as it does not fit a fully Bayesian model as \code{\link{BchronDensity}} does. It is designed to be a probabilistic version of the Oxcal SUM command which takes calibrated ages and sums the probability distributions with the aim of estimating activity through age as a proxy.
 #'
 #' @return An object of class \code{BchronDensityRunFast} with the following components:
+#' \describe{
 #' \item{out}{The output from the run of \code{\link{densityMclust}} with the given number of mixture components}
 #' \item{calAges}{The calibrated ages from the \code{\link{BchronDensity}} function}
-#'
+#' }
 #' @export
 #'
 #' @seealso \code{\link{Bchronology}}, \code{\link{BchronCalibrate}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}} for a slower exact version of this function
