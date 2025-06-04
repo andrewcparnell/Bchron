@@ -15,8 +15,9 @@
 #' @return An object of class \code{BchronDensityRunFast} with the following components:
 #' \describe{
 #' \item{out}{The output from the run of \code{\link{densityMclust}} with the given number of mixture components}
-#' \item{calAges}{The calibrated ages from the \code{\link{BchronDensity}} function}
+#' \item{calAges}{The calibrated ages from the \code{\link[mclust]{BchronDensity}} function}
 #' }
+#' 
 #' @export
 #'
 #' @seealso \code{\link{Bchronology}}, \code{\link{BchronCalibrate}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}} for a slower exact version of this function
