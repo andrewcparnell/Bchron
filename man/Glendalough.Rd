@@ -16,7 +16,7 @@ A data frame with 6 observations on the following 6 variables:
 }
 }
 \source{
-Haslett, J., Whiley, M., Bhattacharya, S., Mitchell, F. J. G., Allen, J. R. M., Huntley, B., \& Salter-Townshend, M. (2006). Bayesian palaeoclimate reconstruction. Journal of the Royal Statistical Society, Series A, 169, 395-438.
+Haslett, J., Whiley, M., Bhattacharya, S., Mitchell, F. J. G., Allen, J. R. M., Huntley, B., & Salter-Townshend, M. (2006). Bayesian palaeoclimate reconstruction. Journal of the Royal Statistical Society, Series A, 169, 395-438.
 }
 \usage{
 data(Glendalough)
