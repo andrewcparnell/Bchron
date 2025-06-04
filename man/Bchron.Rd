@@ -2,6 +2,7 @@
 % Please edit documentation in R/Bchron.R
 \docType{package}
 \name{Bchron}
+\alias{Bchron-package}
 \alias{Bchron}
 \title{Bchron: Radiocarbon dating, age-depth modelling, relative sea level rate estimation, and non-parametric phase modelling}
 \description{
@@ -12,3 +13,25 @@ This package enables quick calibration of radiocarbon dates under various calibr
 The most important functions are \code{\link{BchronCalibrate}} to calibrate radiocarbon (and non-radiocarbon) dates, \code{\link{Bchronology}} for the age-depth model of Haslett and Parnell (2008), \code{\link{BchronRSL}} to get rate estimates for relative sea level data, \code{\link{BchronDensity}} and \code{\link{BchronDensityFast}} for non-parametric phase modelling of age data. See the help files for these functions for examples. See the vignette for more complete documentation
 }
 
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://andrewcparnell.github.io/Bchron/}
+  \item Report bugs at \url{https://github.com/andrewcparnell/Bchron/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Andrew Parnell \email{Andrew.Parnell1@ucd.ie}
+
+Other contributors:
+\itemize{
+  \item Nathan McJames [contributor]
+  \item Bruna Wundervald [contributor]
+  \item Keefe Murphy [contributor]
+  \item Mateus Maia [contributor]
+  \item Amin Shoari Nejad [contributor]
+  \item Yong Chen Goh [contributor]
+}
+
+}
