@@ -1,11 +1,12 @@
 ## Test environments
 * local OS X install, R 4.5.0
 * GitHub Actions
-* rhub
 * win-builder (devel and release)
 
 ## R CMD check results
-There were no ERRORs or WARNINGs or NOTEs on my local machine, GitHub Actions, or win-builder.
+There were no ERRORs or WARNINGs or NOTEs on GitHub Actions
+
+On my local machine I got a note aobut being unable to verify the time but I don't think I can fix this. 
 
 Many thanks for your continuing important work with R,
 
