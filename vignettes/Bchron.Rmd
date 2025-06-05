@@ -726,10 +726,10 @@ And finally add into the plot:
 plot(GlenOut, dateLabels = FALSE, chronTransparency = 0.3) + 
   geom_ribbon(
         data = chronRangeSwap,
-        aes_string(
-          x = "Age",
-          ymin = "positionLow",
-          ymax = "positionHigh"
+        aes(
+          x = Age,
+          ymin = positionLow,
+          ymax = positionHigh
         ),
         colour = "red",
         fill = "red",
