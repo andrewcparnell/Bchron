@@ -102,16 +102,16 @@
     <div id="value">
     <h2>Value</h2>
     <p>An object of class <code>BchronDensityRunFast</code> with the following components:</p><dl><dt>out</dt>
-<dd><p>The output from the run of <code>densityMclust</code> with the given number of mixture components</p></dd>
+<dd><p>The output from the run of <code><a href="https://mclust-org.github.io/mclust/reference/densityMclust.html" class="external-link">densityMclust</a></code> with the given number of mixture components</p></dd>
 
 <dt>calAges</dt>
-<dd><p>The calibrated ages from the <code>BchronDensity</code> function</p></dd>
+<dd><p>The calibrated ages from the <code><a href="BchronDensity.html">BchronDensity</a></code> function</p></dd>
 
 
 </dl></div>
     <div id="details">
     <h2>Details</h2>
-    <p>This is a faster approximate version of <code><a href="BchronDensity.html">BchronDensity</a></code> that uses the <code>densityMclust</code> function to compute the Gaussian mixtures for a set of calibrated ages. The method is an approximation as it does not fit a fully Bayesian model as <code><a href="BchronDensity.html">BchronDensity</a></code> does. It is designed to be a probabilistic version of the Oxcal SUM command which takes calibrated ages and sums the probability distributions with the aim of estimating activity through age as a proxy.</p>
+    <p>This is a faster approximate version of <code><a href="BchronDensity.html">BchronDensity</a></code> that uses the <code><a href="https://mclust-org.github.io/mclust/reference/densityMclust.html" class="external-link">densityMclust</a></code> function to compute the Gaussian mixtures for a set of calibrated ages. The method is an approximation as it does not fit a fully Bayesian model as <code><a href="BchronDensity.html">BchronDensity</a></code> does. It is designed to be a probabilistic version of the Oxcal SUM command which takes calibrated ages and sums the probability distributions with the aim of estimating activity through age as a proxy.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
