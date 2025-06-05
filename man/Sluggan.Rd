@@ -25,6 +25,6 @@ data(Sluggan)
 Chronology data for Sluggan Moss data set
 }
 \details{
-This Sluggan Moss data can be downloaded from the European Pollen Database: \url{http://www.europeanpollendatabase.net}. For usage see \code{\link{Bchronology}} or \code{\link{BchronDensity}}
+This Sluggan Moss data can be downloaded from the European Pollen Database: \url{https://epdweblog.org/}. For usage see \code{\link{Bchronology}} or \code{\link{BchronDensity}}
 }
 \keyword{datasets}

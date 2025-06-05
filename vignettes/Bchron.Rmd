@@ -13,6 +13,7 @@ editor_options:
   chunk_output_type: console
 ---
 
+
 ```{r global_options, include=FALSE}
 knitr::opts_chunk$set(
   fig.width = 7, fig.height = 5, fig.align = "center",
@@ -24,7 +25,7 @@ knitr::opts_chunk$set(
 
 Bchron is an R package that enables quick calibration of radiocarbon dates under various calibration curves (including user generated ones); age-depth modelling as per the algorithm of Haslett and Parnell (2008); Relative sea level rate estimation incorporating time uncertainty in polynomial regression models (Parnell and Gehrels 2015); non-parametric phase modelling via Gaussian mixtures as a means to determine the activity of a site (and as an alternative to the Oxcal function SUM; currently unpublished), and reverse calibration of dates from calibrated into un-calibrated years. 
 
-You will find Bchron far easier to use if you know some basics on how to use R. I recommend the book by Norman Matloff [amazon.co.uk link](https://www.amazon.co.uk/dp/1593273843?ref=cm_sw_r_ffobk_cp_ud_dp_1W4FEH2C8ZGQ79ZEKEW4&ref_=cm_sw_r_ffobk_cp_ud_dp_1W4FEH2C8ZGQ79ZEKEW4&social_share=cm_sw_r_ffobk_cp_ud_dp_1W4FEH2C8ZGQ79ZEKEW4&bestFormat=true&previewDoh=1&previewDohDeal=1), or the online courses by [Pluralsight](https://www.pluralsight.com)
+You will find Bchron far easier to use if you know some basics on how to use R. I recommend the book by Norman Matloff [amazon.co.uk link](https://nostarch.com/artofr.htm), or the online courses by [Pluralsight](https://www.pluralsight.com)
 
 If you find bugs or want to suggest new features please visit the Bchron [GitHub issues page](https://github.com/andrewcparnell/Bchron/issues). 
 
