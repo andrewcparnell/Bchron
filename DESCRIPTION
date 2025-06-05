@@ -7,7 +7,7 @@ Date: 2021-06-09
 URL: https://andrewcparnell.github.io/Bchron/
 BugReports: https://github.com/andrewcparnell/Bchron/issues
 Depends:
-    R (>= 4.5.0),
+    R (>= 4.1.0),
 Imports:
     utils,
     MASS,
