@@ -21,7 +21,8 @@ Imports:
     dplyr,
     scales,
     stringr,
-    checkmate
+    checkmate,
+    methods
 Encoding: UTF-8
 Authors@R: c(
     person("Andrew", "Parnell", email = "Andrew.Parnell1@ucd.ie", role = c("cre", "aut")),
