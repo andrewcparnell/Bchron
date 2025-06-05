@@ -41,7 +41,7 @@ Description: Enables quick calibration of radiocarbon dates under various
   Gaussian mixtures as a means to determine the activity of a site 
   (and as an alternative to the Oxcal function SUM; currently 
   unpublished), and reverse calibration of dates from calibrated into 
-  un-calibrated years (also unpublished).
+  14C years (also unpublished).
 License: GPL (>= 2)
 Suggests:
     knitr,

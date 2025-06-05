@@ -105,7 +105,7 @@
 #' \item{\code{calCurves}}{Calibration curve for each age}
 #' }
 #'
-#' @details This Sluggan Moss data can be downloaded from the European Pollen Database: \url{http://www.europeanpollendatabase.net}. For usage see \code{\link{Bchronology}} or \code{\link{BchronDensity}}
+#' @details This Sluggan Moss data can be downloaded from the European Pollen Database: \url{https://epdweblog.org/}. For usage see \code{\link{Bchronology}} or \code{\link{BchronDensity}}
 #' @usage data(Sluggan)
 #'
 #' @source Smith, A. G., & Goddard, I. C. (1991). A 12,500 year record of vegetational history at Sluggan Bog, Co. Antrim, N. Ireland (incorporating a pollen zone scheme for the non-specialist). New Phytologist, 118, 167-187.

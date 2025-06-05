@@ -4,7 +4,7 @@
 * win-builder (devel and release)
 
 ## R CMD check results
-There were no ERRORs or WARNINGs or NOTEs on GitHub Actions
+There were no ERRORs or WARNINGs or NOTEs on GitHub Actions or win-builder
 
 On my local machine I got a note aobut being unable to verify the time but I don't think I can fix this. 
 
