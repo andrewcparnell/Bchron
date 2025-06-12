@@ -57,6 +57,9 @@
 
 \item{...}{Other arguments to plot (currently ignored)}
 }
+\value{
+A ggplot2 object of the chronology run
+}
 \description{
 Plots output from a run of \code{\link{Bchronology}}
 }

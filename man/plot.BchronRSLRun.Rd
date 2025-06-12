@@ -26,6 +26,9 @@
 
 \item{...}{Other arguments to plot (currently ignored)}
 }
+\value{
+A ggplot2 object of the RSL run
+}
 \description{
 Plot output from the \code{\link{BchronRSL}} function
 }

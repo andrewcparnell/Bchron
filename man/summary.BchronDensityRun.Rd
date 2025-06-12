@@ -15,6 +15,9 @@
 
 \item{digits}{Number of digits to report values}
 }
+\value{
+A list of highest density regions for each phase in the object
+}
 \description{
 Summarise a \code{\link{BchronDensity}} object
 }

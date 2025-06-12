@@ -15,6 +15,9 @@
 
 \item{digits}{Significant digits to display (not currently supported)}
 }
+\value{
+A list of highest density regions for each calibrated date in the object
+}
 \description{
 Produces summary output from a \code{\link{BchronCalibrate}} run, including the highest density regions for the calibrated ages for given probability levels
 }

@@ -7,6 +7,8 @@
 #' @param age_grid An optional age grid for computing RSL, rate, or acceleration estimates. If not provided uses the age range of the Bchronology run
 #' @param ... Other arguments to functions (not currently implemented)
 #'
+#' @return A summary of the BchronRSL run, including posterior medians and credible intervals for the regression coefficients, RSL estimates, rate estimates, and acceleration estimates.
+#'
 #' @seealso \code{\link{BchronCalibrate}}, \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
 #'
 #' @export

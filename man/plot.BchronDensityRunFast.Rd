@@ -17,6 +17,9 @@
 
 \item{...}{Other graphical parameters, see \code{\link{par}}}
 }
+\value{
+A plot object of the density run
+}
 \description{
 Plots output from \code{\link{BchronDensityFast}}
 }

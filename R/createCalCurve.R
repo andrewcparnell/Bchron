@@ -10,6 +10,8 @@
 #' @param createFile whether to write out the new file or not. Only turned off for testing purposes
 #'
 #' @details All calibration curves are stored by Bchron in the standard R gzipped text format. You can find the location of the calibration curves by typing \code{system.file('data',package='Bchron')}. Any created calibration curve will be converted to this format. However R packages are not allowed to write to this directory so it is up to the user to put the resulting calibration curve file in the appropriate directory. It can then be used as in the examples below. However note that re-installing Bchron will likely over-write previously created calibration curves so you should make sure to store the code used to create it. As a short-cut to copying it by hand you can instead use the \code{file.copy} command in the example below.
+#' 
+#' @return No return value, creates a file in your working directory
 #'
 #' @seealso
 #' \code{\link{BchronCalibrate}}
@@ -59,7 +61,7 @@ createCalCurve <- function(name,
   # This function creates a calibration curve and puts it in the appropriate place for future use with Bchron
 
   # First identify the place where the file needs to go
-  fileLoc <- pathToCalCurves
+  fileLoc <- tempdir()
 
   # Now interpolate so that everything is on a regular grid in calendar years
   calOrder <- order(calAges, decreasing = TRUE)
@@ -70,5 +72,5 @@ createCalCurve <- function(name,
   if (createFile) save(out, file = fl)
 
   # And we're done
-  cat("Completed!\n")
+  message(paste("Calibration curve written to ", fl, "\n"))
 }

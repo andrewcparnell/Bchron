@@ -11,6 +11,8 @@
 #'
 #' @seealso \code{\link{BchronCalibrate}}, \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
 #'
+#' @return A ggplot2 object of the RSL run
+#'
 #' @import ggplot2
 #' @importFrom ggforce geom_ellipse
 #' @importFrom stats predict qnorm sd

@@ -7,6 +7,8 @@
 #' @param ... Other arguments (not currently supported)
 #' @param digits Number of digits to report values
 #'
+#' @return A list of highest density regions for each phase in the object
+#'
 #' @seealso \code{\link{BchronDensity}}
 #' @export
 summary.BchronDensityRun <-

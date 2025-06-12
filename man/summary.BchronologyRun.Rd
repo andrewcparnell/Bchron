@@ -29,6 +29,9 @@
 
 \item{digits}{Number of digits to report values}
 }
+\value{
+A data frame summarising the Bchronology object depending on the type of summary requested. For quantiles, a data frame with the quantiles for each position. For outliers, a data frame with outlier probabilities. For convergence, a data frame with p-values for convergence diagnostics. For sedimentation and accumulation rates, a data frame with the rates at each position/age. For maximum variance, a vector of positions with maximum age variance.
+}
 \description{
 Summarise a \code{\link{Bchronology}} object
 }

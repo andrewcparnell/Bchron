@@ -153,7 +153,7 @@ dateInfluence.BchronologyRun <- function(bchrRun,
 
     # Report
     dateName <- bchrRun$inputVals$id[whichDate]
-    cat("\nInfluence of date:", as.character(dateName), "is", influence, "using measure", measure, "\n")
+    message("\nInfluence of date:", as.character(dateName), "is", influence, "using measure", measure, "\n")
   } else if (whichDate %in% names(bchrRun$calAges)) {
     # If whichDate is one of the named dates
     dateNames <- bchrRun$inputVals$ids
@@ -224,7 +224,7 @@ dateInfluence.BchronologyRun <- function(bchrRun,
 
     # Report
     dateName <- bchrRun$inputVals$id[whichDate]
-    cat("\nInfluence of date:", as.character(dateName), "is", influence, "using measure", measure, "\n")
+    message("\nInfluence of date:", as.character(dateName), "is", influence, "using measure", measure, "\n")
   } else if (whichDate == "all") {
     # If whichDate is all of the dates run full cross validation
 
@@ -235,7 +235,7 @@ dateInfluence.BchronologyRun <- function(bchrRun,
 
     # Start loop through
     for (i in 1:nDates) {
-      cat("\nLeaving out date", as.character(dateNames[i]), "\n\n")
+      message("\nLeaving out date", as.character(dateNames[i]), "\n\n")
       whichDate <- i
 
       # Find the closest predictPosition to this date
@@ -301,7 +301,7 @@ dateInfluence.BchronologyRun <- function(bchrRun,
       )
     } # End loop through dates
 
-    cat(paste0("\nInfluence of dates using measure ", measure, ":\n"))
+    message(paste0("\nInfluence of dates using measure ", measure, ":\n"))
     print(data.frame(Name = as.character(dateNames), Influence = influence))
   } else if (whichDate == "internal") {
     # If whichDate is all of the internal dates miss out all but first or last
@@ -313,7 +313,7 @@ dateInfluence.BchronologyRun <- function(bchrRun,
 
     # Start loop through
     for (i in 2:(nDates - 1)) {
-      cat("\nLeaving out date", as.character(dateNames[i]), "\n\n")
+      message("\nLeaving out date", as.character(dateNames[i]), "\n\n")
       whichDate <- i
 
       # Find the closest predictPosition to this date
@@ -379,7 +379,7 @@ dateInfluence.BchronologyRun <- function(bchrRun,
       )
     } # End loop through dates
 
-    cat(paste0("\nInfluence of dates using measure ", measure, ":\n"))
+    message(paste0("\nInfluence of dates using measure ", measure, ":\n"))
     print(data.frame(Name = as.character(dateNames), Influence = influence))
   } else {
     stop("whichDate must be either 'all', or an integer, or the name of the date")

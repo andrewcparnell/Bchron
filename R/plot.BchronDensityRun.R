@@ -7,7 +7,7 @@
 #' @param phaseProb The probability value for the phase identification
 #' @param dateTransparency The transparency value for the dates (default 0.4)
 #' @param ... Other graphical commands. See \code{\link{par}}
-#'
+#' @return A plot object of the density run
 #' @seealso See  \code{\link{BchronDensity}} for examples, also \code{\link{Bchronology}}, \code{\link{BchronRSL}}, and \code{\link{BchronDensityFast}} for a faster approximate version of this function
 #'
 #' @export

@@ -10,6 +10,8 @@
 #'
 #' @details Creates a basic plot of output for a run of \code{\link{BchronDensityFast}}
 #'
+#' @return A plot object of the density run
+#'
 #' @seealso Examples in \code{\link{BchronDensityFast}}, and see \code{\link{BchronDensity}}, for a slower, more accurate version of this function
 #'
 #' @export

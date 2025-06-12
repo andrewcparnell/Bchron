@@ -20,6 +20,9 @@
 
 \item{...}{Other arguments to functions (not currently implemented)}
 }
+\value{
+A summary of the BchronRSL run, including posterior medians and credible intervals for the regression coefficients, RSL estimates, rate estimates, and acceleration estimates.
+}
 \description{
 Summarise a \code{\link{BchronRSL}} run
 }

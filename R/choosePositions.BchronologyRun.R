@@ -98,9 +98,9 @@ choosePositions.BchronologyRun <- function(bchrRun,
   }
   if (N == 1 & count == 1) {
     if (isTRUE(all.equal(positions, bchrRun$predictPositions))) {
-      cat("Using predict positions from Bchron run provided.\n")
+      message("Using predict positions from Bchron run provided.\n")
     } else {
-      cat("Using new positions for object.\n")
+      message("Using new positions for object.\n")
     }
   }
 
@@ -131,11 +131,11 @@ choosePositions.BchronologyRun <- function(bchrRun,
     "osition with largest uncertainty at %s%% level is %s",
     signif(level * 100, 3), signif(returnPos, 3)
   )
-  if (N > 1 | count > 1) cat("\nRound", count, "\n")
+  if (N > 1 | count > 1) message("\nRound", count, "\n")
   if (count > 1) {
-    cat("Next p", store, "\n", sep = "")
+    message("Next p", store, "\n", sep = "")
   } else {
-    cat("P", store, "\n", sep = "")
+    message("P", store, "\n", sep = "")
   }
 
   if (N > 1) {
@@ -185,12 +185,12 @@ choosePositions.BchronologyRun <- function(bchrRun,
     outlierProbsNew[!is.na(blankVec)] <- oldInput$outlierProbs
     outlierProbsNew[posPlace] <- newOutlierProb
 
-    cat("\n")
+    message("\n")
     store <- sprintf(
       "Calibrating with new age %s with sd %s at position %s",
       newDate, newSds, signif(returnPos, 3)
     )
-    cat(store, "\n")
+    message(store, "\n")
 
     diffPosition <- diff(positionsNew)
     if (any(diffPosition == 0)) browser()
@@ -210,7 +210,7 @@ choosePositions.BchronologyRun <- function(bchrRun,
       thin = bchrRun$inputVals$thin,
       artificialThickness = bchrRun$inputVals$artificialThickness
     )
-    cat("\n")
+    message("\n")
 
     if (plot) plot(newOut, main = "Bchronology plot with extra psuedo-dates")
 

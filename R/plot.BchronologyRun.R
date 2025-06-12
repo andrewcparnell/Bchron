@@ -20,6 +20,8 @@
 #'
 #' @details Creates a simple plot of the chronology output. The height of the date densities in the plots can be manipulated via the \code{dateHeight} argument which is represented in the same units as the positions/depths provided. More detailed plots can be created by manipulating the Bchronology object as required.
 #'
+#' @return A ggplot2 object of the chronology run
+#'
 #' @seealso For examples see \code{\link{Bchronology}}. Also \code{\link{BchronCalibrate}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
 #'
 #' @import ggplot2

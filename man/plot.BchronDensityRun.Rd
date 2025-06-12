@@ -29,6 +29,9 @@
 
 \item{...}{Other graphical commands. See \code{\link{par}}}
 }
+\value{
+A plot object of the density run
+}
 \description{
 Plot output from \code{BchronDensity}
 }

@@ -23,6 +23,7 @@
 #'
 #' @seealso \code{\link{BchronCalibrate}}, \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
 #'
+#' @return A ggplot object containing the plot of the calibrated dates
 #' @import ggplot2
 #' @import dplyr
 #' @importFrom purrr map_dfr map_dbl

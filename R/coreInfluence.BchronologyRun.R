@@ -85,7 +85,7 @@ coreInfluence.BchronologyRun <- function(bchrRun1,
   usePositions <- intersect(positions1, positions2)
   if (length(usePositions) == 0) stop("No overlapping positions between Bchronology runs provided.")
   if (!setequal(usePositions, positions1) | !setequal(usePositions, positions2)) {
-    warning(cat("Positions of two Bchron objects not identical. Using:\n", usePositions))
+    warning(paste("Positions of two Bchron objects not identical. Using:\n", usePositions))
   }
 
   # Check for non-uniform positions
@@ -132,8 +132,8 @@ coreInfluence.BchronologyRun <- function(bchrRun1,
   if ("max" %in% type) {
     # Report the position of the maximum uncertainty (type = max) ...
     max_change <- which.max(diffs$all_diff)
-    cat(paste0("Position of maximum age uncertainty change is: ", diffs$positions[max_change], "\n"))
-    cat(paste0("with age uncertainty reduction of ", diffs$all_diff[max_change], " years \n\n"))
+    message(paste0("Position of maximum age uncertainty change is: ", diffs$positions[max_change], "\n"))
+    message(paste0("with age uncertainty reduction of ", diffs$all_diff[max_change], " years \n\n"))
 
     # ...and a window of uncertainty around that (in depth)
     positionsAll <- which(diffs$all_diff > ageTolerance)
@@ -141,8 +141,8 @@ coreInfluence.BchronologyRun <- function(bchrRun1,
       positions = positions[positionsAll],
       ages = all_diff[positionsAll]
     ))
-    cat(paste0("Positions with age uncertainty change above ", ageTolerance, " years are:\n"))
-    cat(diffs$positions[positionsAll])
+    message(paste0("Positions with age uncertainty change above ", ageTolerance, " years are:\n"))
+    message(diffs$positions[positionsAll])
     invisible(df2)
 
     if ("plot" %in% type) {

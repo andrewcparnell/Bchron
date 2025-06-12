@@ -54,6 +54,9 @@
 
 \item{...}{Other arguments to plot (currently ignored)}
 }
+\value{
+A ggplot object containing the plot of the calibrated dates
+}
 \description{
 Plots calibrated radiocarbon dates from a \code{\link{BchronCalibrate}} run. Has options to plot on a position (usually depth) scale if supplied with the original run
 }

@@ -127,7 +127,7 @@ unCalibrate <- function(calAges,
       type = "ages"
     )
     init_sd <- sd(calAges)
-    cat("\n")
+    message("\n")
 
     # Test function
     # opt_fun(round(c(init_mean, init_sd)), calAges)

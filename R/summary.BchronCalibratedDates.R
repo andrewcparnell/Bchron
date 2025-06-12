@@ -7,6 +7,8 @@
 #' @param ... Further arguments (not currently supported)
 #' @param digits Significant digits to display (not currently supported)
 #'
+#' @return A list of highest density regions for each calibrated date in the object
+#'
 #' @seealso \code{\link{BchronCalibrate}}, \code{\link{Bchronology}}, \code{\link{BchronRSL}}, \code{\link{BchronDensity}}, \code{\link{BchronDensityFast}}
 #'
 #' @export

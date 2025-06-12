@@ -26,6 +26,9 @@ createCalCurve(
 
 \item{createFile}{whether to write out the new file or not. Only turned off for testing purposes}
 }
+\value{
+No return value, creates a file in your working directory
+}
 \description{
 A function for creating a new calibration curve not already available in Bchron
 }
