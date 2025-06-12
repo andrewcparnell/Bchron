@@ -1,8 +1,8 @@
 Package: Bchron
 Type: Package
 Title: Age-Depth Radiocarbon Modelling
-Version: 4.7.7
-Date: 2025-06-05
+Version: 4.7.7.9000
+Date: 2025-06-12
 URL: https://andrewcparnell.github.io/Bchron/
 BugReports: https://github.com/andrewcparnell/Bchron/issues
 Depends:
