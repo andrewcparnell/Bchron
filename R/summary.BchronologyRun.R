@@ -5,6 +5,7 @@
 #' @param object Output from a run of \code{\link{Bchronology}}
 #' @param type Type of output required. The default (quantiles) gives the quantiles of the ages for each position in \code{predictPositions} from \code{\link{Bchronology}}. The other options provide outlier probabilities, convergence diagnostics, accumulation rates, sedimentation rate, and positions of maximum age variance
 #' @param probs Probabilities (between 0 and 1) at which to summarise the predicted chronologies
+#' @param acc_probs The age range over which to calculate accumulation rates (the default is between the 5% and 95% quantiles of all predicted ages)
 #' @param useExisting Whether to use the predicted chronologies/positions to calculate the sedimentation rate (if TRUE - default) or to re-create them based on a unit-scaled position grid (if FALSE). The latter will be a little bit slower but will provide better sedimentation rate estimates if the original positions are not on a unit scale (e.g. each cm)
 #' @param numPos The number of positions at which to provide the maximum variance
 #' @param ... Other arguments (not currently supported)
@@ -26,6 +27,7 @@ summary.BchronologyRun <-
              "max_var"
            ),
            probs = c(0.025, 0.25, 0.5, 0.75, 0.975),
+           acc_probs = c(0.05, 0.95),
            useExisting = TRUE,
            numPos = 3,
            ...,
@@ -80,7 +82,7 @@ summary.BchronologyRun <-
       acc_rate = {
         cat("\nAccumulation rate (position units per time unit): \n")
         chrons <- object$thetaPredict
-        age_grid <- seq(stats::quantile(chrons, 0.05), stats::quantile(chrons, 0.95), by = 1)
+        age_grid <- seq(stats::quantile(chrons, acc_probs[1]), stats::quantile(chrons, acc_probs[2]), by = 1)
         my_fun <- function(x) stats::approx(x, y = object$predictPositions, xout = age_grid, rule = 2)$y
         position_interp <- t(apply(chrons, 1, my_fun))
         acc_rate <- apply(position_interp, 1, "diff")

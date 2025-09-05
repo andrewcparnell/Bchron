@@ -1,3 +1,7 @@
+# Bchron 4.7.8
+
+- Changed the arguments to summary.Bchronologyrun to allow for more flexibility in the accumulation rate estimation
+
 # Bchron 4.7.7
 
   - Added an example for reservoir correction in the vignette
