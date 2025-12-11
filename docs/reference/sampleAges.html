@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Bchron</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.7.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.7.7.9000</span>
       </span>
     </div>
 
@@ -95,10 +95,10 @@
 <span class="r-in"><span><span class="va">age_samples</span> <span class="op">&lt;-</span> <span class="fu">sampleAges</span><span class="op">(</span><span class="va">ages</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Create a credible interval and the median for each date</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">age_samples</span>, <span class="fl">2</span>, <span class="va">quantile</span>, probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="fl">0.5</span>, <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     Date1 Date2 Date3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5%   3586 13103  8037</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 50%  3705 13426  8227</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 95%  3824 13841  8383</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Date1    Date2 Date3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5%  3586.00 13102.95  8037</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50% 3705.00 13426.00  8227</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95% 3823.05 13840.00  8383</span>
 </code></pre></div>
     </div>
   </div>
@@ -113,7 +113,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>

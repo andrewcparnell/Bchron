@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Bchron</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.7.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.7.7.9000</span>
       </span>
     </div>
 
@@ -94,6 +94,10 @@
 <dd><p>whether to write out the new file or not. Only turned off for testing purposes</p></dd>
 
 </dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    <p>No return value, creates a file in your working directory</p>
+    </div>
     <div id="details">
     <h2>Details</h2>
     <p>All calibration curves are stored by Bchron in the standard R gzipped text format. You can find the location of the calibration curves by typing <code>system.file('data',package='Bchron')</code>. Any created calibration curve will be converted to this format. However R packages are not allowed to write to this directory so it is up to the user to put the resulting calibration curve file in the appropriate directory. It can then be used as in the examples below. However note that re-installing Bchron will likely over-write previously created calibration curves so you should make sure to store the code used to create it. As a short-cut to copying it by hand you can instead use the <code>file.copy</code> command in the example below.</p>
@@ -152,7 +156,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>

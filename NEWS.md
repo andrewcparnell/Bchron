@@ -1,6 +1,7 @@
 # Bchron 4.7.8
 
 - Changed the arguments to summary.Bchronologyrun to allow for more flexibility in the accumulation rate estimation
+- added a test (test_order.R) for when the order of the data set is changed
 
 # Bchron 4.7.7
 

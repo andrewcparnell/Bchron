@@ -295,9 +295,10 @@ plot.BchronCalibratedDates <-
           ),
           width = 1, col = fillCol
         ) +
-        geom_errorbarh(
+        geom_errorbar(
           data = alldf,
           inherit.aes = FALSE,
+          orientation = "y",
           aes(
             y = c14Mid,
             xmin = calLow,

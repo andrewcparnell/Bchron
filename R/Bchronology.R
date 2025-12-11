@@ -166,6 +166,21 @@ Bchronology <- function(ages,
     type = "Bchronology"
   )
 
+  # Check order of positions ------------------------------------------------
+  
+  # Check positions are in order
+  o <- order(positions)
+  if (any(positions[o] != positions)) {
+    warning("positions not given in order - re-ordering")
+    ages <- ages[o]
+    ageSds <- ageSds[o]
+    positions <- positions[o]
+    positionThicknesses <- positionThicknesses[o]
+    calCurves <- calCurves[o]
+    ids <- ids[o]
+    outlierProbs <- outlierProbs[o]
+  }
+  
   # Re-normalise positions --------------------------------------------------
 
   originalPositions <- positions
@@ -201,22 +216,6 @@ Bchronology <- function(ages,
     }
     return(currPositions)
   }
-
-  # Check order of positions ------------------------------------------------
-
-  # Check positions are in order
-  o <- order(positions)
-  if (any(positions[o] != positions)) {
-    warning("positions not given in order - re-ordering")
-    ages <- ages[o]
-    ageSds <- ageSds[o]
-    positions <- positions[o]
-    positionThicknesses <- positionThicknesses[o]
-    calCurves <- calCurves[o]
-    ids <- ids[o]
-    outlierProbs <- outlierProbs[o]
-  }
-
 
   # Calibrate dates ---------------------------------------------------------
 

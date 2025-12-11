@@ -22,7 +22,7 @@
 
 \item{probs}{Probabilities (between 0 and 1) at which to summarise the predicted chronologies}
 
-\item{acc_probs}{The age range over which to calculate accumulation rates (the default is between the 5% and 95% quantiles of all predicted ages)}
+\item{acc_probs}{The age range over which to calculate accumulation rates (the default is between the 5\% and 95\% quantiles of all predicted ages)}
 
 \item{useExisting}{Whether to use the predicted chronologies/positions to calculate the sedimentation rate (if TRUE - default) or to re-create them based on a unit-scaled position grid (if FALSE). The latter will be a little bit slower but will provide better sedimentation rate estimates if the original positions are not on a unit scale (e.g. each cm)}
 

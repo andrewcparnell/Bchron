@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Bchron</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.7.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.7.7.9000</span>
       </span>
     </div>
 
@@ -61,6 +61,7 @@
 <span>  <span class="va">object</span>,</span>
 <span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"quantiles"</span>, <span class="st">"outliers"</span>, <span class="st">"convergence"</span>, <span class="st">"sed_rate"</span>, <span class="st">"acc_rate"</span>, <span class="st">"max_var"</span><span class="op">)</span>,</span>
 <span>  probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.025</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.975</span><span class="op">)</span>,</span>
+<span>  acc_probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="fl">0.95</span><span class="op">)</span>,</span>
 <span>  useExisting <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  numPos <span class="op">=</span> <span class="fl">3</span>,</span>
 <span>  <span class="va">...</span>,</span>
@@ -84,6 +85,10 @@
 <dd><p>Probabilities (between 0 and 1) at which to summarise the predicted chronologies</p></dd>
 
 
+<dt id="arg-acc-probs">acc_probs<a class="anchor" aria-label="anchor" href="#arg-acc-probs"></a></dt>
+<dd><p>The age range over which to calculate accumulation rates (the default is between the 5% and 95% quantiles of all predicted ages)</p></dd>
+
+
 <dt id="arg-useexisting">useExisting<a class="anchor" aria-label="anchor" href="#arg-useexisting"></a></dt>
 <dd><p>Whether to use the predicted chronologies/positions to calculate the sedimentation rate (if TRUE - default) or to re-create them based on a unit-scaled position grid (if FALSE). The latter will be a little bit slower but will provide better sedimentation rate estimates if the original positions are not on a unit scale (e.g. each cm)</p></dd>
 
@@ -100,6 +105,10 @@
 <dd><p>Number of digits to report values</p></dd>
 
 </dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    <p>A data frame summarising the Bchronology object depending on the type of summary requested. For quantiles, a data frame with the quantiles for each position. For outliers, a data frame with outlier probabilities. For convergence, a data frame with p-values for convergence diagnostics. For sedimentation and accumulation rates, a data frame with the rates at each position/age. For maximum variance, a vector of positions with maximum age variance.</p>
+    </div>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p><code><a href="BchronCalibrate.html">BchronCalibrate</a></code>, <code><a href="Bchronology.html">Bchronology</a></code> <code><a href="BchronRSL.html">BchronRSL</a></code>, <code><a href="BchronDensity.html">BchronDensity</a></code>, <code><a href="BchronDensityFast.html">BchronDensityFast</a></code></p></div>
@@ -117,7 +126,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>
