@@ -21,6 +21,8 @@ knitr::opts_chunk$set(
 )
 ```
 
+# Bchron User Guide
+
 ## Introduction
 
 Bchron is an R package that enables quick calibration of radiocarbon dates under various calibration curves (including user generated ones); age-depth modelling as per the algorithm of Haslett and Parnell (2008); Relative sea level rate estimation incorporating time uncertainty in polynomial regression models (Parnell and Gehrels 2015); non-parametric phase modelling via Gaussian mixtures as a means to determine the activity of a site (and as an alternative to the Oxcal function SUM; currently unpublished), and reverse calibration of dates from calibrated into un-calibrated years. 
@@ -497,11 +499,11 @@ plot(age_09) +
 
 ## Calibrating marine and other offset age ranges
 
-Periodically people want to calibrate dates which have an age offset and an offset error. This is very simple in Bchron and requires no additional Bchron commands. So for example, if you had a date of 3000 14C years with 1-sigma error of 50 14C years, but you want to incorporate a reservoir correction with 80 14C years and a 1-sigma error of 30 14C years, then you can just calibrate 3080 years with a radiocarbon error of sqrt(50^2 + 30^2) = 58.3 years. In Bchron this becomes:
+Periodically people want to calibrate dates which have an age offset and an offset error. This is very simple in Bchron and requires no additional Bchron commands. So for example, if you had a date of 3000 14C years with 1-sigma error of 50 14C years, but you want to incorporate a reservoir correction with 80 14C years and a 1-sigma error of 30 14C years, then you can just calibrate 2920 years with a radiocarbon error of sqrt(50^2 + 30^2) = 58.3 years. In Bchron this becomes:
 
 ```{r, message=FALSE}
 age_rc <- BchronCalibrate(
-  age = 3000 + 80,
+  age = 3000 - 80,
   ageSds = sqrt(50^2 + 30^2),
   calCurves = "marine20",
   ids = "Res_corr"

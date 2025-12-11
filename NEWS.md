@@ -2,6 +2,7 @@
 
 - Changed the arguments to summary.Bchronologyrun to allow for more flexibility in the accumulation rate estimation
 - added a test (test_order.R) for when the order of the data set is changed
+- Fixed a bug in the way Bchronology was returning the radiocarbon dates when they weren't given in depth order
 
 # Bchron 4.7.7
 
