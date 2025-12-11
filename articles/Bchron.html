@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Bchron</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.7.7.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">4.7.8</span>
       </span>
     </div>
 
@@ -82,6 +82,9 @@ Parnell</h4>
 
     
     
+<div class="section level2">
+<h2 id="bchron-user-guide">Bchron User Guide<a class="anchor" aria-label="anchor" href="#bchron-user-guide"></a>
+</h2>
 <div class="section level3">
 <h3 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h3>
@@ -659,20 +662,20 @@ and an offset error. This is very simple in Bchron and requires no
 additional Bchron commands. So for example, if you had a date of 3000
 14C years with 1-sigma error of 50 14C years, but you want to
 incorporate a reservoir correction with 80 14C years and a 1-sigma error
-of 30 14C years, then you can just calibrate 3080 years with a
+of 30 14C years, then you can just calibrate 2920 years with a
 radiocarbon error of sqrt(50^2 + 30^2) = 58.3 years. In Bchron this
 becomes:</p>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">age_rc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/BchronCalibrate.html">BchronCalibrate</a></span><span class="op">(</span></span>
-<span>  age <span class="op">=</span> <span class="fl">3000</span> <span class="op">+</span> <span class="fl">80</span>,</span>
+<span>  age <span class="op">=</span> <span class="fl">3000</span> <span class="op">-</span> <span class="fl">80</span>,</span>
 <span>  ageSds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">50</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span> <span class="fl">30</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>,</span>
 <span>  calCurves <span class="op">=</span> <span class="st">"marine20"</span>,</span>
 <span>  ids <span class="op">=</span> <span class="st">"Res_corr"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">age_rc</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 95% Highest density regions for Res_corr</span></span>
-<span><span class="co">## $`94.5%`</span></span>
-<span><span class="co">## [1] 2487 2884</span></span></code></pre>
+<span><span class="co">## $`94.6%`</span></span>
+<span><span class="co">## [1] 2332 2705</span></span></code></pre>
 <p>These offset adjustments can be used in a <code>Bchronology</code>
 type run by storing the offsets and their standard deviations in a
 vector. So a call to <code>Bchronology</code> might become:</p>
@@ -765,6 +768,7 @@ set is created with Bchron via <code>sampleAges</code>, e.g.:</p>
 <span><span class="co">## [1] 27</span></span></code></pre>
 <p>This will provide a single best estimate of the mean and standard
 deviation of the uncalibrated (here 14C) date.</p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="miscellaneous-other-queries">Miscellaneous other queries<a class="anchor" aria-label="anchor" href="#miscellaneous-other-queries"></a>
