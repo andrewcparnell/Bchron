@@ -73,7 +73,7 @@ Bchron</h1>
                         <h4 data-toc-skip class="author">Andrew
 Parnell</h4>
             
-            <h4 data-toc-skip class="date">2025-09-05</h4>
+            <h4 data-toc-skip class="date">2025-12-11</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/andrewcparnell/Bchron/blob/master/vignettes/Bchron.Rmd" class="external-link"><code>vignettes/Bchron.Rmd</code></a></small>
       <div class="hidden name"><code>Bchron.Rmd</code></div>
@@ -147,7 +147,7 @@ with, e.g.</p>
 <span><span class="co">## [1] 13923 14012</span></span></code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ages1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Bchron_files/figure-html/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="Bchron_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" width="576" style="display: block; margin: auto;"></p>
 <p>This will calibrate the radiocarbon age of 11,553 14C years BP with
 standard error 230 14C years on the intcal20 calibration curve. The
 <code>id</code> given is optional and only used for summarising and
@@ -165,7 +165,7 @@ dates as vectors:</p>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">ages2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ages2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Bchron_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;"><img src="Bchron_files/figure-html/unnamed-chunk-4-2.png" width="672" style="display: block; margin: auto;"><img src="Bchron_files/figure-html/unnamed-chunk-4-3.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="Bchron_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" width="672" style="display: block; margin: auto;"><img src="Bchron_files/figure-html/unnamed-chunk-4-2.png" class="r-plt" width="672" style="display: block; margin: auto;"><img src="Bchron_files/figure-html/unnamed-chunk-4-3.png" class="r-plt" width="672" style="display: block; margin: auto;"></p>
 <p>This will calibrate three different 14C ages with the calibration
 curves as specified in the <code>calCurves</code> argument. The
 <code>summary</code> and <code>plot</code> commands will produce
@@ -197,7 +197,7 @@ y-axis, e.g.:</p>
 <span><span class="co">## [1] 10606 11394</span></span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ages3</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Bchron_files/figure-html/unnamed-chunk-6-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="Bchron_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" width="576" style="display: block; margin: auto;"></p>
 <p>… or change the axes/titles if you want:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
@@ -207,7 +207,7 @@ y-axis, e.g.:</p>
 <span>    y <span class="op">=</span> <span class="st">"Depth (cm)"</span>,</span>
 <span>    title <span class="op">=</span> <span class="st">"Two dates at different depths"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="Bchron_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="Bchron_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" width="672" style="display: block; margin: auto;"></p>
 <p>… or change to BC/AD</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ages3</span>, ageScale <span class="op">=</span> <span class="st">"bc"</span>, scaleReverse <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
@@ -216,11 +216,11 @@ y-axis, e.g.:</p>
 <span>    y <span class="op">=</span> <span class="st">"Depth (cm)"</span>,</span>
 <span>    title <span class="op">=</span> <span class="st">"Two dates at different depths"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="Bchron_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="Bchron_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" width="672" style="display: block; margin: auto;"></p>
 <p>… or add the calibration curve into the plot</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ages1</span>, includeCal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Bchron_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="Bchron_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" width="672" style="display: block; margin: auto;"></p>
 <p>… or add multiple dates into the calibration curve plots</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ages4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/BchronCalibrate.html">BchronCalibrate</a></span><span class="op">(</span></span>
@@ -229,7 +229,7 @@ y-axis, e.g.:</p>
 <span>  calCurves <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"intcal20"</span>, <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ages4</span>, includeCal <span class="op">=</span> <span class="cn">TRUE</span>, fillCol <span class="op">=</span> <span class="st">"orange"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Bchron_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="Bchron_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="credible-intervals">Credible intervals<a class="anchor" aria-label="anchor" href="#credible-intervals"></a>
@@ -275,7 +275,7 @@ code.</p>
 <span>  main <span class="op">=</span> <span class="st">"Age difference between 3445+/-50 and 11553+/-230"</span>,</span>
 <span>  ylab <span class="op">=</span> <span class="st">"Frequency"</span>, xlab <span class="op">=</span> <span class="st">"Age difference"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><img src="Bchron_files/figure-html/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="Bchron_files/figure-html/unnamed-chunk-13-1.png" class="r-plt" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="running-the-bchronology-age-depth-model">Running the Bchronology age-depth model<a class="anchor" aria-label="anchor" href="#running-the-bchronology-age-depth-model"></a>
@@ -354,7 +354,7 @@ gives outlier probabilities. The <code>plot</code> command will produce
 an age-position plot:</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">GlenOut</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Bchron_files/figure-html/unnamed-chunk-19-1.png" width="576" style="display: block; margin: auto;"></p>
+<p><img src="Bchron_files/figure-html/unnamed-chunk-19-1.png" class="r-plt" width="576" style="display: block; margin: auto;"></p>
 <p>Finally, the <code>predict</code> command will produce predicted ages
 for a newly specified set of positions with optional thicknesses:</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
@@ -472,7 +472,7 @@ most variably layer to the plot with:</p>
 <span>    y <span class="op">=</span> <span class="st">"Depth (cm)"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="va">max_var</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Bchron_files/figure-html/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="Bchron_files/figure-html/unnamed-chunk-26-1.png" class="r-plt" width="672" style="display: block; margin: auto;"></p>
 <p>Finding the date which has maximum influence in the core is a more
 computationally intensive procedure and involves running the Bchron
 model repeatedly, leaving each date out in turn, and quantifying the
@@ -738,7 +738,7 @@ ages would look like for an even distribution of calendar ages:</p>
 <span>    sides <span class="op">=</span> <span class="st">"b"</span>, inherit.aes <span class="op">=</span> <span class="cn">F</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Calendar years BP"</span>, y <span class="op">=</span> <span class="st">"14C years BP"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Bchron_files/figure-html/unnamed-chunk-46-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="Bchron_files/figure-html/unnamed-chunk-46-1.png" class="r-plt" width="672" style="display: block; margin: auto;"></p>
 <p>Unsurprisingly the places where the calibration curve is flat (or
 reverses) leads to ‘clumps’ of calendar ages.</p>
 <p>The more complicated version is run by providing it with a
@@ -799,7 +799,7 @@ a title:</p>
 <span>    x <span class="op">=</span> <span class="st">"Age (cal years BP)"</span>,</span>
 <span>    y <span class="op">=</span> <span class="st">"Depth (cm)"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p><img src="Bchron_files/figure-html/unnamed-chunk-51-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="Bchron_files/figure-html/unnamed-chunk-51-1.png" class="r-plt" width="672" style="display: block; margin: auto;"></p>
 <p>Now suppose we want to plot the chronology but add in the 14C date
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>7000</mn><mo>±</mo><mn>40</mn></mrow><annotation encoding="application/x-tex">7000 \pm 40</annotation></semantics></math>
 at depth 600cm. First we calibrated that date</p>
@@ -826,7 +826,7 @@ new colour too):</p>
 <span>    colour <span class="op">=</span> <span class="st">"black"</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html" class="external-link">annotate</a></span><span class="op">(</span><span class="st">"text"</span>, x <span class="op">=</span> <span class="fl">9000</span>, y <span class="op">=</span> <span class="fl">570</span>, label <span class="op">=</span> <span class="st">"New date"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Bchron_files/figure-html/unnamed-chunk-53-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="Bchron_files/figure-html/unnamed-chunk-53-1.png" class="r-plt" width="672" style="display: block; margin: auto;"></p>
 <div class="section level4">
 <h4 id="adding-a-second-chronology">Adding a second chronology<a class="anchor" aria-label="anchor" href="#adding-a-second-chronology"></a>
 </h4>
@@ -895,7 +895,7 @@ interpolation.</p>
 <span>        fill <span class="op">=</span> <span class="st">"red"</span>,</span>
 <span>        alpha <span class="op">=</span> <span class="fl">0.3</span></span>
 <span>      <span class="op">)</span></span></code></pre></div>
-<p><img src="Bchron_files/figure-html/unnamed-chunk-57-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="Bchron_files/figure-html/unnamed-chunk-57-1.png" class="r-plt" width="672" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div class="section level3">
@@ -940,7 +940,7 @@ Research. Chichester: Wiley.</p>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer>
