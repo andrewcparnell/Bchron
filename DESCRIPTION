@@ -39,7 +39,7 @@ Suggests:
     testthat (>= 3.0.0),
     rmarkdown,
     covr
-VignetteBuilder: knitr
+VignetteBuilder: knitr, rmarkdown
 NeedsCompilation: yes
 RoxygenNote: 7.3.3
 Language: en-US
