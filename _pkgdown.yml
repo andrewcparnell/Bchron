@@ -1,1 +1,4 @@
-destination: docs
+articles:
+  - title: "Bchron manual"
+    contents:
+      - Bchron
